@@ -1,0 +1,169 @@
+import Colors
+import System.Exit (exitSuccess)
+import XMonad
+import XMonad.Actions.CycleWS (nextScreen, nextWS, prevWS)
+import XMonad.Actions.MouseResize (mouseResize)
+import XMonad.Actions.OnScreen
+import XMonad.Config.Desktop (desktopConfig)
+import XMonad.Hooks.DynamicLog (PP (..), dynamicLogWithPP, shorten, wrap, xmobarColor, xmobarPP)
+import XMonad.Hooks.EwmhDesktops (ewmh)
+import XMonad.Hooks.ManageDocks (ToggleStruts (..), avoidStruts, docksEventHook, manageDocks)
+import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
+import XMonad.Layout.GridVariants (Grid (Grid))
+import XMonad.Layout.LayoutModifier (ModifiedLayout)
+import XMonad.Layout.LimitWindows (limitWindows)
+import XMonad.Layout.Magnifier (magnifier)
+import XMonad.Layout.MultiToggle (EOT (EOT), mkToggle, single, (??))
+import qualified XMonad.Layout.MultiToggle as MT (Toggle (..))
+import XMonad.Layout.MultiToggle.Instances (StdTransformers (MIRROR, NBFULL, NOBORDERS))
+import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.Reflect
+import XMonad.Layout.Renamed (Rename (Replace), renamed)
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Simplest
+import XMonad.Layout.Spacing
+import XMonad.Layout.SubLayouts (subLayout)
+import XMonad.Layout.Tabbed
+import qualified XMonad.Layout.ToggleLayouts as T (ToggleLayout (Toggle), toggleLayouts)
+import XMonad.Layout.ThreeColumns (ThreeCol( ThreeColMid ))
+import XMonad.Layout.WindowArranger (WindowArrangerMsg (..), windowArrange)
+import XMonad.Layout.WindowNavigation
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
+import qualified XMonad.StackSet as W
+
+baseConfig =
+  desktopConfig
+    { modMask = mod4Mask,
+      normalBorderColor = "#458588",
+      focusedBorderColor = "#83a598",
+      terminal = "wezterm",
+      workspaces = myWorkspaces,
+      borderWidth = 2
+    }
+
+myWorkspaces = ["term", "web", "work", "KSP", "Firefox", "5", "6", "7", "8", "journal", "audio", "email", "chat"]
+myFont = "xft:RobotoMono Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
+mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
+myStartupHook = do
+  spawnOnce "killall trayer"
+  spawnOnce "sh /home/sgiath/.dotfiles/scripts/reset.sh"
+  spawnOnce ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
+  spawn "polybar -c ~/.dotfiles/xmonad/polybar0.ini mainbar-xmonad"
+  spawn "polybar -c ~/.dotfiles/xmonad/polybar1.ini mainbar-xmonad"
+  spawn "polybar -c ~/.dotfiles/xmonad/polybar2.ini mainbar-xmonad"
+
+myLayoutHook =
+    avoidStruts $
+      onWorkspace "KSP" full $
+        onWorkspace "Firefox" full $
+          onWorkspace "audio" tabs $
+            onWorkspace "chat" tabs $
+              smartBorders $
+                mouseResize $
+                  windowArrange $
+                    (reflectHoriz tall ||| full ||| tabs ||| record)
+  where
+    myTabTheme =
+      def
+        { fontName = myFont,
+          activeColor = colorOrangeBright,
+          inactiveColor = colorBlue,
+          activeBorderColor = colorOrangeBright,
+          inactiveBorderColor = colorBg,
+          activeTextColor = colorBg,
+          inactiveTextColor = colorFg
+        }
+    threeColMid =
+      windowNavigation $
+        subLayout [] (smartBorders Simplest) $
+          limitWindows 5 $
+            ThreeColMid 1 (3/100) (1/2)
+    tall = renamed [Replace "tall"] $ mySpacing 8 $ windowNavigation $ subLayout [] (smartBorders Simplest) $ Tall 1 (3/100) (4/5)
+    full = noBorders Full
+    tabs = noBorders $ renamed [Replace "tabs"] $ tabbed shrinkText myTabTheme
+    record = noBorders $ threeColMid
+
+myManageHook =
+  composeAll
+    [ className =? "confirm" --> doFloat,
+      className =? "file_progress" --> doFloat,
+      className =? "dialog" --> doFloat,
+      className =? "download" --> doFloat,
+      className =? "error" --> doFloat,
+      className =? "notification" --> doFloat,
+      className =? "pinentry-gtk-3" --> doFloat,
+      className =? "splash" --> doFloat,
+      className =? "toolbar" --> doFloat,
+      isFullscreen --> doFullFloat,
+      -- Default WS
+      className =? "kitty" --> doShift "term",
+      className =? "Chromium" --> doShift "web",
+      className =? "Google-chrome" --> doShift "work",
+      className =? "KSP.x86_64" --> doShift "KSP",
+      className =? "firefox" --> doShift "Firefox",
+      className =? "Roam Research" --> doShift "journal",
+      className =? "obsidian" --> doShift "journal",
+      className =? "easyeffects" --> doShift "audio",
+      className =? "qpwgraph" --> doShift "audio",
+      className =? "Claws-mail" --> doShift "email",
+      className =? "Slack" --> doShift "chat",
+      className =? "TelegramDesktop" --> doShift "chat",
+      className =? "discord" --> doShift "chat"
+    ]
+
+myKeys =
+  [ -- System
+    ("M-S-q", io exitSuccess),
+    -- Programs
+    ("M-<Return>", spawn "wezterm"),
+    -- Rofi
+    ("M-/", spawn "rofi -show drun"),
+    ("M-b", spawn "rofi -show drun"),
+    ("M-<Backspace>", spawn "rofi -show system"),
+    -- Layout
+    ("M-S-<Space>", sendMessage ToggleStruts),
+    ("M-<Right>", nextWS),
+    ("M-<Left>", prevWS),
+    -- Halmak rebinding
+    ("M-`", windows $ W.greedyView (myWorkspaces !! 0)),
+    ("M-1", windows $ W.greedyView (myWorkspaces !! 1)),
+    ("M-2", windows $ W.greedyView (myWorkspaces !! 2)),
+    ("M-3", windows $ W.greedyView (myWorkspaces !! 3)),
+    ("M-4", windows $ W.greedyView (myWorkspaces !! 4)),
+    ("M-5", windows $ W.greedyView (myWorkspaces !! 5)),
+    ("M-6", windows $ W.greedyView (myWorkspaces !! 6)),
+    ("M-7", windows $ W.greedyView (myWorkspaces !! 7)),
+    ("M-8", windows $ W.greedyView (myWorkspaces !! 8)),
+    ("M-9", windows $ W.greedyView (myWorkspaces !! 9)),
+    ("M-0", windows $ W.greedyView (myWorkspaces !! 10)),
+    ("M--", windows $ W.greedyView (myWorkspaces !! 11)),
+    ("M-=", windows $ W.greedyView (myWorkspaces !! 12)),
+    ("M-S-`", windows $ W.shift (myWorkspaces !! 0)),
+    ("M-S-1", windows $ W.shift (myWorkspaces !! 1)),
+    ("M-S-2", windows $ W.shift (myWorkspaces !! 2)),
+    ("M-S-3", windows $ W.shift (myWorkspaces !! 3)),
+    ("M-S-4", windows $ W.shift (myWorkspaces !! 4)),
+    ("M-S-5", windows $ W.shift (myWorkspaces !! 5)),
+    ("M-S-6", windows $ W.shift (myWorkspaces !! 6)),
+    ("M-S-7", windows $ W.shift (myWorkspaces !! 7)),
+    ("M-S-8", windows $ W.shift (myWorkspaces !! 8)),
+    ("M-S-9", windows $ W.shift (myWorkspaces !! 9)),
+    ("M-S-0", windows $ W.shift (myWorkspaces !! 10)),
+    ("M-S--", windows $ W.shift (myWorkspaces !! 11)),
+    ("M-S-=", windows $ W.shift (myWorkspaces !! 12))
+  ]
+
+main :: IO ()
+main = do
+  xmonad $
+    ewmh $
+      baseConfig
+        { manageHook = manageHook baseConfig <+> myManageHook,
+          startupHook = startupHook baseConfig <+> myStartupHook,
+          layoutHook = myLayoutHook
+          -- logHook = myLogHook xmproc0 xmproc1 xmproc2
+        }
+        `additionalKeysP` myKeys
