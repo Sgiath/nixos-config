@@ -1,7 +1,6 @@
 { config, ... }:
 
 {
-
   xsession = {
     enable = true;
 
@@ -16,5 +15,4 @@
   };
 
   services.flameshot.enable = true;
-
 }

@@ -37,24 +37,14 @@ import qualified XMonad.StackSet as W
 baseConfig =
   desktopConfig
     { modMask = mod4Mask,
-      normalBorderColor = "#458588",
-      focusedBorderColor = "#83a598",
       terminal = "wezterm",
       workspaces = myWorkspaces,
-      borderWidth = 2
+      borderWidth = 0
     }
 
 myWorkspaces = ["term", "web", "work", "KSP", "Firefox", "5", "6", "7", "8", "journal", "audio", "email", "chat"]
 myFont = "xft:RobotoMono Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
-myStartupHook = do
-  spawnOnce "killall trayer"
-  spawnOnce "sh /home/sgiath/.dotfiles/scripts/reset.sh"
-  spawnOnce ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
-  spawn "polybar -c ~/.dotfiles/xmonad/polybar0.ini mainbar-xmonad"
-  spawn "polybar -c ~/.dotfiles/xmonad/polybar1.ini mainbar-xmonad"
-  spawn "polybar -c ~/.dotfiles/xmonad/polybar2.ini mainbar-xmonad"
-
 myLayoutHook =
     avoidStruts $
       onWorkspace "KSP" full $
@@ -162,8 +152,6 @@ main = do
     ewmh $
       baseConfig
         { manageHook = manageHook baseConfig <+> myManageHook,
-          startupHook = startupHook baseConfig <+> myStartupHook,
           layoutHook = myLayoutHook
-          -- logHook = myLogHook xmproc0 xmproc1 xmproc2
         }
         `additionalKeysP` myKeys

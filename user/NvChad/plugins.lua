@@ -296,6 +296,8 @@ local plugins = {
     lazy = false,
     opts = {},
   },
+
+  "tpope/vim-sleuth",
 }
 
 return plugins

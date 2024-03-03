@@ -1,32 +1,30 @@
-{ config, pkgs, ... }:
+{ config, pkgs, userSettings, ... }:
 
 {
   imports = [
-    ./xmonad/xmonad.nix
-    ./polybar.nix
-    ./gnupg.nix
-    ./starship.nix
-    ./wezterm.nix
-    ./zsh.nix
-    ./tmux.nix
+    ../user/gnupg.nix
+    ../user/starship.nix
+    ../user/zsh.nix
+    ../user/tmux.nix
+    ../user/ssh.nix
   ];
 
   home = {
-    username = "sgiath";
-    homeDirectory = "/home/sgiath";
+    username = userSettings.username;
+    homeDirectory = "/home/${userSettings.username}";
 
     stateVersion = "23.11"; # Please read the comment before changing.
 
     packages = [
-    (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; })
+      (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; })
 
-    (pkgs.writeShellScriptBin "upgrade" ''
-      pushd "/home/sgiath/.dotfiles"
-      nix flake update
-      sudo nixos-rebuild switch --flake .
-      home-manager switch --flake .
-      popd
-    '')
+      (pkgs.writeShellScriptBin "upgrade" ''
+        pushd ${userSettings.dotfilesDir}
+        nix flake update
+        sudo nixos-rebuild switch --flake .
+        home-manager switch --flake .
+        popd
+      '')
     ];
 
     file = {
@@ -47,10 +45,6 @@
 
   services = {
 
-    easyeffects = {
-      enable = true;
-    };
-
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
@@ -66,27 +60,30 @@
   programs = {
     home-manager.enable = true;
 
-    # neovim = {
-    #   enable = true;
-    #   defaultEditor = true;
-    # };
-
     NvChad = {
       enable = true;
       defaultEditor = true;
-      otherConfigs = ./NvChad;
+      otherConfigs = ../user/NvChad;
     };
 
     git = {
       enable = true;
-      userName = "sgiath";
-      userEmail = "sgiath@sgiath.dev";
+      userName = userSettings.username;
+      userEmail = userSettings.email;
     };
 
     direnv = {
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
+    };
+
+    bat = {
+      enable = true;
+    };
+
+    btop = {
+      enable = true;
     };
   };
 }
