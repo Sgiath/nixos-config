@@ -83,8 +83,6 @@
 
     password-store.enable = true;
 
-    nix-index.enable = true;
-    nix-index-database.comma.enable = true;
     command-not-found.enable = true;
   };
 }
