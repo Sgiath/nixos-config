@@ -44,7 +44,6 @@ baseConfig =
 
 myWorkspaces = ["term", "web", "work", "KSP", "Firefox", "5", "6", "7", "8", "journal", "audio", "email", "chat"]
 myFont = "xft:RobotoMono Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
-mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 myLayoutHook =
     avoidStruts $
       onWorkspace "KSP" full $
@@ -54,7 +53,7 @@ myLayoutHook =
               smartBorders $
                 mouseResize $
                   windowArrange $
-                    (reflectHoriz tall ||| full ||| tabs ||| record)
+                    (reflectHoriz tall ||| tabs ||| record)
   where
     myTabTheme =
       def
@@ -71,7 +70,7 @@ myLayoutHook =
         subLayout [] (smartBorders Simplest) $
           limitWindows 5 $
             ThreeColMid 1 (3/100) (1/2)
-    tall = renamed [Replace "tall"] $ mySpacing 8 $ windowNavigation $ subLayout [] (smartBorders Simplest) $ Tall 1 (3/100) (4/5)
+    tall = renamed [Replace "tall"] $ windowNavigation $ subLayout [] (smartBorders Simplest) $ Tall 1 (3/100) (4/5)
     full = noBorders Full
     tabs = noBorders $ renamed [Replace "tabs"] $ tabbed shrinkText myTabTheme
     record = noBorders $ threeColMid

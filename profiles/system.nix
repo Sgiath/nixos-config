@@ -6,11 +6,15 @@
 
   # Use the systemd-boot EFI boot loader.
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_xanmod;
     extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+    };
+    kernel.sysctl = {
+      "vm.max_map_count" = 16777216;
+      "fs.file-max" = 524288;
     };
   };
 

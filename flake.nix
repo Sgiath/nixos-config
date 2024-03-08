@@ -12,6 +12,10 @@
 
     stylix.url = "github:danth/stylix";
     NvChad.url = "github:NvChad/nix";
+
+    nix-citizen.url = "github:LovingMelody/nix-citizen";
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
   };
 
   outputs = { self, nixpkgs, home-manager, NvChad, stylix, ... }@inputs:
@@ -48,6 +52,8 @@
         specialArgs = {
           inherit systemSettings;
           inherit userSettings;
+
+          inherit inputs;
         };
       };
     };
@@ -62,7 +68,10 @@
           NvChad.homeManagerModules.default
         ];
         extraSpecialArgs = {
+          inherit systemSettings;
           inherit userSettings;
+
+          inherit inputs;
         };
       };
     };
