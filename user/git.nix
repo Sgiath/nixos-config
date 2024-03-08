@@ -58,7 +58,7 @@
 
       branch = {
         autoSetupRebase = "always";
-        sort = "-commiterdate"
+        sort = "-commiterdate";
       };
 
       pull = {
