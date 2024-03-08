@@ -15,7 +15,7 @@
   stylix = {
     fonts = {
       sizes = {
-        applications = 14;
+        applications = 12;
         terminal = 14;
       };
     };

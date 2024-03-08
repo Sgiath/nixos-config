@@ -1,12 +1,8 @@
 { config, lib, pkgs, systemSettings, userSettings, ... }:
 
 {
-  # VirtualBox
-  # virtualisation.virtualbox.guest.enable = true;
-
   # Use the systemd-boot EFI boot loader.
   boot = {
-    kernelPackages = pkgs.linuxPackages_xanmod;
     extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
     loader = {
       systemd-boot.enable = true;
@@ -71,7 +67,7 @@
 
   environment = {
     shells = with pkgs; [ bash zsh ];
-    systemPackages = with pkgs; [ neovim wget git ];
+    systemPackages = with pkgs; [ neovim git ];
   };
 
   programs = {
