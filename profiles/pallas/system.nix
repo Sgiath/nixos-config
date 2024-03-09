@@ -45,7 +45,7 @@
   };
 
   # Razer
-  hardware.openrazer {
+  hardware.openrazer = {
     enable = true;
     users = [ userSettings.username ];
   };
