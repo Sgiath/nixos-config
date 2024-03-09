@@ -15,7 +15,7 @@
   };
 
   networking = {
-    hostName = systemSettings.hostname;
+    hostName = systemSettings.profile;
     networkmanager.enable = true;
     firewall.enable = false;
   };
@@ -28,7 +28,7 @@
   i18n.defaultLocale = systemSettings.locale;
 
   console = {
-    font = "Lat2-Terminus16";
+    # font = "Lat2-Terminus16";
     useXkbConfig = true;
   };
 

@@ -23,8 +23,7 @@
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
         system = "x86_64-linux";
-        hostname = "nixos";
-        profile = "notebook";
+        profile = "ceres";
         timezone = "UTC";
         locale = "en_US.UTF-8";
       };
@@ -33,7 +32,7 @@
       userSettings = {
         username = "sgiath";
         email = "sgiath@sgiath.dev";
-        dotfilesDir = "~/.dotfiles";
+        dotfilesDir = "/home/sgiath/.dotfiles";
         wm = "xmonad";
       };
 
@@ -46,9 +45,10 @@
 
     # system
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      # desktop
+      ${systemSettings.profile} = nixpkgs.lib.nixosSystem {
         system = systemSettings.system;
-        modules = [ (./. + "/profiles" + ("/" + systemSettings.profile) + "/system.nix") ];
+        modules = [ ( ./profiles/. + systemSettings.profile + "/system.nix" ) ];
         specialArgs = {
           inherit systemSettings;
           inherit userSettings;
