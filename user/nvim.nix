@@ -1,14 +1,18 @@
-{ config, pkgs, NvChad, ...}:
+{ config, pkgs, ...}:
 
 {
-  imports = [
-    NvChad.homeManagerModules.default
-  ];
-
+  # nixd LSP
   home.packages = [ pkgs.nixd ];
-  programs.NvChad = {
+
+  # package
+  programs.neovim = {
     enable = true;
     defaultEditor = true;
-    otherConfigs = ./NvChad;
+  };
+
+  # config files
+  xdg = {
+    enable = true;
+    configFile.nvim.source = ./nvim;
   };
 }

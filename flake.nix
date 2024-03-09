@@ -11,7 +11,6 @@
     };
 
     stylix.url = "github:danth/stylix";
-    NvChad.url = "github:NvChad/nix";
 
     nix-citizen.url = "github:LovingMelody/nix-citizen";
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -41,8 +40,6 @@
         config.allowUnfree = true;
       };
     in {
-
-    # system
     nixosConfigurations = nixpkgs.lib.genAttrs hosts (host: nixpkgs.lib.nixosSystem {
       system = systemSettings.system;
       specialArgs = inputs // {
