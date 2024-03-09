@@ -23,7 +23,7 @@
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
         system = "x86_64-linux";
-        profile = "ceres";
+        profile = "pallas";
         timezone = "UTC";
         locale = "en_US.UTF-8";
       };
@@ -48,7 +48,7 @@
       # desktop
       ${systemSettings.profile} = nixpkgs.lib.nixosSystem {
         system = systemSettings.system;
-        modules = [ ( ./profiles/. + systemSettings.profile + "/system.nix" ) ];
+        modules = [ ( ./profiles + ( "/" + systemSettings.profile ) + "/system.nix" ) ];
         specialArgs = {
           inherit systemSettings;
           inherit userSettings;
