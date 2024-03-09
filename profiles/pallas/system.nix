@@ -16,6 +16,13 @@
     ../../system/bluetooth.nix
   ];
 
+  # razer notebook specific packages
+  environment.systemPackages = with pkgs; [
+    lshw
+    openrazer-daemon
+    sof-firmware
+  ];
+
   # Nvidia and AMD GPUs
   hardware.opengl = {
     enable = true;
@@ -35,5 +42,7 @@
       nvidiaBusId = "PCI:1:0:0";
     };
   };
-  environment.systemPackages = [ pkgs.lshw ];
+
+  # Razer
+  hardware.openrazer.enable = true;
 }

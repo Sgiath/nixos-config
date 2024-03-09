@@ -43,7 +43,10 @@
       };
 
       # Enable touchpad support
-      libinput.enable = true;
+      libinput = {
+        enable = true;
+        touchpad.naturalScrolling = true;
+      };
     };
 
     dbus = {
