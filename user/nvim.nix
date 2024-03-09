@@ -1,19 +1,16 @@
-{ config, pkgs, ...}:
+{ config, pkgs, userSettings, ...}:
 
 {
   # nixd LSP
-  home.packages = [ pkgs.nixd ];
-
-  # package
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
+  home.packages = with pkgs; [ neovim nixd gcc make];
 
   # config files
   xdg = {
     enable = true;
-    configFile.nvim.source = config.lib.file.mkOutOfStoreSymlink ./nvim;
+    configFile.nvim = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/user/nvim";
+      recursive = true;
+    };
   };
 
   # ripgrep

@@ -1,34 +1,31 @@
 { config, pkgs, ... }:
 
 {
-  home = {
-    packages = with pkgs; [
-      ungoogled-chromium
-    ];
-    file.".config/chromium-flags.conf".text = ''
-      --enable-features=WebUIDarkMode,DisableQRGenerator
+  home.packages = with pkgs; [ ungoogled-chromium ];
 
-      --force-dark-mode
+  xdg.configFile."chromium-flags.conf".text = ''
+    --enable-features=WebUIDarkMode,DisableQRGenerator
 
-      --vulkan
-      --use-vulkan
-      --webview-enable-vulkan
+    --force-dark-mode
 
-      --ignore-gpu-blocklist
-      --enable-gpu-rasterization
-      --enable-zero-copy
+    --vulkan
+    --use-vulkan
+    --webview-enable-vulkan
 
-      --disable-search-engine-collection
-      --keep-old-history
-      --max-connections-per-host=15
-      --popups-to-tabs
-      --close-window-with-last-tab=never
+    --ignore-gpu-blocklist
+    --enable-gpu-rasterization
+    --enable-zero-copy
 
-      --fingerprinting-canvas-image-data-noise
-      --fingerprinting-canvas-measuretext-noise
-      --fingerprinting-client-rects-noise
+    --disable-search-engine-collection
+    --keep-old-history
+    --max-connections-per-host=15
+    --popups-to-tabs
+    --close-window-with-last-tab=never
 
-      --ssl-key-log-file=/home/sgiath/.ssl_keylog
-    '';
-  };
+    --fingerprinting-canvas-image-data-noise
+    --fingerprinting-canvas-measuretext-noise
+    --fingerprinting-client-rects-noise
+
+    --ssl-key-log-file=/home/sgiath/.ssl_keylog
+  '';
 }
