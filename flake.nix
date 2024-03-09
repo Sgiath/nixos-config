@@ -34,6 +34,8 @@
         dotfilesDir = "/home/sgiath/.dotfiles";
       };
 
+      hosts = [ "ceres" "vesta" "pallas" ];
+
       pkgs = import nixpkgs {
         system = systemSettings.system;
         config.allowUnfree = true;
@@ -41,87 +43,30 @@
     in {
 
     # system
-    nixosConfigurations = {
-      # desktop
-      ceres = nixpkgs.lib.nixosSystem {
-        system = systemSettings.system;
-        specialArgs = inputs // {
-          inherit systemSettings;
-          inherit userSettings;
-        };
-        modules = [
-          stylix.nixosModules.stylix
-
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = inputs // {
-                inherit systemSettings;
-                inherit userSettings;
-              };
-
-              users.${userSettings.username} = import ./profiles/ceres/home.nix;
-            };
-          }
-
-          ./profiles/ceres/system.nix
-        ];
+    nixosConfigurations = nixpkgs.lib.genAttrs hosts (host: nixpkgs.lib.nixosSystem {
+      system = systemSettings.system;
+      specialArgs = inputs // {
+        inherit systemSettings;
+        inherit userSettings;
       };
+      modules = [
+        stylix.nixosModules.stylix
 
-      # server
-      vesta = nixpkgs.lib.nixosSystem {
-        system = systemSettings.system;
-        specialArgs = inputs // {
-          inherit systemSettings;
-          inherit userSettings;
-        };
-        modules = [
-          stylix.nixosModules.stylix
-
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = inputs // {
-                inherit systemSettings;
-                inherit userSettings;
-              };
-
-              users.${userSettings.username} = import ./profiles/vesta/home.nix;
+        home-manager.nixosModules.home-manager {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = inputs // {
+              inherit systemSettings;
+              inherit userSettings;
             };
-          }
 
-          ./profiles/vesta/system.nix
-        ];
-      };
+            users.${userSettings.username} = import ( ./profiles + "/${host}/home.nix" );
+          };
+        }
 
-      # notebook
-      pallas = nixpkgs.lib.nixosSystem {
-        system = systemSettings.system;
-        specialArgs = inputs // {
-          inherit systemSettings;
-          inherit userSettings;
-        };
-        modules = [
-          stylix.nixosModules.stylix
-
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = inputs // {
-                inherit systemSettings;
-                inherit userSettings;
-              };
-
-              users.${userSettings.username} = import ./profiles/pallas/home.nix;
-            };
-          }
-
-          ./profiles/pallas/system.nix
-        ];
-      };
-    };
+        ( ./profiles + "/${host}/system.nix" )
+      ];
+    });
   };
 }
