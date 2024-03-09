@@ -19,6 +19,7 @@
   # razer notebook specific packages
   environment.systemPackages = with pkgs; [
     lshw
+    lsusb
     razergenie
     openrazer-daemon
     sof-firmware
