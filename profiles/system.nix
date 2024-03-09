@@ -5,12 +5,9 @@
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
     loader = {
-      grub = {
+      systemd-boot = {
         enable = true;
-        device = "nodev";
-        useOSProber = true;
-        configurationName = "NixOS";
-        configurationLimit = 5;
+        configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };

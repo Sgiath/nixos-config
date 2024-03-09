@@ -32,9 +32,7 @@
         username = "sgiath";
         email = "sgiath@sgiath.dev";
         dotfilesDir = "/home/sgiath/.dotfiles";
-        wm = "xmonad";
       };
-
 
       pkgs = import nixpkgs {
         system = systemSettings.system;
@@ -89,7 +87,7 @@
       ${userSettings.username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          (./. + "/profiles" + ("/" + ( builtins.getEnv "HOSTNAME" ) ) + "/home.nix")
+          ( ./. + "/profiles/${( builtins.getEnv "HOST" )}/home.nix" )
           stylix.homeManagerModules.stylix
           NvChad.homeManagerModules.default
         ];

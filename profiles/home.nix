@@ -47,7 +47,6 @@
   };
 
   services = {
-
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
@@ -57,9 +56,6 @@
     };
 
     ssh-agent.enable = true;
-
-    pass-secret-service.enable = true;
-
   };
 
   programs = {
