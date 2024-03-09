@@ -23,8 +23,6 @@
 
       (pkgs.writeShellScriptBin "upgrade" ''
         pushd ${userSettings.dotfilesDir}
-        git add --all
-        git commit
         nix flake update
         sudo nixos-rebuild switch --flake .
         home-manager switch --flake .

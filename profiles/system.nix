@@ -15,7 +15,7 @@
   };
 
   networking = {
-    hostName = systemSettings.profile;
+    # hostName = systemSettings.profile;
     networkmanager.enable = true;
     firewall.enable = false;
   };

@@ -23,7 +23,6 @@
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
         system = "x86_64-linux";
-        profile = "pallas";
         timezone = "UTC";
         locale = "en_US.UTF-8";
       };
@@ -46,9 +45,33 @@
     # system
     nixosConfigurations = {
       # desktop
-      ${systemSettings.profile} = nixpkgs.lib.nixosSystem {
+      ceres = nixpkgs.lib.nixosSystem {
         system = systemSettings.system;
-        modules = [ ( ./profiles + ( "/" + systemSettings.profile ) + "/system.nix" ) ];
+        modules = [ ./profiles/ceres/system.nix ];
+        specialArgs = {
+          inherit systemSettings;
+          inherit userSettings;
+
+          inherit inputs;
+        };
+      };
+
+      # server
+      vesta = nixpkgs.lib.nixosSystem {
+        system = systemSettings.system;
+        modules = [ ./profiles/vesta/system.nix ];
+        specialArgs = {
+          inherit systemSettings;
+          inherit userSettings;
+
+          inherit inputs;
+        };
+      };
+
+      # notebook
+      pallas = nixpkgs.lib.nixosSystem {
+        system = systemSettings.system;
+        modules = [ ./profiles/pallas/system.nix ];
         specialArgs = {
           inherit systemSettings;
           inherit userSettings;
@@ -63,7 +86,7 @@
       ${userSettings.username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix")
+          (./. + "/profiles" + ("/" + ( builtins.getEnv "HOSTNAME" ) ) + "/home.nix")
           stylix.homeManagerModules.stylix
           NvChad.homeManagerModules.default
         ];
