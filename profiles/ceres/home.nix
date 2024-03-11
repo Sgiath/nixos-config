@@ -10,17 +10,27 @@
 
     # GUI apps
     ../../user/xmonad/default.nix
-    ../../user/polybar.nix
+    ../../user/polybar/polybar.nix
     ../../user/rofi.nix
     ../../user/wezterm.nix
     ../../user/browser.nix
     ../../user/email_client.nix
+
+    # CrazyEgg
+    ../../work/aws.nix
+  ];
+
+  home.packages = [
+    pkgs.nitrogen
+    pkgs.killall
   ];
 
   stylix = {
     fonts = {
       sizes = {
         applications = 10;
+        desktop = 10;
+        popups = 10;
         terminal = 10;
       };
     };

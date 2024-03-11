@@ -7,6 +7,7 @@
 
     # hardware
     ./hardware.nix
+    ./monitors.nix
 
     # modules
     ../../system/x11.nix
@@ -20,4 +21,13 @@
 
   # AMD GPU
   services.xserver.videoDrivers = [ "amdgpu" ];
+
+  # temporary, move it out
+  virtualisation.docker.enable = true;
+
+  services.nginx = {
+    enable = true;
+    config = ''
+    '';
+  };
 }

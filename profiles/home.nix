@@ -22,7 +22,7 @@
 
       (pkgs.writeShellScriptBin "upgrade" ''
         pushd ${userSettings.dotfilesDir}
-        nix flake update
+        # nix flake update
         sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}
         popd
       '')

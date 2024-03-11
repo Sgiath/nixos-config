@@ -1,10 +1,15 @@
 { config, pkgs, userSettings, ...}:
 
 {
-  home.sessionVariables."EDITOR" = "${pkgs.neovim}/bin/nvim";
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
 
   # nixd LSP
   home.packages = with pkgs; [ neovim nixd gcc gnumake];
+  # ripgrep
+  programs.ripgrep.enable = true;
 
   # config files
   xdg = {
@@ -14,7 +19,4 @@
       recursive = true;
     };
   };
-
-  # ripgrep
-  programs.ripgrep.enable = true;
 }

@@ -18,6 +18,14 @@
 
   networking.hostName = "pallas";
 
+  # monitor config
+  services.xserver = {
+    videoDrivers = [ "amdgpu" "nvidia" ];
+    resolutions = [
+      { x = 2560; y = 1440; }
+    ];
+  };
+
   # razer notebook specific packages
   environment.systemPackages = with pkgs; [
     razergenie
@@ -29,7 +37,6 @@
     enable = true;
     driSupport = true;
   };
-  services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;

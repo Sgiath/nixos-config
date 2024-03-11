@@ -6,10 +6,6 @@
       enable = true;
       excludePackages = [ pkgs.xterm ];
 
-      resolutions = [
-        { x = 2560; y = 1440; }
-      ];
-
       # managed by home-manager
       desktopManager.session = [
         {

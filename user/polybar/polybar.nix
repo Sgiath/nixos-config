@@ -24,7 +24,9 @@ in
   xsession = {
     enable = true;
     initExtra = ''
+      polybar main0 &
       polybar main1 &
+      polybar main2 &
     '';
   };
 }
