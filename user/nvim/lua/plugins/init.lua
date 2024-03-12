@@ -1,64 +1,89 @@
 return {
-  {
-    "stevearc/conform.nvim",
-    config = function()
-      require "configs.conform"
-    end,
-  },
+	{
+		"neovim/nvim-lspconfig",
+		config = function()
+			require("nvchad.configs.lspconfig").defaults()
+			require("configs.lspconfig")
+		end,
+	},
 
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {},
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-  },
+	{
+		"NvChad/nvim-colorizer.lua",
+		opts = {
+			user_default_options = {
+				names = false,
+			},
+		},
+	},
 
-  {
-    "tpope/vim-fugitive",
-    lazy = false,
-  },
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			lsp = {
+				hover = { enabled = false },
+				signature = { enabled = false },
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true,
+				},
+			},
+			presets = {
+				long_message_to_split = true, -- long messages will be sent to a split
+				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = false, -- add a border to hover docs and signature help
+			},
+		},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	},
 
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    lazy = false,
-    dependencies = {
-      { "tpope/vim-dadbod", lazy = false },
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
-    },
-    cmd = {
-      "DBUI",
-      "DBUIToggle",
-      "DBUIAddConnection",
-      "DBUIFindBuffer",
-    },
-    init = function()
-      -- Your DBUI configuration
-      vim.g.db_ui_use_nerd_fonts = 1
-    end,
-  },
+	{
+		"tpope/vim-fugitive",
+		lazy = false,
+	},
 
-  {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
+	{
+		"kristijanhusak/vim-dadbod-ui",
+		lazy = false,
+		dependencies = {
+			{ "tpope/vim-dadbod", lazy = false },
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+		},
+		cmd = {
+			"DBUI",
+			"DBUIToggle",
+			"DBUIAddConnection",
+			"DBUIFindBuffer",
+		},
+		init = function()
+			-- Your DBUI configuration
+			vim.g.db_ui_use_nerd_fonts = 1
+		end,
+	},
 
-  {
-    "nvim-pack/nvim-spectre",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-      { "<leader>S", "<cmd>lua require('spectre').toggle()<CR>" },
-    },
-  },
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 
-  {
-    "lewis6991/spaceless.nvim",
-    lazy = false,
-    opts = {},
-  },
+	{
+		"nvim-pack/nvim-spectre",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{ "<leader>S", "<cmd>lua require('spectre').toggle()<CR>" },
+		},
+	},
 
-  "tpope/vim-sleuth",
+	{
+		"lewis6991/spaceless.nvim",
+		lazy = false,
+		opts = {},
+	},
+
+	"tpope/vim-sleuth",
 }

@@ -1,21 +1,13 @@
-{ config, systemSettings, inputs, ...}:
+{ config, pkgs, pkgs-citizen, nix-gaming, ...}:
 
 {
-  imports = [
-    inputs.nix-gaming.nixosModules.steamCompat
-  ];
-
   home = {
     packages = [
+      pkgs.discord
+
       # Star Citizen
-      inputs.nix-citizen.packages.${systemSettings.system}.star-citizen
-      inputs.nix-citizen.packages.${systemSettings.system}.star-citizen-helper
+      pkgs-citizen.star-citizen
+      pkgs-citizen.star-citizen-helper
     ];
-  };
-
-  programs.steam = {
-    enable = true;
-
-    extraCompatPackages = [ ];
   };
 }

@@ -3,7 +3,8 @@
 {
   home = {
     packages = [ pkgs.claws-mail ];
-    file.".mail-signature".text = ''
+
+    file.".signature".text = ''
       Filip Vavera
 
       https://sgiath.dev

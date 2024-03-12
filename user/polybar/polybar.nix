@@ -13,8 +13,7 @@ in
       include-file = ${base16-polybar}
 
       [fonts]
-      regular = "${config.stylix.fonts.sansSerif.name}"
-      monospace = "${config.stylix.fonts.monospace.name}"
+      monospace = "${config.stylix.fonts.monospace.name}:size=10:style=Bold;2"
 
       ; actual config
       ${builtins.readFile ./polybar.ini}

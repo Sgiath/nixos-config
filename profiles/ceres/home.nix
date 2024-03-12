@@ -16,6 +16,9 @@
     ../../user/browser.nix
     ../../user/email_client.nix
 
+    # Gaming
+    ../../user/games.nix
+
     # CrazyEgg
     ../../work/aws.nix
   ];
@@ -23,6 +26,7 @@
   home.packages = [
     pkgs.nitrogen
     pkgs.killall
+    pkgs.inotify-tools
   ];
 
   stylix = {

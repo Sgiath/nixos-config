@@ -5,7 +5,9 @@
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   # Steam
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+  };
 
   # enable Cachix for gaming
   nix.settings = {

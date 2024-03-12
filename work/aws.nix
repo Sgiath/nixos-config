@@ -1,13 +1,17 @@
 { config, pkgs, ... }:
+let
+  awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
+    mfa="arn:aws:iam::173509387151:mfa/filip"
+    token=$(pass otp 2fa/amazon/code)
 
+    ${pkgs.awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
+      ${pkgs.jq}/bin/jq -r '.Credentials' | \
+      ${pkgs.jq}/bin/jq '. += {"Version": 1}'
+    '';
+in
 {
   home.packages = with pkgs; [
-    (writeShellScriptBin "aws-secrets" ''
-      token=$(pass otp 2fa/amazon/code)
-      aws sts get-session-token --profile crazyegg --serial-number "arn:aws:iam::173509387151:mfa/filip" --token-code $token | jq -r '.Credentials' | jq '. += {"Version": 1}'
-    '')
     amazon-ecr-credential-helper
-
     slack
     google-chrome
   ];
@@ -20,7 +24,7 @@
       output = "json";
     };
     credentials = {
-      "default"."credential_process" = "aws-secrets";
+      "default"."credential_process" = "${awsSecrets}/bin/aws-secrets";
       "crazyegg"."credential_process" = "${pkgs.pass}/bin/pass show aws/crazyegg";
     };
   };

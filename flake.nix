@@ -10,6 +10,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     stylix.url = "github:danth/stylix";
 
     nix-citizen.url = "github:LovingMelody/nix-citizen";
@@ -17,7 +19,7 @@
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, nix-gaming, nix-citizen, home-manager, stylix, ... }@inputs:
     let
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
@@ -42,6 +44,8 @@
           permittedInsecurePackages = [ "nix-2.16.2" ];
         };
       };
+      pkgs-gaming = nix-gaming.packages.${systemSettings.system};
+      pkgs-citizen = nix-citizen.packages.${systemSettings.system};
     in {
     nixosConfigurations = nixpkgs.lib.genAttrs hosts (host: nixpkgs.lib.nixosSystem {
       system = systemSettings.system;
@@ -59,6 +63,8 @@
             extraSpecialArgs = inputs // {
               inherit systemSettings;
               inherit userSettings;
+              inherit pkgs-gaming;
+              inherit pkgs-citizen;
             };
 
             users.${userSettings.username} = import ( ./profiles + "/${host}/home.nix" );

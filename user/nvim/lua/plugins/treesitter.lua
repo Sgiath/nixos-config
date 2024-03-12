@@ -1,0 +1,30 @@
+return {
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = {
+			ensure_installed = {
+				"elixir",
+				"html",
+				"javascript",
+				"lua",
+				"dockerfile",
+				"git_config",
+				"git_rebase",
+				"gitattributes",
+				"gitcommit",
+				"gitignore",
+				"graphql",
+				"heex",
+				"http",
+				"jq",
+				"json",
+				"markdown_inline",
+				"nix",
+				"rasi",
+				"regex",
+				"sql",
+				"terraform",
+			},
+		},
+	},
+}
