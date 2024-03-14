@@ -1,11 +1,11 @@
-{ pkgs, modulesPath, systemSettings, ... }:
+{ pkgs, modulesPath, ... }:
 
 {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
   ];
 
-  nixpkgs.hostPlatform = systemSettings.system;
+  nixpkgs.hostPlatform = pkgs.system;
 
   environment.systemPackages = with pkgs; [
     neovim

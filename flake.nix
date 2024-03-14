@@ -3,7 +3,7 @@
   description = "Default flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -14,8 +14,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    stylix.url = "github:danth/stylix";
+    nix-bitcoin = {
+      url = "github:fort-nix/nix-bitcoin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
@@ -27,47 +38,45 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-gaming, nix-citizen, home-manager, disko, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      # ---- SYSTEM SETTINGS ---- #
-      systemSettings = {
-        system = "x86_64-linux";
-        timezone = "UTC";
-        locale = "en_US.UTF-8";
-      };
-
       # ---- USER SETTINGS ---- #
       userSettings = {
         username = "sgiath";
         email = "sgiath@sgiath.dev";
-        dotfilesDir = "/home/sgiath/.dotfiles";
       };
 
       hosts = [ "ceres" "vesta" "pallas" ];
 
-      pkgs = nixpkgs.legacyPackages.${systemSettings.system};
-      pkgs-gaming = nix-gaming.packages.${systemSettings.system};
-      pkgs-citizen = nix-citizen.packages.${systemSettings.system};
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
     in {
     nixosConfigurations = nixpkgs.lib.genAttrs hosts (host: nixpkgs.lib.nixosSystem {
-      system = systemSettings.system;
+      system = pkgs.system;
       specialArgs = inputs // {
-        inherit systemSettings;
         inherit userSettings;
       };
       modules = [
-        disko.nixosModules.disko
-        stylix.nixosModules.stylix
+        inputs.nix-bitcoin.nixosModules.default
+        inputs.disko.nixosModules.disko
+        inputs.stylix.nixosModules.stylix
+
+        # required Bitcoin config
+        {
+          nix-bitcoin = {
+            generateSecrets = true;
+            operator = {
+              enable = true;
+              name = "${userSettings.username}";
+            };
+          };
+        }
 
         home-manager.nixosModules.home-manager {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = inputs // {
-              inherit systemSettings;
               inherit userSettings;
-              inherit pkgs-gaming;
-              inherit pkgs-citizen;
             };
 
             users.${userSettings.username} = import ( ./profiles + "/${host}/home.nix" );
@@ -78,7 +87,7 @@
       ];
     }) // {
       installIso = nixpkgs.lib.nixosSystem {
-        specialArgs = inputs // { inherit systemSettings; };
+        specialArgs = inputs;
         modules = [ ./profiles/isoimage/system.nix ];
       };
     };

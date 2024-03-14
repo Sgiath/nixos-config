@@ -1,4 +1,4 @@
-{ config, lib, pkgs, systemSettings, userSettings, hostname, ... }:
+{ config, lib, pkgs, userSettings, hostname, ... }:
 
 {
   imports = [
@@ -31,11 +31,11 @@
   };
 
   # Set your time zone.
-  time.timeZone = systemSettings.timezone;
+  time.timeZone = "UTC";
   services.timesyncd.enable = true;
 
   # Select internationalisation properties.
-  i18n.defaultLocale = systemSettings.locale;
+  i18n.defaultLocale = "en_US.UTF-8";
 
   console = {
     # font = "Lat2-Terminus16";
@@ -69,6 +69,7 @@
       ${userSettings.username} = {
         isNormalUser = true;
         extraGroups = [ "networkmanager" "wheel" "openrazer" "docker" ];
+        hashedPassword = "$y$j9T$EBb/Mjo7nNHfmtbiP1GST0$CctYXT62gX0cMDHzRzYxlix43xC3U6kzSDNvyqZOcj4";
       };
     };
   };
@@ -80,7 +81,7 @@
 
   environment = {
     shells = with pkgs; [ bash zsh ];
-    systemPackages = with pkgs; [ neovim git dig ];
+    systemPackages = with pkgs; [ neovim git ];
   };
 
   programs = {
@@ -94,7 +95,14 @@
   };
 
   # do not require password for sudo
-  security.sudo.wheelNeedsPassword = false;
+  security = {
+    sudo.enable = false;
+    doas = {
+      enable = true;
+      wheelNeedsPassword = false;
+    };
+  };
+  environment.shellAliases.sudo = "doas";
 
   system.stateVersion = "23.11";
 

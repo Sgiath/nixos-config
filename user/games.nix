@@ -1,5 +1,7 @@
-{ config, pkgs, pkgs-citizen, ...}:
-
+{ config, pkgs, nix-citizen, ...}:
+let
+  pkgs-citizen = nix-citizen.packages.${pkgs.system};
+in
 {
   home = {
     packages = [

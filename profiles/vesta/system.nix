@@ -7,6 +7,9 @@
 
     # hardware
     ./hardware.nix
+
+    # bitcoin
+    ../../system/bitcoin.nix
   ];
 
   networking.hostName = "vesta";

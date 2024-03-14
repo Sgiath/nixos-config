@@ -21,20 +21,20 @@
       (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; })
 
       (pkgs.writeShellScriptBin "update" ''
-        pushd ${userSettings.dotfilesDir}
-        sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}
+        pushd ~/.dotfiles
+        sudo nixos-rebuild switch --flake .
         popd
       '')
 
       (pkgs.writeShellScriptBin "upgrade" ''
-        pushd ${userSettings.dotfilesDir}
+        pushd ~/.dotfiles
         nix flake update
-        sudo nixos-rebuild switch --flake ${userSettings.dotfilesDir}
+        sudo nixos-rebuild switch --flake .
         popd
       '')
 
       (pkgs.writeShellScriptBin "build-iso" ''
-        pushd ${userSettings.dotfilesDir}
+        pushd ~/.dotfiles
         nix run "nixpkgs#nixos-generators" -- --format iso --flake ".#installIso" -o result
         popd
       '')

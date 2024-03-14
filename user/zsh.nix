@@ -10,6 +10,7 @@
     curlie
     tldr
     zig
+    dig
   ];
 
   programs.eza = {
