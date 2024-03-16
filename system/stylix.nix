@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 let
   font = {
     package = (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; });
@@ -6,6 +6,10 @@ let
   };
 in 
 {
+  imports = [
+    inputs.stylix.nixosModules.stylix
+  ];
+
   stylix = {
     polarity = "dark";
 

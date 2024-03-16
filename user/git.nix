@@ -1,4 +1,4 @@
-{ config, pkgs, userSettings, ... }:
+{ pkgs, userSettings, ... }:
 
 {
   home.file = {
@@ -11,6 +11,7 @@
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
 
     delta = {
       enable = true;

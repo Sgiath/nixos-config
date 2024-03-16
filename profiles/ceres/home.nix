@@ -1,32 +1,20 @@
-{ config, pkgs, userSettings, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     # default values
     ../home.nix
 
-    # audio
-    ../../user/audio.nix
-
-    # GUI apps
-    ../../user/xmonad.nix
-    ../../user/polybar.nix
-    ../../user/rofi.nix
-    ../../user/wezterm.nix
-    ../../user/browser.nix
-    ../../user/email_client.nix
-
-    # Gaming
-    ../../user/games.nix
-
     # CrazyEgg
-    ../../work/aws.nix
+    ../../work/default.nix
+
+    ../../user/audio.nix
+    ../../user/gui.nix
+    ../../user/games.nix
   ];
 
   home.packages = [
     pkgs.nitrogen
-    pkgs.killall
-    pkgs.inotify-tools
   ];
 
   stylix = {

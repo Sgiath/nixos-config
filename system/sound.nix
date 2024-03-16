@@ -1,8 +1,8 @@
-{ config, nix-gaming, ... }:
+{ inputs, ... }:
 
 {
   imports = [
-    nix-gaming.nixosModules.pipewireLowLatency
+    inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
   # realtime audio

@@ -1,5 +1,3 @@
-{ config, pkgs, stylix, userSettings, ... }:
-
 {
   imports = [
     # default values

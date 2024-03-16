@@ -1,5 +1,3 @@
-{ config, ... }:
-
 {
   programs.gpg.settings = {
     default-key = "0x70F9C7DE34CB3BC8";

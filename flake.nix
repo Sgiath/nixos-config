@@ -38,7 +38,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       # ---- USER SETTINGS ---- #
       userSettings = {
@@ -52,30 +52,17 @@
     in {
     nixosConfigurations = nixpkgs.lib.genAttrs hosts (host: nixpkgs.lib.nixosSystem {
       system = pkgs.system;
-      specialArgs = inputs // {
+      specialArgs = {
+        inherit inputs;
         inherit userSettings;
       };
       modules = [
-        inputs.nix-bitcoin.nixosModules.default
-        inputs.disko.nixosModules.disko
-        inputs.stylix.nixosModules.stylix
-
-        # required Bitcoin config
-        {
-          nix-bitcoin = {
-            generateSecrets = true;
-            operator = {
-              enable = true;
-              name = "${userSettings.username}";
-            };
-          };
-        }
-
         home-manager.nixosModules.home-manager {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = inputs // {
+            extraSpecialArgs = {
+              inherit inputs;
               inherit userSettings;
             };
 
@@ -87,7 +74,9 @@
       ];
     }) // {
       installIso = nixpkgs.lib.nixosSystem {
-        specialArgs = inputs;
+        specialArgs = {
+          inherit inputs;
+        };
         modules = [ ./profiles/isoimage/system.nix ];
       };
     };

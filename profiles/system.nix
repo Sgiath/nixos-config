@@ -1,4 +1,4 @@
-{ config, lib, pkgs, userSettings, hostname, ... }:
+{ config, pkgs, userSettings, ... }:
 
 {
   imports = [
@@ -36,11 +36,12 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
-  console = {
-    # font = "Lat2-Terminus16";
-    useXkbConfig = true;
+  environment.variables = {
+    LANGUAGE = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
   };
+
+  console.useXkbConfig = true;
 
   # OpenSSH
   services.openssh.enable = true;

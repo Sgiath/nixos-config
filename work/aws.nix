@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
+  pass = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
+
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
     mfa="arn:aws:iam::173509387151:mfa/filip"
-    token=$(pass otp 2fa/amazon/code)
+    token=$(${pass}/bin/pass otp 2fa/amazon/code)
 
     ${pkgs.awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
       ${pkgs.jq}/bin/jq -r '.Credentials' | \
@@ -25,7 +27,7 @@ in
     };
     credentials = {
       "default"."credential_process" = "${awsSecrets}/bin/aws-secrets";
-      "crazyegg"."credential_process" = "${pkgs.pass}/bin/pass show aws/crazyegg";
+      "crazyegg"."credential_process" = "${pass}/bin/pass show aws/crazyegg";
     };
   };
   home.file.".docker/config.json".text = ''

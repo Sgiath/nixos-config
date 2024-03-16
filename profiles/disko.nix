@@ -1,6 +1,10 @@
-{ config, device ? throw "You need to set your disk", ... }:
+{ inputs, device ? throw "You need to set your disk", ... }:
 
 {
+  imports = [
+    inputs.disko.nixosModules.disko
+  ];
+
   disko.devices = {
     disk.main = {
       inherit device;

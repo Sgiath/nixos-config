@@ -1,5 +1,3 @@
-{ config, pkgs, userSettings, ... }:
-
 {
   imports = [
     # default values
