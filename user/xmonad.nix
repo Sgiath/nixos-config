@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   xsession = {
     enable = true;
@@ -12,5 +14,12 @@
     };
   };
 
+  services.dunst = {
+    enable = true;
+    iconTheme = {
+      name = "Paper";
+      package = pkgs.paper-icon-theme;
+    };
+  };
   services.flameshot.enable = true;
 }

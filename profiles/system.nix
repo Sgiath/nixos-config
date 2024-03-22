@@ -37,7 +37,11 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  console.useXkbConfig = true;
+  console = {
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
+    earlySetup = true;
+    useXkbConfig = true;
+  };
 
   # OpenSSH
   services.openssh.enable = true;
@@ -73,7 +77,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "nix-2.16.2" ];
+    permittedInsecurePackages = [ ];
   };
 
   environment = {
@@ -107,6 +111,11 @@
 
   system.stateVersion = "23.11";
 
-  # flakes support
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Nix config
+  nix = {
+    settings.experimental-features = [ "nix-command" "flakes" ];
+    gc.automatic = true;
+    optimise.automatic = true;
+    # package = pkgs.nixUnstable;
+  };
 }

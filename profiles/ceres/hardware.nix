@@ -6,12 +6,20 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "thunderbolt" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd = {
+      availableKernelModules = [ "nvme" "thunderbolt" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
+      kernelModules = [ "amdgpu" ];
+    };
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
+    kernelParams = [ "amd_pstate=active" ];
+  };
 
-  services.nfs.server.enable = true;
+  services = {
+    nfs.server.enable = true;
+    fstrim.enable = true;
+  };
 
   fileSystems = {
     "/" = {

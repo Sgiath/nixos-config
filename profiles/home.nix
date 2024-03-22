@@ -39,6 +39,8 @@
         popd
       '')
 
+      pkgs.imagemagick
+      pkgs.ffmpeg
       pkgs.zip
       pkgs.unzip
       pkgs.wget

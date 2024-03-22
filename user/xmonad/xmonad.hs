@@ -42,18 +42,17 @@ baseConfig =
       borderWidth = 0
     }
 
-myWorkspaces = ["term", "web", "work", "KSP", "Firefox", "5", "6", "7", "8", "journal", "audio", "email", "chat"]
+myWorkspaces = ["term", "web", "work", "3", "Firefox", "5", "6", "7", "8", "9", "audio", "email", "chat"]
 myFont = "xft:RobotoMono Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
 myLayoutHook =
     avoidStruts $
-      onWorkspace "KSP" full $
-        onWorkspace "Firefox" full $
-          onWorkspace "audio" tabs $
-            onWorkspace "chat" tabs $
-              smartBorders $
-                mouseResize $
-                  windowArrange $
-                    (reflectHoriz tall ||| tabs ||| record)
+      onWorkspace "Firefox" full $
+        onWorkspace "audio" tabs $
+          onWorkspace "chat" tabs $
+            smartBorders $
+              mouseResize $
+                windowArrange $
+                  (reflectHoriz tall ||| tabs ||| record)
   where
     myTabTheme =
       def
@@ -88,13 +87,10 @@ myManageHook =
       className =? "toolbar" --> doFloat,
       isFullscreen --> doFullFloat,
       -- Default WS
-      className =? "kitty" --> doShift "term",
-      className =? "Chromium" --> doShift "web",
+      className =? "wezterm" --> doShift "term",
+      className =? "Chromium-browser" --> doShift "web",
       className =? "Google-chrome" --> doShift "work",
-      className =? "KSP.x86_64" --> doShift "KSP",
       className =? "firefox" --> doShift "Firefox",
-      className =? "Roam Research" --> doShift "journal",
-      className =? "obsidian" --> doShift "journal",
       className =? "easyeffects" --> doShift "audio",
       className =? "qpwgraph" --> doShift "audio",
       className =? "Claws-mail" --> doShift "email",
@@ -104,14 +100,11 @@ myManageHook =
     ]
 
 myKeys =
-  [ -- System
-    ("M-S-q", io exitSuccess),
-    -- Programs
+  [
+    -- terminal
     ("M-<Return>", spawn "wezterm"),
     -- Rofi
     ("M-/", spawn "rofi -show drun"),
-    ("M-b", spawn "rofi -show drun"),
-    ("M-<Backspace>", spawn "rofi -show system"),
     -- Layout
     ("M-S-<Space>", sendMessage ToggleStruts),
     ("M-<Right>", nextWS),

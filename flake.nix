@@ -4,6 +4,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    # nur.url = "github:nix-community/NUR";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -19,10 +20,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
