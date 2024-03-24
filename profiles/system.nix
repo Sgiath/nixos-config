@@ -77,7 +77,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ ];
+    permittedInsecurePackages = [ "nix-2.17.1" ];
   };
 
   environment = {
@@ -99,6 +99,12 @@
     dconf.enable = true;
   };
 
+  # mounting USBs
+  services = {
+    gvfs.enable = true;
+    udisks2.enable = true;
+  };
+
   # do not require password for sudo
   security = {
     sudo.enable = false;
@@ -116,6 +122,6 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
     gc.automatic = true;
     optimise.automatic = true;
-    # package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.nix_2_17;
   };
 }

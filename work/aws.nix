@@ -29,6 +29,7 @@ in
       "default"."credential_process" = "${awsSecrets}/bin/aws-secrets";
       "crazyegg"."credential_process" = "${pass}/bin/pass show aws/crazyegg";
     };
+    package = pkgs.awscli;
   };
   home.file = {
     ".docker/config.json".text = ''

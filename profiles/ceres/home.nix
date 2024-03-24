@@ -16,6 +16,7 @@
 
   home.packages = [
     pkgs.nitrogen
+    pkgs.cinnamon.nemo-with-extensions
   ];
 
   stylix = {

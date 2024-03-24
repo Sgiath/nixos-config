@@ -6,6 +6,7 @@
 
   # Steam
   programs.steam.enable = true;
+  programs.gamemode.enable = true;
 
   # enable Cachix for gaming
   nix.settings = {
