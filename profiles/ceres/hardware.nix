@@ -8,7 +8,8 @@
 
   boot = {
     initrd = {
-      availableKernelModules = [ "nvme" "thunderbolt" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
+      availableKernelModules =
+        [ "nvme" "thunderbolt" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
       kernelModules = [ "amdgpu" ];
     };
     kernelModules = [ "kvm-amd" ];
@@ -38,9 +39,8 @@
     };
   };
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/a09c60a8-7855-42ff-b9b0-73f7c8b8fb4c"; }
-  ];
+  swapDevices =
+    [{ device = "/dev/disk/by-uuid/a09c60a8-7855-42ff-b9b0-73f7c8b8fb4c"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -52,5 +52,6 @@
   # networking.interfaces.wlp57s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

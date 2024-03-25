@@ -8,9 +8,7 @@
       enable = true;
       enableContribAndExtras = true;
       config = ./xmonad/xmonad.hs;
-      libFiles = {
-        "Colors.hs" = ./xmonad/lib/Colors/Yoru.hs;
-      };
+      libFiles."Colors.hs" = ./xmonad/lib/Colors/Yoru.hs;
     };
   };
 

@@ -14,10 +14,7 @@
     ../../user/ollama.nix
   ];
 
-  home.packages = [
-    pkgs.nitrogen
-    pkgs.cinnamon.nemo-with-extensions
-  ];
+  home.packages = [ pkgs.nitrogen pkgs.cinnamon.nemo-with-extensions ];
 
   stylix = {
     fonts = {

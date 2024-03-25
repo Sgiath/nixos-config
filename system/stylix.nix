@@ -4,11 +4,8 @@ let
     package = (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; });
     name = "RobotoMono Nerd Font Mono";
   };
-in 
-{
-  imports = [
-    inputs.stylix.nixosModules.stylix
-  ];
+in {
+  imports = [ inputs.stylix.nixosModules.stylix ];
 
   stylix = {
     polarity = "dark";

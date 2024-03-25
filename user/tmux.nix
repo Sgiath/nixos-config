@@ -29,11 +29,11 @@
 
       # Styles
       normal="fg=$fg,bg=$bg,nobold,nounderscore,noitalics"
-     
+
       # Status widgets
       wg_session="#[fg=$bg,bg=$blue,bold] #S #[fg=$blue,bg=$bg]"
       wg_date_time="#[fg=$bg,bg=$blue,bold] %F %H%M"
-     
+
       # Status
       set -g status on
       set -g status-position top
@@ -46,12 +46,12 @@
       setw -g window-status-activity-style "none,fg=#a89984,bg=#32302f"
       setw -g window-status-separator ""
       setw -g window-status-style "none,fg=#ddc7a1,bg=#32302f"
-     
+
       set -g status-left "$wg_session"
       set -g status-right "#[fg=$blue]$wg_date_time #{prefix_highlight}"
       setw -g window-status-format "#[bg=$bg,fg=$fg] #I "
       setw -g window-status-current-format "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$bg]#I#[fg=$yellow,bg=$bg]"
-     
+
       set-option -g status-justify centre
       set-option -g status-left-length 100
       set-option -g status-right-length 100

@@ -10,11 +10,8 @@
     virtualHosts.crazyeggdev = {
       addSSL = true;
       serverName = "crazyeggdev.com";
-      serverAliases = [
-        "*.crazyeggdev.com"
-        "crazyeggproxydev.com"
-        "*.crazyeggproxydev.com"
-      ];
+      serverAliases =
+        [ "*.crazyeggdev.com" "crazyeggproxydev.com" "*.crazyeggproxydev.com" ];
       sslCertificate = "/var/development.cert";
       sslCertificateKey = "/var/development.key";
       locations."/" = {

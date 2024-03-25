@@ -24,9 +24,8 @@
 
   # AMD GPU
   services.xserver.videoDrivers = [ "amdgpu" ];
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-  ];
+  systemd.tmpfiles.rules =
+    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
   hardware.opengl = {
     extraPackages = with pkgs; [ rocmPackages.clr rocmPackages.clr.icd amdvlk ];
     extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];

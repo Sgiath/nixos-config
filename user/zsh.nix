@@ -1,15 +1,7 @@
 { lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    du-dust
-    duf
-    fd
-    gping
-    procs
-    curlie
-    tldr
-  ];
+  home.packages = with pkgs; [ du-dust duf fd gping procs curlie tldr ];
 
   programs.eza = {
     enable = true;
@@ -58,10 +50,10 @@
         "autosuggestions"
       ];
 
-	    editor = {
-	      dotExpansion = true;
-	      promptContext = true;
-	    };
+      editor = {
+        dotExpansion = true;
+        promptContext = true;
+      };
 
       tmux = {
         autoStartLocal = true;

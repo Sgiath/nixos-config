@@ -1,9 +1,7 @@
 { inputs, userSettings, ... }:
 
 {
-  imports = [
-    inputs.nix-bitcoin.nixosModules.default
-  ];
+  imports = [ inputs.nix-bitcoin.nixosModules.default ];
 
   nix-bitcoin = {
     generateSecrets = true;

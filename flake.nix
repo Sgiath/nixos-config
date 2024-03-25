@@ -11,10 +11,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # disko = {
+    #   url = "github:nix-community/disko";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nix-bitcoin = {
       url = "github:fort-nix/nix-bitcoin";
@@ -40,7 +40,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       # ---- USER SETTINGS ---- #
       userSettings = {
@@ -52,35 +52,36 @@
 
       pkgs = import nixpkgs { system = "x86_64-linux"; };
     in {
-    nixosConfigurations = nixpkgs.lib.genAttrs hosts (host: nixpkgs.lib.nixosSystem {
-      system = pkgs.system;
-      specialArgs = {
-        inherit inputs;
-        inherit userSettings;
-      };
-      modules = [
-        home-manager.nixosModules.home-manager {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = {
-              inherit inputs;
-              inherit userSettings;
-            };
-
-            users.${userSettings.username} = import ( ./profiles + "/${host}/home.nix" );
+      nixosConfigurations = nixpkgs.lib.genAttrs hosts (host:
+        nixpkgs.lib.nixosSystem {
+          system = pkgs.system;
+          specialArgs = {
+            inherit inputs;
+            inherit userSettings;
           };
-        }
+          modules = [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  inherit userSettings;
+                };
 
-        ( ./profiles + "/${host}/system.nix" )
-      ];
-    }) // {
-      installIso = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
+                users.${userSettings.username} =
+                  import (./profiles + "/${host}/home.nix");
+              };
+            }
+
+            (./profiles + "/${host}/system.nix")
+          ];
+        }) // {
+          installIso = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs; };
+            modules = [ ./profiles/isoimage/system.nix ];
+          };
         };
-        modules = [ ./profiles/isoimage/system.nix ];
-      };
     };
-  };
 }

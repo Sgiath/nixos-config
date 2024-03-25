@@ -1,9 +1,7 @@
 { inputs, ... }:
 
 {
-  imports = [
-    inputs.nix-gaming.nixosModules.pipewireLowLatency
-  ];
+  imports = [ inputs.nix-gaming.nixosModules.pipewireLowLatency ];
 
   # realtime audio
   security.rtkit.enable = true;

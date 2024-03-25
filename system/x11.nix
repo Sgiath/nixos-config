@@ -7,15 +7,13 @@
       excludePackages = [ pkgs.xterm ];
 
       # managed by home-manager
-      desktopManager.session = [
-        {
-          name = "xmonad";
-          start = ''
-            ${pkgs.runtimeShell} $HOME/.xsession &
-            waitPID=$!
-          '';
-        }
-      ];
+      desktopManager.session = [{
+        name = "xmonad";
+        start = ''
+          ${pkgs.runtimeShell} $HOME/.xsession &
+          waitPID=$!
+        '';
+      }];
 
       displayManager = {
         lightdm.enable = true;

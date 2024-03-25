@@ -1,9 +1,7 @@
 { config, pkgs, userSettings, ... }:
 
 {
-  imports = [
-    ./../system/stylix.nix
-  ];
+  imports = [ ./../system/stylix.nix ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -70,7 +68,8 @@
       ${userSettings.username} = {
         isNormalUser = true;
         extraGroups = [ "networkmanager" "wheel" "openrazer" "docker" ];
-        hashedPassword = "$y$j9T$EBb/Mjo7nNHfmtbiP1GST0$CctYXT62gX0cMDHzRzYxlix43xC3U6kzSDNvyqZOcj4";
+        hashedPassword =
+          "$y$j9T$EBb/Mjo7nNHfmtbiP1GST0$CctYXT62gX0cMDHzRzYxlix43xC3U6kzSDNvyqZOcj4";
       };
     };
   };

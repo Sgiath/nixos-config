@@ -9,9 +9,8 @@ let
     ${pkgs.awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
       ${pkgs.jq}/bin/jq -r '.Credentials' | \
       ${pkgs.jq}/bin/jq '. += {"Version": 1}'
-    '';
-in
-{
+  '';
+in {
   home.packages = with pkgs; [
     amazon-ecr-credential-helper
     slack

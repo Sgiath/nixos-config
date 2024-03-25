@@ -21,16 +21,14 @@
   # monitor config
   services.xserver = {
     videoDrivers = [ "amdgpu" "nvidia" ];
-    resolutions = [
-      { x = 2560; y = 1440; }
-    ];
+    resolutions = [{
+      x = 2560;
+      y = 1440;
+    }];
   };
 
   # razer notebook specific packages
-  environment.systemPackages = with pkgs; [
-    razergenie
-    openrazer-daemon
-  ];
+  environment.systemPackages = with pkgs; [ razergenie openrazer-daemon ];
 
   # Nvidia and AMD GPUs
   hardware.opengl = {
@@ -58,7 +56,5 @@
   };
 
   # Docker
-  virtualisation.docker = {
-    enable = true;
-  };
+  virtualisation.docker = { enable = true; };
 }

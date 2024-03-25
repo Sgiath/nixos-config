@@ -15,7 +15,7 @@
 
     delta = {
       enable = true;
-      options = {};
+      options = { };
       package = pkgs.delta;
     };
 
@@ -40,11 +40,7 @@
       "*.jpg binary"
     ];
 
-    ignores = [
-      ".direnv"
-      ".elixir_ls"
-      "result"
-    ];
+    ignores = [ ".direnv" ".elixir_ls" "result" ];
 
     extraConfig = {
       init.defaultBranch = "master";

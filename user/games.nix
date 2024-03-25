@@ -1,14 +1,12 @@
-{ inputs, pkgs, ...}:
-let
-  pkgs-citizen = inputs.nix-citizen.packages.${pkgs.system};
-in
-{
+{ inputs, pkgs, ... }:
+let pkgs-citizen = inputs.nix-citizen.packages.${pkgs.system};
+in {
   home = {
     packages = [
       # general tools
       pkgs.discord
       pkgs.lutris
-      ( pkgs.prismlauncher.override { jdks = with pkgs; [ jdk21 jdk8 ]; } )
+      (pkgs.prismlauncher.override { jdks = with pkgs; [ jdk21 jdk8 ]; })
 
       # Wine
       pkgs.winePackages.unstableFull
@@ -16,7 +14,9 @@ in
       pkgs.winetricks
 
       # Star Citizen
-      ( pkgs-citizen.star-citizen.override { tricks = [ "arial" "vcrun2019" "win10" "sound=alsa" ]; } )
+      (pkgs-citizen.star-citizen.override {
+        tricks = [ "arial" "vcrun2019" "win10" "sound=alsa" ];
+      })
       pkgs-citizen.star-citizen-helper
       pkgs-citizen.lug-helper
     ];

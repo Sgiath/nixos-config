@@ -1,9 +1,7 @@
 { inputs, device ? throw "You need to set your disk", ... }:
 
 {
-  imports = [
-    inputs.disko.nixosModules.disko
-  ];
+  imports = [ inputs.disko.nixosModules.disko ];
 
   disko.devices = {
     disk.main = {

@@ -32,12 +32,8 @@
       };
 
       # Sgiath
-      "mail.sgiath.dev" = {
-        hostname = "46.36.41.188";
-      };
-      "sgiath.local" = {
-        hostname = "192.168.1.2";
-      };
+      "mail.sgiath.dev".hostname = "46.36.41.188";
+      "sgiath.local".hostname = "192.168.1.2";
       "sgiath.dev" = {
         hostname = "145.224.120.18";
         port = 2200;
@@ -50,9 +46,7 @@
       };
 
       # NAS
-      "nas.local" = {
-        hostname = "192.168.1.4";
-      };
+      "nas.local".hostname = "192.168.1.4";
     };
   };
 }

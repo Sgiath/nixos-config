@@ -1,11 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./aws.nix
-  ];
-
-  home.packages = with pkgs; [
-    insomnia
-  ];
+  imports = [ ./aws.nix ];
+  home.packages = [ pkgs.insomnia ];
 }
