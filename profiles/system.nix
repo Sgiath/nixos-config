@@ -92,12 +92,19 @@
     mtr.enable = true;
     zsh.enable = true;
     dconf.enable = true;
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryPackage = pkgs.pinentry-gnome3;
+    };
   };
 
   # mounting USBs
   services = {
     gvfs.enable = true;
     udisks2.enable = true;
+    dbus.packages = [ pkgs.gcr ];
   };
 
   # do not require password for sudo
