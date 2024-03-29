@@ -8,10 +8,10 @@
     # CrazyEgg
     ../../work/default.nix
 
-    ../../user/audio.nix
-    ../../user/gui.nix
-    ../../user/games.nix
-    ../../user/ollama.nix
+    ../../home-manager/audio.nix
+    ../../home-manager/gui.nix
+    ../../home-manager/games.nix
+    ../../home-manager/ollama.nix
   ];
 
   home.packages = [ pkgs.nitrogen pkgs.cinnamon.nemo-with-extensions ];

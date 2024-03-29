@@ -1,7 +1,7 @@
 { config, pkgs, userSettings, ... }:
 
 {
-  imports = [ ./../system/stylix.nix ];
+  imports = [ ../nixos/stylix.nix ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {

@@ -1,4 +1,4 @@
-{ pkgs, userSettings, ... }:
+{ config, pkgs, userSettings, ... }:
 
 {
   imports = [
@@ -9,11 +9,11 @@
     ./hardware.nix
 
     # modules
-    ../../system/x11.nix
-    ../../system/sound.nix
-    ../../system/printing.nix
-    ../../system/gaming.nix
-    ../../system/bluetooth.nix
+    ../../nixos/x11.nix
+    ../../nixos/sound.nix
+    ../../nixos/printing.nix
+    ../../nixos/gaming.nix
+    ../../nixos/bluetooth.nix
   ];
 
   networking.hostName = "pallas";

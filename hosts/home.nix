@@ -2,13 +2,13 @@
 
 {
   imports = [
-    ../user/gnupg.nix
-    ../user/starship.nix
-    ../user/zsh.nix
-    ../user/tmux.nix
-    ../user/ssh.nix
-    ../user/nvim.nix
-    ../user/git.nix
+    ../home-manager/gnupg.nix
+    ../home-manager/starship.nix
+    ../home-manager/zsh.nix
+    ../home-manager/tmux.nix
+    ../home-manager/ssh.nix
+    ../home-manager/nvim.nix
+    ../home-manager/git.nix
   ];
 
   home = {

@@ -71,16 +71,16 @@
                 };
 
                 users.${userSettings.username} =
-                  import (./profiles + "/${host}/home.nix");
+                  import (./. + "/hosts/${host}/home.nix");
               };
             }
 
-            (./profiles + "/${host}/system.nix")
+            (./. + "/hosts/${host}/system.nix")
           ];
         }) // {
           installIso = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs; };
-            modules = [ ./profiles/isoimage/system.nix ];
+            modules = [ ./hosts/isoimage/system.nix ];
           };
         };
     };

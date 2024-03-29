@@ -4,15 +4,15 @@
     ../home.nix
 
     # audio
-    ../../user/audio.nix
+    ../../home-manager/audio.nix
 
     # GUI apps
-    ../../user/xmonad.nix
-    ../../user/polybar.nix
-    ../../user/rofi.nix
-    ../../user/wezterm.nix
-    ../../user/browser.nix
-    ../../user/email_client.nix
+    ../../home-manager/xmonad.nix
+    ../../home-manager/polybar.nix
+    ../../home-manager/rofi.nix
+    ../../home-manager/wezterm.nix
+    ../../home-manager/browser.nix
+    ../../home-manager/email_client.nix
 
     # CrazyEgg
     ../../work/aws.nix
