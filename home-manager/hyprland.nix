@@ -192,19 +192,19 @@
             };
 
             "hyprland/workspaces" = {
-              format = "{icon}";
-              format-icons = {
-                "1" = "term";
-                "2" = "web";
-                "3" = "work";
-                "4" = "firefox";
-                "5" = "5";
-                "6" = "6";
-                "7" = "7";
-                "8" = "8";
-                "9" = "mail";
-                "10" = "chat";
-              };
+              # format = "{icon}";
+              # format-icons = {
+              #   "1" = "term";
+              #   "2" = "web";
+              #   "3" = "work";
+              #   "4" = "firefox";
+              #   "5" = "5";
+              #   "6" = "6";
+              #   "7" = "7";
+              #   "8" = "8";
+              #   "9" = "mail";
+              #   "10" = "chat";
+              # };
             };
           };
         };

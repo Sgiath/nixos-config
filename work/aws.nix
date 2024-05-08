@@ -6,7 +6,7 @@ let
     mfa="arn:aws:iam::173509387151:mfa/filip"
     token=$(${pass}/bin/pass otp 2fa/amazon/code)
 
-    ${pkgs.awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
+    ${pkgs.awscli2}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
       ${pkgs.jq}/bin/jq -r '.Credentials' | \
       ${pkgs.jq}/bin/jq '. += {"Version": 1}'
   '';
@@ -29,7 +29,7 @@ in
       "default"."credential_process" = "${awsSecrets}/bin/aws-secrets";
       "crazyegg"."credential_process" = "${pass}/bin/pass show aws/crazyegg";
     };
-    package = pkgs.awscli;
+    package = pkgs.awscli2;
   };
   home.file = {
     ".docker/config.json".text = ''
@@ -80,7 +80,7 @@ in
                 - crazyegg-prod
                 - --output
                 - json
-              command: ${pkgs.awscli}/bin/aws
+              command: ${pkgs.awscli2}/bin/aws
         - name: arn:aws:eks:us-west-2:173509387151:cluster/crazyegg-staging
           user:
             exec:
@@ -94,7 +94,7 @@ in
                 - crazyegg-staging
                 - --output
                 - json
-              command: ${pkgs.awscli}/bin/aws
+              command: ${pkgs.awscli2}/bin/aws
     '';
   };
 }

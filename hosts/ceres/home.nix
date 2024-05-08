@@ -10,7 +10,9 @@
 
   home.packages = [
     pkgs.betaflight-configurator
-    pkgs.vscodium
+    pkgs.bisq-desktop
+    pkgs.trezor-suite
+    pkgs.trezor-udev-rules
   ];
 
   sgiath = {

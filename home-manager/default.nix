@@ -64,6 +64,7 @@
       pkgs.killall
       pkgs.inotify-tools
       pkgs.xfce.thunar
+      pkgs.fastfetch
     ];
   };
 

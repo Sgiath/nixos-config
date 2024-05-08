@@ -20,7 +20,7 @@ in
         pkgs.webcord
         pkgs.teamspeak_client
         pkgs.lutris
-        pkgs.gamescope
+        pkgs.protonup
         (pkgs.prismlauncher.override {
           jdks = with pkgs; [
             jdk21
@@ -40,6 +40,10 @@ in
           ];
         })
       ];
+
+      sessionVariables = {
+        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+      };
     };
   };
 }
