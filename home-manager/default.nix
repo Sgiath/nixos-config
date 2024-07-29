@@ -78,7 +78,11 @@
 
     password-store = {
       enable = true;
-      package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
+      package = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
     };
+  };
+
+  services = {
+    pass-secret-service.enable = true;
   };
 }

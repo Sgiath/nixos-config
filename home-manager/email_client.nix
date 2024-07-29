@@ -12,7 +12,10 @@
 
   config = lib.mkIf config.sgiath.claws.enable {
     home = {
-      packages = [ pkgs.claws-mail ];
+      packages = with pkgs; [
+        claws-mail
+        protonmail-bridge-gui
+      ];
 
       file.".signature".text = ''
         Filip Vavera

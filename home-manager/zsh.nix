@@ -1,16 +1,6 @@
 { lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    du-dust
-    duf
-    fd
-    gping
-    procs
-    curlie
-    tldr
-  ];
-
   programs.eza = {
     enable = true;
     git = true;
@@ -23,18 +13,18 @@
     shellAliases = {
       mkdir = "mkdir -p";
       tree = "ls --tree --ignore-glob='node_modules'";
-      ls = lib.mkForce "eza --icons --all --time-style=long-iso";
+      ls = lib.mkForce "${pkgs.eza}/bin/eza --icons --all --time-style=long-iso";
       ll = lib.mkForce "ls --long --binary --git";
-      cat = "bat";
-      du = "dust -x";
-      df = "duf";
-      find = "fd";
-      ping = "gping";
-      ps = "procs";
-      curl = "curlie";
-      man = "tldr";
-      top = "btop";
-      htop = "btop";
+      cat = "${pkgs.bat}/bin/bat";
+      du = "${pkgs.du-dust}/bin/dust -x";
+      df = "${pkgs.duf}/bin/duf";
+      find = "${pkgs.fd}/bin/fd";
+      ping = "${pkgs.gping}/bin/gping";
+      ps = "${pkgs.procs}/bin/procs";
+      curl = "${pkgs.curlie}/bin/curlie";
+      man = "${pkgs.tldr}/bin/tldr";
+      top = "${pkgs.btop}/bin/btop";
+      htop = "${pkgs.btop}/bin/btop";
     };
 
     prezto = {
