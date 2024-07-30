@@ -31,14 +31,29 @@
 
       (pkgs.writeShellScriptBin "update" ''
         pushd ~/.dotfiles
+
+        git add --all
+        git commit --signoff -m "changes"
+
         nixos-rebuild switch --use-remote-sudo --flake .
+
+        nix-collect-garbage
         popd
       '')
 
       (pkgs.writeShellScriptBin "upgrade" ''
         pushd ~/.dotfiles
+
+        git add --all
+        git commit --signoff -m "changes"
+
         nix flake update
+        git add --all
+        git commit --signoff -m "flake update"
+
         nixos-rebuild switch --use-remote-sudo --flake .
+
+        nix-collect-garbage
         popd
       '')
 

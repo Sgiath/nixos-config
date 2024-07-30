@@ -13,7 +13,6 @@
     ./gaming.nix
     ./stylix.nix
     ./sound.nix
-    ./x11.nix
     ./wayland.nix
     ./printing.nix
     ./networking.nix
@@ -142,9 +141,6 @@
     };
   };
   environment.shellAliases.sudo = "doas";
-
-  # OpenGL
-  hardware.graphics.enable = true;
 
   system.stateVersion = "23.11";
 
