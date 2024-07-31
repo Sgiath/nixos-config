@@ -19,18 +19,10 @@
     audio.enable = true;
     browser.enable = true;
     claws.enable = true;
-    # games.enable = true;
-    ollama.enable = true;
-
-    # Wayland
+    games.enable = false;
+    ollama.enable = false;
     hyprland.enable = true;
     kitty.enable = true;
-
-    # X11
-    # polybar.enable = true;
-    # xmonad.enable = true;
-    # rofi.enable = true;
-    # wezterm.enable = true;
   };
 
   stylix.fonts.sizes = {

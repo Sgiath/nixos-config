@@ -11,8 +11,6 @@
   };
 
   config = lib.mkIf config.sgiath.ollama.enable {
-    home.packages = [ pkgs.ollama ];
-
     systemd.user.services.ollama = {
       Unit = {
         Description = "Ollama Service";
