@@ -19,7 +19,7 @@
     audio.enable = true;
     browser.enable = true;
     claws.enable = true;
-    games.enable = false;
+    games.enable = true;
     ollama.enable = false;
     hyprland.enable = true;
     kitty.enable = true;
