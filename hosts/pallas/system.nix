@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   userSettings,
   ...
@@ -12,6 +11,9 @@
 
     # modules
     ../../nixos
+
+    # work
+    ../../work/nginx.nix
   ];
 
   networking.hostName = "pallas";

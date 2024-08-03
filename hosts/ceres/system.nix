@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   imports = [
     # hardware
@@ -21,7 +19,6 @@
     printing.enable = true;
     gaming.enable = true;
     networking.localDNS.enable = true;
-    # x11.enable = true;
     wayland.enable = true;
   };
 
