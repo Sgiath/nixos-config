@@ -3,8 +3,8 @@
   description = "Default flake";
 
   inputs = {
-    # nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs.url = "nixpkgs/master";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    # nixpkgs.url = "nixpkgs/master";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
     # nur.url = "github:nix-community/NUR";
 
