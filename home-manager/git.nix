@@ -15,8 +15,6 @@
 
     delta = {
       enable = true;
-      options = { };
-      package = pkgs.delta;
     };
 
     aliases = {
