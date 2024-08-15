@@ -2,11 +2,12 @@
 let
   pass = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
 
+  awscli = pkgs.awscli2_2_15;
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
     mfa="arn:aws:iam::173509387151:mfa/filip"
     token=$(${pass}/bin/pass otp 2fa/amazon/code)
 
-    ${pkgs.awscli2}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
+    ${awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
       ${pkgs.jq}/bin/jq -r '.Credentials' | \
       ${pkgs.jq}/bin/jq '. += {"Version": 1}'
   '';
@@ -29,7 +30,7 @@ in
       "default"."credential_process" = "${awsSecrets}/bin/aws-secrets";
       "crazyegg"."credential_process" = "${pass}/bin/pass show aws/crazyegg";
     };
-    package = pkgs.awscli2;
+    package = awscli;
   };
   home.file = {
     ".docker/config.json".text = ''
@@ -80,7 +81,7 @@ in
                 - crazyegg-prod
                 - --output
                 - json
-              command: ${pkgs.awscli2}/bin/aws
+              command: ${awscli}/bin/aws
         - name: arn:aws:eks:us-west-2:173509387151:cluster/crazyegg-staging
           user:
             exec:
@@ -94,7 +95,7 @@ in
                 - crazyegg-staging
                 - --output
                 - json
-              command: ${pkgs.awscli2}/bin/aws
+              command: ${awscli}/bin/aws
     '';
   };
 }
