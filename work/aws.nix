@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 let
   pass = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
+  pkgs-stable = import inputs.nixpkgs-stable { system = pkgs.system; };
 
-  awscli = pkgs.awscli2_15;
+  awscli = pkgs-stable.awscli2;
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
     mfa="arn:aws:iam::173509387151:mfa/filip"
     token=$(${pass}/bin/pass otp 2fa/amazon/code)
