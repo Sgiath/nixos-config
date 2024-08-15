@@ -12,10 +12,7 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-
-    delta = {
-      enable = false;
-    };
+    delta.enable = false;
 
     aliases = {
       d = "diff";
