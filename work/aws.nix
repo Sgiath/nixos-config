@@ -1,8 +1,8 @@
 { inputs, pkgs, ... }:
 let
-  pass = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
   pkgs-stable = import inputs.nixpkgs-stable { system = pkgs.system; };
 
+  pass = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
   awscli = pkgs-stable.awscli2;
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
     mfa="arn:aws:iam::173509387151:mfa/filip"
