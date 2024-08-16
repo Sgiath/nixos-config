@@ -361,11 +361,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1723799341,
-        "narHash": "sha256-OOwAjqHy/lC+rHZrWDIF2w0oppVxCP48lPDhyNNZ5HQ=",
+        "lastModified": 1723824059,
+        "narHash": "sha256-3AebH/B40viTNVJpgiQkfptVe4aRTfyffa8rjUNB0pU=",
         "ref": "refs/heads/main",
-        "rev": "1840a907a8c6b1f59cfa6738a8f46b320e8df8b1",
-        "revCount": 5097,
+        "rev": "c5feee1e357f3c3c59ebe406630601c627807963",
+        "revCount": 5098,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -492,11 +492,11 @@
         "nixpkgs-unstable": "nixpkgs-unstable"
       },
       "locked": {
-        "lastModified": 1723533469,
-        "narHash": "sha256-8gSsZpYmOzwFRaLIX0OMBvV/+SATmu/O9QXkDgsZlIg=",
+        "lastModified": 1723819566,
+        "narHash": "sha256-u7PFxnfMFBVzxjh2X1rSfA+QeHRtVKuZwuWg1rwNwfw=",
         "owner": "fort-nix",
         "repo": "nix-bitcoin",
-        "rev": "6e208d6a7b554be592167f6ecad9b16c0abf96d7",
+        "rev": "9a2f08205d7ecaaa700747e2e959e71baaf8d5ae",
         "type": "github"
       },
       "original": {
@@ -676,11 +676,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722946882,
-        "narHash": "sha256-mxtnMye8gs82tdQbVC+g6v3aPOZlH150f9WyntHIkTg=",
+        "lastModified": 1723834469,
+        "narHash": "sha256-PkJTr9DWBQcR5Ru1fJpG80dtw0MLSxAZlKnhHHFAGIA=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "5853f1a8bd072f2ebabfc3de3973084353cf6f1e",
+        "rev": "6858d08ed012bc6491cc92c13142104e56badf31",
         "type": "github"
       },
       "original": {
