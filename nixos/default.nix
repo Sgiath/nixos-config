@@ -115,6 +115,7 @@
       enableSSHSupport = true;
       pinentryPackage = pkgs.pinentry-gnome3;
     };
+    nix-ld.enable = true;
   };
 
   # mounting USBs
