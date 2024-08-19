@@ -75,6 +75,7 @@
       pkgs.obsidian
       pkgs.telegram-desktop
       pkgs.signal-desktop-beta
+      pkgs.obs-studio
     ];
   };
 
