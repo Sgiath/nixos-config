@@ -74,9 +74,12 @@
       pkgs.fastfetch
       pkgs.obsidian
       pkgs.telegram-desktop
-      pkgs.signal-desktop-beta
       pkgs.obs-studio
-      pkgs.android-udev-rules
+
+      # privacy
+      pkgs.signal-desktop-beta
+      pkgs.python312Packages.nomadnet
+      pkgs.python312Packages.sbapp
     ];
   };
 
