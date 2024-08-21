@@ -27,7 +27,7 @@ in
     package = awscli;
   };
   home = {
-    programs = with pkgs; [
+    packages = with pkgs; [
       amazon-ecr-credential-helper
     ];
 
