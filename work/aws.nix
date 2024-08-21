@@ -40,6 +40,10 @@ in
         };
       };
 
+      ".kube/config2".text = builtins.toYAML {
+        test = "tshin";
+      };
+
       ".kube/config".text = ''
         apiVersion: v1
         clusters:
