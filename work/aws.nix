@@ -32,7 +32,7 @@ in
     ];
 
     file = {
-      ".docker/config.json".text = pkgs.formats.yaml.toString {
+      ".docker/config.json".text = builtins.toJSON {
         credHelpers = {
           "public.ecr.aws" = "ecr-login";
           "173509387151.dkr.ecr.us-east-1.amazonaws.com" = "ecr-login";
