@@ -40,10 +40,6 @@ in
         };
       };
 
-      ".kube/config2".text = pkgs.formats.yaml.toString {
-        test = "tshin";
-      };
-
       ".kube/config".text = ''
         apiVersion: v1
         clusters:
