@@ -45,7 +45,6 @@
     {
       nixpkgs,
       home-manager,
-      sops-nix,
       ...
     }@inputs:
     let
@@ -62,6 +61,8 @@
       ];
 
       pkgs = import nixpkgs { system = "x86_64-linux"; };
+
+      secrets = builtins.fromJSON ./secrets.json;
     in
     {
       nixosConfigurations =
@@ -72,6 +73,7 @@
             specialArgs = {
               inherit inputs;
               inherit userSettings;
+              inherit secrets;
             };
             modules = [
               # home manager
@@ -83,6 +85,7 @@
                   extraSpecialArgs = {
                     inherit inputs;
                     inherit userSettings;
+                    inherit secrets;
                   };
 
                   users.${userSettings.username} = import (./. + "/hosts/${host}/home.nix");

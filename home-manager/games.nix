@@ -3,6 +3,7 @@
   lib,
   inputs,
   pkgs,
+  secrets,
   ...
 }:
 let
@@ -45,7 +46,7 @@ in
         # Factorio
         (pkgs.factorio.override {
           username = "Sgiath";
-          token = "3d566066aa44a3fc69b9ec6782cfa9";
+          token = secrets.factorio_token;
         })
       ];
 
