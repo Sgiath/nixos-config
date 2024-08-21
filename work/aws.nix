@@ -40,7 +40,7 @@ in
         };
       };
 
-      ".kube/config2".text = builtins.toYAML {
+      ".kube/config2".text = pkgs.formats.yaml.toString {
         test = "tshin";
       };
 
