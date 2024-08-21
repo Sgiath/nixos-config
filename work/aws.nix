@@ -2,7 +2,7 @@
 let
   pkgs-stable = import inputs.nixpkgs-stable { system = pkgs.system; };
 
-  pass = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
+  pass = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
   awscli = pkgs-stable.awscli2;
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
     mfa="arn:aws:iam::173509387151:mfa/filip"
@@ -14,13 +14,6 @@ let
   '';
 in
 {
-  home.packages = with pkgs; [
-    amazon-ecr-credential-helper
-    slack
-    google-chrome
-  ];
-
-  programs.jq.enable = true;
   programs.awscli = {
     enable = true;
     settings."default" = {
@@ -34,15 +27,14 @@ in
     package = awscli;
   };
   home.file = {
-    ".docker/config.json".text = ''
-      {
-        "credHelpers": {
-          "public.ecr.aws": "ecr-login",
-          "173509387151.dkr.ecr.us-east-1.amazonaws.com": "ecr-login",
-          "173509387151.dkr.ecr.us-west-2.amazonaws.com": "ecr-login"
-        }
-      }
-    '';
+    ".docker/config.json".text = builtins.toJSON {
+      credHelpers = {
+        "public.ecr.aws" = "${pkgs.amazon-ecr-credential-helper}/bin/ecr-login";
+        "173509387151.dkr.ecr.us-east-1.amazonaws.com" = "${pkgs.amazon-ecr-credential-helper}/bin/ecr-login";
+        "173509387151.dkr.ecr.us-west-2.amazonaws.com" = "${pkgs.amazon-ecr-credential-helper}/bin/ecr-login";
+      };
+    };
+
     ".kube/config".text = ''
       apiVersion: v1
       clusters:

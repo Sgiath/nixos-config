@@ -26,10 +26,10 @@
 
     stateVersion = "23.11";
 
-    packages = [
-      (pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; })
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "RobotoMono" ]; })
 
-      (pkgs.writeShellScriptBin "update" ''
+      (writeShellScriptBin "update" ''
         pushd ~/.dotfiles
 
         git add --all
@@ -40,7 +40,7 @@
         popd
       '')
 
-      (pkgs.writeShellScriptBin "upgrade" ''
+      (writeShellScriptBin "upgrade" ''
         pushd ~/.dotfiles
 
         git add --all
@@ -55,30 +55,30 @@
         popd
       '')
 
-      (pkgs.writeShellScriptBin "build-iso" ''
+      (writeShellScriptBin "build-iso" ''
         pushd ~/.dotfiles
         nix run "nixpkgs#nixos-generators" -- --format iso --flake ".#installIso" -o result
         popd
       '')
 
       # general programs I want to have always available
-      pkgs.imagemagick
-      pkgs.ffmpeg
-      pkgs.zip
-      pkgs.unzip
-      pkgs.wget
-      pkgs.dig
-      pkgs.killall
-      pkgs.inotify-tools
-      pkgs.xfce.thunar
-      pkgs.fastfetch
-      pkgs.obsidian
-      pkgs.telegram-desktop
-      pkgs.obs-studio
+      imagemagick
+      ffmpeg
+      zip
+      unzip
+      wget
+      dig
+      killall
+      inotify-tools
+      xfce.thunar
+      fastfetch
+      obsidian
+      telegram-desktop
+      obs-studio
 
       # privacy
-      pkgs.signal-desktop-beta
-      pkgs.python312Packages.nomadnet
+      signal-desktop-beta
+      python312Packages.nomadnet
     ];
   };
 

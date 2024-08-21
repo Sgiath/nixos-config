@@ -2,5 +2,9 @@
 
 {
   imports = [ ./aws.nix ];
-  home.packages = [ pkgs.insomnia ];
+  home.packages = with pkgs; [
+    slack
+    google-chrome
+    insomnia
+  ];
 }

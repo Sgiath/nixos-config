@@ -10,9 +10,7 @@ let
 in
 {
   home = {
-    packages = [
-      pkgs.git-crypt
-    ];
+    packages = with pkgs; [ git-crypt ];
 
     file = {
       ".git/commit-template".text = ''
