@@ -62,7 +62,7 @@
 
       pkgs = import nixpkgs { system = "x86_64-linux"; };
 
-      secrets = builtins.fromJSON ./secrets.json;
+      secrets = builtins.fromJSON (builtins.readFile ./secrets.json);
     in
     {
       nixosConfigurations =
