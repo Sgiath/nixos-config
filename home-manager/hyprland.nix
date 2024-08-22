@@ -25,9 +25,11 @@
         exec-once = [
           "${pkgs.kitty}/bin/kitty"
           # "${pkgs.ungoogled-chromium}/bin/chromium"
-          "${pkgs.claws-mail}/bin/claws-mail"
+          "${pkgs.claws-mail}/bin/proton-mail"
           "${pkgs.slack}/bin/slack"
           "${pkgs.webcord}/bin/webcord"
+          "${pkgs.signal-desktop-beta}/bin/signal-desktop-beta"
+          "${pkgs.telegram-desktop}/bin/telegram-desktop"
         ];
 
         monitor = [
@@ -119,22 +121,25 @@
           "10,monitor:DP-2,default:true,gapsin:0,gapsout:0,border:false,persistent:true"
         ];
 
+        # hyprctl clients
         windowrulev2 = [
           # terminal in special workspace
           "workspace 1, class:(kitty)"
 
           # browsers
-          "workspace 2 silent, class:(Chromium-browser)"
-          "workspace 3 silent, class:(Google-chrome)"
+          "workspace 2 silent, class:(chromium-browser)"
+          "workspace 3 silent, class:(google-chrome)"
           "workspace 4 silent, class:(firefox)"
 
           # email
           "workspace 9 silent, class:(claws-mail)"
+          "workspace 9 silent, class:(Proton Mail)"
 
           # messaging apps
           "workspace 10 silent, class:(Slack)"
           "workspace 10 silent, class:(WebCord)"
-          "workspace 10 silent, class:(TelegramDesktop)"
+          "workspace 10 silent, class:(signalbeta)"
+          "workspace 10 silent, class:(org.telegram.deskop)"
         ];
       };
     };
