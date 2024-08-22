@@ -65,7 +65,7 @@
       };
 
       librewolf = {
-        enable = true;
+        enable = false;
       };
 
       qutebrowser = {
