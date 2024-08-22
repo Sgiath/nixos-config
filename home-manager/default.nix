@@ -98,6 +98,8 @@
       enable = true;
       package = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
     };
+
+    freetube.enable = true;
   };
 
   services = {
