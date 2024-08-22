@@ -33,6 +33,7 @@
           # uBlock origin
           { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
         ];
+        dictionaries = [ pkgs.hunspellDictsChromium.en_US ];
         commandLineArgs = [
           "--enable-features=WebUIDarkMode,DisableQRGenerator"
 
