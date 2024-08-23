@@ -76,7 +76,7 @@
 
       # privacy
       signal-desktop-beta
-      python311Packages.rns
+      python312Packages.rns
       python312Packages.nomadnet
     ];
   };
