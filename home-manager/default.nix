@@ -63,6 +63,7 @@
       '')
 
       # general programs I want to have always available
+      appimage-run
       imagemagick
       ffmpeg
       zip
