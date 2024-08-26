@@ -16,7 +16,10 @@
 
       # audio convertor
       (writeShellScriptBin "convert-audio" ''
-        ${ffmpeg}/bin/ffmpeg -i *.mp4 -c:v copy -c:a pcm_s321e output.mov
+        for i in *.mp4; do
+          name=$(echo "$i" | cut -d'.' -f1)
+          ${ffmpeg}/bin/ffmpeg -i "$i" -c:v copy -c:a pcm_s321e "$\{name\}.mov"
+        done
       '')
     ];
   };
