@@ -91,6 +91,7 @@
             };
             modules = [
               inputs.disko.nixosModules.disko
+              outputs.nixosModules
 
               home-manager.nixosModules.home-manager
               {

@@ -1,10 +1,7 @@
-{ outputs, ... }:
 {
   imports = [
     ./hardware.nix
-    outputs.nixosModules
 
-    ../../work/nginx.nix
   ];
 
   networking.hostName = "ceres";
@@ -21,4 +18,6 @@
     razer.enable = false;
     wayland.enable = true;
   };
+
+  crazyegg.enable = true;
 }
