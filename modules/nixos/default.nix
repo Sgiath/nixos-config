@@ -1,3 +1,6 @@
 {
-  imports = [ ./amd-gpu.nix ];
+  imports = [
+    ./amd-gpu.nix
+    ./nvidia-gpu.nix
+  ];
 }

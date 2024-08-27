@@ -4,13 +4,15 @@
   lib,
   ...
 }:
-
+let
+  cfg = config.sgiath.nvidia-gpu;
+in 
 {
   options.sgiath.nvidia-gpu = {
     enable = lib.mkEnableOption "Nvidia GPU";
   };
 
-  config = lib.mkIf config.sgiath.nvidia-gpu.enable {
+  config = lib.mkIf cfg.enable {
     boot.initrd.kernelModules = [ "nvidia" ];
     services.xserver.videoDrivers = [ "nvidia" ];
 

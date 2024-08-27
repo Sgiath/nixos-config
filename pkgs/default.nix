@@ -1,3 +1,3 @@
 pkgs: {
-  sbapp = pkgs.callPackage ./sbapp { };
+  pythin3Packages.sbapp = pkgs.callPackage ./sbapp.nix { };
 }
