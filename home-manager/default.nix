@@ -1,5 +1,4 @@
 {
-  outputs,
   pkgs,
   userSettings,
   ...
@@ -25,19 +24,6 @@
     ./hyprland.nix
     ./kitty.nix
   ];
-
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.stable-packages
-    ];
-
-    config = {
-      allowUnfree = true;
-      permittedInsecurePackages = [ ];
-    };
-  };
 
   home = {
     username = userSettings.username;
