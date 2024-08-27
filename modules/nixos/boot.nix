@@ -1,0 +1,34 @@
+{ pkgs, ... }:
+{
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  console = {
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
+    earlySetup = true;
+    useXkbConfig = true;
+  };
+
+  environment = {
+    shells = with pkgs; [
+      bash
+      zsh
+    ];
+    systemPackages = with pkgs; [
+      neovim
+      git
+    ];
+  };
+
+  programs = {
+    zsh.enable = true;
+    dconf.enable = true;
+  };
+}
