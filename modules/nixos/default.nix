@@ -21,4 +21,6 @@
     ./razer.nix
     ./wayland.nix
   ];
+
+  options = {};
 }
