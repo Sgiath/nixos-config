@@ -15,7 +15,6 @@
     ./audio.nix
     ./bitcoin.nix
     ./bluetooth.nix
-    ./docker.nix
     ./gaming.nix
     ./nvidia-gpu.nix
     ./printing.nix

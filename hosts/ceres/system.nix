@@ -13,7 +13,6 @@
     amd-gpu.enable = true;
     nvidia-gpu.enable = false;
     audio.enable = true;
-    bitcoin.enable = false;
     bluetooth.enable = true;
     docker.enable = true;
     gaming.enable = true;
