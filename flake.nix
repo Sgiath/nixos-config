@@ -49,6 +49,8 @@
       ...
     }@inputs:
     let
+      system = "x86_64-linux";
+
       # ---- USER SETTINGS ---- #
       userSettings = {
         username = "sgiath";
@@ -61,7 +63,17 @@
         "pallas"
       ];
 
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      callPackage = nixpkgs.legacyPackages.${system}.callPackage;
+
+      pkgs = import nixpkgs {
+        inherit system;
+
+        overlays = [
+          {
+            sbapp = callPackage ./pkgs/sbapp.nix;
+          }
+        ];
+      };
 
       secrets = builtins.fromJSON (builtins.readFile ./secrets.json);
     in
