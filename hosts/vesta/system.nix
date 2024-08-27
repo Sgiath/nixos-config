@@ -1,8 +1,7 @@
-{ outputs, ... }:
 {
   imports = [
     ./hardware.nix
-    outputs.nixosModules
+
     ./../../nixos/bitcoin.nix
   ];
 

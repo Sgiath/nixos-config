@@ -1,11 +1,5 @@
-{ outputs, ... }:
 {
-  imports = [
-    ./hardware.nix
-    outputs.nixosModules
-
-    ../../work/nginx.nix
-  ];
+  imports = [ ./hardware.nix ];
 
   networking.hostName = "pallas";
 
@@ -21,4 +15,6 @@
     razer.enable = true;
     wayland.enable = true;
   };
+
+  crazyegg.enable = true;
 }

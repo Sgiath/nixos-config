@@ -102,6 +102,7 @@
                     inherit inputs outputs;
                     inherit userSettings secrets;
                   };
+                  sharedModules = [ outputs.homeManagerModules ];
 
                   users.${userSettings.username} = import (./. + "/hosts/${host}/home.nix");
                 };
