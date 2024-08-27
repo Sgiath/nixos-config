@@ -12,11 +12,7 @@
     ./tmux.nix
     ./ssh.nix
     ./nvim.nix
-    ./git.nix
-    ./email_client.nix
-    ./games.nix
     ./ollama.nix
-    ./davinci.nix
 
     # Wayland
     ./hyprland.nix

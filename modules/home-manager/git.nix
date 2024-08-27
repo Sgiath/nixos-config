@@ -21,7 +21,7 @@
     lfs.enable = true;
     delta = {
       enable = false;
-      package = pkgs.stable.delta;
+      package = pkgs.delta;
     };
 
     aliases = {
@@ -113,14 +113,6 @@
         enabled = true;
         autoUpdate = true;
       };
-    };
-  };
-
-  programs.gh = {
-    enable = true;
-    settings = {
-      git_protocol = "ssh";
-      editor = "${pkgs.neovim}/bin/nvim";
     };
   };
 }

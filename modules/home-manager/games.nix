@@ -19,7 +19,6 @@ in
       packages = [
         # general tools
         pkgs.webcord
-        pkgs.teamspeak_client
         pkgs.lutris
         pkgs.protonup
         (pkgs.prismlauncher.override {

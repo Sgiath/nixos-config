@@ -6,16 +6,14 @@
 }:
 
 {
-  options.sgiath.claws = {
-    enable = lib.mkEnableOption "Claws Email";
+  options.sgiath.email_client = {
+    enable = lib.mkEnableOption "Email Client";
   };
 
-  config = lib.mkIf config.sgiath.claws.enable {
+  config = lib.mkIf config.sgiath.email_client.enable {
     home = {
       packages = with pkgs; [
-        claws-mail
         protonmail-desktop
-        protonmail-bridge-gui
       ];
 
       file.".signature".text = ''
