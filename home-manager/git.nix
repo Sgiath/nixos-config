@@ -1,13 +1,8 @@
 {
   pkgs,
   userSettings,
-  inputs,
   ...
 }:
-
-let
-  pkgs-stable = import inputs.nixpkgs-stable { system = pkgs.system; };
-in
 {
   home = {
     packages = with pkgs; [ git-crypt ];
@@ -26,7 +21,7 @@ in
     lfs.enable = true;
     delta = {
       enable = false;
-      package = pkgs-stable.delta;
+      package = pkgs.stable.delta;
     };
 
     aliases = {

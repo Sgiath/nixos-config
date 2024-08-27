@@ -2,12 +2,8 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
-let
-  pkgs-stable = import inputs.nixpkgs-stable { system = pkgs.system; };
-in
 {
   options.sgiath.audio = {
     enable = lib.mkEnableOption "audio";
@@ -17,7 +13,7 @@ in
     home.packages = [ pkgs.qpwgraph ];
     services.easyeffects = {
       enable = true;
-      package = pkgs-stable.easyeffects;
+      package = pkgs.stable.easyeffects;
     };
   };
 }
