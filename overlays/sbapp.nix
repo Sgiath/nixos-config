@@ -1,27 +1,16 @@
 {
   lib,
-  buildPythonPackage,
-  fetchFromGitHub,
-  pyaudio,
-  pythonOlder,
-  rns,
-  lxmf,
-  kivy,
-  plyer,
-  pillow,
-  qrcode,
-  materialyoucolor,
-  setuptools,
+  pkgs,
+...
 }:
 
-buildPythonPackage rec {
+lib.buildPythonPackage rec {
   pname = "sbapp";
   version = "0.9.1";
   pyproject = true;
 
-  disabled = pythonOlder "3.7";
 
-  src = fetchFromGitHub {
+  src = lib.fetchFromGitHub {
     owner = "markqvist";
     repo = "Sideband";
     rev = "refs/tags/${version}";
@@ -32,9 +21,9 @@ buildPythonPackage rec {
     find . -name "*.kv" -exec cp --parents {} $out/lib/python3.12/site-packages/ \;
   '';
 
-  build-system = [ setuptools ];
+  build-system = [ pkgs.python3Package.setuptools ];
 
-  dependencies = [
+  dependencies = with pkgs.python3Packages; [
     rns
     lxmf
     kivy
@@ -55,6 +44,5 @@ buildPythonPackage rec {
     homepage = "https://github.com/markqvist/Sideband";
     changelog = "https://github.com/markqvist/Sideband/releases/tag/${version}";
     license = licenses.acsl14;
-    maintainers = with maintainers; [ fab ];
   };
 }
