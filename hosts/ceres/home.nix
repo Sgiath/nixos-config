@@ -15,6 +15,11 @@
     pkgs.trezor-udev-rules
   ];
 
+  programs = {
+    git.enable = true;
+    gpg.enable = true;
+  };
+
   sgiath = {
     audio.enable = true;
     browser.enable = true;
