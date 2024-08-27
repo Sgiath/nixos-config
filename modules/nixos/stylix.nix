@@ -16,7 +16,7 @@ in
     image = ./../wallpapers/girl.png;
     imageScalingMode = "fit";
 
-    base16Scheme = ./../theme.yaml;
+    base16Scheme = ./../../theme.yaml;
 
     cursor = {
       package = pkgs.bibata-cursors;
