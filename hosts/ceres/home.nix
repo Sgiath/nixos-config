@@ -17,12 +17,14 @@
 
   sgiath = {
     audio.enable = true;
-    claws.enable = true;
+    browser.enable = true;
+    davinci.enable = true;
+    email_client.enable = true;
     games.enable = true;
+
     ollama.enable = false;
     hyprland.enable = true;
     kitty.enable = true;
-    davinci.enable = true;
   };
 
   stylix.fonts.sizes = {
