@@ -3,9 +3,12 @@
 
   networking.hostName = "pallas";
 
+  graphical = {
+    enable = true;
+    gpu = "nvidia";
+  };
+
   sgiath = {
-    amd-gpu.enable = false;
-    nvidia-gpu.enable = true;
     audio.enable = true;
     bluetooth.enable = true;
     docker.enable = true;
@@ -13,7 +16,6 @@
     networking.localDNS.enable = false;
     printing.enable = true;
     razer.enable = true;
-    wayland.enable = true;
   };
 
   crazyegg.enable = true;

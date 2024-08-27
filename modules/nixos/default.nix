@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   imports = [
     # always enabled
@@ -23,4 +24,14 @@
 
     ./crazyegg
   ];
+
+  options.graphical = {
+    enable = lib.mkEnableOption "graphical interface";
+    gpu = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = ''
+        What GPU configuration to use. Can be "amd" or "nvidia"
+      '';
+    };
+  };
 }
