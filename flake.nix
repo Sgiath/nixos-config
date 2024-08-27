@@ -46,12 +46,14 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
-      disko,
       ...
     }@inputs:
     let
+      inherit (self) outputs;
+
       system = "x86_64-linux";
 
       # ---- USER SETTINGS ---- #
@@ -70,9 +72,11 @@
       secrets = builtins.fromJSON (builtins.readFile ./secrets.json);
     in
     {
-      packages = {
-        sbapp = pkgs.callPackage ./pkgs/sbapp.nix { };
-      };
+      packages = import ./pkgs pkgs;
+      formatter = pkgs.nixpkgs-fmt;
+      overlays = import ./overlays { inherit inputs; };
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
 
       nixosConfigurations =
         nixpkgs.lib.genAttrs hosts (
@@ -80,22 +84,20 @@
           nixpkgs.lib.nixosSystem {
             system = pkgs.system;
             specialArgs = {
-              inherit inputs;
-              inherit userSettings;
-              inherit secrets;
+              inherit inputs outputs;
+              inherit userSettings secrets;
             };
             modules = [
-              disko.nixosModules.disko
-              # home manager
+              inputs.disko.nixosModules.disko
+
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
                   extraSpecialArgs = {
-                    inherit inputs;
-                    inherit userSettings;
-                    inherit secrets;
+                    inherit inputs outputs;
+                    inherit userSettings secrets;
                   };
 
                   users.${userSettings.username} = import (./. + "/hosts/${host}/home.nix");
@@ -104,14 +106,13 @@
 
               # configuration of the selected system
               (./. + "/hosts/${host}/system.nix")
-              (import ./overlays)
             ];
           }
         )
         // {
           installIso = nixpkgs.lib.nixosSystem {
             specialArgs = {
-              inherit inputs;
+              inherit inputs outputs;
             };
             modules = [ ./hosts/isoimage/system.nix ];
           };

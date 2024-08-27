@@ -1,4 +1,6 @@
 {
+  inputs,
+  outputs,
   config,
   pkgs,
   userSettings,
@@ -85,9 +87,17 @@
     };
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [ ];
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.stable-packages
+    ];
+
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [ ];
+    };
   };
 
   environment = {
@@ -151,10 +161,6 @@
       "nix-command"
       "flakes"
     ];
-    # package = pkgs.nixVersions.nix_2_23;
-    gc = {
-      automatic = false;
-      dates = "daily";
-    };
+    channel.enable = false;
   };
 }

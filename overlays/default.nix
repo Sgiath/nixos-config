@@ -1,13 +1,12 @@
+{ inputs, ... }:
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
-  nixpkgs.overlays = [
-    (final: prev: {
-      python3Packages.sbapp = prev.callPackage ./sbapp.nix { inherit pkgs lib; };
-    })
-  ];
+  additions = final: _prev: import ../pkgs final.pkgs;
+  modifications = final: prev: { };
+
+  stable-packages = final: _prev: {
+    stable = import inputs.nixpkgs-stable {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
 }

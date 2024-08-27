@@ -1,4 +1,9 @@
-{ pkgs, userSettings, ... }:
+{
+  outputs,
+  pkgs,
+  userSettings,
+  ...
+}:
 
 {
   imports = [
@@ -20,6 +25,19 @@
     ./hyprland.nix
     ./kitty.nix
   ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.stable-packages
+    ];
+
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [ ];
+    };
+  };
 
   home = {
     username = userSettings.username;
@@ -106,4 +124,6 @@
   services = {
     pass-secret-service.enable = false;
   };
+
+  systemd.user.startServices = "sd-switch";
 }
