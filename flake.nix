@@ -69,9 +69,9 @@
         inherit system;
 
         overlays = [
-          {
-            sbapp = callPackage ./pkgs/sbapp.nix;
-          }
+          (final: prev: {
+            sbapp = callPackage ./pkgs/sbapp.nix { };
+          })
         ];
       };
 
