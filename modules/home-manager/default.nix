@@ -4,7 +4,7 @@
     ./browser.nix
     ./davinci.nix
     ./email_client.nix
-    ./games.ni
+    ./games.nix
     ./git.nix
     ./gnupg.nix
     ./hyprland.nix
