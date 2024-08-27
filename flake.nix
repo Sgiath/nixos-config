@@ -78,12 +78,8 @@
       formatter = pkgs.nixpkgs-fmt;
       overlays = import ./overlays { inherit inputs; };
       lib = import ./lib { inherit (nixpkgs) lib; };
-
-      nixosModules.default = self.nixosModules.sgiath;
-      nixosModules.sgiath.imports = [ ./modules/nixos ];
-
-      homeManagerModules.default = self.homeManagerModules.sgiath;
-      homeManagerModules.sgiath.imports = [ ./modules/home-manager ];
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
 
       nixosConfigurations =
         nixpkgs.lib.genAttrs hosts (
