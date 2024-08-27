@@ -13,7 +13,6 @@
   };
 
   config = lib.mkIf config.sgiath.audio.enable {
-
     # realtime audio
     security.rtkit.enable = true;
 

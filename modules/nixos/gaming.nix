@@ -11,20 +11,16 @@
   };
 
   config = lib.mkIf config.sgiath.gaming.enable {
-    # gaming kernel
-    boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod_latest;
 
-    # Steam
-    programs.steam = {
-      enable = true;
-      gamescopeSession.enable = true;
+    programs = {
+      steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+      };
+
+      gamemode.enable = true;
     };
-
-    programs.gamemode.enable = true;
-
-    environment.systemPackages = [
-      pkgs.mangohud
-    ];
 
     # enable Cachix for gaming
     nix.settings = {

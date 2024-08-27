@@ -1,44 +1,25 @@
-{
-  pkgs,
-  userSettings,
-  ...
-}:
-
+{ outputs, ... }:
 {
   imports = [
-    # hardware
     ./hardware.nix
+    outputs.nixosModules
 
-    # modules
-    ../../nixos
-
-    # work
     ../../work/nginx.nix
   ];
 
   networking.hostName = "pallas";
 
   sgiath = {
+    amd-gpu.enable = false;
     nvidia-gpu.enable = true;
     audio.enable = true;
+    bitcoin.enable = false;
     bluetooth.enable = true;
-    printing.enable = true;
+    docker.enable = true;
     gaming.enable = true;
+    networking.localDNS.enable = false;
+    printing.enable = true;
+    razer.enable = true;
     wayland.enable = true;
   };
-
-  # razer notebook specific packages
-  environment.systemPackages = with pkgs; [
-    razergenie
-    openrazer-daemon
-  ];
-
-  # Razer
-  hardware.openrazer = {
-    enable = true;
-    users = [ userSettings.username ];
-  };
-
-  # Docker
-  virtualisation.docker.enable = true;
 }

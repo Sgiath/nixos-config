@@ -1,14 +1,25 @@
 {
   imports = [
     # always enabled
-    ./optimizations.nix
-    ./time_lang.nix
-    ./security.nix
     ./boot.nix
     ./mounting_usb.nix
+    ./networking.nix
+    ./optimizations.nix
+    ./security.nix
+    ./stylix.nix
+    ./time_lang.nix
+    ./udev_rules.nix
 
     # enable switch
     ./amd-gpu.nix
+    ./audio.nix
+    ./bitcoin.nix
+    ./bluetooth.nix
+    ./docker.nix
+    ./gaming.nix
     ./nvidia-gpu.nix
+    ./printing.nix
+    ./razer.nix
+    ./wayland.nix
   ];
 }

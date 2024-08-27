@@ -6,16 +6,7 @@
 }:
 
 {
-  imports = [
-    outputs.nixosModules
-    ./bluetooth.nix
-    ./gaming.nix
-    ./stylix.nix
-    ./audio.nix
-    ./wayland.nix
-    ./printing.nix
-    ./networking.nix
-  ];
+  imports = [ outputs.nixosModules ];
 
   system.stateVersion = "23.11";
 
@@ -44,13 +35,7 @@
     defaultUserShell = pkgs.zsh;
     users.${userSettings.username} = {
       isNormalUser = true;
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "openrazer"
-        "docker"
-        "dialout"
-      ];
+      extraGroups = [ "wheel" ];
       hashedPassword = userSettings.hashedPassword;
     };
   };

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, userSettings, ... }:
 
 {
   options.sgiath.networking.localDNS = {
@@ -14,11 +14,15 @@
         "192.168.1.5" = [ "nas.sgiath" ];
         "192.168.1.150" = [ "mix.sgiath" ];
       };
-      nameservers = [
-        "192.168.1.2"
-      ];
+      nameservers =
+        if config.sgiath.networking.localDNS then
+          [ "192.168.1.2" ]
+        else
+          [ "8.8.8.8" "8.8.4.4" ];
       networkmanager.enable = true;
       firewall.enable = false;
     };
+
+    users.users.${userSettings.username}.extraGroups = [ "networkmanager" ];
   };
 }
