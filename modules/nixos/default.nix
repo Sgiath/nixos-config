@@ -1,3 +1,3 @@
 {
-  amd-gpu = import ./amd-gpu.nix;
+  sgiath.amd-gpu = import ./amd-gpu.nix;
 }
