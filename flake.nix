@@ -81,7 +81,7 @@
 
       nixosModules.default = self.nixosModules.sgiath;
       nixosModules.sgiath.imports = [ ./modules/nixos ];
-      nixosModules.crazyegg.imports = [ ./modules/nixos/crazyegg ];
+      nixosModules.crazyegg = import ./modules/nixos/crazyegg;
 
       homeManagerModules.default = self.homeManagerModules.sgiath;
       homeManagerModules.sgiath.imports = [ ./modules/home-manager ];
