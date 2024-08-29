@@ -1,37 +1,25 @@
-
 {
   config,
   lib,
   ...
 }:
-let
-  cfg = config.sgiath.nvidia-gpu;
-in 
 {
-  options.sgiath.nvidia-gpu = {
-    enable = lib.mkEnableOption "Nvidia GPU";
-  };
-
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (config.sgiath.gpu == "nvidia") {
     boot.initrd.kernelModules = [ "nvidia" ];
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    hardware = {
-      graphics.enable = true;
+    hardware.nvidia = {
+      open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
 
-      nvidia = {
-        open = false;
-        package = config.boot.kernelPackages.nvidiaPackages.beta;
+      modesetting.enable = true;
 
-        modesetting.enable = true;
-
-        powerManagement = {
-          enable = false;
-          finegrained = false;
-        };
-
-        nvidiaSettings = true;
+      powerManagement = {
+        enable = false;
+        finegrained = false;
       };
+
+      nvidiaSettings = true;
     };
   };
 }
