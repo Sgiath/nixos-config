@@ -18,11 +18,13 @@
         ensureUsers = [
           {
             name = "root";
-            ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
+            ensurePermissions = {
+              "*.*" = "ALL PRIVILEGES";
+            };
           }
         ];
         ensureDatabases = [
-          { name = "crazyegg2_master_development"; }
+          "crazyegg2_master_development"
         ];
       };
 
