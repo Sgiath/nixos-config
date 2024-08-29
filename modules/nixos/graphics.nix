@@ -2,8 +2,8 @@
 {
   options.sgiath.gpu = lib.mkOption {
     type = lib.types.nullOr (lib.types.enum [ "amd" "nvidia" ]);
-    default = "amd";
-    example = "nvidia";
+    default = null;
+    example = "amd";
     description = "What GPU configuration to use";
   };
 

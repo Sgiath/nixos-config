@@ -4,8 +4,7 @@
   networking.hostName = "ceres";
 
   sgiath = {
-    amd-gpu.enable = true;
-    nvidia-gpu.enable = false;
+    gpu = "amd";
     audio.enable = true;
     bluetooth.enable = true;
     docker.enable = true;

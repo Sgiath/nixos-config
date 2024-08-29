@@ -4,8 +4,7 @@
   networking.hostName = "pallas";
 
   sgiath = {
-    amd-gpu.enable = false;
-    nvidia-gpu.enable = true;
+    gpu = "nvidia";
     audio.enable = true;
     bluetooth.enable = true;
     docker.enable = true;
