@@ -28,5 +28,7 @@
         Why is HTML email a security nightmare? See https://useplaintext.email/
       '';
     };
+
+    services.pass-secret-service.enable = true;
   };
 }
