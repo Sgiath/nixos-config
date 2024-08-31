@@ -4,6 +4,7 @@
   networking.hostName = "pallas";
 
   sgiath = {
+    enable = true;
     gpu = "nvidia";
     audio.enable = true;
     bluetooth.enable = true;

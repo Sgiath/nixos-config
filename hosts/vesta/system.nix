@@ -1,13 +1,10 @@
 {
-  imports = [
-    ./hardware.nix
-
-    ./../../nixos/bitcoin.nix
-  ];
+  imports = [ ./hardware.nix ];
 
   networking.hostName = "vesta";
 
   sgiath = {
+    enable = true;
     audio.enable = false;
     bluetooth.enable = false;
     docker.enable = true;

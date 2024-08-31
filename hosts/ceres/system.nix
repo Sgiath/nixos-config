@@ -4,6 +4,7 @@
   networking.hostName = "ceres";
 
   sgiath = {
+    enable = true;
     gpu = "amd";
     audio.enable = true;
     bluetooth.enable = true;
