@@ -15,7 +15,6 @@
         "192.168.1.150" = [ "mix.sgiath" ];
       };
 
-      resolved.enable = false;
       resolvconf.enable = lib.mkForce false;
       dhcpcd.extraConfig = "nohook resolv.conf";
       networkmanager = {
