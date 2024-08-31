@@ -105,7 +105,6 @@
                   };
                   sharedModules = [
                     outputs.homeManagerModules
-                    ./home-manager
                   ];
 
                   users.${userSettings.username} = import (./. + "/hosts/${host}/home.nix");

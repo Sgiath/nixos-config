@@ -1,4 +1,5 @@
 {
+  sgiath.enable = true;
   programs = {
     git.enable = true;
     gpg.enable = true;
