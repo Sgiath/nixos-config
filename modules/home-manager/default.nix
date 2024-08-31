@@ -95,6 +95,7 @@
       fastfetch.enable = true;
       hexchat.enable = true;
       obs-studio.enable = true;
+      freetube.enable = true;
 
       direnv = {
         enable = true;
@@ -106,8 +107,6 @@
         enable = true;
         package = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
       };
-
-      freetube.enable = true;
     };
 
     systemd.user.startServices = "sd-switch";
