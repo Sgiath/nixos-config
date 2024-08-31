@@ -81,6 +81,7 @@
         xfce.thunar
         obsidian
         telegram-desktop
+        gimp
 
         # privacy
         signal-desktop-beta
