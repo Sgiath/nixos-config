@@ -11,8 +11,14 @@
       wireless = {
         enable = true;
         networks = {
-          Starlink.pskRaw = "694358f6d79f35d6feac9f1aefe7615b17bef5c09542858018f7a44f117e3502";
-          Starlink2.pskRaw = "5ece5655aaf9756e003716758313ba676cad380f17492761dcb491605018de9c";
+          Starlink = {
+            priority = 10;
+            pskRaw = "694358f6d79f35d6feac9f1aefe7615b17bef5c09542858018f7a44f117e3502";
+          };
+          Starlink2 = {
+            priority = 0;
+            pskRaw = "5ece5655aaf9756e003716758313ba676cad380f17492761dcb491605018de9c";
+          };
         };
       };
       hosts = {
@@ -31,10 +37,6 @@
 
       resolvconf.enable = lib.mkForce false;
       dhcpcd.extraConfig = "nohook resolv.conf";
-      networkmanager = {
-        enable = true;
-        dns = "none";
-      };
       firewall.enable = false;
     };
     environment.etc."resolv.conf".text = ''
