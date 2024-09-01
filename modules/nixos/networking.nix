@@ -1,15 +1,29 @@
-{ config, lib, userSettings, ... }:
+{
+  config,
+  lib,
+  userSettings,
+  ...
+}:
 
 {
-  options.sgiath.networking.localDNS = {
-    enable = lib.mkEnableOption "local DNS";
-  };
-
-  config = {
+  config =  lib.mkIf config.sgiath.enable {
     networking = {
+      wireless = {
+        enable = true;
+        networks = {
+          Starlink.pskRaw = "694358f6d79f35d6feac9f1aefe7615b17bef5c09542858018f7a44f117e3502";
+          Starlink2.pskRaw = "5ece5655aaf9756e003716758313ba676cad380f17492761dcb491605018de9c";
+        };
+      };
       hosts = {
-        "192.168.1.2" = [ "sgiath.dev" "dns.sgiath" ];
-        "192.168.1.3" = [ "sgiath.dev" "dns.sgiath" ];
+        "192.168.1.2" = [
+          "sgiath.dev"
+          "dns.sgiath"
+        ];
+        "192.168.1.3" = [
+          "sgiath.dev"
+          "dns.sgiath"
+        ];
         "192.168.1.4" = [ "nas.sgiath" ];
         "192.168.1.5" = [ "nas.sgiath" ];
         "192.168.1.150" = [ "mix.sgiath" ];
@@ -23,11 +37,13 @@
       };
       firewall.enable = false;
     };
-    environment.etc."resolv.conf".text =
-      if config.sgiath.networking.localDNS.enable then
-        "nameserver 192.168.1.2\n"
-      else
-        "nameserver 8.8.8.8\nnameserver 8.8.4.4\n";
+    environment.etc."resolv.conf".text = ''
+      search sgiath.dev
+
+      nameserver 192.168.1.2
+      nameserver 192.168.1.1
+      nameserver 8.8.8.8
+    '';
 
     users.users.${userSettings.username}.extraGroups = [ "networkmanager" ];
   };

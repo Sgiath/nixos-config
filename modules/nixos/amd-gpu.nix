@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf (config.sgiath.gpu == "amd") {
+  config = lib.mkIf (config.sgiath.enable && (config.sgiath.gpu == "amd")) {
     boot = {
       initrd.kernelModules = [ "amdgpu" ];
       kernelModules = [ "kvm-amd" ];
