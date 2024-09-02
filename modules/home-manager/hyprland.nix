@@ -5,7 +5,9 @@
   inputs,
   ...
 }:
-
+let
+  package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   options.programs.hyprland = {
     enable = lib.mkEnableOption "hyprland";
@@ -14,9 +16,8 @@
   config = lib.mkIf config.programs.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage =
-        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      package = package.hyprland;
+      # portalPackage = package.xdg-desktop-portal-hyprland;
       xwayland.enable = true;
       systemd = {
         enable = true;
@@ -181,16 +182,14 @@
     programs.wofi.enable = true;
     services.mako.enable = true;
 
-    # xdg = {
-    #   portal = {
-    #     enable = true;
-    #     config.common.default = "hyprland";
-    #     xdgOpenUsePortal = true;
-    #     extraPortals = [
-    #       pkgs.xdg-desktop-portal-hyprland
-    #       pkgs.xdg-desktop-portal-gtk
-    #     ];
-    #   };
-    # };
+    xdg = {
+      portal = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        extraPortals = [
+          pkgs.xdg-desktop-portal-gtk
+        ];
+      };
+    };
   };
 }
