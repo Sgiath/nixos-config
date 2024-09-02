@@ -12,6 +12,9 @@
 
   config = lib.mkIf config.sgiath.wayland.enable {
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    environment.etc."issue".text = ''
+      The Times 03/Jan/2009 Chancellor on brink of second bailout for banks
+    '';
 
     # services.desktopManager.cosmic.enable = true;
     # services.displayManager.cosmic-greeter.enable = true;
@@ -20,22 +23,22 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --remember --cmd Hyprland";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --remember --cmd Hyprland --issue";
           user = "greeter";
         };
       };
     };
 
-    systemd.services.greetd.serviceConfig = {
-      Type = "idle";
-      StandardInput = "tty";
-      StandardOutput = "tty";
-      StandardError = "journal"; # Without this errors will spam on screen
-      # Without these bootlogs will spam on screen
-      TTYReset = true;
-      TTYVHangup = true;
-      TTYVTDisallocate = true;
-    };
+    # systemd.services.greetd.serviceConfig = {
+    #   Type = "idle";
+    #   StandardInput = "tty";
+    #   StandardOutput = "tty";
+    #   StandardError = "journal"; # Without this errors will spam on screen
+    #   # Without these bootlogs will spam on screen
+    #   TTYReset = true;
+    #   TTYVHangup = true;
+    #   TTYVTDisallocate = true;
+    # };
 
     nix.settings = {
       substituters = [ "https://hyprland.cachix.org" ];

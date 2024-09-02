@@ -5,7 +5,7 @@
 }:
 
 {
-  config = lib.mkIf config.programs.waybar.enable {
+  config = lib.mkIf (config.programs.hyprland.enable && config.programs.waybar.enable) {
     programs.waybar = {
       systemd.enable = true;
       settings = {
