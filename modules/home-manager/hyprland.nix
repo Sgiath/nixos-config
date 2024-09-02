@@ -186,6 +186,9 @@ in
       portal = {
         enable = true;
         xdgOpenUsePortal = true;
+        configPackages = [
+          package.xdg-desktop-portal-hyprland
+        ];
         extraPortals = [
           pkgs.xdg-desktop-portal-gtk
         ];
