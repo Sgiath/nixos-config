@@ -36,6 +36,7 @@
         ss = "status";
         tag = "tag --sign";
         amend = "commit --amend --no-edit";
+        main-to-master = "!git symbolic-ref refs/heads/master refs/heads/main && git symbolic-ref refs/remotes/origin/master refs/remotes/origin/main";
       };
 
       attributes = [
