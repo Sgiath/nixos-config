@@ -9,7 +9,7 @@
     audio.enable = true;
     bluetooth.enable = true;
     docker.enable = true;
-    gaming.enable = true;
+    xamond.enable = true;
     printing.enable = true;
     razer.enable = false;
     wayland.enable = true;

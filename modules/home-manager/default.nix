@@ -78,13 +78,8 @@
         dig
         killall
         inotify-tools
-        xfce.thunar
-        obsidian
-        telegram-desktop
-        gimp
+        lshw
 
-        # privacy
-        signal-desktop-beta
         python312Packages.rns
         python312Packages.nomadnet
       ];

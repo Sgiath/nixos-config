@@ -1,13 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ../../work
-  ];
-
-  home.packages = [
-    pkgs.lshw
-  ];
+  imports = [ ../../work ];
 
   programs = {
     chromium.enable = true;
@@ -31,6 +25,7 @@
 
   sgiath = {
     enable = true;
+    apps.enable = true;
     audio.enable = true;
     email_client.enable = true;
     games.enable = false;

@@ -1,16 +1,5 @@
-{ pkgs, ... }:
-
 {
-  imports = [
-    ../../work
-  ];
-
-  home.packages = [
-    pkgs.betaflight-configurator
-    pkgs.bisq-desktop
-    pkgs.trezor-suite
-    pkgs.trezor-udev-rules
-  ];
+  imports = [ ../../work ];
 
   programs = {
     chromium.enable = true;
@@ -34,6 +23,7 @@
 
   sgiath = {
     enable = true;
+    apps.enable = true;
     audio.enable = true;
     email_client.enable = true;
     games.enable = true;

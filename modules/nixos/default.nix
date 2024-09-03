@@ -23,7 +23,6 @@
     ./audio.nix
     ./bluetooth.nix
     ./docker.nix
-    ./gaming.nix
     ./graphics.nix
     ./nvidia-gpu.nix
     ./printing.nix

@@ -1,8 +1,19 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.sgiath.xamond = {
+    enable = lib.mkEnableOption "xamond kernel";
+  };
+
   config = lib.mkIf config.sgiath.enable {
     boot = {
-      kernelPackages = pkgs.linuxPackages_zen;
+      kernelPackages =
+        if config.sgiath.xamond.enable then pkgs.linuxPackages_zen else pkgs.linuxPackages_xanmod_latest;
+
       loader = {
         systemd-boot = {
           enable = true;
