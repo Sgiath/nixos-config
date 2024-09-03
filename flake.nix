@@ -4,7 +4,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    # nixpkgs.url = "nixpkgs/master";
+    nixpkgs-master.url = "nixpkgs/master";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
 
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
@@ -28,7 +28,7 @@
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
-      rev = "4af9410dc2d0e241276a0797d3f3d276310d956e";
+      # rev = "4af9410dc2d0e241276a0797d3f3d276310d956e";
       submodules = true;
       inputs.nixpkgs.follows = "nixpkgs";
     };
