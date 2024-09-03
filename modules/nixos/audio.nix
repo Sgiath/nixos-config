@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.sgiath.audio.enable {
     environment.systemPackages = [
-      pkgs.hevlum
+      pkgs.helvum
       pkgs.ffado
     ];
 
