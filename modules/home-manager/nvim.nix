@@ -19,8 +19,6 @@
     # nixd LSP
     home.packages = with pkgs; [
       # base deps
-      gcc
-      gnumake
       neovim
 
       # Nix
