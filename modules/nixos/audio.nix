@@ -12,8 +12,7 @@
 
   config = lib.mkIf config.sgiath.audio.enable {
     environment.systemPackages = [
-      pkgs.helvum
-      pkgs.ffado
+      pkgs.pavucontrol
     ];
 
     security.rtkit.enable = true;
