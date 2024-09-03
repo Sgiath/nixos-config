@@ -7,6 +7,7 @@
 }:
 {
   imports = [
+    ./apps.nix
     ./audio.nix
     ./chromium.nix
     ./davinci.nix
