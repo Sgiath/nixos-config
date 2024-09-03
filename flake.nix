@@ -85,7 +85,6 @@
             };
             modules = [
               inputs.disko.nixosModules.disko
-              inputs.nixos-cosmic.nixosModules.default
               outputs.nixosModules
 
               home-manager.nixosModules.home-manager
