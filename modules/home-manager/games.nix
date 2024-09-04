@@ -14,7 +14,7 @@
     home = {
       packages = with pkgs; [
         (lutris.override {
-          extraPkgs = pkgs: [ pkgs.gnome3.adwaita-icon-theme ];
+          extraPkgs = pkgs: [ pkgs.adwaita-icon-theme ];
         })
 
         # Minecraft
