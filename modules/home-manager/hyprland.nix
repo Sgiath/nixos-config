@@ -188,8 +188,10 @@ in
         xdgOpenUsePortal = true;
         configPackages = [
           package.xdg-desktop-portal-hyprland
+          pkgs.xdg-desktop-portal-gtk
         ];
         extraPortals = [
+          package.xdg-desktop-portal-hyprland
           pkgs.xdg-desktop-portal-gtk
         ];
       };
