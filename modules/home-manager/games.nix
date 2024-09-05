@@ -14,7 +14,7 @@
     home = {
       packages = with pkgs; [
         llvm.stdenv
-        llvmPackages.libcxx
+        llvmPackages.libclang
         pkgs.libunwind
         # rocmPackages.llvm.libcxxabi
 
