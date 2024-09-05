@@ -1,4 +1,4 @@
-{ config, lib, ...}:
+{ config, lib, pkgs, ...}:
 {
   options.sgiath.gpu = lib.mkOption {
     type = lib.types.nullOr (lib.types.enum [ "amd" "nvidia" ]);
@@ -9,5 +9,9 @@
 
   config = lib.mkIf (config.sgiath.gpu != null) {
     hardware.graphics.enable = true;
+    fonts.packages = with pkgs; [
+      corefonts
+      vistafonts
+    ];
   };
 }
