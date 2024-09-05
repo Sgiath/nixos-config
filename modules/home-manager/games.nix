@@ -13,7 +13,9 @@
   config = lib.mkIf config.sgiath.games.enable {
     home = {
       packages = with pkgs; [
-        winetricks
+        llvmPackages.libcxx
+        llvmPackages.libunwind
+        rocmPackages.llvm.libcxxabi
 
         (lutris.override {
           extraPkgs = pkgs: [
