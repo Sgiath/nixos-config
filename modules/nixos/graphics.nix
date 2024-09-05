@@ -9,9 +9,7 @@
 
   config = lib.mkIf (config.sgiath.gpu != null) {
     hardware.graphics.enable = true;
-    fonts.packages = with pkgs; [
-      corefonts
-      vistafonts
-    ];
+    # MS fonts needed for KSP
+    fonts.packages = with pkgs; [ corefonts ];
   };
 }

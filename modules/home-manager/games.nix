@@ -13,11 +13,12 @@
   config = lib.mkIf config.sgiath.games.enable {
     home = {
       packages = with pkgs; [
-        corefonts
-        vistafonts
-
         (lutris.override {
-          extraPkgs = pkgs: [ pkgs.adwaita-icon-theme pkgs.corefonts pkgs.vistafonts ];
+          extraPkgs = pkgs: [
+            pkgs.adwaita-icon-theme
+            # MS fonts needed for KSP
+            # pkgs.corefonts
+          ];
         })
         ckan
 
