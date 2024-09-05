@@ -35,11 +35,6 @@
   options.sgiath.enable = lib.mkEnableOption "sgiath config";
 
   config = lib.mkIf config.sgiath.enable {
-    programs.gamemode.enable = true;
-    environment.systemPackages = with pkgs; [
-      llvmPackages.libunwind
-    ];
-
     system.stateVersion = "23.11";
 
     nixpkgs = {

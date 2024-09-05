@@ -10,5 +10,7 @@
   config = lib.mkIf (config.sgiath.gpu != null) {
     hardware.graphics.enable = true;
     programs.gamescope.enable = true;
+    programs.gamemode.enable = true;
+    programs.steam.enable = true;
   };
 }
