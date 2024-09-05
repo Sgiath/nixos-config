@@ -15,13 +15,13 @@
       packages = with pkgs; [
         llvm.stdenv
         llvmPackages.libcxx
-        llvmPackages.libunwind
+        pkgs.libunwind
         # rocmPackages.llvm.libcxxabi
-
-        protonup
 
         (lutris.override {
           extraPkgs = pkgs: [
+            pkgs.libunwind
+
             # default icons
             pkgs.adwaita-icon-theme
             # MS fonts needed for KSP
