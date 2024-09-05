@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, ...}:
 {
   options.sgiath.gpu = lib.mkOption {
     type = lib.types.nullOr (lib.types.enum [ "amd" "nvidia" ]);
@@ -9,7 +9,5 @@
 
   config = lib.mkIf (config.sgiath.gpu != null) {
     hardware.graphics.enable = true;
-    # MS fonts needed for KSP
-    fonts.packages = with pkgs; [ corefonts ];
   };
 }

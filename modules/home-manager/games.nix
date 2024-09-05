@@ -17,7 +17,7 @@
           extraPkgs = pkgs: [
             pkgs.adwaita-icon-theme
             # MS fonts needed for KSP
-            # pkgs.corefonts
+            pkgs.corefonts
           ];
         })
         ckan
