@@ -15,6 +15,8 @@
       packages = with pkgs; [
         (lutris.override {
           extraPkgs = pkgs: [
+            pkgs.stdenv
+            pkgs.libunwind
             pkgs.adwaita-icon-theme
             # MS fonts needed for KSP
             pkgs.corefonts
