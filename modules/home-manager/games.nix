@@ -13,12 +13,14 @@
   config = lib.mkIf config.sgiath.games.enable {
     home = {
       packages = with pkgs; [
+        # winetricks
+
         (lutris.override {
           extraPkgs = pkgs: [
             # pkgs.stdenv
 
             # libraries for Principia
-            pkgs.llvmPackages_17.libcxx
+            pkgs.llvmPackages_17.stdenv
             pkgs.rocmPackages.llvm.libcxxabi
             pkgs.libunwind
 
@@ -28,6 +30,8 @@
             pkgs.corefonts
           ];
         })
+
+        # KSP mods
         ckan
 
         # Minecraft
