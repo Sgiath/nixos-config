@@ -18,6 +18,8 @@
         llvmPackages.libunwind
         # rocmPackages.llvm.libcxxabi
 
+        protonup
+
         (lutris.override {
           extraPkgs = pkgs: [
             # default icons
