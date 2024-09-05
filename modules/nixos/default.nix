@@ -35,7 +35,9 @@
   options.sgiath.enable = lib.mkEnableOption "sgiath config";
 
   config = lib.mkIf config.sgiath.enable {
-    environment.systemPackages = with pkgs; [ libunwind ];
+    environment.systemPackages = with pkgs; [
+      llvmPackages.libcxx
+    ];
 
     system.stateVersion = "23.11";
 
