@@ -13,17 +13,10 @@
   config = lib.mkIf config.sgiath.games.enable {
     home = {
       packages = with pkgs; [
-        # winetricks
+        winetricks
 
         (lutris.override {
           extraPkgs = pkgs: [
-            # pkgs.stdenv
-
-            # libraries for Principia
-            pkgs.llvmPackages_17.stdenv
-            pkgs.rocmPackages.llvm.libcxxabi
-            pkgs.libunwind
-
             # default icons
             pkgs.adwaita-icon-theme
             # MS fonts needed for KSP
