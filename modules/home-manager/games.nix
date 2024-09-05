@@ -15,8 +15,14 @@
       packages = with pkgs; [
         (lutris.override {
           extraPkgs = pkgs: [
-            pkgs.stdenv
+            # pkgs.stdenv
+
+            # libraries for Principia
+            pkgs.llvmPackages_17.libcxx
+            pkgs.llvmPackages_17.libcxxabi
             pkgs.libunwind
+
+            # default icons
             pkgs.adwaita-icon-theme
             # MS fonts needed for KSP
             pkgs.corefonts
