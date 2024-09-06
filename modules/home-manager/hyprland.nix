@@ -2,12 +2,8 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
-let
-  package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
-in
 {
   options.programs.hyprland = {
     enable = lib.mkEnableOption "hyprland";
@@ -16,7 +12,7 @@ in
   config = lib.mkIf config.programs.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      package = package.hyprland;
+      package = pkgs.hyprland;
       # portalPackage = package.xdg-desktop-portal-hyprland;
       xwayland.enable = true;
       systemd = {
@@ -188,11 +184,11 @@ in
         config.common.default = "hyprland";
         xdgOpenUsePortal = true;
         configPackages = [
-          package.xdg-desktop-portal-hyprland
+          pkgs.xdg-desktop-portal-hyprland
           pkgs.xdg-desktop-portal-gtk
         ];
         extraPortals = [
-          package.xdg-desktop-portal-hyprland
+          pkgs.xdg-desktop-portal-hyprland
           pkgs.xdg-desktop-portal-gtk
         ];
       };
