@@ -73,7 +73,7 @@
 
       formatter = pkgs.nixfmt-rfc-style;
 
-      overlays = import ./overlays { inherit inputs; };
+      overlays = import ./overlays { inherit inputs system; };
       packages = import ./pkgs pkgs;
       lib = import ./lib { inherit (nixpkgs) lib; };
 

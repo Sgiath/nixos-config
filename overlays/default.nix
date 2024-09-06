@@ -1,6 +1,6 @@
-{ inputs, pkgs, ... }:
+{ inputs, system, ... }:
 let
-  pkgs-hyperland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+  pkgs-hyperland = inputs.hyprland.packages.${system};
 in
 {
   additions = final: _prev: import ../pkgs final.pkgs;
