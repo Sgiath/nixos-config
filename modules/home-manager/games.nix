@@ -14,6 +14,11 @@
     home = {
       packages = with pkgs; [
         (lutris.override {
+          extraLibraries = pkgs: [
+            llvmPackages.libcxx
+            llvmPackages.libunwind
+          ];
+
           extraPkgs = pkgs: [
             # default icons
             pkgs.adwaita-icon-theme
