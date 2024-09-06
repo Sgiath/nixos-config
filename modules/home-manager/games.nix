@@ -16,8 +16,9 @@
         (lutris.override {
           extraLibraries = pkgs: [
             # libraries for Principia
-            pkgs.llvmPackages.libcxx
-            pkgs.llvmPackages.libunwind
+            pkgs.stdenv.cc.cc.lib
+            # pkgs.llvmPackages.libcxx
+            # pkgs.llvmPackages.libunwind
           ];
 
           extraPkgs = pkgs: [
