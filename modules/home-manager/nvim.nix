@@ -50,7 +50,7 @@
     xdg = {
       enable = true;
       configFile.nvim = {
-        source = config.lib.file.mkOutOfStoreSymlink (toString ./nvim);
+        source = config.lib.file.mkOutOfStoreSymlink "/home/sgiath/.dotfiles/modules/home-manager/nvim";
         recursive = true;
       };
     };
