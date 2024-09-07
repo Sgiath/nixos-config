@@ -58,6 +58,7 @@
     };
 
     nix = {
+      package = pkgs.nixVersions.nix_2_24;
       settings = {
         experimental-features = [
           "nix-command"
