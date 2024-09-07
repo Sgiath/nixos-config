@@ -1,7 +1,4 @@
 {
-
-  description = "Sgiath system config flake";
-
   inputs = {
     nixpkgs-master.url = "nixpkgs/master";
     nixpkgs.url = "nixpkgs/nixos-unstable";
