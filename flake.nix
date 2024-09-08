@@ -44,12 +44,7 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }@inputs:
+    { self, nixpkgs }@inputs:
     let
       inherit (self) outputs;
 
@@ -96,13 +91,16 @@
               inherit inputs outputs secrets;
             };
             modules = [
-              userSettings
-              home-manager.nixosModules.home-manager
+              # 3rd party modules
+              inputs.home-manager.nixosModules.home-manager
               inputs.nur.nixosModules.nur
               inputs.disko.nixosModules.disko
               inputs.nix-bitcoin.nixosModules.default
               inputs.simple-nixos-mailserver.nixosModules.mailserver
+              # local modules
               outputs.nixosModules
+              # user settings
+              userSettings
 
               # configuration of the selected system
               (./. + "/hosts/${host}/system.nix")
