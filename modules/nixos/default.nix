@@ -75,6 +75,11 @@
         ];
       };
       channel.enable = false;
+      gc = {
+        automatic = true;
+        dates = "16:00";
+        persistent = true;
+      };
     };
 
     users.defaultUserShell = pkgs.zsh;

@@ -51,8 +51,11 @@
       system = "x86_64-linux";
 
       hosts = [
+        # desktop
         "ceres"
+        # server
         "vesta"
+        # notebook
         "pallas"
       ];
 
