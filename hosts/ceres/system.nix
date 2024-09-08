@@ -1,6 +1,10 @@
 {
   imports = [ ./hardware.nix ];
 
+  home-manager = {
+    users.sgiath = import ./home.nix;
+  };
+
   networking.hostName = "ceres";
 
   sgiath = {

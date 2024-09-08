@@ -102,12 +102,6 @@
               inputs.simple-nixos-mailserver.nixosModules.mailserver
               outputs.nixosModules
 
-              {
-                home-manager = {
-                  users.sgiath = import (./. + "/hosts/${host}/home.nix");
-                };
-              }
-
               # configuration of the selected system
               (./. + "/hosts/${host}/system.nix")
             ];
