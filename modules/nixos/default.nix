@@ -4,6 +4,7 @@
   inputs,
   outputs,
   pkgs,
+  secrets,
   ...
 }:
 {
@@ -77,5 +78,16 @@
     };
 
     users.defaultUserShell = pkgs.zsh;
+
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      extraSpecialArgs = {
+        inherit inputs outputs secrets;
+      };
+      sharedModules = [
+        outputs.homeManagerModules
+      ];
+    };
   };
 }
