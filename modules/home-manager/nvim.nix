@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  userSettings,
   ...
 }:
 
@@ -51,7 +50,7 @@
     xdg = {
       enable = true;
       configFile.nvim = {
-        source = config.lib.file.mkOutOfStoreSymlink "/home/${userSettings.username}/.dotfiles/modules/home-manager/nvim";
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/home-manager/nvim";
         recursive = true;
       };
     };

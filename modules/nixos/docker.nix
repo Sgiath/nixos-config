@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  userSettings,
   ...
 }:
 {
@@ -11,6 +10,6 @@
 
   config = lib.mkIf config.sgiath.docker.enable {
     virtualisation.docker.enable = true;
-    users.users.${userSettings.username}.extraGroups = [ "docker" ];
+    users.users.sgiath.extraGroups = [ "docker" ];
   };
 }

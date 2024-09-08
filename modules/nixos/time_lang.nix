@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  userSettings,
   ...
 }:
 {
@@ -13,7 +12,6 @@
     environment.sessionVariables = {
       LANGUAGE = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";
-      FLAKE = "/home/${userSettings.username}/.dotfiles";
     };
   };
 }

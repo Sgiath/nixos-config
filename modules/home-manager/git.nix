@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  userSettings,
   ...
 }:
 {
@@ -56,11 +55,11 @@
 
       extraConfig = {
         init.defaultBranch = "master";
-        safe.directory = "/home/${userSettings.username}/.dotfiles/";
+        safe.directory = "${config.home.homeDirectory}/.dotfiles/";
 
         user = {
-          name = userSettings.username;
-          email = userSettings.email;
+          name = "sgiath";
+          email = "sgiath@sgiath.dev";
           signingKey = "0x70F9C7DE34CB3BC8";
         };
 

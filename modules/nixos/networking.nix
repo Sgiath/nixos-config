@@ -1,8 +1,7 @@
 {
   config,
   lib,
-pkgs,
-  userSettings,
+  pkgs,
   ...
 }:
 
@@ -53,6 +52,6 @@ pkgs,
       nameserver 8.8.8.8
     '';
 
-    users.users.${userSettings.username}.extraGroups = [ "networkmanager" ];
+    users.users.sgiath.extraGroups = [ "networkmanager" ];
   };
 }

@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  userSettings,
   ...
 }:
 {
@@ -18,9 +17,9 @@
 
     hardware.openrazer = {
       enable = true;
-      users = [ userSettings.username ];
+      users = [ "sgiath" ];
     };
 
-    users.users.${userSettings.username}.extraGroups = [ "openrazer" ];
+    users.users.sgiath.extraGroups = [ "openrazer" ];
   };
 }

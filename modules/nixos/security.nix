@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  userSettings,
   pkgs,
   ...
 }:
@@ -29,7 +28,6 @@
           PasswordAuthentication = false;
         };
       };
-      # gnome.gnome-keyring.enable = true;
     };
 
     programs = {
@@ -39,9 +37,5 @@
         pinentryPackage = pkgs.pinentry-gnome3;
       };
     };
-
-    users.users.${userSettings.username}.openssh.authorizedKeys.keys = [
-      userSettings.sshKey
-    ];
   };
 }

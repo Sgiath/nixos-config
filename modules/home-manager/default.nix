@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  userSettings,
   ...
 }:
 {
@@ -29,8 +28,8 @@
 
   config = lib.mkIf config.sgiath.enable {
     home = {
-      username = userSettings.username;
-      homeDirectory = "/home/${userSettings.username}";
+      username = "sgiath";
+      homeDirectory = "/home/sgiath";
 
       stateVersion = "23.11";
 

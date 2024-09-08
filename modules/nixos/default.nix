@@ -4,8 +4,6 @@
   inputs,
   outputs,
   pkgs,
-  userSettings,
-  secrets,
   ...
 }:
 {
@@ -78,13 +76,6 @@
       channel.enable = false;
     };
 
-    users = {
-      defaultUserShell = pkgs.zsh;
-      users.${userSettings.username} = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" ];
-        hashedPassword = userSettings.hashedPassword;
-      };
-    };
+    users.defaultUserShell = pkgs.zsh;
   };
 }
