@@ -88,8 +88,6 @@
     programs = {
       home-manager.enable = true;
       fastfetch.enable = true;
-      hexchat.enable = true;
-      obs-studio.enable = true;
 
       direnv = {
         enable = true;

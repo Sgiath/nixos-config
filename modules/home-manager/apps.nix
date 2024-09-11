@@ -23,5 +23,10 @@
       trezor-suite
       trezor-udev-rules
     ];
+
+    programs = {
+      hexchat.enable = true;
+      obs-studio.enable = true;
+    };
   };
 }

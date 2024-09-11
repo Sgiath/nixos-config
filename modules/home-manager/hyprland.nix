@@ -33,7 +33,6 @@
           "${pkgs.webcord}/bin/webcord"
           "${pkgs.signal-desktop-beta}/bin/signal-desktop-beta"
           "${pkgs.telegram-desktop}/bin/telegram-desktop"
-          "${pkgs.hexchat}/bin/hexchat"
         ];
 
         monitor = [
@@ -187,10 +186,10 @@
         enable = true;
         config.common.default = "hyprland";
         xdgOpenUsePortal = true;
-        configPackages = [
-          pkgs.xdg-desktop-portal-hyprland
-          pkgs.xdg-desktop-portal-gtk
-        ];
+        # configPackages = [
+        #   pkgs.xdg-desktop-portal-hyprland
+        #   pkgs.xdg-desktop-portal-gtk
+        # ];
         extraPortals = [
           pkgs.xdg-desktop-portal-hyprland
           pkgs.xdg-desktop-portal-gtk

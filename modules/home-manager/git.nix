@@ -20,10 +20,7 @@
 
     programs.git = {
       lfs.enable = true;
-      delta = {
-        enable = true;
-        package = pkgs.delta;
-      };
+      delta.enable = true;
 
       aliases = {
         d = "diff";
