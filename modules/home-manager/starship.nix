@@ -9,9 +9,9 @@
         line_break.disabled = false;
 
         character = {
-          # success_symbol = " [](#6791c9)";
-          # error_symbol = " [](#df5b61)";
-          # vicmd_symbol = "[  ](#78b892)";
+          success_symbol = " [](#6791c9)";
+          error_symbol = " [](#df5b61)";
+          vicmd_symbol = "[  ](#78b892)";
         };
 
         hostname = {
