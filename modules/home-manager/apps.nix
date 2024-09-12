@@ -18,6 +18,8 @@
       signal-desktop-beta
       gimp
 
+      vscodium-fhs
+
       betaflight-configurator
       bisq-desktop
       trezor-suite
