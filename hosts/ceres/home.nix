@@ -12,6 +12,7 @@
     yt-dlp
 
     vscodium-fhs
+    zig
 
     betaflight-configurator
     bisq-desktop
