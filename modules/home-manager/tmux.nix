@@ -13,7 +13,7 @@
 
     xdg = {
       enable = true;
-      configFile.tms."config.toml".text = ''
+      configFile."tms/config.toml".text = ''
         [[search_dirs]]
         path = "/home/sgiath"
         depth = 1
