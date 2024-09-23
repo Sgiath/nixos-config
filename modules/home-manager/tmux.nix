@@ -32,7 +32,9 @@
       mouse = true;
       historyLimit = 10000;
       extraConfig = ''
+        unbind c
         bind c display-popup -E "tms"
+        bind C-j display-popup -E "tms switch"
 
         # Config reload
         bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
