@@ -48,6 +48,7 @@
         ".direnv"
         ".devenv"
         ".elixir_ls"
+        ".zig-cache"
         "result"
       ];
 
