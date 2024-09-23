@@ -32,7 +32,7 @@
       mouse = true;
       historyLimit = 10000;
       extraConfig = ''
-        bind C-o display-popup -E "tms"
+        bind c display-popup -E "tms"
 
         # Config reload
         bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
