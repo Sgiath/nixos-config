@@ -29,10 +29,12 @@
         "192.168.1.2" = [
           "sgiath.dev"
           "dns.sgiath"
+          "homeassistant.sgiath"
         ];
         "192.168.1.3" = [
           "sgiath.dev"
           "dns.sgiath"
+          "homeassistant.sgiath"
         ];
         "192.168.1.4" = [ "nas.sgiath" ];
         "192.168.1.5" = [ "nas.sgiath" ];
