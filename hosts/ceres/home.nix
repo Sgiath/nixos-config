@@ -17,6 +17,8 @@
     bisq-desktop
     trezor-suite
     trezor-udev-rules
+
+    stt
   ];
 
   programs = {
