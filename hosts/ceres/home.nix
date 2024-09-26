@@ -37,7 +37,7 @@
   };
 
   services = {
-    ollama.enable = false;
+    ollama.enable = true;
   };
 
   sgiath = {
