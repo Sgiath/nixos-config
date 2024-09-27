@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [ ./hardware.nix ];
 
@@ -25,5 +26,6 @@
     loadModels = [
       "llama3.2"
     ];
+    package = pkgs.master.ollama-rocm;
   };
 }

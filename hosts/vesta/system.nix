@@ -16,8 +16,22 @@
     wayland.enable = false;
   };
 
-  services.wyoming.faster-whisper.servers = {
-    "home-assistant" = {
+  services = {
+    home-assistant = {
+      enable = true;
+      config = {
+        homeassistant = {
+          name = "Home";
+          latitude = "";
+          longtitude = "";
+          temperature_unit = "C";
+          time_zone = "UTC";
+          unit_system = "metric";
+        };
+      };
+    };
+
+    wyoming.faster-whisper.servers."home-assistant" = {
       enable = true;
       beamSize = 5;
       model = "large-v3";
