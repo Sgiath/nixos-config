@@ -5,13 +5,13 @@
   ...
 }:
 {
-  options.sgiath.server.dnd5etools = {
-    enable = lib.mkEnableOption "5e tools";
+  options.services.dnd5etools = {
+    enable = lib.mkEnableOption "5e tools service";
   };
 
   config =
     lib.mkIf config.sgiath.server.enable
-    && config.sgiath.server.dnd5etools.enable {
+    && config.services.dnd5etools.enable {
       services.nginx.virtualHosts."5e.sgiath.dev" = {
         # SSL
         onlySSL = true;

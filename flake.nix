@@ -37,6 +37,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    foundryvtt = {
+      url = "github:reckenrode/nix-foundryvtt";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -100,6 +105,7 @@
               inputs.disko.nixosModules.disko
               inputs.nix-bitcoin.nixosModules.default
               inputs.simple-nixos-mailserver.nixosModules.mailserver
+              inputs.foundryvtt.nixosModules.foundryvtt
               # local modules
               outputs.nixosModules
               # user settings
