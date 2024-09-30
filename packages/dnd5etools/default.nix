@@ -51,13 +51,16 @@ let
     }
   ];
 
-  copyImgs = lib.lists.forEach imgHashes (v: rec {
-    img = fetchurl {
-      inherit (v) hash;
-      url = "https://github.com/5etools-mirror-2/5etools-img/releases/download/v${version}/${v.name}";
-    };
-    out = "cp ${img} ${v.name}";
-  });
+  copyImgs = lib.lists.forEach imgHashes (
+    v:
+    let
+      img = fetchurl {
+        inherit (v) hash;
+        url = "https://github.com/5etools-mirror-2/5etools-img/releases/download/v${version}/${v.name}";
+      };
+    in
+    "cp ${img} ${v.name}"
+  );
 
   nodeDependencies = (callPackage ./deps { inherit nodejs; }).nodeDependencies;
 in
@@ -78,7 +81,7 @@ stdenv.mkDerivation rec {
 
   buildPhase = ''
     # copy images
-    ${lib.strings.concatMapStringsSep "\n" (x: x.out) copyImgs}
+    ${lib.strings.concatStringsSep "\n" copyImgs}
 
     # unpack images
     7z x -aoa img-v${version}.zip
