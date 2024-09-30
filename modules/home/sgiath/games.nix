@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
+in
 {
   options.sgiath.games = {
     enable = lib.mkEnableOption "games";
@@ -40,10 +43,10 @@
         })
 
         # Factorio
-        # (factorio.override {
-        #   username = "Sgiath";
-        #   token = secrets.factorio_token;
-        # })
+        (factorio.override {
+          username = "Sgiath";
+          token = secrets.factorio_token;
+        })
       ];
     };
   };

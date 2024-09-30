@@ -753,36 +753,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-master": {
-      "locked": {
-        "lastModified": 1727683420,
-        "narHash": "sha256-4VdOHX5QfrUf+JEd7p5efYN+Wn3V5kfvnI92haBBW0U=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "edc63e0b83a1a3ecef4595a0c96ddb499172d7d2",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "master",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs-stable": {
-      "locked": {
-        "lastModified": 1727540905,
-        "narHash": "sha256-40J9tW7Y794J7Uw4GwcAKlMxlX2xISBl6IBigo83ih8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "fbca5e745367ae7632731639de5c21f29c8744ed",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-24.05",
-        "type": "indirect"
-      }
-    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1726871744,
@@ -838,21 +808,6 @@
         "type": "github"
       }
     },
-    "nur": {
-      "locked": {
-        "lastModified": 1727684437,
-        "narHash": "sha256-0Mv/kutd0HIPCFnOdu/tGfauRa9UtQQhiUUWfaquyAs=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "ccf24b461b09725abd35f08830860625842daa8d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -861,10 +816,7 @@
         "hyprland": "hyprland",
         "nix-bitcoin": "nix-bitcoin",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-master": "nixpkgs-master",
-        "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-wayland": "nixpkgs-wayland",
-        "nur": "nur",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
         "snowfall-lib": "snowfall-lib",
         "stylix": "stylix"
