@@ -85,7 +85,7 @@
       formatter.${system} = pkgs.nixfmt-rfc-style;
 
       overlays = import ./overlays { inherit inputs system; };
-      packages.${system} = import ./pkgs pkgs;
+      packages.${system} = import ./packages pkgs;
       lib = import ./lib { inherit (nixpkgs) lib; };
 
       devShells = import ./shell.nix { inherit pkgs; };
@@ -112,7 +112,7 @@
               userSettings
 
               # configuration of the selected system
-              (./. + "/hosts/${host}/system.nix")
+              (./. + "/systems/x86_64-linux/${host}/system.nix")
             ];
           }
         )

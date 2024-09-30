@@ -21,7 +21,8 @@
       quic = true;
 
       # static files
-      locations."/".root = "${pkgs.dnd5etools}";
+      root = "${pkgs.dnd5etools}";
+      # locations."/".root = "${pkgs.dnd5etools}";
     };
   };
 }

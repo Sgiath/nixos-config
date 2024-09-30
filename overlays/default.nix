@@ -3,7 +3,7 @@ let
   pkgs-hyperland = inputs.hyprland.packages.${system};
 in
 {
-  additions = final: _prev: import ../pkgs final.pkgs;
+  additions = final: _prev: import ../packages final.pkgs;
 
   modifications = final: prev: {
     hyprland = pkgs-hyperland.hyprland;
