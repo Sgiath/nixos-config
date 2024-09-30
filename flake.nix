@@ -85,8 +85,8 @@
       };
 
       homeManagerModules = {
-        sgiath = import ./modules/home-manager/sgiath;
-        crazyegg = import ./modules/home-manager/crazyegg;
+        sgiath = import ./modules/home/sgiath;
+        crazyegg = import ./modules/home/crazyegg;
       };
 
       formatter.${system} = pkgs.nixfmt-rfc-style;
