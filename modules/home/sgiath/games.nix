@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  secrets,
   ...
 }:
 {
@@ -41,10 +40,10 @@
         })
 
         # Factorio
-        (factorio.override {
-          username = "Sgiath";
-          token = secrets.factorio_token;
-        })
+        # (factorio.override {
+        #   username = "Sgiath";
+        #   token = secrets.factorio_token;
+        # })
       ];
     };
   };

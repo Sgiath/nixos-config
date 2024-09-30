@@ -26,9 +26,6 @@
 
   config = lib.mkIf config.sgiath.enable {
     home = {
-      username = "sgiath";
-      homeDirectory = "/home/sgiath";
-
       stateVersion = "23.11";
 
       packages = with pkgs; [

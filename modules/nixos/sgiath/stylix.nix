@@ -11,7 +11,6 @@ let
   };
 in
 {
-
   config = lib.mkIf config.sgiath.enable {
     stylix = {
       enable = true;

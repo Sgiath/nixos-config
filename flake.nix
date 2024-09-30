@@ -1,9 +1,8 @@
 {
   inputs = {
-    nixpkgs-master.url = "nixpkgs/master";
+    # nixpkgs-master.url = "nixpkgs/master";
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
-    nur.url = "github:nix-community/NUR";
+    # nixpkgs-stable.url = "nixpkgs/nixos-24.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -11,6 +10,11 @@
     };
     disko = {
       url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -49,89 +53,28 @@
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    inputs:
     let
-      inherit (self) outputs;
+      lib = inputs.snowfall-lib.mkLib {
+        inherit inputs;
+        src = ./.;
+      };
+    in
+    lib.mkFlake {
+      channels-config = {
+        allowUnfree = true;
+      };
 
-      system = "x86_64-linux";
-
-      hosts = [
-        # desktop
-        "ceres"
-        # server
-        "vesta"
-        # notebook
-        "pallas"
+      overlays = with inputs; [
+        nixpkgs-wayland.overlay
       ];
 
-      userSettings = {
-        users.users.sgiath = {
-          isNormalUser = true;
-          extraGroups = [ "wheel" ];
-          hashedPassword = "$y$j9T$EBb/Mjo7nNHfmtbiP1GST0$CctYXT62gX0cMDHzRzYxlix43xC3U6kzSDNvyqZOcj4";
-          openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGJYz3V8IxqdAJw9LLj0RMsdCu4QpgPmItoDoe73w/3"
-          ];
-        };
-      };
-
-      pkgs = import nixpkgs { inherit system; };
-      secrets = builtins.fromJSON (builtins.readFile ./secrets.json);
-    in
-    {
-      nixosModules = {
-        sgiath = import ./modules/nixos/sgiath;
-        crazyegg = import ./modules/nixos/crazyegg;
-      };
-
-      homeManagerModules = {
-        sgiath = import ./modules/home/sgiath;
-        crazyegg = import ./modules/home/crazyegg;
-      };
-
-      formatter.${system} = pkgs.nixfmt-rfc-style;
-
-      overlays = import ./overlays { inherit inputs system; };
-      packages.${system} = import ./packages pkgs;
-      lib = import ./lib { inherit (nixpkgs) lib; };
-
-      devShells = import ./shell.nix { inherit pkgs; };
-
-      nixosConfigurations =
-        nixpkgs.lib.genAttrs hosts (
-          host:
-          nixpkgs.lib.nixosSystem {
-            system = pkgs.system;
-            specialArgs = {
-              inherit inputs outputs secrets;
-            };
-            modules = with inputs; [
-              # 3rd party modules
-              home-manager.nixosModules.home-manager
-              stylix.nixosModules.stylix
-              nur.nixosModules.nur
-              disko.nixosModules.disko
-              nix-bitcoin.nixosModules.default
-              simple-nixos-mailserver.nixosModules.mailserver
-              foundryvtt.nixosModules.foundryvtt
-              # local modules
-              outputs.nixosModules.sgiath
-              outputs.nixosModules.crazyegg
-              # user settings
-              userSettings
-
-              # configuration of the selected system
-              (./. + "/systems/x86_64-linux/${host}")
-            ];
-          }
-        )
-        // {
-          installIso = nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs outputs;
-            };
-            modules = [ ./systems/v86_64-install-iso/isoimage ];
-          };
-        };
+      systems.modules.nixos = with inputs; [
+        stylix.nixosModules.stylix
+        disko.nixosModules.disko
+        nix-bitcoin.nixosModules.default
+        simple-nixos-mailserver.nixosModules.mailserver
+        foundryvtt.nixosModules.foundryvtt
+      ];
     };
 }

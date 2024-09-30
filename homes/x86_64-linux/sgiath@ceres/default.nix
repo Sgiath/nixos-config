@@ -15,8 +15,6 @@
     bisq-desktop
     trezor-suite
     trezor-udev-rules
-
-    node2nix
   ];
 
   programs = {

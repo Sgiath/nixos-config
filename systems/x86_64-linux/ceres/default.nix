@@ -2,8 +2,6 @@
 {
   imports = [ ./hardware.nix ];
 
-  home-manager.users.sgiath = import (./../../../homes/x86_64-linux + "/sgiath@ceres");
-
   networking.hostName = "ceres";
 
   sgiath = {

@@ -6,7 +6,7 @@
 }:
 let
   pass = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
-  awscli = pkgs.stable.awscli2;
+  awscli = pkgs.awscli2;
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
     mfa="arn:aws:iam::173509387151:mfa/filip"
     token=$(${pass}/bin/pass otp 2fa/amazon/code)

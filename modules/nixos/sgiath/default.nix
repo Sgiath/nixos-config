@@ -1,10 +1,7 @@
 {
   config,
   lib,
-  inputs,
-  outputs,
   pkgs,
-  secrets,
   ...
 }:
 {
@@ -31,30 +28,21 @@
     ./printing.nix
     ./razer.nix
     ./wayland.nix
-
-    ./server
   ];
 
   options.sgiath.enable = lib.mkEnableOption "sgiath config";
 
   config = lib.mkIf config.sgiath.enable {
-    system.stateVersion = "23.11";
-
-    nixpkgs = {
-      overlays = [
-        outputs.overlays.additions
-        outputs.overlays.modifications
-        outputs.overlays.stable-packages
-        outputs.overlays.master-packages
-        inputs.nur.overlay
-        inputs.nixpkgs-wayland.overlay
+    users.users.sgiath = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      hashedPassword = "$y$j9T$EBb/Mjo7nNHfmtbiP1GST0$CctYXT62gX0cMDHzRzYxlix43xC3U6kzSDNvyqZOcj4";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGJYz3V8IxqdAJw9LLj0RMsdCu4QpgPmItoDoe73w/3"
       ];
-
-      config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [ ];
-      };
     };
+
+    system.stateVersion = "23.11";
 
     nix = {
       package = pkgs.nixVersions.latest;
@@ -84,17 +72,5 @@
     };
 
     users.defaultUserShell = pkgs.zsh;
-
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      extraSpecialArgs = {
-        inherit inputs outputs secrets;
-      };
-      sharedModules = [
-        outputs.homeManagerModules.sgiath
-        outputs.homeManagerModules.crazyegg
-      ];
-    };
   };
 }
