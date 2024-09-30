@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [ ../../work ];
-
   home.packages = with pkgs; [
     xfce.thunar
     obsidian
@@ -32,6 +30,8 @@
     email_client.enable = true;
     games.enable = false;
   };
+
+  crazyegg.enable = true;
 
   stylix.fonts.sizes = {
     applications = 12;

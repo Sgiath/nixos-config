@@ -20,6 +20,8 @@
     ./tmux.nix
     ./waybar.nix
     ./zsh.nix
+
+    ./crazyegg
   ];
 
   options.sgiath.enable = lib.mkEnableOption "sgiath config";
