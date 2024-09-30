@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  inputs,
   pkgs,
   ...
 }:
@@ -12,7 +11,6 @@ let
   };
 in
 {
-  imports = [ inputs.stylix.nixosModules.stylix ];
 
   config = lib.mkIf config.sgiath.enable {
     stylix = {
@@ -20,10 +18,10 @@ in
 
       polarity = "dark";
 
-      image = ./../../wallpapers/girl.png;
+      image = ./wallpapers/girl.png;
       imageScalingMode = "fit";
 
-      base16Scheme = ./../../theme.yaml;
+      base16Scheme = ./theme.yaml;
 
       cursor = {
         package = pkgs.bibata-cursors;

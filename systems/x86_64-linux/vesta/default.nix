@@ -1,7 +1,7 @@
 {
   imports = [ ./hardware.nix ];
 
-  home-manager.users.sgiath = import ./home.nix;
+  home-manager.users.sgiath = import (./../../../homes/x86_64-linux + "/sgiath@vesta");
 
   networking.hostName = "vesta";
 

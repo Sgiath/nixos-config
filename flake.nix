@@ -79,8 +79,15 @@
       secrets = builtins.fromJSON (builtins.readFile ./secrets.json);
     in
     {
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
+      nixosModules = {
+        sgiath = import ./modules/nixos/sgiath;
+        crazyegg = import ./modules/nixos/crazyegg;
+      };
+
+      homeManagerModules = {
+        sgiath = import ./modules/home-manager/sgiath;
+        crazyegg = import ./modules/home-manager/crazyegg;
+      };
 
       formatter.${system} = pkgs.nixfmt-rfc-style;
 
@@ -98,21 +105,23 @@
             specialArgs = {
               inherit inputs outputs secrets;
             };
-            modules = [
+            modules = with inputs; [
               # 3rd party modules
-              inputs.home-manager.nixosModules.home-manager
-              inputs.nur.nixosModules.nur
-              inputs.disko.nixosModules.disko
-              inputs.nix-bitcoin.nixosModules.default
-              inputs.simple-nixos-mailserver.nixosModules.mailserver
-              inputs.foundryvtt.nixosModules.foundryvtt
+              home-manager.nixosModules.home-manager
+              stylix.nixosModules.stylix
+              nur.nixosModules.nur
+              disko.nixosModules.disko
+              nix-bitcoin.nixosModules.default
+              simple-nixos-mailserver.nixosModules.mailserver
+              foundryvtt.nixosModules.foundryvtt
               # local modules
-              outputs.nixosModules
+              outputs.nixosModules.sgiath
+              outputs.nixosModules.crazyegg
               # user settings
               userSettings
 
               # configuration of the selected system
-              (./. + "/systems/x86_64-linux/${host}/system.nix")
+              (./. + "/systems/x86_64-linux/${host}")
             ];
           }
         )
@@ -121,7 +130,7 @@
             specialArgs = {
               inherit inputs outputs;
             };
-            modules = [ ./hosts/isoimage/system.nix ];
+            modules = [ ./systems/v86_64-install-iso/isoimage ];
           };
         };
     };

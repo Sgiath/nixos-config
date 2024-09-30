@@ -32,7 +32,6 @@
     ./razer.nix
     ./wayland.nix
 
-    ./crazyegg
     ./server
   ];
 
@@ -93,7 +92,8 @@
         inherit inputs outputs secrets;
       };
       sharedModules = [
-        outputs.homeManagerModules
+        outputs.homeManagerModules.sgiath
+        outputs.homeManagerModules.crazyegg
       ];
     };
   };
