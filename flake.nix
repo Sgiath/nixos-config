@@ -66,7 +66,7 @@
       };
 
       overlays = with inputs; [
-        nixpkgs-wayland.overlay
+        # nixpkgs-wayland.overlay
       ];
 
       systems.modules.nixos = with inputs; [
