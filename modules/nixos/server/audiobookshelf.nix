@@ -3,13 +3,13 @@
   config = lib.mkIf (config.sgiath.server.enable && config.services.audiobookshelf.enable) {
     services.nginx.virtualHosts."audio.sgiath.dev" = {
       # SSL
-      onlySSL = true;
-      enableACME = true;
-      kTLS = true;
+      # onlySSL = true;
+      # enableACME = true;
+      # kTLS = true;
 
       # QUIC
-      http3_hq = true;
-      quic = true;
+      # http3_hq = true;
+      # quic = true;
 
       locations."/" = {
         proxyWebsockets = true;

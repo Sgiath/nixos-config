@@ -47,6 +47,7 @@
     nix = {
       package = pkgs.nixVersions.latest;
       settings = {
+        require-sigs = true;
         experimental-features = [
           "nix-command"
           "flakes"
