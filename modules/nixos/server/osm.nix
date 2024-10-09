@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  config = lib.mkIf (config.sgiath.server.enable && config.services.osmscout-server.enable) {
+  config = lib.mkIf (config.sgiath.server.enable) {
     services = {
       nginx = {
         virtualHosts."osm.sgiath.dev" = {

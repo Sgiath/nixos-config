@@ -10,4 +10,8 @@
     tmux.enable = true;
     zsh.enable = true;
   };
+
+  services = {
+    osmscout-server.enable = true;
+  };
 }
