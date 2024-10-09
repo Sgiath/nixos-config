@@ -1,4 +1,5 @@
 {
+  namespace,
   config,
   lib,
   pkgs,
@@ -24,8 +25,8 @@
       quic = true;
 
       # static files
-      root = "${pkgs.dnd5etools}";
-      locations."/".root = "${pkgs.dnd5etools}";
+      root = "${pkgs.${namespace}.dnd5etools}";
+      # locations."/".root = "${pkgs.${namespace}.dnd5etools}";
     };
   };
 }

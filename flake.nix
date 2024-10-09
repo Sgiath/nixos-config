@@ -66,6 +66,11 @@
       };
     in
     lib.mkFlake {
+      snowfall = {
+        root = ./.;
+        namespace = "sgiath";
+      };
+
       channels-config = {
         allowUnfree = true;
         permittedInsecurePackages = [
