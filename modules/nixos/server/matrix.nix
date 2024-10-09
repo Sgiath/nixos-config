@@ -20,7 +20,7 @@ in
         settings.global = {
           # server
           server_name = "sgiath.dev";
-          address = "127.0.0.1";
+          address = "0.0.0.0";
           port = 6167;
 
           database_backend = "rocksdb";
@@ -44,7 +44,7 @@ in
 
               default_type application/json;
 
-              return 200 '{"m.server":"matrix.sgiath.dev"}';
+              return 200 '{"m.server":"matrix.sgiath.dev:443"}';
             '';
           };
 
@@ -55,7 +55,7 @@ in
 
               default_type application/json;
 
-              return 200 '{"m.homeserver":{"base_url":"matrix.sgiath.dev"}}';
+              return 200 '{"m.server":"https://matrix.sgiath.dev","m.homeserver":{"base_url":"https://matrix.sgiath.dev"}}';
             '';
           };
         };

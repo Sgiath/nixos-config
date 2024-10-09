@@ -13,6 +13,7 @@
     ./search.nix
     ./sgiath.nix
     ./wordpress.nix
+    ./xmpp.nix
   ];
 
   options.sgiath.server = {
