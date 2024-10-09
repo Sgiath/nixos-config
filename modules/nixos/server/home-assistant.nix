@@ -20,20 +20,29 @@
           proxyWebsockets = true;
           proxyPass = "http://127.0.0.1:8123";
           # does not work with X-Forwarded-For
-          recommendedProxySettings = false;
-          extraConfig = ''
-            proxy_set_header        Host $host;
-            proxy_set_header        X-Real-IP $remote_addr;
-            # proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header        X-Forwarded-Proto $scheme;
-            proxy_set_header        X-Forwarded-Host $host;
-            proxy_set_header        X-Forwarded-Server $host;
-          '';
+          # recommendedProxySettings = false;
+          # extraConfig = ''
+          #   proxy_set_header        Host $host;
+          #   proxy_set_header        X-Real-IP $remote_addr;
+          #   # proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+          #   proxy_set_header        X-Forwarded-Proto $scheme;
+          #   proxy_set_header        X-Forwarded-Host $host;
+          #   proxy_set_header        X-Forwarded-Server $host;
+          # '';
         };
       };
 
       home-assistant = {
         config = {
+          http = {
+            server_host = [ "127.0.0.1" ];
+            server_port = 8123;
+            use_x_forwarded_for = true;
+            trusted_proxies = [
+              "127.0.0.1"
+              "192.168.1.0/24"
+            ];
+          };
           homeassistant = {
             name = "Home";
             latitude = 49.868068917708214;
