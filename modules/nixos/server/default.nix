@@ -6,6 +6,7 @@
     ./foundry.nix
     ./home-assistant.nix
     ./nginx.nix
+    ./osm.nix
     ./pi-hole.nix
     ./search.nix
     ./wordpress.nix

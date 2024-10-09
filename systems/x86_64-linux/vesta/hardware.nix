@@ -23,7 +23,7 @@
 
   fileSystems = {
     "/data" = {
-      device = "/dev/nvme1n1p1";
+      device = "/dev/disk/by-uuid/f87c6afb-7e94-452a-a6d7-8e5fc2cf43fb";
       fsType = "ext4";
     };
   };

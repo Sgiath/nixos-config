@@ -13,11 +13,12 @@
   };
 
   services = {
-    dnd5etools.enable = false;
     audiobookshelf.enable = true;
-    pi-hole.enable = true;
+    dnd5etools.enable = false;
     foundryvtt.enable = true;
     home-assistant.enable = true;
+    osmscout-server.enable = true;
+    pi-hole.enable = true;
     searx.enable = true;
   };
 }
