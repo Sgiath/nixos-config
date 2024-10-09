@@ -15,7 +15,6 @@
 
       nginx.virtualHosts."meet.sgiath.dev" = {
         # SSL
-        onlySSL = true;
         kTLS = true;
 
         # ACME
