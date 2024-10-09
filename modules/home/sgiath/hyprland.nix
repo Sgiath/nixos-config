@@ -31,6 +31,7 @@
           "${pkgs.protonmail-desktop}/bin/proton-mail"
           "${pkgs.slack}/bin/slack"
           "${pkgs.webcord}/bin/webcord"
+          "${pkgs.cinny-desktop}/bin/cinny"
           "${pkgs.signal-desktop-beta}/bin/signal-desktop-beta"
           "${pkgs.telegram-desktop}/bin/telegram-desktop"
         ];
@@ -146,6 +147,7 @@
           "workspace 10 silent, class:(signalbeta)"
           "workspace 10 silent, class:(org.telegram.desktop)"
           "workspace 10 silent, class:(Hexchat)"
+          "workspace 10 silent, class:(cinny)"
         ];
       };
     };
