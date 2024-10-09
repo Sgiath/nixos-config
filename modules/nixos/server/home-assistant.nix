@@ -46,7 +46,7 @@
           homeassistant = {
             name = "Home";
             latitude = 49.868068917708214;
-            longtitude = 18.133653402327774;
+            longitude = 18.133653402327774;
             temperature_unit = "C";
             time_zone = "UTC";
             unit_system = "metric";
