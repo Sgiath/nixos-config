@@ -20,7 +20,7 @@ in
         settings.global = {
           # server
           server_name = "sgiath.dev";
-          address = "0.0.0.0";
+          address = "127.0.0.1";
           port = 6167;
 
           database_backend = "rocksdb";
@@ -72,8 +72,8 @@ in
           quic = true;
 
           listen = [
-            { addr = "192.168.1.207"; port = 443; ssl = true; }
-            { addr = "192.168.1.207"; port = 8448; ssl = true; }
+            { addr = "0.0.0.0"; port = 443; ssl = true; }
+            { addr = "0.0.0.0"; port = 8448; ssl = true; }
           ];
 
           # static files
