@@ -4,14 +4,29 @@
   pkgs,
   ...
 }:
+let
+  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
+in
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.matrix-conduit.enable) {
     services = {
       matrix-conduit = {
         package = pkgs.conduwuit.all-features;
         settings.global = {
-          address = "127.0.0.1";
+          # server
           server_name = "sgiath.dev";
+          address = "127.0.0.1";
+          port = 6167;
+
+          database_backend = "rocksdb";
+
+          # registration
+          allow_registration = true;
+          registration_token = secrets.matrix_registration_token;
+
+          # other
+          admin_console_automatic = true;
+          new_user_displayname_suffix = "";
         };
       };
 
