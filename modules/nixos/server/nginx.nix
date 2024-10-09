@@ -51,8 +51,8 @@
         client_body_buffer_size 1K;
         client_header_buffer_size 1k;
 
-        proxy_headers_hash_max_size 512;
-        proxy_headers_hash_bucket_size 64;
+        proxy_headers_hash_max_size 1024;
+        proxy_headers_hash_bucket_size 128;
 
         # allow the server to close connection on non responding client, this will free up memory
         reset_timedout_connection on;
@@ -62,6 +62,10 @@
       '';
 
       virtualHosts = {
+        default = {
+          default = true;
+        };
+
         "nas.sgiath.dev" = {
           # SSL
           onlySSL = true;
