@@ -7,6 +7,7 @@
     ./home-assistant.nix
     ./jitsi.nix
     ./matrix.nix
+    ./monitoring.nix
     ./nginx.nix
     ./osm.nix
     ./pi-hole.nix

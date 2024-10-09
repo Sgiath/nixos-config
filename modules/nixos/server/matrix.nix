@@ -73,11 +73,6 @@ in
           http3_hq = true;
           quic = true;
 
-          # listen = [
-          #   { addr = "0.0.0.0"; port = 443; ssl = true; }
-          #   { addr = "0.0.0.0"; port = 8448; ssl = true; }
-          # ];
-
           # static files
           locations."/" = {
             proxyWebsockets = true;
