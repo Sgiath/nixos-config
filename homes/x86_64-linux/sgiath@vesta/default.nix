@@ -14,7 +14,7 @@
   services = {
     osmscout-server = {
       enable = true;
-      network.startWhenNeeded = false;
+      # network.startWhenNeeded = false;
     };
   };
 }
