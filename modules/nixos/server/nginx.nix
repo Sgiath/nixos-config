@@ -4,9 +4,6 @@
   pkgs,
   ...
 }:
-let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
 {
   config = lib.mkIf config.sgiath.server.enable {
     security.acme = {
@@ -34,8 +31,8 @@ in
         email = "server@sgiath.dev";
         dnsProvider = "cloudflare";
         credentialFiles = {
-          CLOUDFLARE_EMAIL = "filipvavera@sgiath.dev";
-          CLOUDFLARE_DNS_API_TOKEN = secrets.cloudflare_token;
+          CLOUDFLARE_EMAIL_FILE = "/run/secrets/cloudflare-email";
+          CLOUDFLARE_DNS_API_TOKEN_FILE = "/run/secrets/cloudflare-token";
         };
         server = "https://acme-staging-v02.api.letsencrypt.org/directory";
       };
