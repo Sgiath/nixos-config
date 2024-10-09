@@ -14,7 +14,7 @@ in
         package = pkgs.conduwuit.all-features;
         settings.global = {
           # server
-          server_name = "sgiath.dev";
+          server_name = "matrix.sgiath.dev";
           address = "127.0.0.1";
           port = 6167;
 
@@ -29,6 +29,13 @@ in
           new_user_displayname_suffix = "";
         };
       };
+
+      # matrix-synapse = {
+      #   settings = {
+      #     public_baseurl = "https://matrix.sgiath.dev";
+      #     enable_registration = true;
+      #   };
+      # };
 
       nginx.virtualHosts = {
         "sgiath.dev".locations = {
