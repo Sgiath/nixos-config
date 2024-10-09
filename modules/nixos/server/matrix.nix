@@ -65,16 +65,14 @@ in
           enableACME = true;
           kTLS = true;
 
-          # HTTP
-          http2 = true;
-          http3 = true;
+          # QUIC
           http3_hq = true;
           quic = true;
 
-          listen = [
-            { addr = "192.168.1.207"; port = 443; ssl = true; }
-            { addr = "192.168.1.207"; port = 8448; ssl = true; }
-          ];
+          # listen = [
+          #   { addr = "192.168.1.207"; port = 443; ssl = true; }
+          #   { addr = "192.168.1.207"; port = 8448; ssl = true; }
+          # ];
 
           # static files
           locations."/" = {

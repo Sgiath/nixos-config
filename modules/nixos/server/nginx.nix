@@ -47,8 +47,12 @@
         log_not_found off;
         aio threads;
         directio 4m;
+
         client_body_buffer_size 1K;
         client_header_buffer_size 1k;
+
+        proxy_headers_hash_max_size 512;
+        proxy_headers_hash_bucket_size 64;
 
         # allow the server to close connection on non responding client, this will free up memory
         reset_timedout_connection on;
