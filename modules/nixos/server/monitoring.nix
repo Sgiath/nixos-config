@@ -9,7 +9,22 @@
       prometheus = {
         enable = true;
         port = 9090;
-        webExternalUrl = "https://monitoring.sgiath.dev";
+
+        exporters = {
+          node = {
+            enable = true;
+            enabledCollectors = [ "systemd" ];
+          };
+        };
+
+        scrapeConfigs = [
+          {
+            job_name = "vesta";
+            static_configs = [
+              { targets = [ "127.0.0.1:9100" ]; }
+            ];
+          }
+        ];
       };
 
       grafana = {
