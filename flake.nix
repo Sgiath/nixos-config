@@ -52,9 +52,8 @@
     };
 
     stylix = {
-      type = "git";
-      url = "https://github.com/danth/stylix";
-      rev = "63426a59e714c4389c5a8e559dee05a0087a3043";
+      # url = "github:danth/stylix";
+      url = "github:trueNAHO/stylix/stylix-downgrade-and-lock-tinted-kitty-input";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

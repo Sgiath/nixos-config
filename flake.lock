@@ -1683,17 +1683,18 @@
         "tinted-tmux": "tinted-tmux"
       },
       "locked": {
-        "lastModified": 1728487226,
-        "narHash": "sha256-gTOUdO94Y24QgnPVnHTQ/Kch0eM6pHEk/c1WoIxg+qE=",
-        "owner": "danth",
-        "repo": "stylix",
-        "rev": "5699ba97c60455ebafde0fd4e78ca0a2e5a58282",
-        "type": "github"
+        "lastModified": 1728312564,
+        "narHash": "sha256-z01cTK5VeLFOUekhAXrJHLDzE74uAxxMwE2p6+Wp9Sg=",
+        "ref": "refs/heads/master",
+        "rev": "63426a59e714c4389c5a8e559dee05a0087a3043",
+        "revCount": 425,
+        "type": "git",
+        "url": "https://github.com/danth/stylix"
       },
       "original": {
-        "owner": "danth",
-        "repo": "stylix",
-        "type": "github"
+        "rev": "63426a59e714c4389c5a8e559dee05a0087a3043",
+        "type": "git",
+        "url": "https://github.com/danth/stylix"
       }
     },
     "systems": {
