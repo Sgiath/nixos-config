@@ -11,10 +11,6 @@
 
         nginx.enable = true;
         prosody.enable = true;
-        jibri.enable = true;
-        jicofo.enable = true;
-        jigasi.enable = true;
-        videobridge.enable = true;
       };
 
       nginx.virtualHosts."meet.sgiath.dev" = {
