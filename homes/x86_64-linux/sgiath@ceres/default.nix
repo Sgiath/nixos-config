@@ -3,15 +3,16 @@
   home.packages = with pkgs; [
     xfce.thunar
     obsidian
+    gimp
+    vscodium-fhs
+
     webcord
     telegram-desktop
     signal-desktop-beta
-    gimp
-    yt-dlp
-
-    vscodium-fhs
-    parted
     cinny-desktop
+
+    yt-dlp
+    parted
 
     betaflight-configurator
     bisq-desktop
@@ -27,7 +28,6 @@
     gpg.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
-    nheko.enable = true;
     nvim.enable = true;
     obs-studio.enable = false;
     ssh.enable = true;
