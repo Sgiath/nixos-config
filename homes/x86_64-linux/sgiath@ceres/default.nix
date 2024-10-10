@@ -27,6 +27,7 @@
     gpg.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
+    nheko.enable = true;
     nvim.enable = true;
     obs-studio.enable = false;
     ssh.enable = true;
