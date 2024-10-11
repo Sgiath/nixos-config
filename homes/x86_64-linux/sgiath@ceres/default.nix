@@ -16,7 +16,7 @@
     parted
 
     betaflight-configurator
-    bisq-desktop
+    # bisq-desktop
     trezor-suite
     trezor-udev-rules
   ];
