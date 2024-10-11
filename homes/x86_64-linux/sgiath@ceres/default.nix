@@ -10,7 +10,6 @@
     telegram-desktop
     signal-desktop-beta
     cinny-desktop
-    element-desktop-wayland
     simplex-chat-desktop
 
     yt-dlp
