@@ -29,4 +29,8 @@
       extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
   };
+
+  virtualisation.libvirtd = {
+    enable = true;
+  };
 }
