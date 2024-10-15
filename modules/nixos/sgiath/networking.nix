@@ -30,7 +30,6 @@
           "sgiath.dev"
           "5e.sgiath.dev"
           "foundry.sgiath.dev"
-          "wp.sgiath.dev"
           "search.sgiath.dev"
           "audio.sgiath.dev"
           "meet.sgiath.dev"
