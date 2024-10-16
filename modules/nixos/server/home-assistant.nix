@@ -27,6 +27,28 @@
             psycopg2
             gtts
           ];
+        extraComponents = [
+          # default
+          "config"
+          "dhcp"
+          "energy"
+          "history"
+          "image_upload"
+          "mobile_app"
+          "ssdp"
+          "sun"
+          "zeroconf"
+
+          # custom
+          "openweathermap"
+          "shelly"
+          "tuya"
+          "tplink"
+          "tplink_tapo"
+          "roborock"
+          "starlink"
+          "bitcoin"
+        ];
         config = {
           http = {
             server_host = [ "127.0.0.1" ];
