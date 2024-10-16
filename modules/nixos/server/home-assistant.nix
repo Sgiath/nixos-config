@@ -28,33 +28,8 @@
             gtts
             pymetno
           ];
-        defaultIntegrations = [
+        extraComponents = [
           # default
-
-          "application_credentials"
-          "frontend"
-          "hardware"
-          "logger"
-          "network"
-          "system_health"
-          "automation"
-          "person"
-          "scene"
-          "script"
-          "tag"
-          "zone"
-          "counter"
-          "input_boolean"
-          "input_button"
-          "input_datetime"
-          "input_number"
-          "input_select"
-          "input_text"
-          "schedule"
-          "timer"
-          "backup"
-
-          # default config
           "config"
           "dhcp"
           "energy"
@@ -75,28 +50,6 @@
           "starlink"
           "bitcoin"
         ];
-        # extraComponents = [
-        #   # default
-        #   "config"
-        #   "dhcp"
-        #   "energy"
-        #   "history"
-        #   "image_upload"
-        #   "mobile_app"
-        #   "ssdp"
-        #   "sun"
-        #   "zeroconf"
-        #
-        #   # custom
-        #   "openweathermap"
-        #   "shelly"
-        #   "tuya"
-        #   "tplink"
-        #   "tplink_tapo"
-        #   "roborock"
-        #   "starlink"
-        #   "bitcoin"
-        # ];
         config = {
           http = {
             server_host = [ "127.0.0.1" ];
