@@ -62,17 +62,19 @@
           };
 
           # default config
-          # backup = { };
           config = { };
           dhcp = { };
           energy = { };
           history = { };
           image_upload = { };
           mobile_app = { };
-          sshp = { };
+          ssdp = { };
           sun = { };
           zeroconf = { };
-          map = { };
+          # matrix = {
+          #   homeserver = "https://matrix.sgiath.dev";
+          #   username = "@sgiath:sgiath.dev";
+          # };
         };
       };
     };
