@@ -39,6 +39,7 @@
           "ssdp"
           "sun"
           "zeroconf"
+          "map"
 
           # custom
           "openweathermap"
