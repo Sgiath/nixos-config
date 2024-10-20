@@ -18,7 +18,7 @@
     foundryvtt.enable = true;
     home-assistant.enable = true;
     jitsi-meet.enable = true;
-    matrix.enable = false;
+    matrix.enable = true;
     monitoring.enable = true;
     nas-proxy.enable = true;
     osm.proxy = false;
