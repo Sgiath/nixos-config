@@ -4,7 +4,9 @@
   ...
 }:
 {
-  config = lib.mkIf (config.sgiath.server.enable) {
+  options.services.wordpress.proxy = lib.mkEnableOption "Wordpress proxy";
+
+  config = lib.mkIf (config.sgiath.server.enable && config.services.wordpress.proxy) {
     services = {
       nginx.virtualHosts."wp.sgiath.dev" = {
         # SSL

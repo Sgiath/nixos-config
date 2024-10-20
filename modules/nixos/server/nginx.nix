@@ -26,7 +26,7 @@
         multi_accept on;
         worker_connections 2048;
       '';
-      resolver.addresses = [ "127.0.0.1:53" ];
+      resolver.addresses = [ "1.1.1.1:53" ];
 
       clientMaxBodySize = "2048M";
       enableQuicBPF = true;
@@ -60,59 +60,6 @@
         # if client stop responding, free up memory -- default 60
         send_timeout 20;
       '';
-
-      virtualHosts = {
-        default = {
-          default = true;
-        };
-
-        "nas.sgiath.dev" = {
-          # SSL
-          onlySSL = true;
-          kTLS = true;
-
-          # ACME
-          enableACME = true;
-          acmeRoot = null;
-
-          # QUIC
-          http3_hq = true;
-          quic = true;
-
-          locations = {
-            "/" = {
-              proxyWebsockets = true;
-              proxyPass = "http://192.168.1.4:5000";
-            };
-
-            "/transmission/" = {
-              proxyWebsockets = true;
-              proxyPass = "http://192.168.1.4:9091";
-            };
-          };
-        };
-
-        "plex.sgiath.dev" = {
-          # SSL
-          onlySSL = true;
-          kTLS = true;
-
-          # ACME
-          enableACME = true;
-          acmeRoot = null;
-
-          # QUIC
-          http3_hq = true;
-          quic = true;
-
-          locations = {
-            "/" = {
-              proxyWebsockets = true;
-              proxyPass = "http://192.168.1.4:32400";
-            };
-          };
-        };
-      };
     };
   };
 }

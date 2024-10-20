@@ -1,8 +1,6 @@
 { config, lib, ... }:
 {
-  options.services.pi-hole = {
-    enable = lib.mkEnableOption "pi-hole";
-  };
+  options.services.pi-hole.enable = lib.mkEnableOption "pi-hole";
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.pi-hole.enable) {
     networking.networkmanager.dns = lib.mkForce "none";

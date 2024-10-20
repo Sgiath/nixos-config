@@ -1,6 +1,8 @@
 { config, lib, ... }:
 {
-  config = lib.mkIf (config.sgiath.server.enable) {
+  options.services.sgiath-dev.proxy = lib.mkEnableOption "sgiath.dev proxy";
+
+  config = lib.mkIf (config.sgiath.server.enable && config.services.sgiath-dev.proxy) {
     services = {
       nginx.virtualHosts."sgiath.dev" = {
         # SSL
@@ -47,6 +49,11 @@
             extraConfig = ''
               add_header Content-Disposition 'attachment';
             '';
+          };
+
+          "/" = {
+            proxyWebsockets = true;
+            proxyPass = "http://127.0.0.1:4000";
           };
         };
       };

@@ -8,6 +8,7 @@
     ./jitsi.nix
     ./matrix.nix
     ./monitoring.nix
+    ./nas.nix
     ./nginx.nix
     ./osm.nix
     ./pi-hole.nix

@@ -1,6 +1,11 @@
 { config, lib, ... }:
 {
-  config = lib.mkIf (config.sgiath.server.enable) {
+  options.services.osm = {
+    enable = lib.mkEnableOption "OSM server";
+    proxy = lib.mkEnableOption "OSM proxy";
+  };
+
+  config = lib.mkIf (config.sgiath.server.enable && config.services.osm.proxy) {
     services = {
       nginx.virtualHosts."osm.sgiath.dev" = {
         # SSL

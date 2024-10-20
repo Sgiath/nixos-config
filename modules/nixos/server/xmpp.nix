@@ -1,8 +1,6 @@
 { config, lib, ... }:
 {
-  options.services.xmpp = {
-    enable = lib.mkEnableOption "XMPP server";
-  };
+  options.services.xmpp.enable = lib.mkEnableOption "XMPP server";
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.xmpp.enable) {
     services = {
