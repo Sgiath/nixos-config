@@ -10,7 +10,7 @@
         kTLS = true;
 
         # ACME
-        enableACME = false;
+        enableACME = true;
         acmeRoot = null;
 
         # QUIC
