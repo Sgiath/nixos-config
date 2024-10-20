@@ -71,8 +71,8 @@
         allowBroken = false;
         permittedInsecurePackages = [
           "jitsi-meet-1.0.8043"
-          "cinny-4.2.1"
-          "cinny-unwrapped-4.2.1"
+          "cinny-4.2.2"
+          "cinny-unwrapped-4.2.2"
           "olm-3.2.16"
         ];
       };

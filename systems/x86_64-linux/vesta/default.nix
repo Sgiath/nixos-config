@@ -25,7 +25,7 @@
     pi-hole.enable = true;
     searx.enable = true;
     sgiath-dev.proxy = true;
-    wordpress.proxy = true;
+    wordpress.proxy = false;
     xmpp.enable = false;
   };
 }
