@@ -34,6 +34,7 @@
           "audio.sgiath.dev"
           "meet.sgiath.dev"
           "matrix.sgiath.dev"
+          "skylark.sgiath.dev"
           "home-assistant.sgiath.dev"
           "dns.sgiath"
         ];
@@ -50,8 +51,8 @@
     environment.etc."resolv.conf".text = ''
       search sgiath.dev
 
-      # nameserver 192.168.1.2
-      # nameserver 192.168.1.1
+      nameserver 192.168.1.2
+      nameserver 192.168.1.1
       nameserver 1.1.1.1
       nameserver 8.8.8.8
     '';
