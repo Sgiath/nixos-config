@@ -40,18 +40,24 @@
           git commit --signoff -m "changes"
           git push
 
-          nixos-rebuild switch --use-remote-sudo --flake .
-          popd
-        '')
+          case "$1" in
+            --ceres)
+              nixos-rebuild switch --use-remote-sudo --flake '.#ceres'
+              ;;
 
-        (writeShellScriptBin "update-server" ''
-          pushd ~/.dotfiles
+            --vesta)
+              nixos-rebuild switch --use-remote-sudo --flake '.#vesta' --target-host 'sgiath@vesta.sgiath.dev'
+              ;;
 
-          git add --all
-          git commit --signoff -m "server changes"
-          git push
+            --hygiea)
+              nixos-rebuild switch --use-remote-sudo --flake '.#hygiea' --target-host 'sgiath@hygiea.sgiath.dev'
+              ;;
 
-          nixos-rebuild switch --use-remote-sudo --flake . --target-host 'sgiath@192.168.1.2'
+            *)
+              nixos-rebuild switch --use-remote-sudo --flake .
+              ;;
+          esac
+
           popd
         '')
 
@@ -66,7 +72,6 @@
           git commit --signoff -m "flake update"
           git push
 
-          nixos-rebuild switch --use-remote-sudo --flake .
           popd
         '')
 

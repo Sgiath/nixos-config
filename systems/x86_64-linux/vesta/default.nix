@@ -27,6 +27,6 @@
     nas-proxy.enable = true;
     sgiath-dev.proxy = true;
     sinai-camp.proxy = true;
-    wordpress.proxy = true;
+    wordpress.proxy = false;
   };
 }

@@ -27,6 +27,9 @@
       hosts = {
         "192.168.1.1" = [ "router.sgiath" ];
         "192.168.1.2" = [
+          "vesta.sgiath.dev"
+          "dns.sgiath"
+
           "sgiath.dev"
           "5e.sgiath.dev"
           "foundry.sgiath.dev"
@@ -36,7 +39,6 @@
           "matrix.sgiath.dev"
           "skylark.sgiath.dev"
           "home-assistant.sgiath.dev"
-          "dns.sgiath"
         ];
         "192.168.1.4" = [ "nas.sgiath" ];
         "192.168.1.5" = [ "nas.sgiath" ];
