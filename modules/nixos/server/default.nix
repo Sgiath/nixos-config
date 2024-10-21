@@ -14,6 +14,7 @@
     ./pi-hole.nix
     ./search.nix
     ./sgiath.nix
+    ./sinai.nix
     ./wordpress.nix
     ./xmpp.nix
   ];

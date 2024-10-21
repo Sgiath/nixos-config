@@ -25,6 +25,7 @@
     pi-hole.enable = true;
     searx.enable = true;
     sgiath-dev.proxy = true;
+    sinai-camp.proxy = true;
     wordpress.proxy = false;
     xmpp.enable = false;
   };
