@@ -35,7 +35,7 @@
         # servers
         "hygiea".hostname = "46.36.41.188";
         "vesta.local".hostname = "192.168.1.2";
-        "vesta" = {
+        "vesta.sgiath.dev" = {
           hostname = "145.224.120.18";
           port = 2200;
         };

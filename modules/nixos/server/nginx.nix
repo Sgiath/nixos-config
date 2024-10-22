@@ -6,6 +6,8 @@
 }:
 {
   config = lib.mkIf config.sgiath.server.enable {
+    users.users.sgiath.extraGroups = [ "nginx" ];
+
     security.acme = {
       acceptTerms = true;
       defaults = {
