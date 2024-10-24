@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  inputs,
   pkgs,
   ...
 }:
@@ -45,6 +46,7 @@
     system.stateVersion = "23.11";
 
     nix = {
+      nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       package = pkgs.nixVersions.latest;
       settings = {
         require-sigs = false;
