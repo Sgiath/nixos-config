@@ -22,10 +22,10 @@ lspconfig.nixd.setup({
 			},
 			options = {
 				nixos = {
-					expr = '(builtins.getFlake "/home/sgiath/.dotfiles").nixosConfigurations.default.options',
+					expr = '(builtins.getFlake "/home/sgiath/.dotfiles").nixosConfigurations.ceres.options',
 				},
 				home_manager = {
-					expr = '(builtins.getFlake "/home/sgiath/.dotfiles").homeConfigurations.default.options',
+					expr = '(builtins.getFlake "/home/sgiath/.dotfiles").homeConfigurations.sgiath.options',
 				},
 			},
 		},
