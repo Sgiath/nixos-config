@@ -5,7 +5,10 @@ let
 in
 {
   # master version of packages
-  master = inputs.nixpkgs-master.legacyPackages.${prev.system};
+  master = import inputs.nixpkgs-master {
+    system = prev.system;
+    allowUnfree = true;
+  };
 
   # Hyprland main repo overrides
   hyprland = pkgs-hyperland.hyprland;
