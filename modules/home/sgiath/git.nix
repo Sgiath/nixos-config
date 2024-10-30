@@ -25,7 +25,8 @@
       aliases = {
         d = "diff";
         aa = "add --all";
-        cm = "commit --signoff";
+        cm = "commit --signoff --no-verify";
+        ca = "commit --all --signoff --no-verify";
         ps = "push --progress";
         pl = "pull --autostash --rebase --signoff";
         pf = "push --progress --force-with-lease";
