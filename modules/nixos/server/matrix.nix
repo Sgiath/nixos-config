@@ -35,7 +35,10 @@ in {
         "sgiath.dev".locations = {
           # server <-> server
           "/.well-known/matrix/server" = {
-            return = "200 {\"m.server\":\"matrix.sgiath.dev:6167\"}";
+            extraConfig = ''
+              default_type application/json;
+            '';
+            return = "200 '{\"m.server\":\"matrix.sgiath.dev:6167\"}'";
           };
 
           # client <-> server
@@ -43,8 +46,10 @@ in {
             extraConfig = ''
               add_header Access-Control-Allow-Origin '*';
               add_header Cross-Origin-Resource-Policy 'cross-origin';
+
+              default_type application/json;
             '';
-            return = "200 {\"m.homeserver\":{\"base_url\":\"https://matrix.sgiath.dev\"}}";
+            return = "200 '{\"m.homeserver\":{\"base_url\":\"https://matrix.sgiath.dev\"}}'";
           };
 
           # server support
@@ -52,8 +57,10 @@ in {
             extraConfig = ''
               add_header Access-Control-Allow-Origin '*';
               add_header Cross-Origin-Resource-Policy 'cross-origin';
+
+              default_type application/json;
             '';
-            return = "200 {\"contacts\":[{\"email_address\":\"matrix@sgiath.dev\",\"matrix_id\":\"@sgiath:sgiath.dev\",\"role\":\"m.role.admin\"}]}";
+            return = "200 '{\"contacts\":[{\"email_address\":\"matrix@sgiath.dev\",\"matrix_id\":\"@sgiath:sgiath.dev\",\"role\":\"m.role.admin\"}]}'";
           };
         };
 
