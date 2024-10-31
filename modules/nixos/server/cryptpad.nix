@@ -4,11 +4,17 @@
   ...
 }: {
   config = lib.mkIf config.sgiath.server.enable {
-    services.cryptpad = {
-      configureNginx = true;
-      settings = {
-        httpSafeOrigin = "https://cryptpad-safe.sgiath.dev";
-        httpUnsafeOrigin = "https://cryptpad.sgiath.dev";
+    services = {
+      cryptpad = {
+        configureNginx = true;
+        settings = {
+          httpSafeOrigin = "https://cryptpad-safe.sgiath.dev";
+          httpUnsafeOrigin = "https://cryptpad.sgiath.dev";
+        };
+      };
+      nginx.virtualHosts = {
+        "cryptpad.sgiath.dev".acmeRoot = null;
+        "cryptpad-safe.sgiath.dev".acmeRoot = null;
       };
     };
   };

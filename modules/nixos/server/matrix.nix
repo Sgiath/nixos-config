@@ -3,11 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
-{
+in {
   options.services.matrix.enable = lib.mkEnableOption "matrix server";
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.matrix.enable) {
@@ -34,6 +32,31 @@ in
       };
 
       nginx.virtualHosts = {
+        "sgiath.dev".locations = {
+          # server <-> server
+          "/.well-known/matrix/server" = {
+            return = "200 {\"m.server\":\"matrix.sgiath.dev:6167\"}";
+          };
+
+          # client <-> server
+          "/.well-known/matrix/client" = {
+            extraConfig = ''
+              add_header Access-Control-Allow-Origin '*';
+              add_header Cross-Origin-Resource-Policy 'cross-origin';
+            '';
+            return = "200 {\"m.homeserver\":{\"base_url\":\"https://matrix.sgiath.dev\"}}";
+          };
+
+          # server support
+          "/.well-known/matrix/support" = {
+            extraConfig = ''
+              add_header Access-Control-Allow-Origin '*';
+              add_header Cross-Origin-Resource-Policy 'cross-origin';
+            '';
+            return = "200 {\"contacts\":[{\"email_address\":\"matrix@sgiath.dev\",\"matrix_id\":\"@sgiath:sgiath.dev\",\"role\":\"m.role.admin\"}]}";
+          };
+        };
+
         "matrix.sgiath.dev" = {
           # SSL
           onlySSL = true;
