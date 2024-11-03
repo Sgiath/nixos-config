@@ -13,7 +13,7 @@ let
 in
 {
   # get Factorio updates as soon as possible
-  factorio = pkgs-master.factorio-space-age-experimental;
+  factorio = pkgs-master.factorio-space-age;
 
   # Hyprland Nix native versions
   hyprland = pkgs-hyperland.hyprland;
