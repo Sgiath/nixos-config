@@ -57,14 +57,12 @@
     };
   };
 
-  outputs =
-    inputs:
-    let
-      lib = inputs.snowfall-lib.mkLib {
-        inherit inputs;
-        src = ./.;
-      };
-    in
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
+    };
+  in
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
@@ -87,6 +85,10 @@
         nix-bitcoin.nixosModules.default
         simple-nixos-mailserver.nixosModules.mailserver
         foundryvtt.nixosModules.foundryvtt
+      ];
+
+      homes.modules = with inputs; [
+        stylix.homeManagerModules.stylix
       ];
     };
 }
