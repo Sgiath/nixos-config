@@ -14,6 +14,7 @@ in
   config = lib.mkIf config.sgiath.enable {
     stylix = {
       enable = true;
+      homeManagerIntegration.autoImport = false;
 
       polarity = "dark";
 
