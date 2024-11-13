@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in {
+in
+{
   options.services.matrix.enable = lib.mkEnableOption "matrix server";
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.matrix.enable) {
