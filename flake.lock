@@ -1528,6 +1528,22 @@
         "type": "indirect"
       }
     },
+    "nixpkgs-proton": {
+      "locked": {
+        "lastModified": 1730911088,
+        "narHash": "sha256-0JVGPaQXyVq4ToCE/b2AhHvNvSviLMxK0nz8fs7p8ZA=",
+        "owner": "daniel-fahey",
+        "repo": "nixpkgs",
+        "rev": "f78bd97f4c57ebb4371a6633e23e6a22744e125e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "daniel-fahey",
+        "ref": "protonmail-bridge-gui-qt68support",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -1881,6 +1897,7 @@
         "nix-bitcoin": "nix-bitcoin",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-master": "nixpkgs-master",
+        "nixpkgs-proton": "nixpkgs-proton",
         "nixpkgs-stable": "nixpkgs-stable_4",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "simple-nixos-mailserver": "simple-nixos-mailserver",

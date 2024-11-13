@@ -24,7 +24,7 @@
       simplex-chat-desktop
 
       # bitcoin
-      # bisq-desktop
+      bisq-desktop
       trezor-suite
       trezor-udev-rules
 
