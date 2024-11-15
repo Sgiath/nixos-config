@@ -29,9 +29,6 @@
             pymetno
           ];
         extraComponents = [
-          # default
-          "map"
-
           # custom
           "openweathermap"
           "shelly"
