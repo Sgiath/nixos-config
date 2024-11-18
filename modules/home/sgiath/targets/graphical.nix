@@ -22,7 +22,7 @@
       webcord
       telegram-desktop
       signal-desktop-beta
-      cinny-desktop
+      # cinny-desktop
       simplex-chat-desktop
 
       # bitcoin
