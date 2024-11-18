@@ -16,6 +16,7 @@
       gimp
       vlc
       okular
+      plex-media-player
 
       # comm
       webcord
