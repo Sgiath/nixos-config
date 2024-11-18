@@ -32,7 +32,7 @@
           "${pkgs.protonmail-desktop}/bin/proton-mail"
           "${pkgs.slack}/bin/slack"
           "${pkgs.webcord}/bin/webcord"
-          "${pkgs.cinny-desktop}/bin/cinny"
+          # "${pkgs.cinny-desktop}/bin/cinny"
           "${pkgs.signal-desktop-beta}/bin/signal-desktop-beta"
           "${pkgs.telegram-desktop}/bin/telegram-desktop"
         ];
