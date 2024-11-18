@@ -12,16 +12,16 @@
       # utils
       xfce.thunar
       vscodium-fhs
-      obsidian
+      # obsidian
       gimp
       vlc
       okular
       plex-media-player
 
       # comm
-      webcord
-      telegram-desktop
-      signal-desktop-beta
+      # webcord
+      # telegram-desktop
+      # signal-desktop-beta
       # cinny-desktop
       simplex-chat-desktop
 
