@@ -33,6 +33,7 @@ in
     home = {
       packages = with pkgs; [
         amazon-ecr-credential-helper
+        awsSecrets
       ];
 
       file = {
