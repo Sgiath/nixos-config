@@ -8,12 +8,13 @@ let
   pass = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
   awscli = pkgs.awscli2;
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
+    # ${pkgs.jq}/bin/jq
     mfa="arn:aws:iam::173509387151:mfa/filip"
     token=$(${pass}/bin/pass otp 2fa/amazon/code)
-
-    ${awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
+    cred=${awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | \
       ${pkgs.jq}/bin/jq -r '.Credentials' | \
       ${pkgs.jq}/bin/jq '. += {"Version": 1}'
+    echo $cred > ~/.aws/cred
   '';
 in
 {
