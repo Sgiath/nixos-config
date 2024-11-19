@@ -8,12 +8,17 @@ let
   pass = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
   awscli = pkgs.awscli2;
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
-    ${pkgs.jq}/bin/jq
-    mfa="arn:aws:iam::173509387151:mfa/filip"
-    token=$(${pass}/bin/pass otp 2fa/amazon/code)
-    cred=$(${awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | ${pkgs.jq}/bin/jq -r '.Credentials' | ${pkgs.jq}/bin/jq '. += {"Version": 1}')
-    echo $cred
-    echo $cred > /home/sgiath/.aws-cred
+    exp=$(date -d $(${pkgs.jq}/bin/jq -r '.Expiration' /home/sgiath/.aws-cred) +"%Y-%m-%dT%H:%M:%S%z")
+    now=$(date +"%Y-%m-%dT%H:%M:%S%z")
+    if [ $now -ge $exp ]; then
+      mfa="arn:aws:iam::173509387151:mfa/filip"
+      token=$(${pass}/bin/pass otp 2fa/amazon/code)
+      cred=$(${awscli}/bin/aws sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | ${pkgs.jq}/bin/jq -r '.Credentials' | ${pkgs.jq}/bin/jq '. += {"Version": 1}')
+      echo $cred > /home/sgiath/.aws-cred
+      echo updated
+    else
+      echo "up to date"
+    fi
   '';
 in
 {
@@ -25,7 +30,7 @@ in
         output = "json";
       };
       credentials = {
-        "default"."credential_process" = "${awsSecrets}/bin/aws-secrets";
+        "default"."credential_process" = "cat /home/sgiath/.aws-cred";
         "crazyegg"."credential_process" = "${pass}/bin/pass show aws/crazyegg";
       };
       package = awscli;
