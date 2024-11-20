@@ -52,10 +52,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # stylix
     base16 = {
       # url = "github:SenchoPens/base16.nix";
       url = "github:Noodlez1232/base16.nix/slugify-fix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     stylix = {
