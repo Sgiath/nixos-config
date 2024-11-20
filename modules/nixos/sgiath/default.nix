@@ -16,6 +16,7 @@
     ./optimizations.nix
     ./security.nix
     ./stylix.nix
+    ./syncthing.nix
     ./time_lang.nix
     ./udev.nix
 
