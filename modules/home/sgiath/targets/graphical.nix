@@ -18,6 +18,9 @@
       okular
       plex-media-player
 
+      syncthing-tray
+      syncthing-cli
+
       # comm
       # webcord
       # telegram-desktop
