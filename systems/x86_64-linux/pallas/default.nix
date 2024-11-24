@@ -2,6 +2,8 @@
   imports = [ ./hardware.nix ];
 
   networking.hostName = "pallas";
+  networking.wireless.enable = true;
+  # environment.systemPackages = with pkgs; [ wpa_supplicant_gui ];
 
   sgiath = {
     enable = true;
