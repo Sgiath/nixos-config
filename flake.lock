@@ -1075,18 +1075,18 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1732052838,
-        "narHash": "sha256-1pNsLGNStCFjXiBc2zMUxKzKk45CePTf+GwKlzTmrCY=",
-        "ref": "v0.45.2",
-        "rev": "12f9a0d0b93f691d4d9923716557154d74777b0a",
-        "revCount": 5451,
+        "lastModified": 1731940146,
+        "narHash": "sha256-GpTgNh+zTDIp8tWiqyYoqJ4qK1q7IqRkRWV3OUmQ1ao=",
+        "ref": "v0.45.1",
+        "rev": "500d2a3580388afc8b620b0a3624147faa34f98b",
+        "revCount": 5448,
         "submodules": true,
         "type": "git",
         "url": "ssh://github.com/hyprwm/Hyprland"
       },
       "original": {
-        "ref": "v0.45.2",
-        "rev": "12f9a0d0b93f691d4d9923716557154d74777b0a",
+        "ref": "v0.45.1",
+        "rev": "500d2a3580388afc8b620b0a3624147faa34f98b",
         "submodules": true,
         "type": "git",
         "url": "ssh://github.com/hyprwm/Hyprland"
@@ -1891,7 +1891,6 @@
     },
     "root": {
       "inputs": {
-        "base16": "base16",
         "conduwuit": "conduwuit",
         "disko": "disko",
         "foundryvtt": "foundryvtt",
@@ -1972,9 +1971,7 @@
     },
     "stylix": {
       "inputs": {
-        "base16": [
-          "base16"
-        ],
+        "base16": "base16",
         "base16-fish": "base16-fish",
         "base16-helix": "base16-helix",
         "base16-vim": "base16-vim",
