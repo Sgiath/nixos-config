@@ -18,5 +18,8 @@
       google-chrome
       insomnia
     ];
+    wayland.windowManager.hyprland.settings.exec-once = [
+      "${pkgs.slack}/bin/slack"
+    ];
   };
 }

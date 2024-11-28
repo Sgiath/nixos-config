@@ -12,7 +12,7 @@
       # utils
       xfce.thunar
       vscodium-fhs
-      # obsidian
+      obsidian
       gimp
       vlc
       okular
@@ -21,19 +21,30 @@
       syncthing-tray
 
       # comm
-      # webcord
-      # telegram-desktop
-      # signal-desktop-beta
-      # cinny-desktop
+      webcord
+      telegram-desktop
+      signal-desktop
+      cinny-desktop
       simplex-chat-desktop
 
       # bitcoin
-      # bisq-desktop
+      bisq-desktop
       trezor-suite
       trezor-udev-rules
 
       # misc
       betaflight-configurator
+    ];
+
+    wayland.windowManager.hyprland.settings.exec-once = [
+      # tools
+      "${pkgs.obsidian}/bin/obsidian"
+
+      # comms
+      "${pkgs.webcord}/bin/webcord"
+      "${pkgs.telegram-desktop}/bin/telegram-desktop"
+      "${pkgs.signal-desktop}/bin/signal-desktop"
+      "${pkgs.cinny-desktop}/bin/cinny"
     ];
 
     programs = {

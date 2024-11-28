@@ -25,15 +25,6 @@
         # startup
         exec-once = [
           "${pkgs.kitty}/bin/kitty"
-          # "${pkgs.ungoogled-chromium}/bin/chromium"
-          # "${pkgs.freetube}/bin/freetube"
-          "${pkgs.obsidian}/bin/obsidian"
-          "${pkgs.protonmail-desktop}/bin/proton-mail"
-          "${pkgs.slack}/bin/slack"
-          "${pkgs.webcord}/bin/webcord"
-          # "${pkgs.cinny-desktop}/bin/cinny"
-          "${pkgs.signal-desktop}/bin/signal-desktop"
-          "${pkgs.telegram-desktop}/bin/telegram-desktop"
         ];
 
         monitor = [

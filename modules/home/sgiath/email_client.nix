@@ -29,6 +29,10 @@
       '';
     };
 
+    wayland.windowManager.hyprland.settings.exec-once = [
+      "${pkgs.protonmail-desktop}/bin/proton-mail"
+    ];
+
     services.pass-secret-service.enable = true;
   };
 }
