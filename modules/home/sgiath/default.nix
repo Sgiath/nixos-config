@@ -31,7 +31,7 @@
       stateVersion = "23.11";
 
       packages = with pkgs; [
-        nerd-fonts.roboto-mono
+        (nerdfonts.override { fonts = [ "RobotoMono" ]; })
 
         (writeShellScriptBin "update" ''
           pushd ~/.dotfiles

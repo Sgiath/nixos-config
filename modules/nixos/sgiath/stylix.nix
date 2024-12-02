@@ -6,7 +6,7 @@
 }:
 let
   font = {
-    package = pkgs.nerd-fonts.roboto-mono;
+    package = pkgs.nerdfonts.override { fonts = [ "RobotoMono" ]; };
     name = "RobotoMono Nerd Font Mono";
   };
 in
