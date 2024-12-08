@@ -27,7 +27,7 @@
       # docs
       texlive = {
         enable = true;
-        extraPackages = tpkgs: { inherit (tpkgs) collection-basic pdflatex; };
+        extraPackages = tpkgs: { inherit (tpkgs) collection-basic pdflatexpicscale; };
       };
       pandoc.enable = true;
     };
