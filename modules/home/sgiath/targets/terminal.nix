@@ -22,6 +22,7 @@
       starship.enable = true;
       tmux.enable = true;
       zsh.enable = true;
+      pandoc.enable = true;
     };
   };
 }
