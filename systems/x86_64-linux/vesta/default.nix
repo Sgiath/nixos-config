@@ -15,11 +15,11 @@
   services = {
     dnd5etools.enable = true;
     audiobookshelf.enable = true;
-    cryptpad.enable = true;
+    cryptpad.enable = false;
     factorio.enable = false;
     foundryvtt.enable = true;
     home-assistant.enable = true;
-    jitsi-meet.enable = true;
+    jitsi-meet.enable = false;
     matrix.enable = true;
     monitoring.enable = true;
     pi-hole.enable = true;
