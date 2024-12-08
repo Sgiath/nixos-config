@@ -25,9 +25,9 @@
       zsh.enable = true;
 
       # docs
-      texlive = {
-        enable = true;
-      };
+      # texlive = {
+      #   enable = true;
+      # };
       pandoc.enable = true;
     };
   };
