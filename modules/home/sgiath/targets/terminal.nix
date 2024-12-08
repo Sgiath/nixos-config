@@ -12,7 +12,7 @@
       yt-dlp
       parted
       google-cloud-sdk
-
+      texliveMedium
     ];
 
     programs = {
@@ -27,7 +27,6 @@
       # docs
       texlive = {
         enable = true;
-        extraPackages = tpkgs: { inherit (tpkgs) collection-basic pdflatexpicscale; };
       };
       pandoc.enable = true;
     };
