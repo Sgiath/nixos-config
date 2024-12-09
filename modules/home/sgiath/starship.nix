@@ -66,8 +66,9 @@
           style = "fg:#edeff0 bg:#232526";
         };
 
-        aws.disabled = true;
+        aws.disabled = false;
         direnv.disabled = false;
+        localip.disabled = false;
         gcloud.disabled = true;
         nix_shell.disabled = true;
         package.disabled = true;
