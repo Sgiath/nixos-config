@@ -3,7 +3,7 @@
   config = lib.mkIf config.sgiath.enable {
     networking = {
       wireless = {
-        athUserRegulatoryDomain = true;
+        # athUserRegulatoryDomain = true;
         userControlled.enable = true;
         networks = {
           Starlink = {
