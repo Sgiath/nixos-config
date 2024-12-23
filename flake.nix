@@ -26,7 +26,7 @@
     hyprland = {
       type = "git";
       url = "ssh://github.com/hyprwm/Hyprland";
-      # ref = "v0.45.2";
+      ref = "v0.46.2";
       # rev = "12f9a0d0b93f691d4d9923716557154d74777b0a";
       submodules = true;
       inputs.nixpkgs.follows = "nixpkgs";
