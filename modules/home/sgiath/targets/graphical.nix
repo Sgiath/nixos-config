@@ -9,8 +9,10 @@
 
   config = lib.mkIf (config.sgiath.targets.graphical) {
     home.packages = with pkgs; [
+      nemo
+      nemo-fileroller
+
       # utils
-      xfce.thunar
       vscodium-fhs
       obsidian
       gimp
@@ -25,6 +27,7 @@
       telegram-desktop
       signal-desktop
       cinny-desktop
+      fractal
       simplex-chat-desktop
 
       # bitcoin
