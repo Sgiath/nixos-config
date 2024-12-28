@@ -67,7 +67,6 @@
       kitty.enable = true;
       obs-studio.enable = false;
       waybar.enable = true;
-      tofi.enable = true;
 
       # browsers
       chromium.enable = true;
