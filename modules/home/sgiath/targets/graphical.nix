@@ -18,6 +18,7 @@
       okular
       plex-media-player
       texliveMedium
+      wacomtablet
 
       # comm
       webcord
