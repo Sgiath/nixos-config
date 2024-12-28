@@ -23,5 +23,5 @@ in
   conduwuit = inputs.conduwuit.packages.${prev.system}.all-features;
 
   awscli2 = pkgs-master.awscli2;
-  rocmPackages.llvm.libc = pkgs-stable.rocmPackages.llvm.libc;
+  rocmPackages = pkgs-stable.rocmPackages;
 }
