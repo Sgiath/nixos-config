@@ -6,11 +6,4 @@
       terminal = true;
     };
   };
-
-  services = {
-    osmscout-server = {
-      enable = true;
-      # network.startWhenNeeded = false;
-    };
-  };
 }
