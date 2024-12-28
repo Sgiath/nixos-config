@@ -21,4 +21,6 @@ in
 
   # conduwuit Nix native version
   conduwuit = inputs.conduwuit.packages.${prev.system}.all-features;
+
+  awscli2 = pkgs-master.awscli2;
 }
