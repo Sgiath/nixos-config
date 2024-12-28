@@ -34,8 +34,11 @@
           };
         };
       };
-      libinput.touchpad = {
-        naturalScrolling = true;
+      libinput = {
+        enable = true;
+        touchpad = {
+          naturalScrolling = true;
+        };
       };
     };
 
