@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  beamPackages = pkgs.beam_minimal.erlang_27;
+  beamPackages = pkgs.beam_minimal.packages.erlang_27;
   erlang = beamPackages.erlang;
   elixir = beamPackages.elixir_1_18;
 in 
