@@ -25,8 +25,9 @@
       commandLineArgs = [
         "--enable-features=WebUIDarkMode"
         "--enable-features=Vulkan"
+        "--enable-features=VaapiVideoEncoder"
+        "--enable-features=VaapiVideoDecoder"
 
-        "--enable-vulkan"
         "--enable-unsafe-webgpu"
         "--ignore-gpu-blocklist"
         "--enable-gpu-rasterization"
