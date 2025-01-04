@@ -28,8 +28,8 @@
         "--enable-features=VaapiVideoEncoder"
         "--enable-features=VaapiVideoDecoder"
 
-        "--enable-unsafe-webgpu"
-        "--ignore-gpu-blocklist"
+        # "--enable-unsafe-webgpu"
+        # "--ignore-gpu-blocklist"
         "--enable-gpu-rasterization"
         "--enable-zero-copy"
 
