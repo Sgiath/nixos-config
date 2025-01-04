@@ -17,7 +17,7 @@ in
 
       polarity = "dark";
 
-      image = ./wallpapers/girl.png;
+      image = ./wallpapers/rocinante.jpg;
       imageScalingMode = "fit";
 
       base16Scheme = ./theme.yaml;
