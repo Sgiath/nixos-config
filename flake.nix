@@ -25,6 +25,10 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+
     nix-bitcoin = {
       url = "github:fort-nix/nix-bitcoin";
       inputs.nixpkgs.follows = "nixpkgs";

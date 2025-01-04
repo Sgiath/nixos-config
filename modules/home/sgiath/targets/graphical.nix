@@ -13,6 +13,7 @@
       nemo-fileroller
 
       # utils
+      ghostty
       vscodium-fhs
       obsidian
       gimp
