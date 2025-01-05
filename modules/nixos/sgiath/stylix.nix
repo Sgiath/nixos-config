@@ -16,7 +16,7 @@ in
       enable = true;
 
       polarity = "dark";
-      image = ./wallpapers/rocinante.jpg;
+      image = "/dev/null";
       base16Scheme = ./theme.yaml;
 
       cursor = {

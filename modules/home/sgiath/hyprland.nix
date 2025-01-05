@@ -176,11 +176,11 @@
       hyprpaper = {
         enable = true;
         settings = lib.mkForce {
-          preload = ["${./../../nixos/sgiath/wallpapers/rocinante.jpg}"];
+          preload = ["${./wallpapers/rocinante.jpg}"];
           wallpaper = [
-            "DP-1,contain:${./../../nixos/sgiath/wallpapers/rocinante.jpg}"
-            "DP-3,contain:${./../../nixos/sgiath/wallpapers/rocinante.jpg}"
-            "DP-2,contain:${./../../nixos/sgiath/wallpapers/rocinante.jpg}"
+            "DP-1,contain:${./wallpapers/rocinante.jpg}"
+            "DP-3,contain:${./wallpapers/rocinante.jpg}"
+            "DP-2,contain:${./wallpapers/rocinante.jpg}"
           ];
         };
       };
