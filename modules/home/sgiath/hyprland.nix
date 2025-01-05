@@ -13,7 +13,6 @@
     wayland.windowManager.hyprland = {
       enable = true;
       package = pkgs.hyprland;
-      # portalPackage = pkgs.xdg-desktop-portal-hyprland;
       xwayland.enable = true;
       systemd = {
         enable = true;
@@ -173,13 +172,22 @@
     };
 
     programs.wofi.enable = true;
-    services.mako.enable = true;
+    services = {
+      hyprpaper = {
+        enable = true;
+        settings = {
+          preload = ["${./../../nixos/sgiath/wallpapers/rocinante.jpg}"];
+          wallpaper = [
+            "DP-1,contain:${./../../nixos/sgiath/wallpapers/rocinante.jpg}"
+            "DP-3,contain:${./../../nixos/sgiath/wallpapers/rocinante.jpg}"
+            "DP-2,contain:${./../../nixos/sgiath/wallpapers/rocinante.jpg}"
+          ];
+        };
+      };
+      mako.enable = true;
+    };
 
     xdg = {
-      configFile."hypr/hyprpaper.conf".text = ''
-        preload ${./../../nixos/sgiath/wallpapers/rocinante.jpg}
-        wallpaper = , contain:${./../../nixos/sgiath/wallpapers/rocinante.jpg}
-      '';
       portal = {
         enable = true;
         config.common.default = "hyprland";
