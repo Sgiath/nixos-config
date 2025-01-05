@@ -1,4 +1,9 @@
+{ pkgs, ... }:
 {
+  home.packages = [
+    pkgs.tts
+  ];
+
   sgiath = {
     enable = true;
     games.enable = true;
