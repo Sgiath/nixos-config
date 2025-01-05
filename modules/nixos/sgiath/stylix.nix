@@ -16,7 +16,8 @@ in
       enable = true;
 
       polarity = "dark";
-      image = "/dev/null";
+      # I set this manually with hyprpaper but stylix needs this anyway
+      image = ./../../home/sgiath/wallpapers/rocinante.jpg;
       base16Scheme = ./theme.yaml;
 
       cursor = {
