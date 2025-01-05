@@ -34,6 +34,11 @@ in
       };
     };
 
+    tts.servers.chris = {
+      enable = true;
+      model = null;
+    };
+
     livebook = {
       enableUserService = true;
       environmentFile = "/var/lib/livebook.env";

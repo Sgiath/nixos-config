@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.tts
+    # pkgs.tts
   ];
 
   sgiath = {
