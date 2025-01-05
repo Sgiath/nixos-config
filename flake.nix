@@ -81,6 +81,7 @@
         # nixpkgs-wayland.overlay
         hyprland.overlays.default
         hyprpaper.overlays.default
+        ghostty.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [
