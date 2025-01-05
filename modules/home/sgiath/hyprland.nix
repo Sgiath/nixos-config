@@ -175,7 +175,7 @@
     services = {
       hyprpaper = {
         enable = true;
-        settings = {
+        settings = lib.mkForce {
           preload = ["${./../../nixos/sgiath/wallpapers/rocinante.jpg}"];
           wallpaper = [
             "DP-1,contain:${./../../nixos/sgiath/wallpapers/rocinante.jpg}"
