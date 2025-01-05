@@ -4,7 +4,7 @@
     enable = lib.mkEnableOption "mailserver";
   };
 
-  config = lib.mkIf (config.sgiath.server.enable && config.mailserver.enable) {
+  config = lib.mkIf (config.sgiath.server.enable && config.sgiath.mailserver.enable) {
     mailserver = {
       fqdn = "mail.sgiath.dev";
       domains = [ "sgiath.dev" ];

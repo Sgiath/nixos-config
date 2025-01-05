@@ -10,5 +10,6 @@
     enable = true;
     boot = "legacy";
     server.enable = true;
+    mailserver.enable = true;
   };
 }
