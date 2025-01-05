@@ -34,12 +34,6 @@ in
       };
     };
 
-    tts.servers.chris = {
-      enable = true;
-      port = 5000;
-      model = null;
-    };
-
     livebook = {
       enableUserService = true;
       environmentFile = "/var/lib/livebook.env";
