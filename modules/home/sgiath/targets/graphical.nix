@@ -12,8 +12,6 @@
       nemo-with-extensions
       nemo-fileroller
 
-      comfyui
-
       # utils
       ghostty
       vscodium-fhs

@@ -54,9 +54,6 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixified-ai.url = "github:nixified-ai/flake";
-    nix-ai-stuff.url = "github:BatteredBunny/nix-ai-stuff";
   };
 
   outputs =
