@@ -1,11 +1,4 @@
-{ pkgs, ... }:
 {
-  home.packages = [
-    (pkgs.local-ai.override {
-      with_tts = true;
-    })
-  ];
-
   sgiath = {
     enable = true;
     games.enable = true;

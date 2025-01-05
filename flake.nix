@@ -54,6 +54,8 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixified-ai.url = "github:nixified-ai/flake";
   };
 
   outputs =
@@ -81,6 +83,7 @@
         hyprland.overlays.default
         hyprpaper.overlays.default
         ghostty.overlays.default
+        nixified-ai.overlays.comfyui
       ];
 
       systems.modules.nixos = with inputs; [
@@ -89,6 +92,7 @@
         nix-bitcoin.nixosModules.default
         simple-nixos-mailserver.nixosModules.mailserver
         foundryvtt.nixosModules.foundryvtt
+        nixified-ai.nixosModules.comfyui
       ];
     };
 }
