@@ -83,6 +83,7 @@
         imagemagick
         (ffmpeg.override {
           withAmf = true;
+          withUnfree = true;
           withRuntimeCPUDetection = false;
         })
         zip
