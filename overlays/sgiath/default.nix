@@ -22,7 +22,4 @@ in
 
   # get Factorio updates as soon as possible
   factorio = pkgs-master.factorio-space-age-experimental;
-
-  # FIXME: currently broken on unstable
-  # rocmPackages = pkgs-stable.rocmPackages;
 }
