@@ -23,8 +23,6 @@
           nvim-cmp.enable = true;
         };
 
-        autopairs.enable = true;
-
         comments = {
           comment-nvim.enable = true;
         };
