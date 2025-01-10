@@ -26,7 +26,7 @@
 
     hyprland = {
       # v0.46.2
-      url = "github:hyprwm/Hyprland/0bd541f2fd902dbfa04c3ea2ccf679395e316887";
+      url = "github:hyprwm/Hyprland/v0.46.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
