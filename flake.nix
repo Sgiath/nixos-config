@@ -25,12 +25,17 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/788ae588979c2a1ff8a660f16e3c502ef5796755";
+      url = "github:hyprwm/Hyprland/0bd541f2fd902dbfa04c3ea2ccf679395e316887";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprpaper = {
       url = "github:hyprwm/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    xdph = {
+      url = "github:hyprwm/xdg-desktop-portal-hyprland/fa50ab342b29f0981eab8c1ba57648d8c9d8c85c";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -86,6 +91,7 @@
         nixpkgs-wayland.overlay
         hyprland.overlays.default
         hyprpaper.overlays.default
+        xdph.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [
