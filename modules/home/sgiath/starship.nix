@@ -61,7 +61,7 @@
         };
 
         elixir = {
-          symbol = " ";
+          symbol = "";
           format = "[](fg:#232526 bg:none)[$version (OTP $otp_version)]($style)[](fg:#232526 bg:#232526)[](fg:purple bg:#232526)[$symbol](fg:#232526 bg:purple)[](fg:purple bg:none) ";
           style = "fg:#edeff0 bg:#232526";
         };
