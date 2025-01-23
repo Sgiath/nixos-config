@@ -11,7 +11,7 @@ let
 in
 {
   options = {
-    services.open-webui = {
+    sgiath.open-webui = {
       enable = lib.mkEnableOption "Open-WebUI server";
       package = lib.mkPackageOption pkgs "open-webui" { };
 
