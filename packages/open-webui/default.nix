@@ -149,7 +149,7 @@ python3.pkgs.buildPythonApplication rec {
       src = fetchPypi {
         inherit version;
         pname = "gcp_storage_emulator";
-        hash = lib.fakeHash;
+        hash = "sha256-5dReXCOgNEwcTES4+MNvfol1yh/MUTTKtgi5bdzNkiU=";
       };
 
       propagatedBuildInputs = [
