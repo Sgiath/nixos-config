@@ -77,7 +77,7 @@
     in
     lib.mkFlake {
       channels-config = {
-        rocmSupport = true;
+        rocmSupport = false;
         allowUnfree = true;
         permittedInsecurePackages = [
           "jitsi-meet-1.0.8043"
