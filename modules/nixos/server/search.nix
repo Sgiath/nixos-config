@@ -26,6 +26,10 @@ in
           base_url = "https://search.sgiath.dev/";
           secret_key = secrets.searx_secret;
           http_protocol_version = "1.1";
+          formats = [
+            "html"
+            "json"
+          ];
         };
         outgoing = {
           request_timeout = 5.0;
