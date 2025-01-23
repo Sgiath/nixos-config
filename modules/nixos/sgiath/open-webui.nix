@@ -107,7 +107,7 @@ in
         DynamicUser = true;
         DevicePolicy = "closed";
         LockPersonality = true;
-        MemoryDenyWriteExecute = false; # onnxruntime/capi/onnxruntime_pybind11_state.so: cannot enable executable stack as shared object requires: Permission Denied
+        # MemoryDenyWriteExecute = false; # onnxruntime/capi/onnxruntime_pybind11_state.so: cannot enable executable stack as shared object requires: Permission Denied
         PrivateUsers = true;
         ProtectHome = true;
         ProtectHostname = true;
@@ -115,10 +115,10 @@ in
         ProtectKernelModules = true;
         ProtectKernelTunables = true;
         ProtectControlGroups = true;
-        ProcSubset = "all"; # Error in cpuinfo: failed to parse processor information from /proc/cpuinfo
+        # ProcSubset = "all"; # Error in cpuinfo: failed to parse processor information from /proc/cpuinfo
         RestrictNamespaces = true;
         RestrictRealtime = true;
-        SystemCallArchitectures = "native";
+        # SystemCallArchitectures = "native";
         UMask = "0077";
       };
     };

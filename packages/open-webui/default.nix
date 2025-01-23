@@ -2,7 +2,7 @@
   lib,
   buildNpmPackage,
   fetchFromGitHub,
-  python313,
+  python3,
   nixosTests,
 }:
 let
@@ -42,7 +42,7 @@ let
     '';
   };
 in
-python313.pkgs.buildPythonApplication rec {
+python3.pkgs.buildPythonApplication rec {
   inherit pname version src;
   pyproject = true;
 
@@ -62,7 +62,7 @@ python313.pkgs.buildPythonApplication rec {
     "pytest-docker"
   ];
 
-  dependencies = with python313.pkgs; [
+  dependencies = with python3.pkgs; [
     aiocache
     aiofiles
     aiohttp
@@ -139,7 +139,7 @@ python313.pkgs.buildPythonApplication rec {
     youtube-transcript-api
   ];
 
-  build-system = with python313.pkgs; [ hatchling ];
+  build-system = with python3.pkgs; [ hatchling ];
 
   pythonImportsCheck = [ "open_webui" ];
 
