@@ -36,6 +36,9 @@ in
 
     open-webui = {
       enable = true;
+      package = pkgs.open-webui.override {
+        python312 = pkgs.python313;
+      };
     };
 
     livebook = {
