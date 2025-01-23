@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ namespace, pkgs, ... }:
 let
   beamPackages = pkgs.beam_minimal.packages.erlang_27;
   erlang = beamPackages.erlang;
@@ -36,9 +36,7 @@ in
 
     open-webui = {
       enable = true;
-      package = pkgs.open-webui.override {
-        python312 = pkgs.python313;
-      };
+      package = pkgs.${namespace}.open-webui;
     };
 
     livebook = {
