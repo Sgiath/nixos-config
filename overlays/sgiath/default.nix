@@ -22,12 +22,4 @@ in
 
   # get Factorio updates as soon as possible
   factorio = pkgs-master.factorio-space-age-experimental;
-
-  # python3 = pkgs-master.python3.override {
-  #   packageOverrides = self: super: {
-  #     torch = super.torch.override {
-  #       cudaSupport = false;
-  #     };
-  #   };
-  # };
 }

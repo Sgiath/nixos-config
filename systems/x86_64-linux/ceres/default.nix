@@ -19,11 +19,6 @@ in
     printing.enable = true;
     razer.enable = false;
     wayland.enable = true;
-
-    open-webui = {
-      enable = true;
-      package = pkgs.${namespace}.open-webui;
-    };
   };
 
   crazyegg.enable = true;
@@ -37,6 +32,11 @@ in
       environmentVariables = {
         OLLAMA_ORIGINS = "*";
       };
+    };
+
+    open-webui = {
+      enable = true;
+      package = pkgs.${namespace}.open-webui;
     };
 
     livebook = {

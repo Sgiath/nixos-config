@@ -25,7 +25,6 @@
     ./docker.nix
     ./graphics.nix
     ./nvidia-gpu.nix
-    ./open-webui.nix
     ./printing.nix
     ./razer.nix
     ./wayland.nix
