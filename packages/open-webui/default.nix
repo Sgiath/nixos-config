@@ -148,4 +148,12 @@ python313.pkgs.buildPythonApplication rec {
   passthru.tests = {
     inherit (nixosTests) open-webui;
   };
+
+  meta = {
+    changelog = "https://github.com/open-webui/open-webui/blob/${src.rev}/CHANGELOG.md";
+    description = "Comprehensive suite for LLMs with a user-friendly WebUI";
+    homepage = "https://github.com/open-webui/open-webui";
+    license = lib.licenses.mit;
+    mainProgram = "open-webui";
+  };
 }
