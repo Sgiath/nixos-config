@@ -89,6 +89,8 @@ python3.pkgs.buildPythonApplication rec {
     flask-cors
     fpdf2
     ftfy
+    gcp-storage-emulator
+    google-cloud-storage
     google-generativeai
     googleapis-common-protos
     langchain
@@ -97,6 +99,7 @@ python3.pkgs.buildPythonApplication rec {
     langfuse
     ldap3
     markdown
+    moto
     nltk
     openai
     opencv-python-headless
