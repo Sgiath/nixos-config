@@ -34,6 +34,10 @@ in
       };
     };
 
+    open-webui = {
+      enable = true;
+    };
+
     livebook = {
       enableUserService = true;
       environmentFile = "/var/lib/livebook.env";
