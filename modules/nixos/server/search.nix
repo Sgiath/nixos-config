@@ -17,6 +17,7 @@ in
           contact_url = "mailto:search@sgiath.dev";
         };
         search = {
+          safe_search = 0;
           autocomplete = "duckduckgo";
           default_lang = "en-US";
           formats = [
