@@ -1,4 +1,4 @@
-{ namespace, pkgs, ... }:
+{ pkgs, ... }:
 let
   beamPackages = pkgs.beam_minimal.packages.erlang_27;
   erlang = beamPackages.erlang;
@@ -27,7 +27,7 @@ in
     ollama = {
       enable = true;
       package = pkgs.ollama-rocm;
-      # acceleration = "rocm";
+      acceleration = "rocm";
       host = "0.0.0.0";
       environmentVariables = {
         OLLAMA_ORIGINS = "*";
