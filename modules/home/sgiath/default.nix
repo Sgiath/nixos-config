@@ -51,6 +51,13 @@
               nixos-rebuild switch --use-remote-sudo --flake '.#hygiea' --target-host 'sgiath@hygiea.sgiath.dev'
               ;;
 
+            --iso)
+              nix build '.#install-isoConfigurations.isoimage
+
+              echo
+              echo "doas dd if=result/iso/*.iso of=/dev/sdX status=progress"
+              ;;
+
             *)
               nixos-rebuild switch --use-remote-sudo --flake .
               ;;
