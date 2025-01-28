@@ -4,6 +4,11 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.11";
 
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +30,6 @@
     };
 
     hyprland = {
-      # url = "github:hyprwm/Hyprland";
       url = "github:hyprwm/Hyprland/v0.47.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -37,7 +41,6 @@
 
     xdph = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
-      # url = "github:hyprwm/xdg-desktop-portal-hyprland/v1.3.9";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
