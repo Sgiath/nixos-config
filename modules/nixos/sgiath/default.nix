@@ -54,6 +54,7 @@
       nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       package = pkgs.nixVersions.latest;
       settings = {
+        auto-optimise-store = true;
         require-sigs = false;
         experimental-features = [
           "nix-command"
@@ -73,9 +74,8 @@
       channel.enable = false;
       optimise.automatic = true;
       gc = {
-        automatic = false;
-        dates = "16:00";
-        persistent = true;
+        automatic = true;
+        dates = "08:00";
       };
     };
 

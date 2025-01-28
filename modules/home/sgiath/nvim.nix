@@ -178,7 +178,7 @@
     xdg = {
       enable = true;
       configFile.nvim = {
-        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/home/sgiath/nvim";
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/modules/home/sgiath/nvim";
         recursive = true;
       };
     };

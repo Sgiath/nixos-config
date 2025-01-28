@@ -31,11 +31,13 @@
 
       packages = with pkgs; [
         (writeShellScriptBin "update" ''
-          pushd ~/.dotfiles
+          pushd ~/nixos
 
           git add --all
           git commit --signoff -m "changes"
           git push
+
+          nix-store --add-fixed sha256 ~/nix-root/FoundryVTT-12.331.zip
 
           case "$1" in
             --ceres)
@@ -51,7 +53,7 @@
               ;;
 
             --iso)
-              nix build '.#install-isoConfigurations.isoimage
+              nix build '.#install-isoConfigurations.live'
 
               echo
               echo "doas dd if=result/iso/*.iso of=/dev/sdX status=progress"
@@ -66,7 +68,7 @@
         '')
 
         (writeShellScriptBin "upgrade" ''
-          pushd ~/.dotfiles
+          pushd ~/nixos
 
           git add --all
           git commit --signoff -m "changes"
@@ -79,19 +81,9 @@
           popd
         '')
 
-        (writeShellScriptBin "build-iso" ''
-          pushd ~/.dotfiles
-          nix run "nixpkgs#nixos-generators" -- --format iso --flake ".#installIso" -o result
-          popd
-        '')
-
         # general programs I want to have always available
         imagemagick
-        (ffmpeg.override {
-          withAmf = true;
-          withUnfree = true;
-          withRuntimeCPUDetection = false;
-        })
+        ffmpeg
         zip
         unzip
         wget
@@ -99,9 +91,6 @@
         killall
         inotify-tools
         lshw
-
-        # python312Packages.rns
-        # python312Packages.nomadnet
       ];
     };
 

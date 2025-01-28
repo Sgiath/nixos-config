@@ -13,8 +13,8 @@ nix-channel --update
 reboot
 
 # install dotfiles
-git clone https://git.sr.ht/~sgiath/nix-config ~/.dotfiles
-cd .dotfiles/
+git clone https://git.sr.ht/~sgiath/nix-config ~/nixos
+cd nixos/
 sudo nixos-rebuild switch --flake .
 
 reboot

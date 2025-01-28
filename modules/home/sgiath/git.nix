@@ -63,7 +63,7 @@
 
         extraConfig = {
           init.defaultBranch = "master";
-          safe.directory = "${config.home.homeDirectory}/.dotfiles/";
+          safe.directory = "${config.home.homeDirectory}/nixos/";
 
           user = {
             name = "sgiath";
