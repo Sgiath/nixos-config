@@ -1,6 +1,5 @@
 {
   inputs = {
-    nixpkgs-fix.url = "github:mschwaig/nixpkgs/fix-rocm-build-by-disabling-test";
     nixpkgs-master.url = "nixpkgs/master";
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.11";
