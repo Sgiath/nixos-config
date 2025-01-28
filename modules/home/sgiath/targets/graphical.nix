@@ -73,7 +73,6 @@
       firefox.enable = true;
 
       # utils
-      davinci.enable = false;
       pandoc.enable = true;
     };
 

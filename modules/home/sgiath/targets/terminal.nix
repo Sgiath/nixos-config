@@ -13,6 +13,7 @@
       yt-dlp
       parted
       google-cloud-sdk
+      nix-du
     ];
 
     programs = {

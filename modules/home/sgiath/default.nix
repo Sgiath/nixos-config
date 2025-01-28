@@ -8,7 +8,6 @@
   imports = [
     ./audio.nix
     ./chromium.nix
-    ./davinci.nix
     ./email_client.nix
     ./games.nix
     ./git.nix
