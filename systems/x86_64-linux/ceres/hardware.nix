@@ -7,7 +7,7 @@
 
 {
   imports = [
-    # (import ./disko.nix { device = "/dev/nvme1n1"; })
+    ./disko.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -30,16 +30,6 @@
   };
 
   fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/c127f369-d1dc-4cfb-827e-3db9dd9ddde5";
-      fsType = "ext4";
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-uuid/5BB4-78C7";
-      fsType = "vfat";
-    };
-
     "/nas/homes" = {
       device = "192.168.1.4:/volume1/homes";
       fsType = "nfs";
@@ -55,8 +45,6 @@
       fsType = "nfs";
     };
   };
-
-  swapDevices = [ { device = "/dev/disk/by-uuid/a09c60a8-7855-42ff-b9b0-73f7c8b8fb4c"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

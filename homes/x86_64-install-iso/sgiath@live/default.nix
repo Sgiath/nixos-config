@@ -6,6 +6,6 @@
 
   home.file.nixos = {
     recursive = true;
-    source = ./../../..;
+    source = ./../../../.;
   };
 }

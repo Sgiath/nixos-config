@@ -23,4 +23,21 @@
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
   };
+
+  services.tor = {
+    enable = true;
+    client = {
+      enable = true;
+      dns.enable = true;
+      transparentProxy.enable = true;
+    };
+  };
+
+  users.mutableUsers = false;
+
+  isoImage = {
+    makeEfiBootable = true;
+    makeUsbBootable = true;
+    appendToMenuLabel = " live";
+  };
 }
