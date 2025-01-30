@@ -21,5 +21,6 @@ in
   factorio = pkgs-master.factorio-space-age-experimental;
 
   # broken rocm on unstable
-  # rocmPackages = pkgs-master.rocmPackages;
+  # https://github.com/NixOS/nixpkgs/pull/377629
+  rocmPackages = pkgs-master.rocmPackages;
 }
