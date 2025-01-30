@@ -4,14 +4,14 @@ let
   pkgs-master = import inputs.nixpkgs-master {
     system = prev.system;
     config = {
-      rocmSupport = false;
+      rocmSupport = true;
       allowUnfree = true;
     };
   };
   pkgs-stable = import inputs.nixpkgs-stable {
     system = prev.system;
     config = {
-      rocmSupport = false;
+      rocmSupport = true;
       allowUnfree = true;
     };
   };
@@ -22,5 +22,6 @@ in
 
   # broken rocm on unstable
   # https://github.com/NixOS/nixpkgs/pull/377629
+  ollama-rocm = pkgs-master.ollama-rocm;
   rocmPackages = pkgs-master.rocmPackages;
 }
