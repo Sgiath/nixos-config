@@ -14,6 +14,7 @@
       parted
       google-cloud-sdk
       nix-du
+      exfat
     ];
 
     programs = {
