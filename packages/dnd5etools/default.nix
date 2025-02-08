@@ -9,7 +9,7 @@
   ...
 }:
 let
-  version = "2.5.1";
+  version = "2.7.0";
   pname = "5etools";
 
   imgHashes = [
@@ -64,8 +64,9 @@ let
     let
       img = fetchurl {
         pname = "5etools-img-${v.name}";
-        inherit version;
+        # inherit version;
         inherit (v) hash;
+        version = "2.5.1";
         url = "https://github.com/5etools-mirror-2/5etools-img/releases/download/v${version}/img-v${version}.${v.name}";
       };
     in
@@ -75,12 +76,11 @@ let
   nodeDependencies = (callPackage ./deps { inherit nodejs; }).nodeDependencies;
 in
 stdenv.mkDerivation {
-  inherit  pname;
-  version = "2.6.0";
+  inherit version pname;
 
   src = fetchzip {
+    inherit version;
     pname = "5etools-src";
-    version = "2.6.0";
     url = "https://github.com/5etools-mirror-3/5etools-src/releases/download/v${version}/${pname}-v${version}.zip";
     stripRoot = false;
     hash = "sha256-73R5DeNDw5I2Xk800Vszmd3o9EpUgC0ZErBxaJ+S7zE=";
