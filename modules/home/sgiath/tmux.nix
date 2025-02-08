@@ -101,12 +101,12 @@
             set -g @yank_selection_mouse 'clipboard' # or 'primary' or 'secondary'
           '';
         }
-        {
-          plugin = tmuxPlugins.resurrect;
-          extraConfig = ''
-            set -g @resurrect-strategy-nvim 'session'
-          '';
-        }
+        # {
+        #   plugin = tmuxPlugins.resurrect;
+        #   extraConfig = ''
+        #     set -g @resurrect-strategy-nvim 'session'
+        #   '';
+        # }
         {
           plugin = tmuxPlugins.continuum;
           extraConfig = ''
