@@ -70,6 +70,11 @@
     };
 
     nvf.url = "github:notashelf/nvf";
+
+    stable-diffusion-webui-nix = {
+      url = "github:Janrupf/stable-diffusion-webui-nix/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -111,6 +116,7 @@
         hyprland.overlays.default
         hyprpaper.overlays.default
         xdph.overlays.default
+        stable-diffusion-webui-nix.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [
