@@ -19,9 +19,4 @@ in
 {
   # get Factorio updates as soon as possible
   factorio = pkgs-master.factorio-space-age-experimental;
-
-  # broken rocm on unstable
-  # https://github.com/NixOS/nixpkgs/pull/377629
-  # ollama-rocm = pkgs-master.ollama-rocm;
-  # rocmPackages = pkgs-master.rocmPackages;
 }
