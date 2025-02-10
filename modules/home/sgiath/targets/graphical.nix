@@ -12,8 +12,6 @@
       nemo-with-extensions
       nemo-fileroller
 
-      stable-diffusion-webui.comfy.rocm
-
       # utils
       vscodium-fhs
       obsidian
