@@ -13,7 +13,6 @@
       nemo-fileroller
 
       # utils
-      vscodium-fhs
       obsidian
       gimp
       vlc
@@ -72,6 +71,10 @@
       # browsers
       chromium.enable = true;
       firefox.enable = true;
+
+      vscode = {
+        enable = true;
+      };
 
       # utils
       pandoc.enable = true;
