@@ -4,7 +4,7 @@ let
   pkgs-master = import inputs.nixpkgs-master {
     system = prev.system;
     config = {
-      rocmSupport = true;
+      rocmSupport = false;
       allowUnfree = true;
     };
   };
