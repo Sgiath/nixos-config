@@ -70,6 +70,7 @@
     };
 
     nvf.url = "github:notashelf/nvf";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs =
@@ -103,6 +104,7 @@
       outputs-builder = channels: {
         packages = {
           conduwuit = inputs.conduwuit.packages.${channels.nixpkgs.system}.all-features;
+          zen-browser = inputs.zen-browser.packages.${channels.nixpkgs.system}.default;
         };
       };
 
