@@ -230,15 +230,16 @@
         "rocksdb": "rocksdb"
       },
       "locked": {
-        "lastModified": 1739202916,
-        "narHash": "sha256-QdPUbONWFUdUSagT0pwad5yzOP0+Vxmmb6pM6QjhyFI=",
+        "lastModified": 1739114248,
+        "narHash": "sha256-Etzh7m1aZBwKfcS6sa+2zBzdOaZSR+yFn2pwwGTilb4=",
         "owner": "girlbossceo",
         "repo": "conduwuit",
-        "rev": "e3b81f7b6488b5c483e8b13e3959fe591bf4cb92",
+        "rev": "b6e9dc3d98704c56027219d3775336910a0136c6",
         "type": "github"
       },
       "original": {
         "owner": "girlbossceo",
+        "ref": "v0.5.0-rc3",
         "repo": "conduwuit",
         "type": "github"
       }
@@ -1780,11 +1781,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1739862288,
-        "narHash": "sha256-31U6S6sJpiRZgY4qfAxZBpq+zI0QQr/8s5m6hPXSx7g=",
+        "lastModified": 1739863612,
+        "narHash": "sha256-UbtgxplOhFcyjBcNbTVO8+HUHAl/WXFDOb6LvqShiZo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "47703edbe70474bac50e73d1374bc78a5b6a2ce2",
+        "rev": "632f04521e847173c54fa72973ec6c39a371211c",
         "type": "github"
       },
       "original": {
@@ -2023,11 +2024,11 @@
     "rocksdb": {
       "flake": false,
       "locked": {
-        "lastModified": 1739735789,
-        "narHash": "sha256-BIzuZS0TV4gRnciP4ieW5J3Hql986iedM5dHQfK6z68=",
+        "lastModified": 1737828695,
+        "narHash": "sha256-8Ev6zzhNPU798JNvU27a7gj5X+6SDG3jBweUkQ59DbA=",
         "owner": "girlbossceo",
         "repo": "rocksdb",
-        "rev": "34e401fd4392dd3268e042f1e40dffd064b9a7ff",
+        "rev": "a4d9230dcc9d03be428b9a728133f8f646c0065c",
         "type": "github"
       },
       "original": {
