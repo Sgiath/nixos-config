@@ -199,15 +199,15 @@
     "complement": {
       "flake": false,
       "locked": {
-        "lastModified": 1739287660,
-        "narHash": "sha256-w33wAUTEyKMp4LRodFkRTVWciYguBIQ+PFmpW2zAgfc=",
-        "owner": "matrix-org",
+        "lastModified": 1734303596,
+        "narHash": "sha256-HjDRyLR4MBqQ3IjfMM6eE+8ayztXlbz3gXdyDmFla68=",
+        "owner": "girlbossceo",
         "repo": "complement",
-        "rev": "ec492656f8449d875b5832020a56f60f6fbfb329",
+        "rev": "14cc5be797b774f1a2b9f826f38181066d4952b8",
         "type": "github"
       },
       "original": {
-        "owner": "matrix-org",
+        "owner": "girlbossceo",
         "ref": "main",
         "repo": "complement",
         "type": "github"
@@ -230,16 +230,15 @@
         "rocksdb": "rocksdb"
       },
       "locked": {
-        "lastModified": 1725209064,
-        "narHash": "sha256-ut3IWEueNR/hT7NyGfuK5IYtppC6ArSoJdEfFuD/0vE=",
+        "lastModified": 1739202916,
+        "narHash": "sha256-QdPUbONWFUdUSagT0pwad5yzOP0+Vxmmb6pM6QjhyFI=",
         "owner": "girlbossceo",
         "repo": "conduwuit",
-        "rev": "8f7ade4c22533a3177bfd8f175e178573ba6c1d4",
+        "rev": "e3b81f7b6488b5c483e8b13e3959fe591bf4cb92",
         "type": "github"
       },
       "original": {
         "owner": "girlbossceo",
-        "ref": "v0.4.6",
         "repo": "conduwuit",
         "type": "github"
       }
@@ -2024,16 +2023,16 @@
     "rocksdb": {
       "flake": false,
       "locked": {
-        "lastModified": 1724285323,
-        "narHash": "sha256-k60kreKQ0v+bQ16yBd2SfLYpuNjMw2qoRmZL/S3k6CU=",
+        "lastModified": 1739735789,
+        "narHash": "sha256-BIzuZS0TV4gRnciP4ieW5J3Hql986iedM5dHQfK6z68=",
         "owner": "girlbossceo",
         "repo": "rocksdb",
-        "rev": "5a67ad7ce46328578ee5587fb0c23faa03d14e67",
+        "rev": "34e401fd4392dd3268e042f1e40dffd064b9a7ff",
         "type": "github"
       },
       "original": {
         "owner": "girlbossceo",
-        "ref": "v9.5.2",
+        "ref": "v9.9.3",
         "repo": "rocksdb",
         "type": "github"
       }
