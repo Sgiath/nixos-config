@@ -8,7 +8,6 @@
 {
   imports = [
     # always enabled
-    ./bitcoin.nix
     ./boot.nix
     ./mounting_usb.nix
     ./networking.nix
