@@ -73,7 +73,7 @@
       channel.enable = false;
       optimise.automatic = true;
       gc = {
-        automatic = true;
+        automatic = false;
         dates = "08:00";
       };
     };
