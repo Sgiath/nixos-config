@@ -16,7 +16,7 @@
       obsidian
       gimp
       vlc
-      okular
+      kdePackages.okular
       plex-media-player
       texliveMedium
       libwacom
