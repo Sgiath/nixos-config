@@ -74,7 +74,7 @@
 
       vscode = {
         enable = true;
-        userSettings = {
+        profiles.default.userSettings = {
           "editor.tabSize" = 2;
           "editor.minimap.enabled" = false;
         };
