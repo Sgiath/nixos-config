@@ -27,5 +27,9 @@
       yazi.enable = true;
       zsh.enable = true;
     };
+
+    services = {
+      podman.enable = true;
+    };
   };
 }
