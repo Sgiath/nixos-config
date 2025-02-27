@@ -1,12 +1,14 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 {
   options.services.monitoring.enable = lib.mkEnableOption "monitoring";
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.monitoring.enable) {
+    system.packages = [ pkgs.goaccess ];
     services = {
       prometheus = {
         enable = true;
