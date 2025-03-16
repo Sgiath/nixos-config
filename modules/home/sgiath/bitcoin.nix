@@ -9,7 +9,7 @@
     enable = lib.mkEnableOption "bitcoin apps";
   };
 
-  config = lib.mkIf (config.sgiath.comm.enable) {
+  config = lib.mkIf (config.sgiath.bitcoin.enable) {
     home.packages = with pkgs; [
       bisq-desktop
       trezor-suite
