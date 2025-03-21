@@ -1,0 +1,10 @@
+{lib, config, pkgs, ...}:
+{
+  options.services.tts.enable = lib.mkEnableOption "Local TTS";
+
+  config = lib.mkIf config.services.tts.enable {
+    environment.systemPackages = [
+      pkgs.tts
+    ];
+  };
+}

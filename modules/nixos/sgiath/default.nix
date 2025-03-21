@@ -27,6 +27,7 @@
     ./ollama.nix
     ./printing.nix
     ./razer.nix
+    ./tts.nix
     ./wayland.nix
   ];
 

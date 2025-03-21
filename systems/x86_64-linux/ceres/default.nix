@@ -25,6 +25,7 @@ in
 
   services = {
     ollama.enable = true;
+    tts.enable = true;
 
     livebook = {
       enableUserService = true;
