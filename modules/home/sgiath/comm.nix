@@ -25,7 +25,7 @@
         "${pkgs.telegram-desktop}/bin/telegram-desktop"
         "${pkgs.signal-desktop}/bin/signal-desktop"
         "${pkgs.cinny-desktop}/bin/cinny"
-        "${pkgs.fractal}/bin/fractal"
+        # "${pkgs.fractal}/bin/fractal"
       ];
     };
   };
