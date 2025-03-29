@@ -158,11 +158,12 @@
             -o -iname "*.tif" -o -iname "*.tiff" -o -iname "*.webp" -o -iname "*.heic" \
             -o -iname "*.heif" \) -print0 | \
           ${parallel-full}/bin/parallel -0 --eta \
-            exiftool -quiet -api PNGEarlyXMP=1 -TagsFromFile @ -all:all -JUMBF:all= -overwrite_original {}
+            exiftool -quiet -api PNGEarlyXMP=1 -JUMBF:all= -overwrite_original {}
         '')
 
         # general programs I want to have always available
         imagemagick
+        parallel-full
         ffmpeg
         zip
         unzip
