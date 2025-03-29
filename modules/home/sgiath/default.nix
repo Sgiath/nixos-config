@@ -86,6 +86,73 @@
         '')
 
         (writeShellScriptBin "fix-images" ''
+          # === Configuration ===
+          # Standard EXIF thumbnail size, but you can change it
+          THUMB_SIZE="160x120"
+          # Set to true to modify the original file directly, false to keep backups (*_original)
+          OVERWRITE_ORIGINAL=true
+          # === End Configuration ===
+
+          # --- Script Logic ---
+
+          # Check if an input file was provided
+          if [ -z "$1" ]; then
+            echo "Usage: $0 <image_file>"
+            exit 1
+          fi
+
+          INPUT_IMAGE="$1"
+
+          # Check if input file exists
+          if [ ! -f "$INPUT_IMAGE" ]; then
+            echo "Error: Input file '$INPUT_IMAGE' not found."
+            exit 1
+          fi
+
+          # Create a secure temporary file for the thumbnail
+          TEMP_THUMB=$(mktemp --suffix=.jpg)
+          # Ensure temporary file is deleted even if script exits unexpectedly
+          trap 'rm -f "$TEMP_THUMB"' EXIT
+
+          echo "Processing: $INPUT_IMAGE"
+
+          # 1. Generate the thumbnail using ImageMagick
+          echo " -> Generating thumbnail ($THUMB_SIZE)..."
+          ${imagemagick}/bin/convert "$INPUT_IMAGE" -thumbnail "$THUMB_SIZE" "$TEMP_THUMB"
+          if [ $? -ne 0 ]; then
+            echo "Error: Failed to generate thumbnail with 'convert'."
+            exit 1
+          fi
+
+          # Check if thumbnail was actually created and has size > 0
+          if [ ! -s "$TEMP_THUMB" ]; then
+            echo "Error: Temporary thumbnail file '$TEMP_THUMB' was not created or is empty."
+            exit 1
+          fi
+
+          # 2. Embed the thumbnail using ExifTool
+          echo " -> Embedding thumbnail into metadata..."
+          if [ "$OVERWRITE_ORIGINAL" = true ]; then
+            echo "    (Overwriting original file)"
+            ${exiftool}/bin/exiftool -quiet -overwrite_original "-ThumbnailImage<=$TEMP_THUMB" "$INPUT_IMAGE"
+          else
+            echo "    (Creating backup: $INPUT_IMAGE_original)"
+            exiftool -quiet "-ThumbnailImage<=$TEMP_THUMB" "$INPUT_IMAGE"
+          fi
+
+          if [ $? -ne 0 ]; then
+            echo "Error: Failed to embed thumbnail with 'exiftool'."
+            # Note: Temp file is removed by the trap EXIT
+            exit 1
+          fi
+
+          # 3. Cleanup is handled by the 'trap' command on exit
+
+          echo " -> Success: Thumbnail embedded in $INPUT_IMAGE"
+          exit 0
+        '')
+
+        (writeShellScriptBin "fix-images" ''
           find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.tif" -o -iname "*.tiff" -o -iname "*.webp" -o -iname "*.heic" -o -iname "*.heif" \) -exec exiftool -overwrite_original -JUMBF:all= {} \;
         '')
 
