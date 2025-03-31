@@ -14,6 +14,7 @@
       google-cloud-sdk
 
       exiftool
+      multitail
     ];
 
     programs = {
