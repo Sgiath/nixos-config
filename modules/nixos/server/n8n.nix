@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.n8n.enable) {
     services = {
@@ -28,5 +28,9 @@
         };
       };
     };
+
+    environment.systemPackages = [
+      pkgs.nodejs_22
+    ];
   };
 }

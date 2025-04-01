@@ -89,13 +89,13 @@ return {
 		opts = {},
 	},
 
-	{
-    "augmentcode/augment.vim",
-    lazy = false,
-    init = function ()
-      vim.g.augment_workspace_folders = { "/home/sgiath/develop/crazyegg/core_v2/" }
-    end
-  },
+	-- {
+	--    "augmentcode/augment.vim",
+	--    lazy = false,
+	--    init = function ()
+	--      vim.g.augment_workspace_folders = { "/home/sgiath/develop/crazyegg/core_v2/" }
+	--    end
+	--  },
 
 	"tpope/vim-sleuth",
 }
