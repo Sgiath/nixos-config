@@ -1,6 +1,13 @@
 { inputs, ... }:
 final: prev:
 let
+  pkgs-drupol = import inputs.nixpkgs-drupol {
+    system = prev.system;
+    config = {
+      rocmSupport = false;
+      allowUnfree = true;
+    };
+  };
   pkgs-master = import inputs.nixpkgs-master {
     system = prev.system;
     config = {
@@ -27,7 +34,7 @@ in
   factorio = pkgs-master.factorio-space-age-experimental;
 
   # get open-webui updates sooner
-  open-webui = pkgs-master.open-webui;
+  open-webui = pkgs-drupol.open-webui;
 
   # broken on unstable for me
   audiobookshelf = pkgs-stable.audiobookshelf;
