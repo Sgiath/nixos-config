@@ -3,7 +3,6 @@
     nixpkgs-master.url = "nixpkgs/master";
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.11";
-    nixpkgs-drupol.url = "github:drupol/nixpkgs/push-nznqsuyxtupp";
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
