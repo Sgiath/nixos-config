@@ -6,6 +6,7 @@
         settings = {
           Port = 8087;
         };
+        masterKeyFile = "/data/zitadel-key";
         tlsMode = "external";
       };
 
