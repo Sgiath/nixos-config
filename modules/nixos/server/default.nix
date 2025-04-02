@@ -23,6 +23,7 @@
     ./sinai.nix
     ./wordpress.nix
     ./xmpp.nix
+    ./zitadel.nix
   ];
 
   options.sgiath.server = {
