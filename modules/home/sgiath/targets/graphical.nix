@@ -22,6 +22,7 @@
       libwacom
       varia
       betaflight-configurator
+      appimage-run
 
       code-cursor
     ];
