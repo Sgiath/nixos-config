@@ -22,7 +22,6 @@
       };
 
       n8n = {
-        package = pkgs.${namespace}.n8n;
         webhookUrl = "https://n8n.sgiath.dev/";
         settings = {
           # ai.enabled = true;

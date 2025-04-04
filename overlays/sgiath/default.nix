@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ namespace, pkgs, inputs, ... }:
 final: prev:
 let
   pkgs-master = import inputs.nixpkgs-master {
@@ -31,4 +31,7 @@ in
 
   # broken on unstable for me
   audiobookshelf = pkgs-stable.audiobookshelf;
+
+  # I have my own, updated n8n package
+  n8n = pkgs.${namespace}.n8n;
 }
