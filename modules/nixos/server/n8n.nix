@@ -81,6 +81,7 @@ in
       };
     };
 
+    # needed to instal community nodes manually
     environment.systemPackages = [
       pkgs.nodejs_22
     ];
