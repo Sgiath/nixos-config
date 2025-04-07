@@ -176,11 +176,11 @@
       hyprpaper = {
         enable = true;
         settings = lib.mkForce {
-          preload = ["${./wallpapers/rocinante.jpg}"];
+          preload = ["${./wallpapers/transhumanism.png}"];
           wallpaper = [
-            "DP-1,contain:${./wallpapers/rocinante.jpg}"
-            "DP-3,contain:${./wallpapers/rocinante.jpg}"
-            "DP-2,contain:${./wallpapers/rocinante.jpg}"
+            "DP-1,contain:${./wallpapers/transhumanism.png}"
+            "DP-3,contain:${./wallpapers/transhumanism.png}"
+            "DP-2,contain:${./wallpapers/transhumanism.png}"
           ];
         };
       };
