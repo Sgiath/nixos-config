@@ -24,7 +24,7 @@
         "${pkgs.webcord}/bin/webcord"
         "${pkgs.telegram-desktop}/bin/telegram-desktop"
         "${pkgs.signal-desktop-bin}/bin/signal-desktop"
-        "${pkgs.cinny-desktop}/bin/cinny"
+        # "${pkgs.cinny-desktop}/bin/cinny"
         # "${pkgs.fractal}/bin/fractal"
       ];
     };

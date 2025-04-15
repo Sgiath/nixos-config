@@ -12,6 +12,7 @@
         "editor.minimap.enabled" = false;
         "security.workspace.trust.untrustedFiles" = "open";
         "explorer.confirmDelete" = false;
+        "editor.wordWrapColumn" = 98;
       };
     };
 

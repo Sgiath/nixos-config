@@ -21,7 +21,7 @@
     foundryvtt.enable = true;
     home-assistant.enable = true;
     jitsi-meet.enable = false;
-    matrix.enable = true;
+    matrix.enable = false;
     monitoring.enable = true;
     pi-hole.enable = true;
     searx.enable = true;
