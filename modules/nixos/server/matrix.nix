@@ -11,13 +11,13 @@ in
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.matrix.enable) {
     services = {
-      conduwuit = {
+      matrix-conduit = {
         enable = true;
         settings.global = {
           # server
           server_name = "sgiath.dev";
-          address = [ "0.0.0.0" ];
-          port = [ 6167 ];
+          address = "0.0.0.0";
+          port = 6167;
 
           database_backend = "rocksdb";
 
@@ -25,9 +25,10 @@ in
           allow_registration = true;
           registration_token = secrets.matrix_registration_token;
 
-          # other
-          admin_console_automatic = true;
-          new_user_displayname_suffix = "";
+          well_known = {
+            client = "https://matrix.sgiath.dev";
+            server = "matrix.sgiath.dev:6167";
+          };
         };
       };
 

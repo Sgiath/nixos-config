@@ -17,8 +17,8 @@ let
   };
 in
 {
-  # conduwuit build from official repo flake
-  # conduwuit = inputs.conduwuit.packages.${prev.system}.all-features;
+  # conduit build from official repo flake
+  matrix-conduit = inputs.conduit.packages.${prev.system}.default;
 
   # zen browser has custom repo until nixpkgs is updated
   zen-browser = inputs.zen-browser.packages.${prev.system}.default;
@@ -27,7 +27,7 @@ in
   factorio = pkgs-master.factorio-space-age-experimental;
 
   # get open-webui updates sooner
-  # open-webui = pkgs-master.open-webui;
+  open-webui = pkgs-master.open-webui;
 
   # broken on unstable for me
   audiobookshelf = pkgs-stable.audiobookshelf;

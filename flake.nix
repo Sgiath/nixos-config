@@ -45,8 +45,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    conduwuit = {
-      url = "github:girlbossceo/conduwuit";
+    conduit = {
+      url = "gitlab:famedly/conduit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
