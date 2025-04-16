@@ -12,7 +12,7 @@ in
           ips = ["10.2.0.2/32"];
           peers = [
             {
-              name = "CZ#36";
+              name = "CZ-36";
               endpoint = "146.70.129.18:51820";
               publicKey = "sDVKmYDevvGvpKNei9f2SDbx5FMFi6FqBmuRYG/EFg8=";
               allowedIPs = ["0.0.0.0/0"];
