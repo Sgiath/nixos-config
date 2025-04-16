@@ -31,7 +31,7 @@
     zitadel.enable = false;
 
     # AI
-    open-webui.enable = true;
+    open-webui.enable = false;
 
     # proxies
     nas-proxy.enable = true;
