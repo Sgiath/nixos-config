@@ -27,19 +27,20 @@
       ports = [
         "53:53/tcp"
         "53:53/udp"
-        "80:8053/tcp"
-        "443:8054/tcp"
+        "8053:8053/tcp"
       ];
       volumes = [
-        "/var/lib/pihole:/var/lib/pihole"
+        "/var/lib/pihole:/etc/pihole"
         "dnsmasq:/etc/dnsmasq.d"
       ];
       extraOptions = [
         "--network=host"
       ];
       environment = {
-        FTLCONF_webserver_api_password = "";
         TZ = "UTC";
+        FTLCONF_webserver_port = "8053";
+        FTLCONF_webserver_api_password = "";
+        FTLCONF_misc_etc_dnsmasq_d = true;
       };
     };
   };
