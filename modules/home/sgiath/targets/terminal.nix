@@ -1,4 +1,5 @@
 {
+  namespace,
   config,
   lib,
   pkgs,
@@ -10,7 +11,7 @@
   config = lib.mkIf (config.sgiath.targets.terminal) {
     home.packages = with pkgs; [
       openssl
-      codex
+      pkgs.${namespace}.codex
 
       superfile
       yt-dlp
