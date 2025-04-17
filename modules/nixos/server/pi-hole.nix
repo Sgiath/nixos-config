@@ -40,7 +40,7 @@
         TZ = "UTC";
         FTLCONF_webserver_port = "8053";
         FTLCONF_webserver_api_password = "";
-        FTLCONF_misc_etc_dnsmasq_d = true;
+        FTLCONF_misc_etc_dnsmasq_d = "true";
       };
     };
   };
