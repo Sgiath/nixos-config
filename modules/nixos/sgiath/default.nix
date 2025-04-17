@@ -5,6 +5,9 @@
   pkgs,
   ...
 }:
+let
+  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
+in
 {
   imports = [
     # always enabled
@@ -80,5 +83,8 @@
     };
 
     users.defaultUserShell = pkgs.zsh;
+    environment.sessionVariables = {
+      OPENAI_API_KEY = secrets.openai;
+    };
   };
 }

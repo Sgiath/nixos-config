@@ -28,6 +28,7 @@ in
 
   # get open-webui updates sooner
   open-webui = pkgs-master.open-webui;
+  codex = pkgs-master.codex;
 
   # broken on unstable for me
   audiobookshelf = pkgs-stable.audiobookshelf;
