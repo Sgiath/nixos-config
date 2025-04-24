@@ -181,6 +181,7 @@
 
     services = {
       gnome-keyring.enable = true;
+      pass-secret-service.enable = false;
     };
 
     programs = {
