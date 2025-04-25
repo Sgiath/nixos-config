@@ -11,8 +11,12 @@
         originalsPath = "/data/photos";
 
         settings = {
+          # authentication
+          PHOTOPRISM_AUTH_MODE = "public";
           PHOTOPRISM_ADMIN_USER = "sgiath";
-          PHOTOPRISM_EXPERIMENTAL = "true";
+          # feature flags
+          # PHOTOPRISM_EXPERIMENTAL = "true";
+          # customization
           PHOTOPRISM_APP_NAME = "Photo";
           # site info
           PHOTOPRISM_SITE_URL = "https://photo.sgiath.dev/";
