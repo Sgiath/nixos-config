@@ -12,7 +12,7 @@
 
         settings = {
           # authentication
-          PHOTOPRISM_AUTH_MODE = "public";
+          # PHOTOPRISM_AUTH_MODE = "public";
           PHOTOPRISM_ADMIN_USER = "sgiath";
           # feature flags
           # PHOTOPRISM_EXPERIMENTAL = "true";
@@ -45,6 +45,7 @@
 
         locations."/" = {
           proxyPass = "http://127.0.0.1:2342";
+          proxyWebsockets = true;
         };
       };
     };
