@@ -17,6 +17,7 @@
     ./nginx.nix
     ./open-webui.nix
     ./osm.nix
+    ./photo.nix
     ./pi-hole.nix
     ./search.nix
     ./sgiath.nix
