@@ -1,4 +1,8 @@
-{config, lib, pkgs, ...}:
+{
+  config,
+  lib,
+  ...
+}:
 let
   secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
 in
@@ -21,26 +25,27 @@ in
           PHOTOPRISM_TRUSTED_PROXY = "127.0.0.1";
           # webserver
           PHOTOPRISM_DISABLE_TLS = "true";
-        }
+        };
       };
 
       nginx.virtualHosts."photo.sgiath.dev" = {
-      # SSL
-      onlySSL = true;
-      kTLS = true;
+        # SSL
+        onlySSL = true;
+        kTLS = true;
 
-      # ACME
-      enableACME = true;
-      acmeRoot = null;
+        # ACME
+        enableACME = true;
+        acmeRoot = null;
 
-      # QUIC
-      http3_hq = true;
-      quic = true;
+        # QUIC
+        http3_hq = true;
+        quic = true;
 
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:2342";
-      };
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:2342";
+        };
       };
     };
   };
 }
+

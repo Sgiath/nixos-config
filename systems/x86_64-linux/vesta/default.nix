@@ -29,6 +29,7 @@
     mollysocket.enable = true;
     focalboard.enable = true;
     zitadel.enable = false;
+    photoprism.enable = true;
 
     # AI
     open-webui.enable = false;
