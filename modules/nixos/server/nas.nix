@@ -22,32 +22,6 @@
             proxyWebsockets = true;
             proxyPass = "http://192.168.1.4:5000";
           };
-
-          "/transmission/" = {
-            proxyWebsockets = true;
-            proxyPass = "http://192.168.1.4:9091";
-          };
-        };
-      };
-
-      "plex.sgiath.dev" = {
-        # SSL
-        onlySSL = true;
-        kTLS = true;
-
-        # ACME
-        enableACME = true;
-        acmeRoot = null;
-
-        # QUIC
-        http3_hq = true;
-        quic = true;
-
-        locations = {
-          "/" = {
-            proxyWebsockets = true;
-            proxyPass = "http://192.168.1.4:32400";
-          };
         };
       };
     };

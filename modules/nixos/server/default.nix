@@ -19,6 +19,7 @@
     ./osm.nix
     ./photo.nix
     ./pi-hole.nix
+    ./plex.nix
     ./search.nix
     ./sgiath.nix
     ./sinai.nix
