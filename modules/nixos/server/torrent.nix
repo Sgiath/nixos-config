@@ -11,13 +11,12 @@ in
   config = lib.mkIf (config.sgiath.server.enable && config.services.transmission.enable) {
     services = {
       transmission = {
-        home = "/data2/torrent";
         openPeerPorts = true;
         performanceNetParameters = true;
-
         webHome = pkgs.flood-for-transmission;
 
         settings = {
+          download-dir = "/nas/downloads";
           rpc-authentication-required = true;
           rpc-username = "sgiath";
           rpc-password = secrets.transmission;
