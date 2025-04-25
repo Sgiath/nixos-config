@@ -39,6 +39,10 @@
       device = "/dev/sdb1";
       fsType = "ext4";
     };
+    "/nas/downloads" = {
+      device = "192.168.1.4:/volume1/Downloads";
+      fsType = "nfs";
+    };
     "/nas/homes" = {
       device = "192.168.1.4:/volume1/homes";
       fsType = "nfs";
