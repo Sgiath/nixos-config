@@ -12,6 +12,7 @@
         "editor.tabSize" = 2;
         "editor.minimap.enabled" = false;
         "explorer.confirmDelete" = false;
+        "explorer.confirmDragAndDrop" = false;
         "editor.wordWrapColumn" = 98;
         # Augment needs to have it disabled
         "github.copilot.enable"."*" = false;
