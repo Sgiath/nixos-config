@@ -3,17 +3,14 @@
   lib,
   ...
 }:
-let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.photoprism.enable) {
     services = {
       photoprism = {
+        passwordFile = "/data/photos/password";
         originalsPath = "/data/photos";
         settings = {
           PHOTOPRISM_ADMIN_USER = "sgiath";
-          PHOTOPRISM_ADMIN_PASSWORD = secrets.photoprism;
           PHOTOPRISM_EXPERIMENTAL = "true";
           PHOTOPRISM_APP_NAME = "Photo";
           # site info
