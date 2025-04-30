@@ -13,7 +13,7 @@
         enable = true;
         enableSshSupport = true;
         enableZshIntegration = true;
-        pinentryPackage = pkgs.pinentry-gnome3;
+        pinentry.package = pkgs.pinentry-gnome3;
         sshKeys = [ "191203A373DD9867A125EC6A9D3EC96416186FEE" ];
       };
     };
