@@ -28,7 +28,7 @@
       };
       git = {
         lfs.enable = true;
-        delta.enable = true;
+        diff-so-fancy.enable = true;
 
         aliases = {
           d = "diff";
@@ -95,10 +95,6 @@
             context = 5;
             interHunkContext = 10;
             renames = "copies";
-          };
-
-          diff-so-fancy = {
-            markEmptyLines = false;
           };
 
           branch = {
@@ -175,13 +171,11 @@
           };
 
           pager = {
-            diff = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | $PAGER";
             branch = false;
             tag = false;
           };
 
           interactive = {
-            diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
             singlekey = true;
           };
 
