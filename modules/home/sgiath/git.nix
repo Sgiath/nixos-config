@@ -134,27 +134,14 @@
             sort = "-taggerdate";
             gpgSign = true;
           };
+
           blame.date = "short";
           fetch.prune = true;
 
           color = {
             branch = "auto";
-
-            diff = {
-              meta = "black bold";
-              frag = "magenta";
-              context = "white";
-              whitespace = "yellow reverse";
-              old = "red";
-            };
-
-            decorate = {
-              HEAD = "red";
-              branch = "blue";
-              tag = "yellow";
-              remoteBranch = "magenta";
-            };
-
+            diff = "auto";
+            decorate = "auto";
             interactive = "auto";
             status = "auto";
             ui = "always";
