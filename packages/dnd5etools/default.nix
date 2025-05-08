@@ -14,10 +14,6 @@ let
 
   imgHashes = [
     {
-      name = "zip";
-      hash = "sha256-sk7BaBeZxzgLH2F6O2ll8CQ35Y58GyCQUB7CLTqu63c=";
-    }
-    {
       name = "z01";
       hash = "sha256-UjkkOh2YnqT0zY16YSUNi7wDMv3PdTfO0A4gWOB1++8=";
     }
@@ -56,6 +52,10 @@ let
     {
       name = "z10";
       hash = "sha256-uvmM2mxX+4ZD4boZ3999/LpRuOsqGqnzJJxAi1W4vpo=";
+    }
+    {
+      name = "zip";
+      hash = "sha256-sk7BaBeZxzgLH2F6O2ll8CQ35Y58GyCQUB7CLTqu63c=";
     }
   ];
 

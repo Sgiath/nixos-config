@@ -22,7 +22,7 @@
 
       settings = {
         decoration = {
-          rounding = 10;
+          rounding = 5;
         };
 
         input = {
