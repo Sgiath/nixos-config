@@ -13,50 +13,50 @@ let
   pname = "5etools";
 
   imgHashes = [
-    # {
-    #   name = "zip";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z01";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z02";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z03";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z04";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z05";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z06";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z07";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z08";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z09";
-    #   hash = "";
-    # }
-    # {
-    #   name = "z10";
-    #   hash = "";
-    # }
+    {
+      name = "zip";
+      hash = "sha256-sk7BaBeZxzgLH2F6O2ll8CQ35Y58GyCQUB7CLTqu63c=";
+    }
+    {
+      name = "z01";
+      hash = "sha256-UjkkOh2YnqT0zY16YSUNi7wDMv3PdTfO0A4gWOB1++8=";
+    }
+    {
+      name = "z02";
+      hash = "sha256-c12EJXRBteS/yLewM9x9ccDzWnKu+RlAwm/YOQ1b2H0=";
+    }
+    {
+      name = "z03";
+      hash = "sha256-BjLkuvIRYD5ZM1Cj7em22kqEl8mlbXPXAIiE9cmfCsw=";
+    }
+    {
+      name = "z04";
+      hash = "sha256-s4H9ZF+lBa+jeZ+SA/N813XgpV0yNQ4oPNewQWEpwXE=";
+    }
+    {
+      name = "z05";
+      hash = "sha256-eCvROi136tnFjDuJR23xvburEM2guvpn+0uvuOzcNNM=";
+    }
+    {
+      name = "z06";
+      hash = "sha256-8cWcHXPHk+Df8WIzLJMezg8GIgrwBkGvvph3g4ie4ZA=";
+    }
+    {
+      name = "z07";
+      hash = "sha256-Ogu6SdUni4IUPSOCGNQ2zhiTrAcMMmV/QLkRi8SKkmE=";
+    }
+    {
+      name = "z08";
+      hash = "sha256-3uo6+3FVPmsqYnvaD3wyaxUDre65lra9hLiomX1xgVo=";
+    }
+    {
+      name = "z09";
+      hash = "sha256-woIAWaE2FhwIVTY8myuwLYf02Reyn8KYa/binsnNayw=";
+    }
+    {
+      name = "z10";
+      hash = "sha256-uvmM2mxX+4ZD4boZ3999/LpRuOsqGqnzJJxAi1W4vpo=";
+    }
   ];
 
   copyImgs = lib.lists.forEach imgHashes (
@@ -83,7 +83,7 @@ stdenv.mkDerivation {
     pname = "5etools-src";
     url = "https://github.com/5etools-mirror-3/5etools-src/releases/download/v${version}/${pname}-v${version}.zip";
     stripRoot = false;
-    hash = "";
+    hash = "sha256-v3kbYm7wX9vmGXI0TLauFgm0Hiu8i7yzVeJgjL5tgFs=";
   };
 
   buildInputs = [
