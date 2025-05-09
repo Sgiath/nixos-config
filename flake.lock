@@ -153,11 +153,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1746743238,
-        "narHash": "sha256-PSLBk4tDLz7yltR0XKxU7qev7COkt+HgsZlALcXWnGs=",
+        "lastModified": 1746790677,
+        "narHash": "sha256-HIUs4wzjsEUfmzj5fHM1bxzS/Aub2jJbXzOkR70wd5s=",
         "owner": "famedly",
         "repo": "conduit",
-        "rev": "bdc6dabe3a07d9e5e324854c225eca78fd374682",
+        "rev": "160ab757a89e21e2ce2b40f881864b398277c6f6",
         "type": "gitlab"
       },
       "original": {
@@ -1149,11 +1149,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1746787996,
-        "narHash": "sha256-/lxk9obdxu1ePaGUmZM9vOm+E834LVq0ZZQU55owAok=",
+        "lastModified": 1746793707,
+        "narHash": "sha256-cadntXEoQFmYSeIzV0Dxa6PF2gQph4bng5fuyBltW0s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f7f8fc4685c7c56d2238746e00fe826005b8e0c6",
+        "rev": "33949e56e5d67374ca143da77bcc8ab994c4a2e6",
         "type": "github"
       },
       "original": {
@@ -1233,16 +1233,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1746663147,
-        "narHash": "sha256-Ua0drDHawlzNqJnclTJGf87dBmaO/tn7iZ+TCkTRpRc=",
+        "lastModified": 1746269363,
+        "narHash": "sha256-Q0lKWway9OmZnkDTpAoAE9VLXHOHqCqdJ3N0tkSM99g=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "dda3dcd3fe03e991015e9a74b22d35950f264a54",
+        "rev": "b6aef6c3553f849e1e6c08f1bcd3061df2b69fc4",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-unstable",
+        "rev": "b6aef6c3553f849e1e6c08f1bcd3061df2b69fc4",
         "type": "indirect"
       }
     },
@@ -1397,11 +1397,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1746575057,
-        "narHash": "sha256-kBlPMNZXPzDG4HUmdqYpvjvVYkoDdDrVvO14cKgHaiU=",
+        "lastModified": 1746789001,
+        "narHash": "sha256-aNDOPgv642K5UU0RD87PB7tRFwxmCYJ6sL5m6dCnwKY=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "685deb9bae2e4c463e953ff39bd54fd448feaf05",
+        "rev": "b06c1cb60ab83885fe62359257d9d982deea45ad",
         "type": "github"
       },
       "original": {
