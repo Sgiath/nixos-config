@@ -193,7 +193,52 @@
       };
     };
 
-    programs.wofi.enable = true;
+    programs.wofi = {
+      enable = true;
+      settings = {
+        mode = "drun";
+        prompt = "";
+        insensitive = true;
+      };
+      style = ''
+        * {
+          background: none;
+          border: none;
+          outline: none;
+          box-shadow: none;
+          font: Noto Sans Mono Light;
+          font-size: 24px;
+        }
+
+        #window {
+          background: rgba(29, 36, 51, 0.75);  /* bg with opacity */
+        }
+
+        #input {
+          padding: 24px;
+        }
+
+        #input * {
+          color: transparent;
+        }
+
+        #outer-box {
+          margin: 24px;
+        }
+
+        #inner-box {
+          margin-left: 48px;
+        }
+
+        #entry {
+          padding: 8px;
+        }
+
+        #entry:selected * {
+        }
+      '';
+    };
+
     services = {
       hyprpaper = {
         enable = true;
