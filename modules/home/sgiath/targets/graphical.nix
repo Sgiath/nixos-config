@@ -31,11 +31,11 @@
     wayland.windowManager.hyprland.settings = {
       exec-once = [
         # tools
-        "${pkgs.kitty}/bin/kitty"
+        # "${pkgs.kitty}/bin/kitty"
         "${pkgs.obsidian}/bin/obsidian"
       ];
       bind = [
-        "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
+        # "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, slash, exec, ${pkgs.wofi}/bin/wofi --show drun"
       ];
     };
