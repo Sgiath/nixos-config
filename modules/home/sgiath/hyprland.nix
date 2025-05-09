@@ -206,8 +206,8 @@
           border: none;
           outline: none;
           box-shadow: none;
-          font: Noto Sans Mono Light;
-          font-size: 24px;
+          font: RobotoMono NerdFonts Mono;
+          font-size: 18px;
         }
 
         #window {
@@ -220,14 +220,6 @@
 
         #input * {
           color: transparent;
-        }
-
-        #outer-box {
-          margin: 24px;
-        }
-
-        #inner-box {
-          margin-left: 48px;
         }
 
         #entry {
