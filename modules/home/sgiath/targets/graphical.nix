@@ -49,10 +49,10 @@
       waybar.enable = true;
 
       # terminals
-      alacritty.enable = true;
-      kitty.enable = false;
-      wezterm.enable = true;
-      ghostty.enable = true;
+      alacritty.enable = false;
+      kitty.enable = true;
+      wezterm.enable = false;
+      ghostty.enable = false;
 
       # utils
       pandoc.enable = true;
