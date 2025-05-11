@@ -99,8 +99,6 @@
         disko.nixosModules.disko
         simple-nixos-mailserver.nixosModules.mailserver
         foundryvtt.nixosModules.foundryvtt
-        nix-gaming.nixosModules.pipewireLowLatency
-        nix-gaming.nixosModules.platformOptimizations
       ];
 
       # homes.modules = with inputs; [

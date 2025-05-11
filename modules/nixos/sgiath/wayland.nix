@@ -45,7 +45,7 @@
     security.pam.services.greetd = {
       allowNullPassword = true;
       startSession = true;
-      enableGnomeKeyring = false;
+      enableGnomeKeyring = true;
       gnupg = {
         enable = true;
         noAutostart = true;
