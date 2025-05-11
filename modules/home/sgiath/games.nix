@@ -21,7 +21,7 @@ in
 
         (lutris.override {
           extraLibraries = pkgs: [
-            # libraries for Principia
+            # libraries for KSP mod Principia
             pkgs.llvmPackages.libcxx
             pkgs.llvmPackages.libunwind
           ];
@@ -47,12 +47,12 @@ in
         })
 
         # Factorio
-        (factorio.override {
+        (factorio-space-age-experimental.override {
           username = "Sgiath";
           token = secrets.factorio_token;
         })
 
-        star-citizen
+        # star-citizen
       ];
     };
   };

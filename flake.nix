@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs-master.url = "nixpkgs/master";
-    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-24.11";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -40,15 +40,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    # nix-gaming.url = "github:fufexan/nix-gaming";
 
     foundryvtt = {
       url = "github:reckenrode/nix-foundryvtt";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    conduit = {
-      url = "gitlab:famedly/conduit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
