@@ -26,7 +26,6 @@
         };
 
         input = {
-          follow_mouse = 2;
           touchpad = {
             natural_scroll = true;
           };
@@ -200,31 +199,6 @@
         prompt = "";
         insensitive = true;
       };
-      style = ''
-        * {
-          background: none;
-          border: none;
-          outline: none;
-          box-shadow: none;
-          font-size: 14px;
-        }
-
-        #window {
-          background: rgba(29, 36, 51, 0.75);  /* bg with opacity */
-        }
-
-        #input {
-          padding: 14px;
-        }
-
-        #input * {
-          color: transparent;
-        }
-
-        #outer-box {
-          margin: 24px;
-        }
-      '';
     };
 
     services = {

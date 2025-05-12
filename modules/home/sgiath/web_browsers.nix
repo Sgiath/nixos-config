@@ -19,5 +19,29 @@
     # Firefox
     programs.firefox.enable = false;
     stylix.targets.firefox.enable = false;
+
+    # libre Wolf
+    programs.librewolf = {
+      enable = true;
+      # https://librewolf.net/docs/settings/
+      settings = { };
+    };
+
+    # qutebrowser
+    programs.qutebrowser = {
+      enable = true;
+      searchEngines = {
+        DEFAULT = "https://search.sgiath.dev/search?q={}";
+      };
+      quickmarks = {
+        nixpkgs = "https://github.com/NixOS/nixpkgs";
+      };
+      # https://qutebrowser.org/doc/help/settings.html
+      settings = {
+        auto_save.session = true;
+        colors.webpage.darkmode.enabled = true;
+        url.auto_search = true;
+      };
+    };
   };
 }
