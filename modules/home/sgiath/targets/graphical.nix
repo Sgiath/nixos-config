@@ -50,7 +50,7 @@
 
       # terminals
       alacritty.enable = true;
-      kitty.enable = false;
+      kitty.enable = true;
       wezterm.enable = false;
       ghostty.enable = false;
 

@@ -24,7 +24,7 @@ in
   zen-browser = inputs.zen-browser.packages.${prev.system}.default;
 
   # NIX Gaming
-  # star-citizen = inputs.nix-gaming.packages.${prev.system}.star-citizen;
+  star-citizen = inputs.nix-gaming.packages.${prev.system}.star-citizen;
 
   # get open-webui updates sooner
   open-webui = pkgs-master.open-webui;
