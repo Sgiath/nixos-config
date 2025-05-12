@@ -39,7 +39,6 @@ in
   programs = {
     gamescope.enable = true;
     gamemode.enable = true;
-    ladybird.enable = true;
     steam = {
       enable = true;
       protontricks.enable = true;
