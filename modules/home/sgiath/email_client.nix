@@ -29,8 +29,12 @@
       '';
     };
 
-    wayland.windowManager.hyprland.settings.exec-once = [
-      "${pkgs.protonmail-desktop}/bin/proton-mail"
-    ];
+    wayland.windowManager.hyprland.settings = {
+      exec-once = [ "${pkgs.protonmail-desktop}/bin/proton-mail" ];
+      windowrulev2 = [
+        "workspace 9 silent, class:(claws-mail)"
+        "workspace 9 silent, class:(Proton Mail)"
+      ];
+    };
   };
 }

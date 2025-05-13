@@ -43,5 +43,11 @@
         url.auto_search = true;
       };
     };
+
+    wayland.windowManager.hyprland.settings.windowrulev2 = [
+      "workspace 2 silent, class:(chromium-browser)"
+      "workspace 3 silent, class:(google-chrome)"
+      "workspace 4 silent, class:(firefox)"
+    ];
   };
 }

@@ -22,28 +22,15 @@
       };
 
       settings = {
-        decoration = {
-          rounding = 5;
-        };
+        decoration.rounding = 5;
 
         input = {
-          touchpad = {
-            natural_scroll = true;
-          };
-          tablet = {
-            output = "current";
-          };
+          touchpad.natural_scroll = true;
+          tablet.output = "current";
         };
 
-        group = {
-          groupbar = {
-            font_size = 14;
-          };
-        };
-
-        misc = {
-          focus_on_activate = true;
-        };
+        group.groupbar.font_size = 14;
+        misc.focus_on_activate = true;
 
         monitor = [
           # Desktop
@@ -135,31 +122,8 @@
           # terminal in special workspace
           "workspace 1, class:(kitty)"
 
-          # browsers
-          "workspace 2 silent, class:(chromium-browser)"
-          "workspace 3 silent, class:(google-chrome)"
-          "workspace 4 silent, class:(firefox)"
-
           # other apps
           "workspace 5 silent, class:(obsidian)"
-
-          # games
-          "workspace 6 silent, class:(.factorio-wrapped)"
-          "workspace 6 silent, class:(battle.net.exe)"
-          "workspace 6 silent, class:(lutris)"
-
-          # email
-          "workspace 9 silent, class:(claws-mail)"
-          "workspace 9 silent, class:(Proton Mail)"
-
-          # messaging apps
-          "workspace 10 silent, class:(Slack)"
-          "workspace 10 silent, class:(WebCord)"
-          "workspace 10 silent, class:(signal)"
-          "workspace 10 silent, class:(org.telegram.desktop)"
-          "workspace 10 silent, class:(Hexchat)"
-          "workspace 10 silent, class:(cinny)"
-          "workspace 10 silent, class:(org.gnome.Fractal)"
         ];
       };
     };
@@ -203,7 +167,7 @@
       hyprpaper = {
         enable = true;
         settings = lib.mkForce {
-          preload = ["${./wallpapers/transhumanism.png}"];
+          preload = [ "${./wallpapers/transhumanism.png}" ];
           wallpaper = [
             "DP-1,contain:${./wallpapers/transhumanism.png}"
             "DP-3,contain:${./wallpapers/transhumanism.png}"
