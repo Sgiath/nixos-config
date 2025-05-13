@@ -51,6 +51,7 @@
         "$mod" = "SUPER";
         bind = [
           "$mod SHIFT, Q, exec, ${pkgs.wlogout}/bin/wlogout"
+          "$mod, E, exec, ${pkgs.kitty}/bin/kitty --class files -e superfile"
 
           "$mod SHIFT, C, killactive,"
           "$mod, R, togglesplit,"
