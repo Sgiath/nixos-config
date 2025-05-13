@@ -215,16 +215,16 @@
       hyprpolkitagent.enable = true;
     };
 
-    xdg = {
-      portal = {
-        enable = false;
-        config.common.default = "hyprland";
-        xdgOpenUsePortal = true;
-        extraPortals = [
-          pkgs.xdg-desktop-portal-hyprland
-          pkgs.xdg-desktop-portal-gtk
-        ];
-      };
-    };
+    # xdg = {
+    #   portal = {
+    #     enable = false;
+    #     config.common.default = "hyprland";
+    #     xdgOpenUsePortal = true;
+    #     extraPortals = [
+    #       pkgs.xdg-desktop-portal-hyprland
+    #       pkgs.xdg-desktop-portal-gtk
+    #     ];
+    #   };
+    # };
   };
 }
