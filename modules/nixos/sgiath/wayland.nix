@@ -41,7 +41,6 @@
         };
       };
       hypridle.enable = true;
-      hyprlock.enable = true;
     };
 
     security.pam.services.greetd = {
@@ -66,6 +65,9 @@
       TTYVTDisallocate = true;
     };
 
-    programs.hyprland.enable = true;
+    programs = {
+      hyprland.enable = true;
+      hyprlock.enable = true;
+    };
   };
 }
