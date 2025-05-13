@@ -12,7 +12,8 @@
   config = lib.mkIf config.programs.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      package = pkgs.hyprland;
+      package = null;
+      portalPackage = null;
       xwayland.enable = true;
       systemd = {
         enable = true;
@@ -186,6 +187,8 @@
         wl-clipboard-x11
         wlogout
         hyprpolkitagent
+        qt5-wayland
+        qt6-wayland
       ];
       sessionVariables = {
         NIXOS_OZONE_WL = "1";

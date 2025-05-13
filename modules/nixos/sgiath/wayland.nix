@@ -40,6 +40,8 @@
           naturalScrolling = true;
         };
       };
+      hypridle.enable = true;
+      hyprlock.enable = true;
     };
 
     security.pam.services.greetd = {
@@ -64,10 +66,6 @@
       TTYVTDisallocate = true;
     };
 
-    programs.hyprland = {
-      enable = true;
-      package = pkgs.hyprland;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
-    };
+    programs.hyprland.enable = true;
   };
 }
