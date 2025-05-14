@@ -31,8 +31,8 @@
     };
 
     hyprland = {
-      # url = "github:hyprwm/Hyprland";
-      url = "github:hyprwm/Hyprland/v0.48.1";
+      # url = "github:hyprwm/hyprland";
+      url = "github:hyprwm/hyprland/v0.48.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -99,7 +99,7 @@
       };
 
       overlays = with inputs; [
-        # nixpkgs-wayland.overlay
+        nixpkgs-wayland.overlay
         hyprland.overlays.default
       ];
 
