@@ -26,6 +26,9 @@ in
   # superfile is Nix native
   superfile = inputs.superfile.packages.${prev.system}.default;
 
+  # codex is Nix native
+  codex = inputs.codex.packages.${prev.system}.codex-cli;
+
   # NIX Gaming
   star-citizen = inputs.nix-gaming.packages.${prev.system}.star-citizen;
 
