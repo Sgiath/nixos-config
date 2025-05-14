@@ -24,11 +24,11 @@
 
     wayland.windowManager.hyprland.settings = {
       exec-once = [
-        "${pkgs.kitty}/bin/kitty"
+        # "${pkgs.kitty}/bin/kitty"
         "${pkgs.obsidian}/bin/obsidian"
       ];
       bind = [
-        "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
+        # "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, slash, exec, ${pkgs.wofi}/bin/wofi --show drun"
       ];
       windowrulev2 = [
@@ -54,7 +54,7 @@
 
       # terminals
       alacritty.enable = true;
-      kitty.enable = true;
+      kitty.enable = false;
       wezterm.enable = true;
       ghostty.enable = true;
 
