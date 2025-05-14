@@ -1,5 +1,4 @@
 {
-  namespace,
   config,
   lib,
   pkgs,
@@ -11,7 +10,7 @@
   config = lib.mkIf (config.sgiath.targets.terminal) {
     home.packages = with pkgs; [
       openssl
-      pkgs.${namespace}.codex
+      codex-cli
 
       yt-dlp
       google-cloud-sdk
