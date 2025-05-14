@@ -32,7 +32,7 @@
 
     hyprland = {
       # url = "github:hyprwm/Hyprland";
-      url = "github:hyprwm/Hyprland/v0.49.0";
+      url = "github:hyprwm/Hyprland/v0.48.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -65,6 +65,7 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     superfile = {
       url = "github:yorukot/superfile";
       inputs.nixpkgs.follows = "nixpkgs";
