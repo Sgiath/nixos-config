@@ -26,14 +26,13 @@
     };
 
     nixpkgs-wayland = {
-      # url = "github:nix-community/nixpkgs-wayland";
-      url = "github:nix-community/nixpkgs-wayland/ba8169d88a5f3cd4e85ba4cd16f26786c388213c";
+      url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
       # url = "github:hyprwm/Hyprland";
-      url = "github:hyprwm/Hyprland/v0.48.1";
+      url = "github:hyprwm/Hyprland/v0.49.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -99,7 +98,7 @@
       };
 
       overlays = with inputs; [
-        # nixpkgs-wayland.overlay
+        nixpkgs-wayland.overlay
         hyprland.overlays.default
       ];
 
