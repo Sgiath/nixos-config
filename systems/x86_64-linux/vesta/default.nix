@@ -20,7 +20,7 @@
     cryptpad.enable = false;
     factorio.enable = false;
     foundryvtt.enable = true;
-    home-assistant.enable = true;
+    home-assistant.enable = false;
     jitsi-meet.enable = false;
     matrix.enable = true;
     monitoring.enable = true;
