@@ -9,7 +9,6 @@
     ./foundry.nix
     ./home-assistant.nix
     ./jitsi.nix
-    ./mailserver.nix
     ./matrix.nix
     ./monitoring.nix
     ./n8n.nix
