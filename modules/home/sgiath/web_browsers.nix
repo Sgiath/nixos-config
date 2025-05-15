@@ -10,7 +10,7 @@
 
   config = lib.mkIf config.sgiath.web_browsers.enable {
     home.packages = [
-      # pkgs.tor-browser
+      pkgs.tor-browser
       pkgs.zen-browser
     ];
 
@@ -22,14 +22,14 @@
 
     # librewolf
     programs.librewolf = {
-      enable = false;
+      enable = true;
       # https://librewolf.net/docs/settings/
       settings = { };
     };
 
     # qutebrowser
     programs.qutebrowser = {
-      enable = false;
+      enable = true;
       searchEngines = {
         DEFAULT = "https://search.sgiath.dev/search?q={}";
       };
