@@ -21,11 +21,9 @@
     stylix.targets.firefox.enable = false;
 
     # librewolf
-    programs.librewolf = {
-      enable = true;
-      # https://librewolf.net/docs/settings/
-      settings = { };
-    };
+    # https://librewolf.net/docs/settings/
+    programs.librewolf.enable = true;
+    stylix.targets.librewolf.enable = false;
 
     # qutebrowser
     programs.qutebrowser = {

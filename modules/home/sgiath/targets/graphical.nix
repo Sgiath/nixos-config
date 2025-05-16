@@ -9,6 +9,8 @@
 
   config = lib.mkIf (config.sgiath.targets.graphical) {
     home.packages = with pkgs; [
+      code-cursor
+
       # utils
       obsidian
       gimp
@@ -16,9 +18,9 @@
       kdePackages.okular
       texliveMedium
       libwacom
-      # varia
-      # betaflight-configurator
-      # appimage-run
+      varia
+      betaflight-configurator
+      appimage-run
       davinci-resolve-studio
     ];
 
