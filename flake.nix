@@ -49,11 +49,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    superfile = {
-      url = "github:yorukot/superfile";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     codex = {
       url = "github:openai/codex";
       inputs.nixpkgs.follows = "nixpkgs";
