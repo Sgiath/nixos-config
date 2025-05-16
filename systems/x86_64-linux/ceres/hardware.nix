@@ -22,6 +22,10 @@
     ];
     extraModulePackages = [ ];
     kernelParams = [ "amd_pstate=active" ];
+
+    # Windows 11 boot
+    # loader.systemd-boot.edk2-uefi-shell.enable = true;
+    loader.systemd-boot.windows."11".efiDeviceHandle = "HD1b";
   };
 
   services = {
