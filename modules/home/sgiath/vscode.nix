@@ -1,12 +1,14 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 
 {
   config = lib.mkIf config.programs.vscode.enable {
     programs.vscode = {
+      # package = pkgs.vscodium;
       profiles.default.userSettings = {
         "security.workspace.trust.untrustedFiles" = "open";
         "editor.tabSize" = 2;

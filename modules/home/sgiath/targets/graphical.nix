@@ -18,8 +18,6 @@
       kdePackages.okular
       texliveMedium
       libwacom
-      varia
-      betaflight-configurator
       appimage-run
       davinci-resolve-studio
     ];
