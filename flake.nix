@@ -83,7 +83,8 @@
         foundryvtt.nixosModules.foundryvtt
       ];
 
-      # homes.modules = with inputs; [
-      # ];
+      homes.modules = with inputs; [
+        stylix.homeModules.stylix
+      ];
     };
 }
