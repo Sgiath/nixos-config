@@ -5,6 +5,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     home-manager.url = "github:nix-community/home-manager";
+    nixvim.url = "github:nix-community/nixvim";
     stylix.url = "github:danth/stylix";
 
     nixos-generators = {
@@ -74,9 +75,9 @@
         ];
       };
 
-      # overlays = with inputs; [
-      #
-      # ];
+      overlays = with inputs; [
+        nixvim.overlays.nixvim
+      ];
 
       systems.modules.nixos = with inputs; [
         stylix.nixosModules.stylix
@@ -84,8 +85,8 @@
         foundryvtt.nixosModules.foundryvtt
       ];
 
-      # homes.modules = with inputs; [
-      #   stylix.homeModules.stylix
-      # ];
+      homes.modules = with inputs; [
+        nixvim.homeManagerModules.nixvim
+      ];
     };
 }
