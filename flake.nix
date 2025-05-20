@@ -75,9 +75,9 @@
         ];
       };
 
-      overlays = with inputs; [
-        nixvim.overlays.nixvim
-      ];
+      # overlays = with inputs; [
+        # nixvim.overlays.nixvim
+      # ];
 
       systems.modules.nixos = with inputs; [
         stylix.nixosModules.stylix
