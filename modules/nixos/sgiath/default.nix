@@ -16,7 +16,6 @@ in
     ./networking.nix
     ./optimizations.nix
     ./security.nix
-    # ./stylix.nix
     ./time_lang.nix
     ./udev.nix
 

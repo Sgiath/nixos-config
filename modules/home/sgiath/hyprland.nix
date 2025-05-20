@@ -132,8 +132,6 @@
     };
 
     home = {
-      # pointerCursor.gtk.enable = true;
-
       packages = with pkgs; [
         (writeShellScriptBin "screenshot" ''
           ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" - | ${swappy}/bin/swappy -f -
