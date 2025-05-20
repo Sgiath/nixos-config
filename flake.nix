@@ -106,6 +106,7 @@
 
       homes.modules = with inputs; [
         nixvim.homeManagerModules.nixvim
+        sops-nix.homeManagerModules.sops
       ];
     };
 }

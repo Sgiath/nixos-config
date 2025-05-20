@@ -2,7 +2,5 @@
 {
     programs.nixvim = {
       enable = true;
-      extraPlugins = [ pkgs.vimPlugins.yorumi ];
-      colorscheme = "yorumi";
     };
 }
