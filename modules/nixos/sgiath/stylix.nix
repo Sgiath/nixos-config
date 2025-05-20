@@ -19,7 +19,7 @@ in
       # polarity = "dark";
       # I set this manually with hyprpaper but stylix needs this anyway
       # image = ./../../home/sgiath/wallpapers/transhumanism.png;
-      # base16Scheme = ./../../home/sgiath/theme.yaml;
+      base16Scheme = ./../../home/sgiath/theme.yaml;
 
       # cursor = {
       #   package = pkgs.bibata-cursors;
