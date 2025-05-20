@@ -16,8 +16,8 @@
         "explorer.confirmDelete" = false;
         "explorer.confirmDragAndDrop" = false;
         "editor.wordWrapColumn" = 98;
-        # Augment needs to have it disabled
-        "github.copilot.enable"."*" = false;
+        # Github Copilot
+        "github.copilot.enable"."*" = true;
         # makefile plugin
         "makefile.configureOnOpen" = true;
         # shellcheck plugin

@@ -1,5 +1,5 @@
----@type ChadrcConfig}
-local M = {
+---@type ChadrcConfig
+local M = {}
 
 M.base64 = {
   theme = "yoru",

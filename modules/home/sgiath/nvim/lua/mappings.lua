@@ -11,5 +11,3 @@ map("n", "<leader>fn", ":ObsidianQuickSwitch<CR>", { desc = "Search Obsidian" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("v", ";", ":", { desc = "CMD enter command mode" })
-
-map("i", "jk", "<ESC>", { desc = "Escape insert mode" })

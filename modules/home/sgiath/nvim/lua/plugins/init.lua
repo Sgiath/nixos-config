@@ -25,8 +25,8 @@ return {
 		event = "VeryLazy",
 		opts = {
 			lsp = {
-				-- hover = { enabled = false },
-				-- signature = { enabled = false },
+				hover = { enabled = false },
+				signature = { enabled = false },
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
@@ -88,14 +88,6 @@ return {
 		lazy = false,
 		opts = {},
 	},
-
-	-- {
-	--    "augmentcode/augment.vim",
-	--    lazy = false,
-	--    init = function ()
-	--      vim.g.augment_workspace_folders = { "/home/sgiath/develop/crazyegg/core_v2/" }
-	--    end
-	--  },
 
 	"tpope/vim-sleuth",
 }
