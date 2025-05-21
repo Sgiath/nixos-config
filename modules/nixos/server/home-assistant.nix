@@ -32,11 +32,11 @@
           # custom
           "openweathermap"
           "shelly"
-          "tuya"
-          "tplink"
-          "tplink_tapo"
+          # "tuya"
+          # "tplink"
+          # "tplink_tapo"
           "roborock"
-          "starlink"
+          # "starlink"
           # "bitcoin"
         ];
         config = {
@@ -51,8 +51,8 @@
           };
           homeassistant = {
             name = "Home";
-            latitude = 49.868068917708214;
-            longitude = 18.133653402327774;
+            latitude = 49.84582092775863;
+            longitude = 18.181012180054974;
             temperature_unit = "C";
             time_zone = "UTC";
             unit_system = "metric";
@@ -68,10 +68,10 @@
           ssdp = { };
           sun = { };
           zeroconf = { };
-          # matrix = {
-          #   homeserver = "https://matrix.sgiath.dev";
-          #   username = "@sgiath:sgiath.dev";
-          # };
+          matrix = {
+            homeserver = "https://matrix.sgiath.dev";
+            username = "@sgiath:sgiath.dev";
+          };
         };
       };
     };
