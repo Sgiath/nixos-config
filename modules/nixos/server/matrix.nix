@@ -72,6 +72,10 @@ in
             '';
             return = "200 '{\"contacts\":[{\"email_address\":\"matrix@sgiath.dev\",\"matrix_id\":\"@sgiath:sgiath.dev\",\"role\":\"m.role.admin\"}]}'";
           };
+
+          "/_matrix/*" = {
+            proxyPass = "http://127.0.0.1:6167";
+          };
         };
 
         "matrix.sgiath.dev" = {
