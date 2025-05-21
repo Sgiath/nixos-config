@@ -38,8 +38,8 @@ in
           "/.well-known/matrix/server" = {
             extraConfig = ''
               add_header Access-Control-Allow-Origin '*';
-              add_header Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-              add_header Access-Control-Allow-Headers: X-Requested-With, Content-Type, Authorization
+              add_header Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS;
+              add_header Access-Control-Allow-Headers: X-Requested-With, Content-Type, Authorization;
               add_header Cross-Origin-Resource-Policy 'cross-origin';
 
               default_type application/json;
@@ -51,8 +51,8 @@ in
           "/.well-known/matrix/client" = {
             extraConfig = ''
               add_header Access-Control-Allow-Origin '*';
-              add_header Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-              add_header Access-Control-Allow-Headers: X-Requested-With, Content-Type, Authorization
+              add_header Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS;
+              add_header Access-Control-Allow-Headers: X-Requested-With, Content-Type, Authorization;
               add_header Cross-Origin-Resource-Policy 'cross-origin';
 
               default_type application/json;
@@ -64,8 +64,8 @@ in
           "/.well-known/matrix/support" = {
             extraConfig = ''
               add_header Access-Control-Allow-Origin '*';
-              add_header Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-              add_header Access-Control-Allow-Headers: X-Requested-With, Content-Type, Authorization
+              add_header Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS;
+              add_header Access-Control-Allow-Headers: X-Requested-With, Content-Type, Authorization;
               add_header Cross-Origin-Resource-Policy 'cross-origin';
 
               default_type application/json;
