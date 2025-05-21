@@ -16,7 +16,6 @@ in
         settings.global = {
           # server
           server_name = "sgiath.dev";
-          address = "0.0.0.0";
           port = 6167;
 
           database_backend = "rocksdb";
@@ -27,8 +26,13 @@ in
 
           well_known = {
             client = "https://matrix.sgiath.dev";
-            server = "matrix.sgiath.dev:6167";
+            server = "matrix.sgiath.dev:443";
           };
+
+          trusted_servers = [
+            "matrix.org"
+            "nixos.org"
+          ];
         };
       };
 
