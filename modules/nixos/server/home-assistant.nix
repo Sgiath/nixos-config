@@ -1,4 +1,7 @@
 { config, lib, ... }:
+let
+  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
+in
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.home-assistant.enable) {
     services = {
@@ -71,6 +74,7 @@
           matrix = {
             homeserver = "https://matrix.sgiath.dev";
             username = "@sgiath:sgiath.dev";
+            password = secrets.matrix_password;
           };
         };
       };
