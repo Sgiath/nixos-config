@@ -56,6 +56,7 @@ in
       nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       package = pkgs.nixVersions.latest;
       settings = {
+        access-tokens = "github.com=${secrets.github_token}";
         auto-optimise-store = true;
         require-sigs = false;
         experimental-features = [
