@@ -50,10 +50,14 @@
       shells = with pkgs; [
         bash
         zsh
+        fish
+        nushellFull
       ];
       systemPackages = with pkgs; [
         neovim
         git
+        fish
+        nushellFull
       ];
     };
 
