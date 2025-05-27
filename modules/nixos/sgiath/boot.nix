@@ -51,13 +51,13 @@
         bash
         zsh
         fish
-        nushellFull
+        nushell
       ];
       systemPackages = with pkgs; [
         neovim
         git
         fish
-        nushellFull
+        nushell
       ];
     };
 
