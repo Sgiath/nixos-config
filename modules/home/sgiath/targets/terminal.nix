@@ -11,6 +11,7 @@
     home.packages = with pkgs; [
       coreutils-prefixed
       mprocs
+      presenterm
 
       openssl
       # codex-cli
