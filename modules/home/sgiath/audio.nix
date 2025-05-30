@@ -13,6 +13,7 @@
     home.packages = with pkgs; [
       qpwgraph
       helvum
+      pavucontrol
     ];
     services.easyeffects = {
       enable = true;
