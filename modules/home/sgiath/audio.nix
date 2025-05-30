@@ -10,7 +10,10 @@
   };
 
   config = lib.mkIf config.sgiath.audio.enable {
-    home.packages = [ pkgs.qpwgraph ];
+    home.packages = with pkgs; [
+      qpwgraph
+      helvum
+    ];
     services.easyeffects = {
       enable = true;
       package = pkgs.easyeffects;
