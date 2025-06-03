@@ -86,5 +86,10 @@ in
     environment.sessionVariables = {
       OPENAI_API_KEY = secrets.openai;
     };
+    programs = {
+      nix-ld = {
+        enable = true;
+      };
+    };
   };
 }
