@@ -35,7 +35,7 @@
         # servers
         "vesta.local".hostname = "192.168.1.2";
         "vesta.sgiath.dev" = {
-          hostname = "145.224.120.18";
+          hostname = "193.165.30.198";
           port = 2200;
         };
 
@@ -49,17 +49,15 @@
         "nas.local".hostname = "192.168.1.4";
 
         # CrazyEgg
+        "bastion.crazyegg.com".hostname = "us-east-1.general-purpose.bastion.crazyegg.com";
         "*.bastion.crazyegg.com" = {
           user = "filip";
           proxyCommand = "none";
           forwardAgent = true;
         };
-        "i.staging2.crazyegg.com" = {
-          proxyCommand = "ssh us-west-2.general-purpose-staging.bastion.crazyegg.com -W %h:%p";
-        };
-        "i.*.crazyegg.com dev.crazyegg.com" = {
+        "i.*.crazyegg.com" = {
           user = "crazyegg";
-          proxyCommand = "ssh us-east-1.general-purpose.bastion.crazyegg.com -W %h:%p";
+          proxyCommand = "ssh bastion.crazyegg.com -W %h:%p";
         };
       };
     };
