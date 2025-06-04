@@ -47,6 +47,13 @@
 
         # NAS
         "nas.local".hostname = "192.168.1.4";
+
+        # CrazyEgg
+        "*.bastion.crazyegg.yom" = {
+          user = "filip";
+          proxyCommand = "none";
+          forwardAgent = true;
+        };
       };
     };
   };
