@@ -49,8 +49,8 @@
         "nas.local".hostname = "192.168.1.4";
 
         # CrazyEgg
-        "bastion.crazyegg.com".hostname = "us-east-1.general-purpose.bastion.crazyegg.com";
-        "*.bastion.crazyegg.com" = {
+        "bastion.crazyegg.com" = {
+          hostname = "us-east-1.general-purpose.bastion.crazyegg.com";
           user = "filip";
           proxyCommand = "none";
           forwardAgent = true;
