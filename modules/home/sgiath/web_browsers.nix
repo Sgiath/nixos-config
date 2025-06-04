@@ -12,33 +12,36 @@
     home.packages = [
       pkgs.tor-browser
       pkgs.zen-browser
+      pkgs.lynx
     ];
 
-    programs.chromium.enable = true;
+    programs = {
+      chromium.enable = true;
+      ladybird.enable = true;
+      firefox.enable = true;
 
-    # Firefox
-    programs.firefox.enable = true;
-    stylix.targets.firefox.enable = false;
+      # https://librewolf.net/docs/settings/
+      librewolf.enable = true;
 
-    # librewolf
-    # https://librewolf.net/docs/settings/
-    programs.librewolf.enable = true;
-    stylix.targets.librewolf.enable = false;
+      qutebrowser = {
+        enable = true;
+        searchEngines = {
+          DEFAULT = "https://search.sgiath.dev/search?q={}";
+        };
+        quickmarks = {
+          nixpkgs = "https://github.com/NixOS/nixpkgs";
+        };
+        # https://qutebrowser.org/doc/help/settings.html
+        settings = {
+          auto_save.session = true;
+          colors.webpage.darkmode.enabled = true;
+        };
+      };
+    };
 
-    # qutebrowser
-    programs.qutebrowser = {
-      enable = true;
-      searchEngines = {
-        DEFAULT = "https://search.sgiath.dev/search?q={}";
-      };
-      quickmarks = {
-        nixpkgs = "https://github.com/NixOS/nixpkgs";
-      };
-      # https://qutebrowser.org/doc/help/settings.html
-      settings = {
-        auto_save.session = true;
-        colors.webpage.darkmode.enabled = true;
-      };
+    stylix.targets = {
+      firefox.enable = false;
+      librewolf.enable = false;
     };
 
     wayland.windowManager.hyprland.settings.windowrulev2 = [
