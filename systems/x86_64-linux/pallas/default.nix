@@ -1,10 +1,11 @@
+{ pkgs, ... }:
 {
   imports = [ ./hardware.nix ];
 
   networking.hostName = "pallas";
-  networking.wireless.enable = true;
+  networking.wireless.enable = false;
   networking.wireguard.enable = false;
-  # environment.systemPackages = with pkgs; [ wpa_supplicant_gui ];
+  environment.systemPackages = with pkgs; [ wpa_supplicant_gui ];
 
   sgiath = {
     enable = true;
