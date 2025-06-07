@@ -23,10 +23,7 @@ in
       wireless = {
         userControlled.enable = true;
         networks = {
-          "Turris 5" = {
-            priority = 10;
-            pskRaw = "5979f534aeb44615c6efa716ad68f0bf36747981e4eb1a83381997c03301eb44";
-          };
+          "Turris 5".psk = "5979f534aeb44615c6efa716ad68f0bf36747981e4eb1a83381997c03301eb44";
         };
       };
       hosts = {
