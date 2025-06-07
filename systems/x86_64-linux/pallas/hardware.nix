@@ -25,6 +25,9 @@
     ];
     extraModulePackages = [ ];
     kernelModules = [ "kvm-amd" ];
+
+    loader.systemd-boot.edk2-uefi-shell.enable = true;
+    # loader.systemd-boot.windows."11".efiDeviceHandle = "HD1b";
   };
 
   services.nfs.server.enable = true;
