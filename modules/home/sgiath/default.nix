@@ -111,6 +111,7 @@
         parted
         nix-du
         exfat
+        wpa_supplicant_gui
       ];
     };
 
