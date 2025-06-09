@@ -31,5 +31,4 @@ in
 
   # get open-webui updates sooner
   open-webui = pkgs-master.open-webui;
-
 }

@@ -13,10 +13,12 @@
     ./comm.nix
     ./email_client.nix
     ./file-explorer.nix
+    ./fish.nix
     ./games.nix
     ./git.nix
     ./gnupg.nix
     ./hyprland.nix
+    ./nushell.nix
     ./nvim.nix
     ./ssh.nix
     ./starship.nix

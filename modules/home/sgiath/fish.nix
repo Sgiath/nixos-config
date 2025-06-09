@@ -1,6 +1,6 @@
 {}:
 {
-  programs.nushell = {
+  programs.fish = {
     enable = true;
   };
 }

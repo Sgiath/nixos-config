@@ -1,4 +1,9 @@
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    codex-cli
+  ];
+
   sgiath = {
     enable = true;
     games.enable = true;

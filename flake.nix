@@ -65,11 +65,6 @@
       url = "github:openai/codex";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    jujutsu = {
-      url = "github:jj-vcs/jj";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -98,9 +93,9 @@
         ];
       };
 
-      overlays = with inputs; [
-        jujutsu.overlays.default
-      ];
+      # overlays = with inputs; [
+      #   jujutsu.overlays.default
+      # ];
 
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko
