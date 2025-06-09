@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     # codex-cli
+    code-cursor
   ];
 
   sgiath = {
