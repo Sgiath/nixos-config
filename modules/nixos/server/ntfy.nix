@@ -4,9 +4,9 @@
   ...
 }:
 {
-  config = lib.mkIf (config.sgiath.server.enable && config.services.ntfy.enable) {
+  config = lib.mkIf (config.sgiath.server.enable && config.services.ntfy-sh.enable) {
     services = {
-      ntfy = {
+      ntfy-sh = {
         settings = {
           base-url = "https://ntfy.sgiath.dev";
           listen-http = ":5679";
