@@ -48,16 +48,16 @@
 
           case "$1" in
             --ceres)
-              nixos-rebuild switch --use-remote-sudo --flake '.#ceres'
+              nixos-rebuild switch --sudo --flake '.#ceres'
               ;;
 
             --vesta)
               nix-store --add-fixed sha256 ~/nix-root/FoundryVTT-Linux-13.344.zip
-              nixos-rebuild switch --use-remote-sudo --flake '.#vesta' --target-host 'sgiath@vesta.local'
+              nixos-rebuild switch --sudo --flake '.#vesta' --target-host 'sgiath@vesta.local'
               ;;
 
             --hygiea)
-              nixos-rebuild switch --use-remote-sudo --flake '.#hygiea' --target-host 'sgiath@hygiea.sgiath.dev'
+              nixos-rebuild switch --sudo --flake '.#hygiea' --target-host 'sgiath@hygiea.sgiath.dev'
               ;;
 
             --iso)
@@ -68,7 +68,7 @@
               ;;
 
             *)
-              nixos-rebuild switch --use-remote-sudo --flake .
+              nixos-rebuild switch --sudo --flake .
               ;;
           esac
 
