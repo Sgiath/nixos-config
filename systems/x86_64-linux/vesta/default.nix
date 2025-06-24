@@ -20,7 +20,7 @@
     pi-hole.enable = true;
     searx.enable = true;
     transmission.enable = true;
-    plex.enable = true;
+    jellyfin.enable = true;
 
     foundryvtt.enable = true;
     dnd5etools.enable = true;

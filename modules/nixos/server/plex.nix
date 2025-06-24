@@ -4,13 +4,13 @@
   ...
 }:
 {
-  config = lib.mkIf (config.sgiath.server.enable && config.services.plex.enable) {
+  config = lib.mkIf (config.sgiath.server.enable && config.services.jellyfin.enable) {
     services = {
-      plex = {
+      jellyfin = {
         openFirewall = true;
       };
 
-      nginx.virtualHosts."plex.sgiath.dev" = {
+      nginx.virtualHosts."watch.sgiath.dev" = {
         # SSL
         onlySSL = true;
         kTLS = true;
@@ -24,7 +24,7 @@
         quic = true;
 
         locations."/" = {
-          proxyPass = "http://127.0.0.1:32400";
+          proxyPass = "http://127.0.0.1:8096";
           proxyWebsockets = true;
         };
       };
