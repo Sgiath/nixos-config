@@ -93,10 +93,6 @@
         ];
       };
 
-      # overlays = with inputs; [
-      #   jujutsu.overlays.default
-      # ];
-
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
