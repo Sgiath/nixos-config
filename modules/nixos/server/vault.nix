@@ -24,11 +24,11 @@ in
       #   https://github.com/dani-garcia/vaultwarden/wiki/SMTP-configuration
       SMTP_HOST = "smtp.protonmail.ch";
       SMTP_PORT = 587;
-      SMTP_SECURITY = "force_tls";
+      # SMTP_SECURITY = "force_tls";
       SMTP_USERNAME = "FilipVavera@sgiath.dev";
       SMTP_PASSWORD = secrets.protonmail_token;
 
-      SMTP_FROM = "FilipVavera@sgiath.dev";
+      SMTP_FROM = "vault@sgiath.dev";
       SMTP_FROM_NAME = "sgiath.dev Vault server";
     };
 
