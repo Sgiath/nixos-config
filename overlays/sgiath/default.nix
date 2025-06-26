@@ -23,9 +23,6 @@ in
   # zen browser has custom repo until nixpkgs is updated
   zen-browser = inputs.zen-browser.packages.${prev.system}.default;
 
-  # codex is Nix native
-  codex-cli = inputs.codex.packages.${prev.system}.codex-cli;
-
   # NIX Gaming
   star-citizen = inputs.nix-gaming.packages.${prev.system}.star-citizen;
 

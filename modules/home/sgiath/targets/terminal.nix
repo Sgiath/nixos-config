@@ -14,7 +14,8 @@
       presenterm
 
       openssl
-      # codex-cli
+      codex
+      opencode
 
       yt-dlp
       google-cloud-sdk
