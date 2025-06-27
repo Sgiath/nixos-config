@@ -55,6 +55,9 @@
           # Auth service
           auth.app.crazyeggdev.com 'http://127.0.0.1:4041';
 
+          # Chat service
+          chat.crazyeggdev.com 'http://127.0.0.1:4051';
+
           # Core v2 shell, shell
           core.crazyeggdev.com 'http://127.0.0.1:8080';
           share.crazyeggdev.com 'http://127.0.0.1:8080';
