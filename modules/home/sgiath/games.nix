@@ -51,7 +51,7 @@ in
         token = secrets.factorio_token;
       })
 
-      star-citizen
+      # star-citizen
     ];
 
     wayland.windowManager.hyprland.settings.windowrulev2 = [
