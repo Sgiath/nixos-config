@@ -7,6 +7,7 @@
 
 {
   config = lib.mkIf config.programs.vscode.enable {
+    # VSCode
     programs.vscode = {
       # package = pkgs.vscodium;
       profiles.default.userSettings = {
@@ -24,15 +25,20 @@
         "shellcheck.customArgs" = [ "-x" ];
       };
     };
-
     stylix.targets.vscode.enable = false;
 
+    # Cursor
     xdg.desktopEntries = {
       "cursor" = {
         name = "Cursor";
         genericName = "Text Editor";
-        exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/Cursor-1.0.0-x86_64.AppImage";
+        exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/Cursor-1.2.2-x86_64.AppImage";
       };
     };
+
+    home.packages = with pkgs; [
+      windsurf
+      zed-editor-fhs
+    ];
   };
 }
