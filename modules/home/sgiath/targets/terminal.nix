@@ -14,7 +14,7 @@
       presenterm
 
       openssl
-      codex
+      # codex
       opencode
       gemini-cli
 
