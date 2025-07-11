@@ -137,9 +137,7 @@ in
       };
     };
 
-    home = {
-      packages = [ screenshot ];
-    };
+    home.packages = [ screenshot ];
 
     programs.wofi = {
       enable = true;
