@@ -65,7 +65,6 @@
     programs = {
       hyprland.enable = true;
       hyprlock.enable = true;
-      ladybird.enable = true;
     };
   };
 }
