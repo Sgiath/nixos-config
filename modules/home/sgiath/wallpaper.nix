@@ -17,9 +17,9 @@ in {
       ];
 
       settings = {
-        exec-once = [
-          "${nasa_exec}/bin/nasa"
-        ];
+        # exec-once = [
+        #   "${nasa_exec}/bin/nasa"
+        # ];
 
         bind = [
           "$mod, W, exec, ${nasa_exec}/bin/nasa"
@@ -28,10 +28,9 @@ in {
         plugin.hyprwinwrap.class = "nasa";
         
         windowrulev2 = [
-          "fullscreenstate 0 0, class:(nasa)"
+          "fullscreenstate 36 0, class:(nasa)"
           "workspace special:nasa silent, class:(nasa)"
           "noinitialfocus, class:(nasa)"
-          "move 100 0, class:(nasa)"
         ];
       };
     };
