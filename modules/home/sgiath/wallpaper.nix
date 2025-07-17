@@ -14,8 +14,12 @@ in {
       ];
 
       settings = {
-        exec-once = [
-          "sleep 5 && ${pkgs.ungoogled-chromium}/bin/chromium --kiosk --user-data-dir=/tmp/chrome-temp --incognito --no-first-run --ozone-platform=x11 --class=nasa '${nasa_url}'"
+        # exec-once = [
+        #   "sleep 5 && ${pkgs.ungoogled-chromium}/bin/chromium --kiosk --user-data-dir=/tmp/chrome-temp --incognito --no-first-run --ozone-platform=x11 --class=nasa '${nasa_url}'"
+        # ];
+
+        bind = [
+          "$mod, W, exec, ${pkgs.ungoogled-chromium}/bin/chromium --kiosk --user-data-dir=/tmp/chrome-temp --incognito --no-first-run --ozone-platform=x11 --class=nasa '${nasa_url}'"
         ];
 
         plugin.hyprwinwrap.class = "nasa";
