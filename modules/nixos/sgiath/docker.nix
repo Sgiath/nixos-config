@@ -10,10 +10,17 @@
 
   config = lib.mkIf config.sgiath.docker.enable {
     virtualisation = {
-      docker.enable = true;
-      podman.enable = true;
+      docker = {
+        enable = true;
+        storageDriver = "btrfs";
+      };
+
+      podman = {
+        enable = true;
+        defaultNetwork.settings.dns_enabled = true;
+      };
     };
-    
+
     users.users.sgiath.extraGroups = [ "docker" ];
   };
 }
