@@ -9,8 +9,11 @@
   };
 
   config = lib.mkIf config.sgiath.docker.enable {
-    virtualisation.docker.enable = true;
-    virtualisation.podman.enable = true;
+    virtualisation = {
+      docker.enable = true;
+      podman.enable = true;
+    };
+    
     users.users.sgiath.extraGroups = [ "docker" ];
   };
 }

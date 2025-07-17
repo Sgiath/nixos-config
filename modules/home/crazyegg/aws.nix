@@ -32,6 +32,7 @@ in
     };
     home = {
       packages = with pkgs; [
+        docker-credential-helpers
         amazon-ecr-credential-helper
         awsSecrets
         jq
