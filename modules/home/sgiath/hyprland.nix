@@ -138,7 +138,7 @@ in
       };
     };
 
-    home.packages = [ screenshot ];
+    home.packages = [ screenshot pkgs.grim ];
 
     programs.wofi = {
       enable = true;
