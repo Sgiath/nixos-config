@@ -21,10 +21,6 @@ in
       portalPackage = null;
       xwayland.enable = true;
 
-      plugins = [
-        pkgs.hyprlandPlugins.hyprwinwrap
-      ];
-
       systemd = {
         enable = true;
         enableXdgAutostart = true;
@@ -41,16 +37,6 @@ in
 
         group.groupbar.font_size = 14;
         misc.focus_on_activate = true;
-
-        exec-once = [
-          "sleep 1 && ${pkgs.firefox}/bin/firefox --new-window 'https://eyes.nasa.gov/apps/solar-system/#/home' --name='nasa' --kiosk"
-        ];
-        plugin.hyprwinwrap.class = "nasa";
-        windowrule = [
-          "fullscreenstate 0 0, class:nasa"
-          "workspace special:nasa silent, class:nasa"
-          "noinitialfocus, class:nasa"
-        ];
 
         monitor = [
           # Desktop
@@ -164,17 +150,6 @@ in
     };
 
     services = {
-      hyprpaper = {
-        enable = false;
-        settings = lib.mkForce {
-          preload = [ "${./wallpapers/transhumanism.png}" ];
-          wallpaper = [
-            "DP-1,contain:${./wallpapers/transhumanism.png}"
-            "DP-3,contain:${./wallpapers/transhumanism.png}"
-            "DP-2,contain:${./wallpapers/transhumanism.png}"
-          ];
-        };
-      };
       mako.enable = true;
       hyprpolkitagent.enable = true;
     };

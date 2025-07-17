@@ -25,6 +25,7 @@
     ./stylix.nix
     ./tmux.nix
     ./vscode.nix
+    ./wallpaper.nix
     ./waybar.nix
     ./web_browsers.nix
     ./zsh.nix
