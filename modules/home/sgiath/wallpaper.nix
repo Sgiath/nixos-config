@@ -17,9 +17,9 @@ in {
       ];
 
       settings = {
-        # exec-once = [
-        #   "sleep 5 && ${pkgs.ungoogled-chromium}/bin/chromium --kiosk --user-data-dir=/tmp/chrome-temp --incognito --no-first-run --ozone-platform=x11 --class=nasa '${nasa_url}'"
-        # ];
+        exec-once = [
+          "${nasa_exec}/bin/nasa"
+        ];
 
         bind = [
           "$mod, W, exec, ${nasa_exec}/bin/nasa"
@@ -31,6 +31,7 @@ in {
           "fullscreenstate 0 0, class:(nasa)"
           "workspace special:nasa silent, class:(nasa)"
           "noinitialfocus, class:(nasa)"
+          "layer:bellow, class:(nasa)"
         ];
       };
     };
