@@ -13,7 +13,7 @@ in {
   config = lib.mkIf config.programs.hyprland.enable {
     wayland.windowManager.hyprland = {
       plugins = [
-        pkgs.hyprlandPlugins.hyprwinwrap
+        # pkgs.hyprlandPlugins.hyprwinwrap
       ];
 
       settings = {
@@ -28,9 +28,11 @@ in {
         # plugin.hyprwinwrap.class = "nasa";
         
         windowrulev2 = [
-          # "fullscreenstate 0 0, class:(nasa)"
+          "fullscreenstate 0 0, class:(nasa)"
           "workspace special:nasa silent, class:(nasa)"
           "noinitialfocus, class:(nasa)"
+          "float, class:(nasa)"
+          "size 100% 100%, class:(nasa)"
         ];
       };
     };
