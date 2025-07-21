@@ -25,7 +25,11 @@ in {
           "$mod, W, exec, ${nasa_exec}/bin/nasa"
         ];
 
-        plugin.hyprwinwrap.class = "nasa";
+        plugin.hyprwinwrap = {
+          class = "nasa";
+          pos_x = 0;
+          pos_y = 10;
+        };
         
         windowrulev2 = [
           "fullscreenstate 0 0, class:(nasa)"
