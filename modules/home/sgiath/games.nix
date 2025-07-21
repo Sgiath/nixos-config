@@ -14,6 +14,8 @@ in
 
   config = lib.mkIf config.sgiath.games.enable {
     home.packages = with pkgs; [
+      protonplus
+
       # wine64
       winetricks
       wineWowPackages.waylandFull
