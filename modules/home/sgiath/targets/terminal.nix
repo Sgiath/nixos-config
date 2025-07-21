@@ -15,7 +15,7 @@
 
       openssl
       # codex
-      opencode
+      # opencode
       gemini-cli
 
       yt-dlp
