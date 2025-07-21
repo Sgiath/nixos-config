@@ -1,4 +1,9 @@
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    vue
+  ];
+
   sgiath = {
     enable = true;
     games.enable = true;
