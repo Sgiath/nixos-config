@@ -2,9 +2,14 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 let
+  # package to use
+  n8n = pkgs.${namespace}.n8n;
+
+  # generate config file
   format = pkgs.formats.json { };
   configFile = format.generate "n8n.json" {
     port = 5678;
@@ -56,7 +61,7 @@ in
       };
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.n8n}/bin/n8n";
+        ExecStart = "${n8n}/bin/n8n";
         Restart = "on-failure";
         StateDirectory = "n8n";
 

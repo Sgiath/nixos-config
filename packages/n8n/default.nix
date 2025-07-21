@@ -15,18 +15,19 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "n8n";
-  version = "1.93.0";
+  version = "1.103.1";
 
   src = fetchFromGitHub {
     owner = "n8n-io";
     repo = "n8n";
     tag = "n8n@${finalAttrs.version}";
-    hash = "sha256-qq4oehZnwp9Zj+h827exILrgLgM/yHQzjWRQsdmYWgs=";
+    hash = "sha256-raEKpvpquPVpjKuHuOPgRb8Xk7z0ARqmoxtjuHZISGI=";
   };
 
   pnpmDeps = pnpm_10.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-bLpYfIIJYmooRX7F/L8e7kdbEKPNJE6EPqjhPdAwJt4=";
+    fetcherVersion = 1;
+    hash = "sha256-LierbGPkVIy5/2vtBl94TQcSpmNX9OUDMntDdo5BeiU=";
   };
 
   nativeBuildInputs = [
@@ -87,7 +88,6 @@ stdenv.mkDerivation (finalAttrs: {
 
   passthru = {
     tests = nixosTests.n8n;
-    # updateScript = ./update.sh;
   };
 
   # this package has ~80000 files, these take too long and seem to be unnecessary
