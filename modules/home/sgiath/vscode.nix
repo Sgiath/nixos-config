@@ -28,12 +28,10 @@
     stylix.targets.vscode.enable = false;
 
     # Cursor
-    xdg.desktopEntries = {
-      "cursor" = {
-        name = "Cursor";
-        genericName = "Text Editor";
-        exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/Cursor-1.2.2-x86_64.AppImage";
-      };
+    xdg.desktopEntries."cursor" = {
+      name = "Cursor";
+      genericName = "Text Editor";
+      exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/Cursor-1.2.2-x86_64.AppImage";
     };
 
     home.packages = with pkgs; [

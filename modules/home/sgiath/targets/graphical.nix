@@ -75,4 +75,10 @@
       web_browsers.enable = true;
     };
   };
+
+  xdg.desktopEntries."vue" = {
+    name = "Visual Unederstanding Environment";
+    genericName = "VUE";
+    exec = "${pkgs.vue}/bin/vue";
+  };
 }
