@@ -11,9 +11,10 @@
 
   config = lib.mkIf (config.sgiath.bitcoin.enable) {
     home.packages = with pkgs; [
-      bisq-desktop
+      bisq
       trezor-suite
       trezor-udev-rules
+      sparrow
     ];
   };
 }

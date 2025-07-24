@@ -69,7 +69,7 @@
     sgiath = {
       enable = true;
       audio.enable = true;
-      bitcoin.enable = false;
+      bitcoin.enable = true;
       comm.enable = true;
       email_client.enable = true;
       web_browsers.enable = true;

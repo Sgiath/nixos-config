@@ -15,6 +15,8 @@ let
       allowUnfree = true;
     };
   };
+
+  pkgs-btc = import inputs.btc-clients.packages.${prev.system};
 in
 {
   # conduit build from official repo flake
@@ -31,4 +33,8 @@ in
 
   # get n8n updates sooner
   n8n = pkgs-master.n8n;
+
+  # Bitcoin clients
+  bisq = pkgs-btc.bisq;
+  sparrow = pkgs-btc.sparrow;
 }
