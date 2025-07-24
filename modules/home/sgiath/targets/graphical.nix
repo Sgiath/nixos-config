@@ -74,11 +74,11 @@
       email_client.enable = true;
       web_browsers.enable = true;
     };
-  };
 
-  xdg.desktopEntries."vue" = {
-    name = "Visual Unederstanding Environment";
-    genericName = "VUE";
-    exec = "${pkgs.vue}/bin/vue";
+    xdg.desktopEntries."vue" = {
+      name = "Visual Unederstanding Environment";
+      genericName = "VUE";
+      exec = "${pkgs.vue}/bin/vue";
+    };
   };
 }

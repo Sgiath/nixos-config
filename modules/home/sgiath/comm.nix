@@ -29,12 +29,19 @@
       ];
       windowrulev2 = [
         "workspace 10 silent, class:(Slack)"
+        "noinitialfocus, class:(Slack)"
         "workspace 10 silent, class:(WebCord)"
+        "noinitialfocus, class:(WebCord)"
         "workspace 10 silent, class:(signal)"
+        "noinitialfocus, class:(signal)"
         "workspace 10 silent, class:(org.telegram.desktop)"
+        "noinitialfocus, class:(org.telegram.desktop)"
         "workspace 10 silent, class:(Hexchat)"
+        "noinitialfocus, class:(Hexchat)"
         "workspace 10 silent, class:(cinny)"
+        "noinitialfocus, class:(cinny)"
         "workspace 10 silent, class:(org.gnome.Fractal)"
+        "noinitialfocus, class:(org.gnome.Fractal)"
       ];
     };
   };
