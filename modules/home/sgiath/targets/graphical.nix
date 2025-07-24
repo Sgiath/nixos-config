@@ -21,6 +21,7 @@
       libwacom
       appimage-run
       # davinci-resolve-studio
+      gephi
     ];
 
     wayland.windowManager.hyprland.settings = {
