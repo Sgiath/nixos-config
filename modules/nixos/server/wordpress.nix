@@ -10,7 +10,7 @@
     services = {
       nginx.virtualHosts."romana-vaverova.cz" = {
         # SSL
-        onlySSL = true;
+        onlySSL = false;
         kTLS = true;
 
         # ACME
