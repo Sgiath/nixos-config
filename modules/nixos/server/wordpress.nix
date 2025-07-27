@@ -30,7 +30,7 @@
         WORDPRESS_DB_USER = "wordpress";
         WORDPRESS_DB_NAME = "romana-vaverova";
         WORDPRESS_DB_HOST = "localhost";
-        WORDPRESS_DB_PASSWORD = "wordpress";
+        # WORDPRESS_DB_PASSWORD = "wordpress";
       };
     };
 
@@ -42,7 +42,6 @@
         ensureUsers = [
           {
             name = "wordpress";
-            password = "wordpress";
             ensurePermissions = { "romana-vaverova.*" = "ALL PRIVILEGES"; };
           }
         ];
