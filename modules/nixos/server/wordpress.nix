@@ -14,20 +14,15 @@
           # SSL
           onlySSL = true;
           kTLS = true;
+
           sslCertificate = "/data/www/romana-vaverova.cz/cert.pem";
           sslCertificateKey = "/data/www/romana-vaverova.cz/key.pem";
 
           # ACME
           enableACME = false;
 
-          # QUIC
-          http3_hq = true;
-          quic = true;
-
-          locations = {
-            "/" = {
-              proxyPass = "http://127.0.0.1:8081";
-            };
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8081";
           };
         };
       };
