@@ -8,22 +8,26 @@
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.wordpress.proxy) {
     services = {
-      nginx.virtualHosts."romana-vaverova.cz" = {
-        # SSL
-        onlySSL = true;
-        kTLS = true;
+      nginx.virtualHosts = {
+        "www.romana-vaverova.cz".globalRedirect = "romana-vaverova.cz";
+        "romana-vaverova.cz" = {
+          # SSL
+          onlySSL = true;
+          kTLS = true;
+          sslCertificate = "/data/www/romana-vaverova.cz/cert.pem";
+          sslCertificateKey = "/data/www/romana-vaverova.cz/key.pem";
 
-        # ACME
-        enableACME = true;
-        acmeRoot = null;
+          # ACME
+          enableACME = false;
 
-        # QUIC
-        http3_hq = true;
-        quic = true;
+          # QUIC
+          http3_hq = true;
+          quic = true;
 
-        locations = {
-          "/" = {
-            proxyPass = "http://127.0.0.1:8081";
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:8081";
+            };
           };
         };
       };
