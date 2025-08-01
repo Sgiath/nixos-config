@@ -22,6 +22,7 @@
       appimage-run
       # davinci-resolve-studio
       gephi
+      lmstudio
     ];
 
     wayland.windowManager.hyprland.settings = {
