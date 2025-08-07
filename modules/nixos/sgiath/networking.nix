@@ -1,7 +1,4 @@
 { config, lib, ... }:
-let
-  # secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
 {
   config = lib.mkIf config.sgiath.enable {
     networking = {
@@ -14,9 +11,15 @@ in
           "Turris 5".pskRaw = "5979f534aeb44615c6efa716ad68f0bf36747981e4eb1a83381997c03301eb44";
           "Turris 2".pskRaw = "70130aabbf56025a53266182e3a282588d7c324c90f4e75e45fff5a275ba019a";
           # mobile hotspot
-          "sgiath".pskRaw = "f6a123fbdb7740477934a8a5fb8c3e4ef6496c5e0fefd43f0074559fc5345c7c";
+          "sgiath" = {
+            pskRaw = "f6a123fbdb7740477934a8a5fb8c3e4ef6496c5e0fefd43f0074559fc5345c7c";
+            priority = 10;
+          };
           # Kypruv mlyn
-          "mlyn".pskRaw = "e4b2f70b2546be145714c58c42b6f0d725b4df7b5d06dbc77bd439157ca7147f";
+          "mlyn" = {
+            pskRaw = "e4b2f70b2546be145714c58c42b6f0d725b4df7b5d06dbc77bd439157ca7147f";
+            priority = 5;
+          };
         };
       };
 
