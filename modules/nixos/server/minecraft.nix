@@ -23,7 +23,7 @@ in
     # vanila server
     services.minecraft-servers = {
       eula = true;
-      mangementSystem = {
+      managementSystem = {
         tmux.enable = true;
         # systemd-socket.enable = true;
       };
