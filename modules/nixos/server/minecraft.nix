@@ -25,7 +25,7 @@ in
       eula = true;
       managementSystem = {
         tmux.enable = true;
-        # systemd-socket.enable = true;
+        systemd-socket.enable = true;
       };
 
       servers = {
