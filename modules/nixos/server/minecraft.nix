@@ -24,13 +24,13 @@ in
     services.minecraft-server = {
       eula = true;
       declarative = true;
-
       whitelist = operators;
 
       # https://minecraft.wiki/w/Server.properties#Java_Edition
       serverProperties = {
         difficulty = "easy";
         gamemode = "survival";
+        level-name = "world2";
         force-gamemode = true;
         enforce-whitelist = true;
         server-port = 25565;
