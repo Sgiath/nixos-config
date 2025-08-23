@@ -16,34 +16,24 @@ let
   };
 in
 {
-  config = lib.mkIf (config.sgiath.server.enable && config.services.minecraft-servers.enable) {
+  config = lib.mkIf (config.sgiath.server.enable && config.services.minecraft-server.enable) {
     # for starting new packs on the server and testing
     environment.systemPackages = with pkgs; [ jdk21 ];
 
     # vanila server
-    services.minecraft-servers = {
+    services.minecraft-server = {
       eula = true;
-      managementSystem = {
-        tmux.enable = true;
-        # systemd-socket.enable = true;
-      };
+      declarative = true;
 
-      servers = {
-        vanila = {
-          enable = true;
-          inherit operators;
-
-          # https://minecraft.wiki/w/Server.properties#Java_Edition
-          serverProperties = {
-            # easy
-            difficulty = 1;
-            # survival
-            gamemode = 0;
-            server-port = 25565;
-            max-players = 10;
-            online-mode = false;
-          };
-        };
+      # https://minecraft.wiki/w/Server.properties#Java_Edition
+      serverProperties = {
+        # easy
+        difficulty = 1;
+        # survival
+        gamemode = 0;
+        server-port = 25565;
+        max-players = 10;
+        online-mode = false;
       };
     };
 
