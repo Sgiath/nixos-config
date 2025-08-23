@@ -30,9 +30,10 @@ in
       serverProperties = {
         difficulty = "easy";
         gamemode = "survival";
-        level-name = "world2";
+        level-name = "world3";
         force-gamemode = true;
         enforce-whitelist = true;
+        white-list = true;
         server-port = 25565;
         max-players = 10;
         online-mode = false;
