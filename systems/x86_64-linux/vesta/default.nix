@@ -25,7 +25,7 @@
 
     foundryvtt.enable = true;
     dnd5etools.enable = true;
-    minecraft-server.enable = true;
+    minecraft-servers.enable = true;
 
     open-webui.enable = true;
     home-assistant.enable = true;

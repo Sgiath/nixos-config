@@ -4,23 +4,43 @@
   pkgs,
   ...
 }:
+let
+  operators = {
+    # online accounts
+    SgiathMC = "a3072618-d0b9-3091-ba3d-f6607f5cd37c";
+
+    # offline accounts
+    Sgiath = "8441ebbf-4c37-3cc3-bc05-32a06694f504";
+    Kuba = "821b0f4a-cdd3-371d-8ab7-98882924f39c";
+    kihitomi = "cb24a33e-407c-3625-955b-7535ed160d3a";
+  };
+in
 {
-  config = lib.mkIf (config.sgiath.server.enable && config.services.minecraft-server.enable) {
+  config = lib.mkIf (config.sgiath.server.enable && config.services.minecraft-servers.enable) {
+    environment.systemPackages = with pkgs; [
+      jdk21
+    ];
 
     # vanila server
-    services.minecraft-server = {
+    services.minecraft-servers = {
       eula = true;
-      declarative = true;
 
-      # https://minecraft.wiki/w/Server.properties#Java_Edition
-      serverProperties = {
-        # easy
-        difficulty = 1;
-        # survival
-        gamemode = 0;
-        server-port = 25565;
-        max-players = 10;
-        online-mode = false;
+      servers = {
+        vanila = {
+          enable = true;
+          inherit operators;
+
+          # https://minecraft.wiki/w/Server.properties#Java_Edition
+          serverProperties = {
+            # easy
+            difficulty = 1;
+            # survival
+            gamemode = 0;
+            server-port = 25565;
+            max-players = 10;
+            online-mode = false;
+          };
+        };
       };
     };
 
