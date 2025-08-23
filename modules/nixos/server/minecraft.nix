@@ -17,9 +17,8 @@ let
 in
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.minecraft-servers.enable) {
-    environment.systemPackages = with pkgs; [
-      jdk21
-    ];
+    # for starting new packs on the server and testing
+    environment.systemPackages = with pkgs; [ jdk21 ];
 
     # vanila server
     services.minecraft-servers = {
