@@ -29,7 +29,7 @@ in
       # https://minecraft.wiki/w/Server.properties#Java_Edition
       serverProperties = {
         difficulty = "easy";
-        gamemode = "survival";
+        gamemode = "creative";
         level-name = "world3";
         force-gamemode = true;
         enforce-whitelist = true;
