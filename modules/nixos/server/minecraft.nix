@@ -35,12 +35,10 @@ in
           force-gamemode = true;
           enforce-whitelist = true;
           white-list = true;
-          server-port = 25565;
+          server-port = 25569;
           max-players = 10;
           online-mode = false;
           view-distance = 32;
-          "query.port" = 25765;
-          "rcon.port" = 25775;
         };
       };
     };
