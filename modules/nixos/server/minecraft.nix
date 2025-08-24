@@ -30,12 +30,12 @@ in
         # https://minecraft.wiki/w/Server.properties#Java_Edition
         serverProperties = {
           difficulty = "easy";
-          gamemode = "creative";
+          gamemode = "survival";
           level-name = "world3";
           force-gamemode = true;
           enforce-whitelist = true;
           white-list = true;
-          server-port = 25569;
+          server-port = 25565;
           max-players = 10;
           online-mode = false;
           view-distance = 12;
