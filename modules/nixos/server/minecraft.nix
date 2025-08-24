@@ -38,7 +38,7 @@ in
           server-port = 25569;
           max-players = 10;
           online-mode = false;
-          view-distance = 32;
+          view-distance = 12;
         };
       };
     };
