@@ -16,13 +16,14 @@ let
   };
 in
 {
-  config = lib.mkIf (config.sgiath.server.enable && config.services.minecraft-server.enable) {
+  config = lib.mkIf (config.sgiath.server.enable) {
     # for starting new packs on the server and testing
     environment.systemPackages = with pkgs; [ jdk21 ];
 
     # vanila server (default port 25565)
     services = {
       minecraft-server = {
+        enable = false;
         eula = true;
         declarative = true;
         whitelist = operators;
