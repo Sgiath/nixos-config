@@ -54,9 +54,9 @@
           extraOptions = {
             Protocol = 2;
     
-            PasswordAuthentication = true;
-            ChallengeResponseAuthentication = true;
-            PubkeyAuthentication = true;
+            PasswordAuthentication = "yes";
+            ChallengeResponseAuthentication = "yes";
+            PubkeyAuthentication = "yes";
             PreferredAuthentications = "publickey";
 
             Ciphers = "chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr";
