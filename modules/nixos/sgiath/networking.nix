@@ -45,6 +45,8 @@
           "osm.sgiath.dev"
           "photo.sgiath.dev"
           "watch.sgiath.dev"
+          "torrent.sgiath.dev"
+          "minecraft.sgiath.dev"
         ];
         "192.168.1.4" = [ "nas.sgiath" ];
         "192.168.1.5" = [ "nas.sgiath" ];
