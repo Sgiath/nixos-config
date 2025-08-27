@@ -52,7 +52,7 @@
           serverAliveCountMax = 30;
 
           extraOptions = {
-            Protocol = 2;
+            Protocol = "2";
     
             PasswordAuthentication = "yes";
             ChallengeResponseAuthentication = "yes";
