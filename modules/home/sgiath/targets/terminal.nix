@@ -36,6 +36,12 @@
       tmux.enable = true;
       yazi.enable = true;
       zsh.enable = true;
+
+      # install zed-server even in terminal environment
+      zed-editor = {
+        enable = true;
+        installRemoteServer = true;
+      }
     };
 
     services = {
