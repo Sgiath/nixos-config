@@ -36,7 +36,7 @@
 
     home.packages = with pkgs; [
       windsurf
-      zed-editor-fhs
+      zed-editor
     ];
   };
 }
