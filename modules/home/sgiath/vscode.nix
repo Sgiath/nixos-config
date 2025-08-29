@@ -37,7 +37,7 @@
 
     stylix.targets = {
       vscode.enable = false;
-      zed-editor.enable = false;
+      zed.enable = false;
     };
 
     # Cursor
