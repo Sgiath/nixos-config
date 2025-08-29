@@ -30,7 +30,7 @@
       zed-editor = {
         enable = true;
         installRemoteServer = true;
-        extensions = ["nix", "elixir", "dockerfile", "docker-compose"];
+        extensions = ["nix" "elixir" "dockerfile" "docker-compose"];
         extraPackages = [ pkgs.nixd ];
       };
     };
