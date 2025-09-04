@@ -1,9 +1,7 @@
 { config, lib, ... }:
 {
   options.services.focalboard.enable = lib.mkEnableOption "focalboard";
-
   config = lib.mkIf (config.sgiath.server.enable && config.services.focalboard.enable) {
-
     services.nginx.virtualHosts."focalboard.sgiath.dev" = {
       # SSL
       onlySSL = true;
