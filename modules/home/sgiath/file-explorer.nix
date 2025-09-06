@@ -7,6 +7,10 @@
 {
   config = lib.mkIf config.programs.hyprland.enable {
     home.packages = with pkgs; [
+      nemo-with-extensions
+      nemo-fileroller
+      webp-pixbuf-loader
+      
       superfile
       exiftool
     ];
