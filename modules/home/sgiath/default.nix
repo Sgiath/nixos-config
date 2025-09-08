@@ -11,6 +11,7 @@
     ./chromium.nix
     ./clipboard.nix
     ./comm.nix
+    ./editors.nix
     ./email_client.nix
     ./file-explorer.nix
     ./fish.nix
@@ -24,7 +25,6 @@
     ./starship.nix
     ./stylix.nix
     ./tmux.nix
-    ./vscode.nix
     ./wallpaper.nix
     ./waybar.nix
     ./web_browsers.nix
