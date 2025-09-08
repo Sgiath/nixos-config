@@ -30,12 +30,12 @@
       url = "github:snowfallorg/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     snowfall-lib = {
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -69,6 +69,11 @@
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zed-editor = {
+      url = "github:zed-industries/zed";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

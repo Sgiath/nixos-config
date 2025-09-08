@@ -29,6 +29,7 @@
 
       zed-editor = {
         enable = true;
+        package = inputs.zed-editor.packages.${pkgs.system}.default;
         installRemoteServer = true;
         extensions = ["nix" "elixir" "dockerfile" "docker-compose"];
         extraPackages = [ pkgs.nixd ];
