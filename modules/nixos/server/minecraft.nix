@@ -53,7 +53,7 @@ in
         description = "Minecraft GTNH server";
         after = [ "network.target" ];
         wantedBy = [ "multi-user.target" ];
-        script = "${pkgs.jdk21}/lib/openjdk/bin/java -server -Xms4G -Xmx6G -Dfml.queryResult=confirm -Dfml.readTimeout=180 @java9args.txt -jar lwjgl3ify-forgePatches.jar nogui";
+        script = "${pkgs.jdk21}/lib/openjdk/bin/java -server -Xms6G -Xmx6G -Dfml.queryResult=confirm -Dfml.readTimeout=180 @java9args.txt -jar lwjgl3ify-forgePatches.jar nogui";
         serviceConfig = {
           WorkingDirectory = "/data/minecraft/gtnh";
         };
