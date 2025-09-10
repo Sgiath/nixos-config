@@ -60,8 +60,8 @@
       };
 
       networkmanager.enable = true;
-      resolvconf.enable = lib.mkForce false;
-      dhcpcd.extraConfig = "nohook resolv.conf";
+      # resolvconf.enable = lib.mkForce false;
+      # dhcpcd.extraConfig = "nohook resolv.conf";
       firewall.enable = false;
     };
     environment.etc."resolv.conf".text = ''
