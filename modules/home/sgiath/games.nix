@@ -14,11 +14,11 @@ in
 
   config = lib.mkIf config.sgiath.games.enable {
     home.packages = with pkgs; [
-      protonplus
+      # protonplus
 
       # wine64
-      winetricks
-      wineWowPackages.waylandFull
+      # winetricks
+      # wineWowPackages.waylandFull
 
       (lutris.override {
         extraLibraries = pkgs: [
@@ -37,7 +37,7 @@ in
       })
 
       # KSP mods
-      ckan
+      # ckan
 
       # Minecraft
       (prismlauncher.override {
@@ -48,10 +48,10 @@ in
       })
 
       # Factorio
-      (factorio-space-age-experimental.override {
-        username = "Sgiath";
-        token = secrets.factorio_token;
-      })
+      # (factorio-space-age-experimental.override {
+      #   username = "Sgiath";
+      #   token = secrets.factorio_token;
+      # })
 
       # star-citizen
     ];
