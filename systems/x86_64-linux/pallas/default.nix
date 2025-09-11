@@ -2,7 +2,10 @@
 {
   imports = [ ./hardware.nix ];
 
-  networking.hostName = "pallas";
+  networking = {
+    hostName = "pallas";
+    networkmanager.enable = lib.mkForce true;
+  };
 
   environment.systemPackages = with pkgs; [ wpa_supplicant_gui ];
   environment.etc."resolv.conf".text = lib.mkForce ''
