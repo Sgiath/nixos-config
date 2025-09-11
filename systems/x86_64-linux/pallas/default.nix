@@ -1,10 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [ ./hardware.nix ];
 
   networking.hostName = "pallas";
 
   environment.systemPackages = with pkgs; [ wpa_supplicant_gui ];
+  environment.etc."resolv.conf".text = lib.mkForce ''
+    nameserver 1.1.1.1
+    nameserver 8.8.8.8
+  '';
 
   sgiath = {
     enable = true;
