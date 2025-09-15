@@ -13,6 +13,7 @@
     environment.systemPackages = with pkgs; [
       razergenie
       openrazer-daemon
+      alsa-tools
     ];
 
     hardware.openrazer = {
