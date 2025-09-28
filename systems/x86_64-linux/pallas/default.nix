@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ lib, ... }:
 {
   imports = [ ./hardware.nix ];
 
@@ -7,7 +7,6 @@
     networkmanager.enable = lib.mkForce true;
   };
 
-  environment.systemPackages = with pkgs; [ wpa_supplicant_gui ];
   environment.etc."resolv.conf".text = lib.mkForce ''
     nameserver 1.1.1.1
     nameserver 8.8.8.8

@@ -4,9 +4,9 @@
   pkgs,
   ...
 }:
-# let
-#   secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-# in
+let
+  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
+in
 {
   options.sgiath.games = {
     enable = lib.mkEnableOption "games";
@@ -14,46 +14,44 @@
 
   config = lib.mkIf config.sgiath.games.enable {
     home.packages = with pkgs; [
-      # protonplus
+      protonplus
 
-      # wine64
-      # winetricks
-      # wineWowPackages.waylandFull
+      wine64
+      winetricks
+      wineWowPackages.waylandFull
 
-      # (lutris.override {
-      #   extraLibraries = pkgs: [
-      #     # libraries for KSP mod Principia
-      #     pkgs.llvmPackages.libcxx
-      #     pkgs.llvmPackages.libunwind
-      #   ];
+      (lutris.override {
+        extraLibraries = pkgs: [
+          # libraries for KSP mod Principia
+          pkgs.llvmPackages.libcxx
+          pkgs.llvmPackages.libunwind
+        ];
 
-      #   extraPkgs = pkgs: [
-      #     # default icons
-      #     pkgs.adwaita-icon-theme
+        extraPkgs = pkgs: [
+          # default icons
+          pkgs.adwaita-icon-theme
 
-      #     # MS fonts needed for KSP
-      #     pkgs.corefonts
-      #   ];
-      # })
+          # MS fonts needed for KSP
+          pkgs.corefonts
+        ];
+      })
 
       # KSP mods
-      # ckan
+      ckan
 
       # Minecraft
       (prismlauncher.override {
         jdks = [
           jdk24
-          jdk23
-          jdk21
           jdk8
         ];
       })
 
       # Factorio
-      # (factorio-space-age-experimental.override {
-      #   username = "Sgiath";
-      #   token = secrets.factorio_token;
-      # })
+      (factorio-space-age-experimental.override {
+        username = "Sgiath";
+        token = secrets.factorio_token;
+      })
 
       # star-citizen
     ];
