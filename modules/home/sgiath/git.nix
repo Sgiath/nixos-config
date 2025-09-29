@@ -34,15 +34,16 @@
           d = "diff";
           aa = "add --all";
           ap = "add --patch";
-          cm = "commit --signoff --no-verify --verbose";
-          ca = "commit --all --signoff --no-verify --verbose";
+          cm = "commit --verbose --signoff";
+          cn = "commit --verbose --signoff --no-verify";
+          ca = "commit --verbose --signoff --all";
+          amend = "commit --amend --no-edit";
           ps = "push --progress";
           pl = "pull --autostash --rebase --signoff";
           pf = "push --progress --force-with-lease";
           ss = "status --short";
           ll = "log --all --graph --pretty=format:'%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n'";
           tag = "tag --sign";
-          amend = "commit --amend --no-edit --no-verify";
           main-to-master = "!git symbolic-ref refs/heads/master refs/heads/main && git symbolic-ref refs/remotes/origin/master refs/remotes/origin/main";
         };
 
