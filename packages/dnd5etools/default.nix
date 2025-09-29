@@ -73,6 +73,8 @@ let
     "cp ${img} img-v${version}.${v.name}"
   );
 
+  # to update copy new package.json and package-lock.json and run:
+  # node2nix -i package.json -l package-lock.json -d
   nodeDependencies = (callPackage ./deps { inherit nodejs; }).nodeDependencies;
 in
 stdenv.mkDerivation {
@@ -103,7 +105,7 @@ stdenv.mkDerivation {
 
     # link Node deps
     ln -s ${nodeDependencies}/lib/node_modules ./node_modules
-    # export PATH="${nodeDependencies}/bin:$PATH"
+    export PATH="${nodeDependencies}/bin:$PATH"
 
     # generate service worker
     ${nodejs}/bin/npm run build:sw:prod
