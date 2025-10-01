@@ -42,8 +42,8 @@ in
       # Minecraft
       (prismlauncher.override {
         jdks = [
-          jdk24
-          jdk8
+          zulu25
+          zulu8
         ];
       })
 
