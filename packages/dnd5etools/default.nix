@@ -9,7 +9,7 @@
   ...
 }:
 let
-  version = "2.12.0";
+  version = "2.12.1";
   pname = "5etools";
 
   imgHashes = [
