@@ -13,6 +13,7 @@ in
       transmission = {
         openPeerPorts = true;
         performanceNetParameters = true;
+        package = pkgs.transmission_4;
         webHome = pkgs.flood-for-transmission;
 
         settings = {
