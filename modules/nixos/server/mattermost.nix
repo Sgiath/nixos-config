@@ -9,10 +9,15 @@
       mattermost = {
         siteName = "Sgiath Chat";
         siteUrl = "https://chat.sgiath.dev";
-        mutableConfig = true;
+        mutableConfig = false;
+
         plugins = [
           ./mattermost/mattermost-plugin-focalboard-v8.0.0-linux-amd64.tar.gz
         ];
+
+        database = {
+          peerAuth = true;
+        };
       };
 
       nginx.virtualHosts."chat.sgiath.dev" = {
