@@ -10,6 +10,7 @@
     ./home-assistant.nix
     ./jitsi.nix
     ./matrix.nix
+    ./mattermost.nix
     ./minecraft.nix
     ./monitoring.nix
     ./n8n.nix
