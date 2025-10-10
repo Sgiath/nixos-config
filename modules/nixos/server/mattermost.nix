@@ -11,7 +11,7 @@
         siteUrl = "chat.sgiath.dev";
         mutableConfig = true;
         plugins = [
-          ./mattermost-plugin-focalboard-v8.0.0-linux-amd64.tar.gz
+          ./mattermost/mattermost-plugin-focalboard-v8.0.0-linux-amd64.tar.gz
         ];
       };
 
