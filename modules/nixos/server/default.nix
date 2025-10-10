@@ -9,7 +9,6 @@
     ./foundry.nix
     ./home-assistant.nix
     ./jitsi.nix
-    ./kanboard.nix
     ./matrix.nix
     ./mattermost.nix
     ./minecraft.nix

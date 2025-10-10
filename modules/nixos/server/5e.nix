@@ -20,10 +20,6 @@
       enableACME = true;
       acmeRoot = null;
 
-      # QUIC
-      http3_hq = true;
-      quic = true;
-
       # static files
       root = "${pkgs.${namespace}.dnd5etools}";
 

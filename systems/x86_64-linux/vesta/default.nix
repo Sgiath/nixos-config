@@ -22,8 +22,7 @@
     transmission.enable = true;
     jellyfin.enable = true;
     vaultwarden.enable = false;
-    mattermost.enable = false;
-    kanboard.enable = true;
+    mattermost.enable = true;
 
     foundryvtt.enable = true;
     dnd5etools.enable = true;
@@ -36,7 +35,7 @@
     cryptpad.enable = false;
     factorio.enable = false;
     jitsi-meet.enable = false;
-    focalboard.enable = false;
+    focalboard.enable = true;
     zitadel.enable = false;
     photoprism.enable = false;
     monitoring.enable = false;

@@ -15,15 +15,12 @@
 
       nginx.virtualHosts."meet.sgiath.dev" = {
         # SSL
+        onlySSL = true;
         kTLS = true;
 
         # ACME
         enableACME = true;
         acmeRoot = null;
-
-        # QUIC
-        http3_hq = true;
-        quic = true;
       };
     };
   };

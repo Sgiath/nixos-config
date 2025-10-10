@@ -13,10 +13,6 @@
         enableACME = true;
         acmeRoot = null;
 
-        # QUIC
-        http3_hq = true;
-        quic = true;
-
         locations = {
           "/" = {
             proxyWebsockets = true;

@@ -33,10 +33,6 @@ in
         enableACME = true;
         acmeRoot = null;
 
-        # QUIC
-        http3_hq = true;
-        quic = true;
-
         locations."/" = {
           proxyPass = "http://127.0.0.1:9091";
           proxyWebsockets = true;
