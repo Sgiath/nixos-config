@@ -8,7 +8,7 @@
     services = {
       mattermost = {
         siteName = "Sgiath Chat";
-        siteUrl = "chat.sgiath.dev";
+        siteUrl = "https://chat.sgiath.dev";
         mutableConfig = true;
         plugins = [
           ./mattermost/mattermost-plugin-focalboard-v8.0.0-linux-amd64.tar.gz
