@@ -22,6 +22,7 @@
     transmission.enable = true;
     jellyfin.enable = true;
     vaultwarden.enable = false;
+    mattermost.enable = true;
 
     foundryvtt.enable = true;
     dnd5etools.enable = true;
