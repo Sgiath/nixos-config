@@ -30,7 +30,7 @@ in
   open-webui = pkgs-master.open-webui;
 
   # broken on unstable for now
-  # awscli2 = pkgs-master.awscli2;
+  awscli2 = pkgs-master.awscli2;
 
   # Bitcoin clients
   bisq = inputs.btc-clients.packages.${prev.system}.bisq;
