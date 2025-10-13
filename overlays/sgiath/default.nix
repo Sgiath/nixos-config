@@ -29,11 +29,8 @@ in
   # get open-webui from a configuration with ROCm support off
   open-webui = pkgs-master.open-webui;
 
-  # get n8n updates sooner
-  n8n = pkgs-master.n8n;
-
   # broken on unstable for now
-  awscli2 = pkgs-master.awscli2;
+  # awscli2 = pkgs-master.awscli2;
 
   # Bitcoin clients
   bisq = inputs.btc-clients.packages.${prev.system}.bisq;
