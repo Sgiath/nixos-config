@@ -42,7 +42,7 @@
 
     # proxies
     nas-proxy.enable = true;
-    osm.proxy = true;
+    osm.proxy = false;
     sgiath-dev.proxy = true;
     sinai-camp.proxy = true;
     wordpress.proxy = false;
