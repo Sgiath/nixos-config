@@ -19,7 +19,7 @@
     environment.etc."resolv.conf".text = ''
       search sgiath.dev
 
-      nameserver 192.168.1.2
+      nameserver 192.168.1.3
       nameserver 192.168.1.1
       nameserver 1.1.1.1
       nameserver 8.8.8.8
