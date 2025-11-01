@@ -23,7 +23,7 @@
         };
 
         # Router
-        "turris.sgiath.dev" = {
+        "turris.local" = {
           hostname = "192.168.1.1";
           user = "root";
         };
