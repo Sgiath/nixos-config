@@ -15,7 +15,7 @@ in {
     wayland.windowManager.hyprland = {
       plugins = [
         # pkgs.hyprlandPlugins.hyprwinwrap
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
+        inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprwinwrap
       ];
 
       settings = {

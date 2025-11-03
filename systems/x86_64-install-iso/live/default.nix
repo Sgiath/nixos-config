@@ -4,7 +4,7 @@
   imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix" ];
 
   nixpkgs = {
-    hostPlatform = pkgs.system;
+    hostPlatform = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 

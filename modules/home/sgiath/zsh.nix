@@ -38,7 +38,7 @@
           ls = lib.mkForce "${pkgs.eza}/bin/eza --icons --all --time-style=long-iso";
           ll = lib.mkForce "ls --long --binary --git";
           cat = "${pkgs.bat}/bin/bat";
-          du = "${pkgs.du-dust}/bin/dust -x";
+          du = "${pkgs.dust}/bin/dust -x";
           df = "${pkgs.duf}/bin/duf";
           find = "${pkgs.fd}/bin/fd";
           ping = "${pkgs.gping}/bin/gping";

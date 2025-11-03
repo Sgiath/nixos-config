@@ -2,14 +2,14 @@
 final: prev:
 let
   pkgs-master = import inputs.nixpkgs-master {
-    system = prev.system;
+    system = prev.stdenv.hostPlatform.system;
     config = {
       rocmSupport = false;
       allowUnfree = true;
     };
   };
   pkgs-stable = import inputs.nixpkgs-stable {
-    system = prev.system;
+    system = prev.stdenv.hostPlatform.system;
     config = {
       rocmSupport = true;
       allowUnfree = true;
@@ -18,13 +18,13 @@ let
 in
 {
   # conduit build from official repo flake
-  matrix-conduit = inputs.conduit.packages.${prev.system}.default;
+  matrix-conduit = inputs.conduit.packages.${prev.stdenv.hostPlatform.system}.default;
 
   # zen browser has custom repo until nixpkgs is updated
-  zen-browser = inputs.zen-browser.packages.${prev.system}.default;
+  zen-browser = inputs.zen-browser.packages.${prev.stdenv.hostPlatform.system}.default;
 
   # NIX Gaming
-  star-citizen = inputs.nix-gaming.packages.${prev.system}.star-citizen;
+  star-citizen = inputs.nix-gaming.packages.${prev.stdenv.hostPlatform.system}.star-citizen;
 
   # get open-webui from a configuration with ROCm support off
   open-webui = pkgs-master.open-webui;
@@ -33,6 +33,6 @@ in
   awscli2 = pkgs-master.awscli2;
 
   # Bitcoin clients
-  bisq = inputs.btc-clients.packages.${prev.system}.bisq;
-  sparrow = inputs.btc-clients.packages.${prev.system}.sparrow;
+  bisq = inputs.btc-clients.packages.${prev.stdenv.hostPlatform.system}.bisq;
+  sparrow = inputs.btc-clients.packages.${prev.stdenv.hostPlatform.system}.sparrow;
 }
