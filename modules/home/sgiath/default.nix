@@ -53,7 +53,7 @@
               ;;
 
             --vesta)
-              nix-store --add-fixed sha256 ~/nix-root/FoundryVTT-Linux-13.346.zip
+              nix-store --add-fixed sha256 ~/nix-root/FoundryVTT-Linux-13.350.zip
               nixos-rebuild switch --sudo --flake '.#vesta' --target-host 'sgiath@vesta.local'
               ;;
 
@@ -70,6 +70,42 @@
 
             *)
               nixos-rebuild switch --sudo --flake .
+              ;;
+          esac
+
+          popd
+        '')
+
+        (writeShellScriptBin "update-limited" ''
+          pushd ~/nixos
+
+          git add --all
+          git commit --signoff -m "changes"
+          git push
+
+          case "$1" in
+            --ceres)
+              nixos-rebuild switch --sudo --max-jobs 2 --cores 12 --flake '.#ceres'
+              ;;
+
+            --vesta)
+              nix-store --add-fixed sha256 ~/nix-root/FoundryVTT-Linux-13.350.zip
+              nixos-rebuild switch --sudo --max-jobs 2 --cores 12 --flake '.#vesta' --target-host 'sgiath@vesta.local'
+              ;;
+
+            --hygiea)
+              nixos-rebuild switch --sudo --max-jobs 2 --cores 12 --flake '.#hygiea' --target-host 'sgiath@hygiea.sgiath.dev'
+              ;;
+
+            --iso)
+              nix build '.#install-isoConfigurations.live'
+
+              echo
+              echo "doas dd if=result/iso/*.iso of=/dev/sdX status=progress"
+              ;;
+
+            *)
+              nixos-rebuild switch --sudo --max-jobs 2 --cores 12 --flake .
               ;;
           esac
 

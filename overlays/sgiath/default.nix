@@ -4,6 +4,7 @@ let
   pkgs-master = import inputs.nixpkgs-master {
     system = prev.stdenv.hostPlatform.system;
     config = {
+      cudaSupport = false;
       rocmSupport = false;
       allowUnfree = true;
     };
@@ -11,7 +12,8 @@ let
   pkgs-stable = import inputs.nixpkgs-stable {
     system = prev.stdenv.hostPlatform.system;
     config = {
-      rocmSupport = true;
+      cudaSupport = false;
+      rocmSupport = false;
       allowUnfree = true;
     };
   };
@@ -25,12 +27,6 @@ in
 
   # NIX Gaming
   star-citizen = inputs.nix-gaming.packages.${prev.stdenv.hostPlatform.system}.star-citizen;
-
-  # get open-webui from a configuration with ROCm support off
-  open-webui = pkgs-master.open-webui;
-
-  # broken on unstable for now
-  awscli2 = pkgs-master.awscli2;
 
   # Bitcoin clients
   bisq = inputs.btc-clients.packages.${prev.stdenv.hostPlatform.system}.bisq;
