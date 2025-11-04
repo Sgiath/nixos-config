@@ -15,7 +15,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "n8n";
-  version = "1.114.4";
+  version = "1.117.3";
 
   src = fetchFromGitHub {
     owner = "n8n-io";

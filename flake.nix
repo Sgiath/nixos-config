@@ -21,6 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -121,6 +126,7 @@
       homes.modules = with inputs; [
         nixvim.homeModules.nixvim
         sops-nix.homeManagerModules.sops
+        nix-index-database.homeModules.nix-index
       ];
     };
 }
