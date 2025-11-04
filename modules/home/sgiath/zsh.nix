@@ -24,7 +24,8 @@
         enable = true;
         package = pkgs.btop-rocm;
       };
-      command-not-found.enable = true;
+      # command-not-found.enable = true;
+      # nix-index.enable = true;
       nix-index-database.comma.enable = true;
       fd.enable = true;
       fzf.enable = true;
