@@ -42,7 +42,7 @@
     xdg.desktopEntries."cursor" = {
       name = "Cursor";
       genericName = "Text Editor";
-      exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/Cursor-2.0.69-x86_64.AppImage";
+      exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/Cursor-2.0.73-x86_64.AppImage";
     };
 
     # Tidewave
