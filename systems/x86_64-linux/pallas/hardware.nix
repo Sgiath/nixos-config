@@ -25,13 +25,7 @@
     ];
     extraModulePackages = [ ];
     kernelModules = [ "kvm-amd" ];
-    kernelParams = [
-      "nvme_core.default_ps_max_latency_us=0"
-      "pcie_aspm=off"
-      "nvme.noacpi=1"
-      "pci=nomsi"
-      "nvidia_drm.modeset=1"
-    ];
+    # kernelParams = [ ];
     loader.systemd-boot = {
       windows."11".efiDeviceHandle = "HD0c";
     };
