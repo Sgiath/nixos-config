@@ -33,10 +33,8 @@ in {
           pos_y = 10;
         };
         
-        windowrulev2 = [
-          "fullscreenstate 0 0, class:(nasa)"
-          "workspace special:nasa silent, class:(nasa)"
-          "noinitialfocus, class:(nasa)"
+        windowrule = [
+          "match:class nasa, fullscreenstate 0 0, workspace special:nasa silent, noinitialfocus"
         ];
       };
     };

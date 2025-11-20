@@ -31,9 +31,9 @@
 
     wayland.windowManager.hyprland.settings = {
       exec-once = [ "${pkgs.protonmail-desktop}/bin/proton-mail" ];
-      windowrulev2 = [
-        "workspace 9 silent, class:(claws-mail)"
-        "workspace 9 silent, class:(Proton Mail)"
+      windowrule = [
+        "match:class claws-mail, workspace 9 silent"
+        "match:class Proton Mail, workspace 9 silent"
       ];
     };
   };

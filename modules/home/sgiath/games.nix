@@ -62,10 +62,9 @@ in
       # star-citizen
     ];
 
-    wayland.windowManager.hyprland.settings.windowrulev2 = [
-      "workspace 6 silent, class:(.factorio-wrapped)"
-      "workspace 6 silent, class:(battle.net.exe)"
-      "workspace 6 silent, class:(lutris)"
+    wayland.windowManager.hyprland.settings.windowrule = [
+      "match:class .factorio-wrapped, workspace 6 silent"
+      "match:class lutris, workspace 6 silent"
     ];
   };
 }

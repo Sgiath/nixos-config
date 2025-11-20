@@ -28,21 +28,14 @@
         # "${pkgs.cinny-desktop}/bin/cinny"
         # "${pkgs.fractal}/bin/fractal"
       ];
-      windowrulev2 = [
-        "workspace 10 silent, class:(Slack)"
-        "noinitialfocus, class:(Slack)"
-        "workspace 10 silent, class:(WebCord)"
-        "noinitialfocus, class:(WebCord)"
-        "workspace 10 silent, class:(signal)"
-        "noinitialfocus, class:(signal)"
-        "workspace 10 silent, class:(org.telegram.desktop)"
-        "noinitialfocus, class:(org.telegram.desktop)"
-        "workspace 10 silent, class:(Hexchat)"
-        "noinitialfocus, class:(Hexchat)"
-        "workspace 10 silent, class:(cinny)"
-        "noinitialfocus, class:(cinny)"
-        "workspace 10 silent, class:(org.gnome.Fractal)"
-        "noinitialfocus, class:(org.gnome.Fractal)"
+      windowrule = [
+        "match:class Slack,workspace 10 silent, noinitialfocus"
+        "match:class WebCord, workspace 10 silent, noinitialfocus"
+        "match:class signal, workspace 10 silent, noinitialfocus"
+        "match:class org.telegram.desktop, workspace 10 silent, noinitialfocus"
+        "match:class Hexchat, workspace 10 silent, noinitialfocus"
+        "match:class cinny, workspace 10 silent, noinitialfocus"
+        "match:class org.gnome.Fractal, workspace 10 silent, noinitialfocus"
       ];
     };
 

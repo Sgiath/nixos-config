@@ -43,10 +43,10 @@
       librewolf.enable = false;
     };
 
-    wayland.windowManager.hyprland.settings.windowrulev2 = [
-      "workspace 2 silent, class:(chromium-browser)"
-      "workspace 3 silent, class:(google-chrome)"
-      "workspace 4 silent, class:(firefox)"
+    wayland.windowManager.hyprland.settings.windowrule = [
+      "match:class chromium-browser, workspace 2 silent"
+      "match:class google-chrome, workspace 3 silent"
+      "match:class firefox, workspace 4 silent, noinitialfocus"
     ];
   };
 }

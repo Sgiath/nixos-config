@@ -28,16 +28,15 @@
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
         "$mod, slash, exec, ${pkgs.wofi}/bin/wofi --show drun"
       ];
-      windowrulev2 = [
-        "workspace 1, class:(alacritty)"
-        "workspace 1, class:(kitty)"
-        "workspace 1, class:(wezterm)"
-        "workspace 1, class:(ghostty)"
+      windowrule = [
+        "match:class alacritty, workspace 1"
+        "match:class kitty, workspace 1"
+        "match:class wezterm, workspace 1"
+        "match:class ghostty, workspace 1"
 
-        "workspace 5 silent, class:(obsidian)"
-        "noinitialfocus, class:(obsidian)"
+        "match:class obsidian, workspace 5 silent, noinitialfocus"
 
-        "workspace 7 silent, class:(com.obsproject.Studio)"
+        "match:class com.obsproject.Studio, workspace 7 silent"
       ];
     };
 
