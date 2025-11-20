@@ -29,13 +29,13 @@
         # "${pkgs.fractal}/bin/fractal"
       ];
       windowrule = [
-        "match:class Slack,workspace 10 silent, noinitialfocus"
-        "match:class WebCord, workspace 10 silent, noinitialfocus"
-        "match:class signal, workspace 10 silent, noinitialfocus"
-        "match:class org.telegram.desktop, workspace 10 silent, noinitialfocus"
-        "match:class Hexchat, workspace 10 silent, noinitialfocus"
-        "match:class cinny, workspace 10 silent, noinitialfocus"
-        "match:class org.gnome.Fractal, workspace 10 silent, noinitialfocus"
+        "match:class Slack,workspace 10 silent, no_initial_focus"
+        "match:class WebCord, workspace 10 silent, no_initial_focus"
+        "match:class signal, workspace 10 silent, no_initial_focus"
+        "match:class org.telegram.desktop, workspace 10 silent, no_initial_focus"
+        "match:class Hexchat, workspace 10 silent, no_initial_focus"
+        "match:class cinny, workspace 10 silent, no_initial_focus"
+        "match:class org.gnome.Fractal, workspace 10 silent, no_initial_focus"
       ];
     };
 

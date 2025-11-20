@@ -34,7 +34,7 @@ in {
         };
         
         windowrule = [
-          "match:class nasa, fullscreenstate 0 0, workspace special:nasa silent, noinitialfocus"
+          "match:class nasa, fullscreenstate 0 0, workspace special:nasa silent, no_initial_focus"
         ];
       };
     };

@@ -34,7 +34,7 @@
         "match:class wezterm, workspace 1"
         "match:class ghostty, workspace 1"
 
-        "match:class obsidian, workspace 5 silent, noinitialfocus"
+        "match:class obsidian, workspace 5 silent, no_initial_focus"
 
         "match:class com.obsproject.Studio, workspace 7 silent"
       ];
