@@ -58,6 +58,8 @@ in
     programs.codex = {
       enable = true;
       settings = {
+        model = "gpt-5.1-codex";
+
         # untrusted on-failure on-request never
         approval_policy = "on-request";
 
@@ -69,10 +71,12 @@ in
         mcp_servers = {
           context7 = {
             url = "https://mcp.context7.com/mcp";
-            http_headers = { 
-              CONTEXT7_API_KEY = secrets.context7_api_key;
-            };
+            http_headers = "{ \"CONTEXT7_API_KEY\" = \"${secrets.context7_api_key}\ }";
           };
+        };
+
+        notice = {
+          hide_gpt5_1_migration_prompt = true;
         };
       };
     };
