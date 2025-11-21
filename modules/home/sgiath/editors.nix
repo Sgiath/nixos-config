@@ -5,9 +5,9 @@
   inputs,
   ...
 }:
-let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
+# let
+#   secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
+# in
 {
   config = lib.mkIf config.programs.vscode.enable {
     # VSCode
