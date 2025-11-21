@@ -4,7 +4,9 @@
   pkgs,
   ...
 }:
-
+let
+  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
+in
 {
   config = lib.mkIf config.programs.vscode.enable {
     # VSCode
@@ -68,7 +70,7 @@
           context7 = {
             url = "https://mcp.context7.com/mcp";
             http_headers = { 
-              CONTEXT7_API_KEY = "ctx7sk-a64011f8-3e75-45cb-add9-46fe828f3b52";
+              CONTEXT7_API_KEY = secrets.context7_api_key;
             };
           };
         };
