@@ -26,7 +26,6 @@
       ];
       bind = [
         "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
-        "$mod, slash, exec, ${pkgs.wofi}/bin/wofi --show drun"
       ];
       windowrule = [
         "match:class alacritty, workspace 1"
