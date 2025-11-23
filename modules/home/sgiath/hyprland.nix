@@ -28,6 +28,11 @@ in
       };
 
       settings = {
+        general.col = {
+          active_border = "rgba(F7DCDE39)";
+          inactive_border = "rgba(A58A8D30)";
+        };
+
         decoration.rounding = 5;
 
         input = {
