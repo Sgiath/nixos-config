@@ -45,14 +45,7 @@
     xdg.desktopEntries."cursor" = {
       name = "Cursor";
       genericName = "Text Editor";
-      exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/Cursor-2.0.73-x86_64.AppImage";
-    };
-
-    # Tidewave
-    xdg.desktopEntries."tidewave" = {
-      name = "Tidewave";
-      genericName = "AI-powered code editor";
-      exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/tidewave-app-amd64.AppImage";
+      exec = "${pkgs.appimage-run}/bin/appimage-run /home/sgiath/nix-root/Cursor-2.1.20-x86_64.AppImage";
     };
 
     # Codex
