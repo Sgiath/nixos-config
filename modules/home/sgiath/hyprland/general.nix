@@ -127,11 +127,11 @@
 
       touchpad = {
         natural_scroll = true;
-        tablet.output = "current";
         disable_while_typing = true;
         clickfinger_behavior = true;
         scroll_factor = 0.5;
       };
+      tablet.output = "current";
     };
 
     misc = {
