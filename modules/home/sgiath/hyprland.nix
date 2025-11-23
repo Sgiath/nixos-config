@@ -29,12 +29,35 @@ in
 
       settings = {
         # colors
-        general = {
-          "col.active_border" = "rgba(F7DCDE39)";
-          "col.inactive_border" = "rgba(A58A8D30)";
-        };
+        # general = {
+        #   "col.active_border" = "rgba(F7DCDE39)";
+        #   "col.inactive_border" = "rgba(A58A8D30)";
+        # };
         misc.background_color = "rgba(1D1011FF)";
-        windowrule = ["bordercolor rgba(FFB2BCAA) rgba(FFB2BC77),pinned:1"];
+
+        # general
+        general = {
+          # Gaps and border
+          gaps_in = 4;
+          gaps_out = 5;
+          gaps_workspaces = 50;
+      
+          border_size = 1;
+          "col.active_border" = "rgba(0DB7D4FF)";
+          "col.inactive_border" = "rgba(31313600)";
+          resize_on_border = true;
+      
+          no_focus_fallback = true;
+      
+          allow_tearing = true; # This just allows the `immediate` window rule to work
+      
+          snap = {
+          	enabled = true;
+          	window_gap = 4;
+          	monitor_gap = 5;
+          	respect_gaps = true;
+          };
+        };
 
 
 
