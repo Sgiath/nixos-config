@@ -20,8 +20,9 @@ stdenvNoCC.mkDerivation {
       mv "$f" "''${f//\[FILL,GRAD,opsz,wght\]/}"
     done
 
-    # Fonts should not be executable; install as 0644
+    # Install fonts
     install -Dm444 variablefont/*.ttf -t $out/share/fonts/truetype
+    install -Dm444 variablefont/*.ttf -t $out/share/fonts/opentype
 
     runHook postInstall
   '';
