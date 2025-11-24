@@ -44,6 +44,7 @@ let
     pkgs.kdePackages.qttranslations
     pkgs.kdePackages.qtvirtualkeyboard
     pkgs.kdePackages.qtwebsockets
+    pkgs.kdePackages.syntax-highlighting
     pkgs.kdePackages.kirigami.unwrapped
   ];
 

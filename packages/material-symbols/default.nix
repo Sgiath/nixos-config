@@ -20,10 +20,11 @@ stdenvNoCC.mkDerivation {
     # Tidy filenames (drop [FILL,GRAD,opsz,wght] suffix)
     rename 's/\[FILL,GRAD,opsz,wght\]//g' variablefont/*
 
-    # Install fonts
-    mkdir -p "$out/share/fonts/"{truetype,woff2}
-    cp fonts/*.ttf "$out/share/fonts/truetype/"
-    cp fonts/*.woff2 "$out/share/fonts/woff2/"
+    mkdir -p "$out/share/fonts/truetype"
+    cp variablefont/*.ttf "$out/share/fonts/truetype/"
+
+    mkdir -p "$out/share/fonts/woff2"
+    cp variablefont/*.woff2 "$out/share/fonts/woff2/"
 
     runHook postInstall
   '';
