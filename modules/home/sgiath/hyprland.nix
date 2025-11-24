@@ -81,11 +81,10 @@
         insensitive = true;
       };
     };
-    
-    programs.hyprshot.enable = true;
 
     services = {
-      mako.enable = true;
+      mako.enable = false;
+      swaync.enable = true;
       hyprpolkitagent.enable = true;
     };
   };
