@@ -95,23 +95,22 @@
         }
 
         button {
-            /* Use box-shadow instead of border so the text isn't offset */
-            box-shadow: inset 0 -1px transparent;
-            /* Avoid rounded borders under each button name */
-            border: none;
-            border-radius: 8;
+          /* Use box-shadow instead of border so the text isn't offset */
+          box-shadow: inset 0 -1px transparent;
+          
+          border: none;
+          border-radius: 8px;
         }
 
         /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
         button:hover {
-            background: inherit;
-            box-shadow: inset 0 -1px #a7c080;
+          background: inherit;
+          box-shadow: inset 0 -1px #a7c080;
         }
 
         #workspaces button {
-          padding: 0 6px;
+          padding: 6px;
           background-color: transparent;
-          color: #d3c6aa;
         }
 
         #workspaces button:hover {
@@ -147,7 +146,7 @@
             margin-top: 3px;
             margin-bottom: 3px;
             color: #ffffff;
-            border-radius: 1px;
+            border-radius: 8px;
         }
 
         #window,
