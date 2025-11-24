@@ -25,10 +25,10 @@ let
   ]);
 
   quickshell-with-qtpositioning = pkgs.symlinkJoin {
-      name = "quickshell-with-qtpositioning";
-      paths = [ inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
+    name = "quickshell-with-qtpositioning";
+    paths = [ inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
       # Create a fake venv structure for compatibility with scripts that source activate
       mkdir -p $out/venv/bin
       cat > $out/venv/bin/activate <<'EOF'
@@ -69,8 +69,8 @@ let
             --set ILLOGICAL_IMPULSE_VIRTUAL_ENV "$out/venv"
         fi
       done
-      '';
-    };
+    '';
+  };
 in
 {
   # Qt/KDE packages required for QuickShell functionality
@@ -96,11 +96,11 @@ in
     kdePackages.syntax-highlighting
     kdePackages.kirigami
   ];
-qt.enable = true;
-    programs.quickshell = {
-      enable = true;
-      package = quickshell-with-qtpositioning;
-      activeConfig = "default";
-      configs.default = ./quickshell;
-    };
+  qt.enable = true;
+  programs.quickshell = {
+    enable = true;
+    package = quickshell-with-qtpositioning;
+    activeConfig = "default";
+    configs.default = ./quickshell;
+  };
 }
