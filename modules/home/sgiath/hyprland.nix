@@ -81,6 +81,9 @@
         insensitive = true;
       };
     };
+    programs = {
+      hyprshot.enable = true;
+    };
 
     services = {
       mako.enable = false;
