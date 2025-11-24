@@ -5,14 +5,12 @@ let
   '';
 in
 {
-  home.packages = [ screenshot ];
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
     bind = [
       "$mod SHIFT, Q, exec, ${pkgs.wlogout}/bin/wlogout"
       "$mod, S, exec, ${screenshot}/bin/screenshot"
-      # "$mod, slash, exec, ${pkgs.wofi}/bin/wofi --show drun"
-      "$mod, slash, exec, ${pkgs.fuzzel}/bin/fuzzel"
+      "$mod, slash, exec, ${pkgs.wofi}/bin/wofi --show drun"
 
       "$mod SHIFT, C, killactive,"
       "$mod, R, togglesplit,"
