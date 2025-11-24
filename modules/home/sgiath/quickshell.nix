@@ -48,9 +48,6 @@ let
     pkgs.kdePackages.kirigami.unwrapped
   ];
 
-  # Font configuration for the wrapped application
-  fontConfig = pkgs.makeFontsConf { fontDirectories = [ pkgs.${namespace}.material-symbols ]; };
-
   quickshell-with-qtpositioning = pkgs.symlinkJoin {
     name = "quickshell-with-qtpositioning";
     paths = [ inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default ];
@@ -76,10 +73,7 @@ let
             --prefix QML_IMPORT_PATH : "${qmlPath}" \
             --prefix QML2_IMPORT_PATH : "${qmlPath}" \
             --prefix PATH : "${pythonEnv}/bin" \
-            --set ILLOGICAL_IMPULSE_VIRTUAL_ENV "$out/venv" \
-            --set FONTCONFIG_FILE "${fontConfig}" \
-            --set QT_QPA_PLATFORMTHEME "qt5ct" \
-            --set QT_FONT_DPI "96"
+            --set ILLOGICAL_IMPULSE_VIRTUAL_ENV "$out/venv"
         fi
       done
     '';
