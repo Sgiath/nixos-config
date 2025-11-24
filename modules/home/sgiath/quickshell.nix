@@ -130,6 +130,7 @@ in
 
     # Fonts
     pkgs.${namespace}.material-symbols
+    material-design-icons
     rubik
     # nurPkgs.repos.skiletro.gabarito
     nerd-fonts.ubuntu
