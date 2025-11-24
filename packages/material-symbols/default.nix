@@ -1,4 +1,4 @@
-{ lib, stdenvNoCC, fetchFromGitHub }:
+{ lib, stdenvNoCC, fetchFromGitHub, rename }:
 
 stdenvNoCC.mkDerivation {
   pname = "material-symbols";
@@ -12,17 +12,18 @@ stdenvNoCC.mkDerivation {
     sparseCheckout = [ "variablefont" ];
   };
 
+  nativeBuildInputs = [ rename ];
+
   installPhase = ''
     runHook preInstall
 
     # Tidy filenames (drop [FILL,GRAD,opsz,wght] suffix)
-    for f in variablefont/*; do
-      mv "$f" "''${f//\[FILL,GRAD,opsz,wght\]/}"
-    done
+    rename 's/\[FILL,GRAD,opsz,wght\]//g' variablefont/*
 
     # Install fonts
-    install -Dm444 variablefont/*.ttf -t $out/share/fonts/truetype
-    install -Dm444 variablefont/*.ttf -t $out/share/fonts/opentype
+    mkdir -p "$out/share/fonts/"{truetype,woff2}
+    cp fonts/*.ttf "$out/share/fonts/truetype/"
+    cp fonts/*.woff2 "$out/share/fonts/woff2/"
 
     runHook postInstall
   '';
