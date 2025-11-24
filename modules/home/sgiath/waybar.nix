@@ -94,19 +94,6 @@
           border: none;
         }
 
-        window#waybar.hidden {
-          opacity: 0.2;
-        }
-
-        window#waybar.termite {
-            background-color: #3F3F3F;
-        }
-
-        window#waybar.chromium {
-            background-color: #000000;
-            border: none;
-        }
-
         button {
             /* Use box-shadow instead of border so the text isn't offset */
             box-shadow: inset 0 -1px transparent;
@@ -122,10 +109,10 @@
         }
 
         #workspaces button {
-            padding: 0 6px;
-            radius: 4;
-            background-color: transparent;
-            color: #d3c6aa;
+          padding: 0 6px;
+          border-radius: 4;
+          background-color: transparent;
+          color: #d3c6aa;
         }
 
         #workspaces button:hover {
