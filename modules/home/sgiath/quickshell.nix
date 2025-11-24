@@ -128,7 +128,7 @@ in
 
     pkgs.${namespace}.material-symbols
     rubik
-    nurPkgs.repos.skiletro.gabarito
+    # nurPkgs.repos.skiletro.gabarito
     nerd-fonts.ubuntu
     nerd-fonts.ubuntu-mono
     nerd-fonts.jetbrains-mono
