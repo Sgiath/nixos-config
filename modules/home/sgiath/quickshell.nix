@@ -94,7 +94,7 @@ in
     kdePackages.qtwebsockets
     kdePackages.syntax-highlighting
   ];
-programs.qt.enable = true;
+qt.enable = true;
     programs.quickshell = {
       enable = true;
       package = quickshell-with-qtpositioning;
