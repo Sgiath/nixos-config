@@ -24,7 +24,7 @@ let
     ps.opencv4
   ]);
 
-  qmlPath = pkgs.lib.makeSearchPath "lib/qt-6/qml" [
+  qmlPath = pkgs.lib.makeSearchPath pkgs.kdePackages.qtbase.qtQmlPrefix [
     pkgs.kdePackages.qtpositioning
     pkgs.kdePackages.qtbase
     pkgs.kdePackages.qtdeclarative
@@ -39,8 +39,8 @@ let
     pkgs.kdePackages.qttranslations
     pkgs.kdePackages.qtvirtualkeyboard
     pkgs.kdePackages.qtwebsockets
-    pkgs.kdePackages.kirigami
-    pkgs.kdePackages.kirigami-addons
+    pkgs.kdePackages.kirigami.unwrapped
+    # pkgs.kdePackages.kirigami-addons
   ];
 
   quickshell-with-qtpositioning = pkgs.symlinkJoin {
@@ -97,7 +97,7 @@ in
     kdePackages.qtwebsockets
     kdePackages.syntax-highlighting
     kdePackages.kirigami
-    kdePackages.kirigami-addons
+    # kdePackages.kirigami-addons
   ];
   qt.enable = true;
   programs.quickshell = {
