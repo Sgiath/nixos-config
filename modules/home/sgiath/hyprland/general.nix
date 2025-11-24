@@ -27,6 +27,8 @@
       no_focus_fallback = true;
       allow_tearing = true;
 
+      layout = "dwindle";
+
       snap = {
         enabled = true;
         window_gap = 4;
