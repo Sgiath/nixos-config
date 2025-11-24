@@ -72,7 +72,11 @@
       };
     };
 
-    home.packages = [ pkgs.grim ];
+    home.packages = [ 
+      pkgs.grim
+      pkgs.libsecret
+
+       ];
 
     programs.wofi = {
       enable = true;
@@ -109,12 +113,6 @@
           selection-match = "dfb8f6ff";
         };
       };
-    };
-
-    programs.quickshell = {
-      enable = true;
-      activeConfig = "default";
-      configs.default = ./quickshell;
     };
 
     services = {

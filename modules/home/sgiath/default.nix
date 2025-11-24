@@ -21,6 +21,7 @@
     ./hyprland.nix
     ./nushell.nix
     ./nvim.nix
+    ./quickshell.nix
     ./ssh.nix
     ./starship.nix
     ./stylix.nix
