@@ -76,7 +76,9 @@ let
             --prefix QML2_IMPORT_PATH : "${qmlPath}" \
             --prefix PATH : "${pythonEnv}/bin" \
             --set ILLOGICAL_IMPULSE_VIRTUAL_ENV "$out/venv" \
-            --set FONTCONFIG_FILE "${fontConfig}"
+            --set FONTCONFIG_FILE "${fontConfig}" \
+            --set QT_QPA_PLATFORMTHEME "qt5ct" \
+            --set QT_FONT_DPI "96"
         fi
       done
     '';
