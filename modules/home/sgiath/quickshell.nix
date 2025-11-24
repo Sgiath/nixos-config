@@ -76,6 +76,20 @@ in
 {
   # Qt/KDE packages required for QuickShell functionality
   home.packages = with pkgs; [
+
+      # Core utilities
+      cava
+      lxqt.pavucontrol-qt
+      wireplumber
+      libdbusmenu-gtk3
+      playerctl
+      brightnessctl
+      ddcutil
+      axel
+      bc
+      cliphist
+      libqalculate
+
     # QuickShell with QtPositioning support (wrap both qs and quickshell)
     quickshell-with-qtpositioning
 

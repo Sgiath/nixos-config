@@ -116,7 +116,7 @@
     };
 
     services = {
-      mako.enable = true;
+      # mako.enable = true;
       hyprpolkitagent.enable = true;
     };
   };
