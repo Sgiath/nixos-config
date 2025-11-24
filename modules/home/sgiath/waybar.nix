@@ -159,180 +159,85 @@
         }
 
         #clock {
-            background-color: #a7c080;
-            color: #2d353b;
-            font-weight: bold;
-            margin-right: 7px;
+          background-color: #a7c080;
+          color: #2d353b;
+          font-weight: bold;
+          margin-right: 7px;
         }
 
         #battery {
-            background-color: #d699b6;
-            color: #2d353b;
+          background-color: #d699b6;
+          color: #2d353b;
         }
 
         #battery.charging, #battery.plugged {
-            color: #2d353b;
-            background-color: #83c092;
+          color: #2d353b;
+          background-color: #83c092;
         }
 
         @keyframes blink {
-            to {
-                background-color: #ffffff;
-                color: #000000;
-            }
+          to {
+            background-color: #ffffff;
+            color: #000000;
+          }
         }
 
         #battery.critical:not(.charging) {
-            background-color: #f53c3c;
-            color: #ffffff;
-            animation-name: blink;
-            animation-duration: 0.5s;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
-        }
-
-        label:focus {
-            background-color: #000000;
+          background-color: #f53c3c;
+          color: #ffffff;
+          animation-name: blink;
+          animation-duration: 0.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
         }
 
         #cpu {
-            background-color: #2ecc71;
-            color: #000000;
+          background-color: #2ecc71;
+          color: #000000;
         }
 
         #memory {
-            background-color: #9b59b6;
+          background-color: #9b59b6;
         }
 
         #disk {
-            background-color: #964B00;
+          background-color: #964B00;
         }
 
         #backlight {
-            background-color: #90b1b1;
+          background-color: #90b1b1;
         }
 
         #network {
-            background-color: #7fbbb3;
-            color: #232a2e;
+          background-color: #7fbbb3;
+          color: #232a2e;
         }
 
         #network.disconnected {
-            background-color: #e67e80;
-            color: #232a2e;
-        }
-
-        #pulseaudio {
-            background-color: #dbbc7f;
-            color: #232a2e;
-        }
-
-        #pulseaudio.muted {
-            background-color: #dbbc7f;
-            color: #2a5c45;
-        }
-
-        #wireplumber {
-            background-color: #fff0f5;
-            color: #000000;
-        }
-
-        #wireplumber.muted {
-            background-color: #f53c3c;
-        }
-
-        #custom-media {
-            background-color: #66cc99;
-            color: #2a5c45;
-            min-width: 100px;
-        }
-
-        #custom-media.custom-spotify {
-            background-color: #66cc99;
-        }
-
-        #custom-media.custom-vlc {
-            background-color: #ffa000;
+          background-color: #e67e80;
+          color: #232a2e;
         }
 
         #temperature {
-            background-color: #f0932b;
+          background-color: #f0932b;
         }
 
         #temperature.critical {
-            background-color: #eb4d4b;
+          background-color: #eb4d4b;
         }
 
         #tray {
-            background-color: #2980b9;
+          background-color: #232323;
         }
 
         #tray > .passive {
-            -gtk-icon-effect: dim;
+          -gtk-icon-effect: dim;
         }
 
         #tray > .needs-attention {
-            -gtk-icon-effect: highlight;
-            background-color: #eb4d4b;
-        }
-
-        #idle_inhibitor {
-            background-color: #2d3436;
-        }
-
-        #idle_inhibitor.activated {
-            background-color: #ecf0f1;
-            color: #2d3436;
-        }
-
-        #mpd {
-            background-color: #66cc99;
-            color: #2a5c45;
-        }
-
-        #mpd.disconnected {
-            background-color: #f53c3c;
-        }
-
-        #mpd.stopped {
-            background-color: #90b1b1;
-        }
-
-        #mpd.paused {
-            background-color: #51a37a;
-        }
-
-        #language {
-            background: #00b093;
-            color: #740864;
-            padding: 0 5px;
-            margin: 0 5px;
-            min-width: 16px;
-        }
-
-        #keyboard-state {
-            background: #97e1ad;
-            color: #000000;
-            padding: 0 0px;
-            margin: 0 5px;
-            min-width: 16px;
-        }
-
-        #keyboard-state > label {
-            padding: 0 5px;
-        }
-
-        #keyboard-state > label.locked {
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        #scratchpad {
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        #scratchpad.empty {
-        	background-color: transparent;
+          -gtk-icon-effect: highlight;
+          background-color: #eb4d4b;
         }
       '';
     };
