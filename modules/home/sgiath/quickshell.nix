@@ -40,7 +40,6 @@ let
     pkgs.kdePackages.qtvirtualkeyboard
     pkgs.kdePackages.qtwebsockets
     pkgs.kdePackages.kirigami.unwrapped
-    pkgs.kdePackages.kirigami-addons
   ];
 
   quickshell-with-qtpositioning = pkgs.symlinkJoin {
@@ -97,7 +96,16 @@ in
     kdePackages.qtwebsockets
     kdePackages.syntax-highlighting
     kdePackages.kirigami.unwrapped
-    kdePackages.kirigami-addons
+
+
+      # Themes and icons
+      adw-gtk3
+      customPkgs.illogical-impulse-oneui4-icons
+      papirus-icon-theme  # Primary icon theme
+      adwaita-icon-theme  # GNOME fallback icons
+      hicolor-icon-theme  # Base icon theme (required by most themes)
+      gnome-icon-theme  # Additional GNOME icon coverage
+      kdePackages.breeze-icons  # KDE Breeze icons (required by Papirus inheritance)
   ];
   qt.enable = true;
   programs.quickshell = {
