@@ -123,6 +123,7 @@
 
         #workspaces button {
             padding: 0 6px;
+            radius: 4;
             background-color: transparent;
             color: #d3c6aa;
         }
