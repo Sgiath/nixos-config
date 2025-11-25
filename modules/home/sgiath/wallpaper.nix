@@ -45,7 +45,7 @@ in {
         settings = lib.mkForce {
           preload = [ "${./wallpapers/transhumanism.png}" ];
           wallpaper = [
-            "DP-1,contain:${./wallpapers/transhumanism.png}"
+            "DP-1,contain:${./wallpapers/lollipop-neon-neko-girl-wallpaperwaifu-com.mp4}"
             "DP-3,contain:${./wallpapers/transhumanism.png}"
             "DP-2,contain:${./wallpapers/transhumanism.png}"
           ];
