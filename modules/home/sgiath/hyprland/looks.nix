@@ -20,7 +20,7 @@
         new_optimizations = true;
         size = 10;
         passes = 3;
-        brightness = 1;
+        brightness = 0.5;
         noise = 0.15;
         contrast = 0.2;
         vibrancy = 0.8;
