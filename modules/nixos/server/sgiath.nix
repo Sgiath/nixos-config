@@ -15,13 +15,27 @@
 
         root = "/data/www/sgiath.dev";
 
+        extraConfig = ''
+          rewrite ^/twitter/?$ https://x.com/SgiathDev redirect;
+          rewrite ^/x/?$ https://x.com/SgiathDev redirect;
+          rewrite ^/github/?$ https://github.com/Sgiath redirect;
+          rewrite ^/source-hut/?$ https://sr.ht/~sgiath redirect;
+        '';
+
         locations = {
-          "/profile" = {
-            extraConfig = ''
-              add_header Access-Control-Allow-Origin '*';
-              add_header Cross-Origin-Resource-Policy 'cross-origin';
-            '';
-          };
+          "= /ping".extraConfig = ''
+            default_type text/plain;
+            return 200 "pong\n";
+          '';
+
+          "= /sgiath.asc".extraConfig = ''
+            add_header Content-Disposition 'attachment';
+          '';
+
+          "/profile".extraConfig = ''
+            add_header Access-Control-Allow-Origin '*';
+            add_header Cross-Origin-Resource-Policy 'cross-origin';
+          '';
 
           "/presentations" = {
             extraConfig = ''
@@ -39,12 +53,6 @@
               autoindex_format html;
             '';
             tryFiles = "$uri $uri/ $uri.zip $uri/index.html =404";
-          };
-
-          "/sgiath.asc" = {
-            extraConfig = ''
-              add_header Content-Disposition 'attachment';
-            '';
           };
 
           "/" = {
