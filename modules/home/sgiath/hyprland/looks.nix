@@ -5,12 +5,12 @@
       rounding_power = 2;
 
       active_opacity = 1.0;
-      inactive_opacity = 0.80;
+      inactive_opacity = 0.90;
       fullscreen_opacity = 1.0;
 
       # Dim
       dim_inactive = true;
-      dim_strength = 0.05;
+      dim_strength = 0.025;
       dim_special = 0.07;
 
       blur = {
@@ -18,8 +18,8 @@
         xray = true;
         special = false;
         new_optimizations = true;
-        size = 200;
-        passes = 4;
+        size = 10;
+        passes = 3;
         brightness = 1;
         noise = 0.15;
         contrast = 0.2;
