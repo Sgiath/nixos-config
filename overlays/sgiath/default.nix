@@ -19,8 +19,8 @@ let
   };
 in
 {
-  prompt-toolkit = pkgs-master.prompt-toolkit;
-  
+  awscli2 = pkgs-master.awscli2;
+
   # conduit build from official repo flake
   matrix-conduit = inputs.conduit.packages.${prev.stdenv.hostPlatform.system}.default;
 
