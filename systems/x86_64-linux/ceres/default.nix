@@ -25,9 +25,15 @@
   programs = {
     gamescope.enable = true;
     gamemode.enable = true;
+
     steam = {
       enable = true;
+      package = pkgs.steam.override {
+        extraPkgs = pkgs: [ pkgs.gamemode ];
+      };
+      remotePlay.openFirewall = true;
       protontricks.enable = true;
+      gamescopeSession.enable = true;
       extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
   };
