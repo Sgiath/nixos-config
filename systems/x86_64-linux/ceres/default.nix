@@ -42,8 +42,7 @@
       protontricks.enable = true;
       gamescopeSession.enable = true;
       extraCompatPackages = with pkgs; [
-        proton-ge-custom-bin
-        (proton-ge-custom.override { protonVersion = "GE-Proton10-11"; }) # Latest GE
+        proton-ge-bin
       ];
     };
   };
