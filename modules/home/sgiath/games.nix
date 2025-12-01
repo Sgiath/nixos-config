@@ -59,6 +59,8 @@ in
         token = secrets.factorio_token;
       })
 
+      bottles
+
       # star-citizen
     ];
 
