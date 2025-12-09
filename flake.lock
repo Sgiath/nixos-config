@@ -153,16 +153,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1765249523,
-        "narHash": "sha256-IO5bZOkMcpIB0751d9PV32C21CIFuZPa/p8tVmoNwuA=",
+        "lastModified": 1764870940,
+        "narHash": "sha256-1zh6ifwavP3RFqQbHIClEQ4cKRQ5LdU61LReA6+HSW8=",
         "owner": "openai",
         "repo": "codex",
-        "rev": "e51fbd14f9346fa47c088950c0ab0826f5a991a2",
+        "rev": "0cb995b34f5ba32a5b20c5893a930a5ad9469063",
         "type": "github"
       },
       "original": {
         "owner": "openai",
-        "ref": "rust-v0.66.0",
+        "ref": "rust-v0.65.0",
         "repo": "codex",
         "type": "github"
       }
@@ -1446,6 +1446,26 @@
         "type": "github"
       }
     },
+    "opencode": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765321004,
+        "narHash": "sha256-H42CBLMK67KUsD8zXomX1wbHdWTcvboI7HqpvawxQ0M=",
+        "owner": "sst",
+        "repo": "opencode",
+        "rev": "9fdbe193cd3d2bacdd53d5617a78c6d0580934c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sst",
+        "repo": "opencode",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -1488,6 +1508,7 @@
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixvim": "nixvim",
+        "opencode": "opencode",
         "snowfall-flake": "snowfall-flake",
         "snowfall-lib": "snowfall-lib_2",
         "sops-nix": "sops-nix",

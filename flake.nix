@@ -88,14 +88,14 @@
     };
 
     codex = {
-      url = "github:openai/codex/rust-v0.66.0";
+      url = "github:openai/codex/rust-v0.65.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # opencode = {
-    #   url = "github:sst/opencode";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    opencode = {
+      url = "github:sst/opencode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
