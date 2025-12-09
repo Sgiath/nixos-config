@@ -9,7 +9,7 @@
       ntfy-sh = {
         settings = {
           base-url = "https://ntfy.sgiath.dev";
-          listen-http = ":5679";
+          listen-http = ":5689";
           behind-proxy = true;
         };
       };
@@ -25,7 +25,7 @@
 
         locations."/" = {
           proxyWebsockets = true;
-          proxyPass = "http://127.0.0.1:5679";
+          proxyPass = "http://127.0.0.1:5689";
         };
       };
     };
