@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.programs.nvim.enable {
     home.sessionVariables = {
-      EDITOR = "zeditor";
+      EDITOR = "nvim";
       VISUAL = "zeditor";
     };
 
