@@ -67,10 +67,7 @@
       };
     };
 
-    home.packages = [
-      pkgs.grim
-      pkgs.gnome-software
-    ];
+    home.packages = [ pkgs.grim ];
 
     programs.wofi = {
       enable = true;
