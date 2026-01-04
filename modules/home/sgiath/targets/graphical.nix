@@ -41,6 +41,12 @@
 
     services = {
       udiskie.enable = true;
+      flatpak.packages = [
+        {
+          flatpakref = "https://github.com/NyarchLinux/NyarchAssistant/releases/download/1.0.1/nyarchassistant.flatpak";
+          sha256 = "";
+        }
+      ];
     };
 
     programs = {
