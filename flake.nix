@@ -47,8 +47,6 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-
     btc-clients = {
       url = "github:emmanuelrosa/btc-clients-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -138,7 +136,6 @@
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
-        nix-flatpak.nixosModules.nix-flatpak
         foundryvtt.nixosModules.foundryvtt
         nix-minecraft.nixosModules.minecraft-servers
       ];
@@ -147,7 +144,6 @@
         nixvim.homeModules.nixvim
         sops-nix.homeManagerModules.sops
         nix-index-database.homeModules.nix-index
-        nix-flatpak.homeManagerModules.nix-flatpak
       ];
     };
 }
