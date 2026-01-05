@@ -12,8 +12,8 @@
 
   config = lib.mkIf config.programs.nvim.enable {
     home.sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "zeditor";
+      EDITOR = "zeditor --wait";
+      VISUAL = "zeditor --wait";
     };
 
     # nixd LSP
