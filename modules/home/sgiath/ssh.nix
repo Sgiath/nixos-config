@@ -2,7 +2,6 @@
 {
   config = lib.mkIf config.programs.ssh.enable {
     programs.ssh = {
-      startAgent = false;
       enableDefaultConfig = false;
 
       matchBlocks = {
