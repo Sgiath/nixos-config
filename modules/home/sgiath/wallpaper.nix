@@ -49,9 +49,21 @@ in
             "${./wallpapers/solar-system.jpg}"
           ];
           wallpaper = [
-            "DP-1,contain:${./wallpapers/marry.jpg}"
-            "DP-3,contain:${./wallpapers/triss1.jpg}"
-            "DP-2,contain:${./wallpapers/solar-system.jpg}"
+            {
+              monitor = "DP-1";
+              fit_mode = "contain";
+              path = "${./wallpapers/marry.jpg}";
+            }
+            {
+              monitor = "DP-3";
+              fit_mode = "contain";
+              path = "${./wallpapers/triss1.jpg}";
+            }
+            {
+              monitor = "DP-2";
+              fit_mode = "contain";
+              path = "${./wallpapers/solar-system.jpg}";
+            }
           ];
         };
       };
