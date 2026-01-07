@@ -22,6 +22,7 @@
   config = lib.mkIf config.programs.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
+      xwayland.enable = true;
       package = null;
       portalPackage = null;
 
@@ -31,7 +32,6 @@
         variables = [ "--all" ];
       };
 
-      xwayland.enable = true;
       settings = {
         group.groupbar.font_size = 14;
 
