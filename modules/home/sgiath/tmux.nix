@@ -9,42 +9,111 @@ let
   bd-picker = pkgs.writeShellScriptBin "bd-picker" ''
     set -euo pipefail
 
+    # ANSI color codes
+    RESET='\033[0m'
+    BOLD='\033[1m'
+    DIM='\033[2m'
+    BLUE='\033[34m'
+    CYAN='\033[36m'
+    YELLOW='\033[33m'
+    GREEN='\033[32m'
+    RED='\033[31m'
+    MAGENTA='\033[35m'
+    GRAY='\033[90m'
+    WHITE='\033[97m'
+
     # Format issues hierarchically: parents first, then their children indented
     format_issues() {
       bd list --json --all 2>/dev/null | ${pkgs.jq}/bin/jq -r '
-        # Sort by priority for stable ordering
-        sort_by(.priority // 2, .id) |
+        # Color codes
+        def reset: "\u001b[0m";
+        def bold: "\u001b[1m";
+        def dim: "\u001b[2m";
+        def blue: "\u001b[34m";
+        def cyan: "\u001b[36m";
+        def yellow: "\u001b[33m";
+        def green: "\u001b[32m";
+        def red: "\u001b[31m";
+        def magenta: "\u001b[35m";
+        def gray: "\u001b[90m";
+        def white: "\u001b[97m";
+
+        # Color based on type
+        def type_color:
+          if . == "epic" then magenta + bold
+          elif . == "feature" then cyan
+          elif . == "bug" then red
+          elif . == "task" then blue
+          elif . == "chore" then gray
+          else white
+          end;
+
+        # Color based on priority
+        def priority_color:
+          if . <= 1 then red + bold
+          elif . == 2 then yellow
+          else green
+          end;
+
+        # Color based on status
+        def status_icon:
+          if . == "in_progress" then yellow + "●" + reset
+          elif . == "blocked" then red + "✗" + reset
+          elif . == "closed" then green + "✓" + reset
+          elif . == "deferred" then gray + "◌" + reset
+          else dim + "○" + reset
+          end;
+
+        # Sort by priority for stable ordering (reversed for display)
+        sort_by(.priority // 2, .id) | reverse |
 
         # Separate into parents (no parent) and children (has parent)
         . as $all |
         ($all | map(select(.parent == null or .parent == ""))) as $parents |
         ($all | map(select(.parent != null and .parent != "")) | group_by(.parent) | map({key: .[0].parent, value: .}) | from_entries) as $children |
 
-        # Output parents, each followed by their children
+        # Output parents, each followed by their children (children first for reversed display)
         $parents[] |
-        "\(.id)\t\(.title)\t\(.type // "task")\tP\(.priority // 2)",
-        (($children[.id] // []) | sort_by(.priority // 2) | .[] | "  └─ \(.id)\t\(.title)\t\(.type // "task")\tP\(.priority // 2)")
+        (($children[.id] // []) | sort_by(.priority // 2) | reverse | .[] |
+          gray + "  └─ " + reset +
+          (.status | status_icon) + " " +
+          blue + .id + reset + "\t" +
+          white + .title + reset + "\t" +
+          ((.type // "task") | . as $t | type_color + $t + reset) + "\t" +
+          ((.priority // 2) | . as $p | priority_color + "P" + ($p | tostring) + reset)
+        ),
+        (.status | status_icon) + " " +
+        bold + cyan + .id + reset + "\t" +
+        bold + white + .title + reset + "\t" +
+        ((.type // "task") | . as $t | type_color + $t + reset) + "\t" +
+        ((.priority // 2) | . as $p | priority_color + "P" + ($p | tostring) + reset)
       ' || true
     }
 
     issues=$(format_issues)
 
     if [[ -z "$issues" ]]; then
-      echo "No beads found"
+      echo -e "''${YELLOW}No beads found''${RESET}"
       read -n 1 -s -r -p "Press any key to close..."
       exit 0
     fi
-
-    # Preview function that extracts clean ID
-    export -f format_issues 2>/dev/null || true
 
     selection=$(echo "$issues" | ${pkgs.fzf}/bin/fzf \
       --ansi \
       --delimiter '\t' \
       --with-nth '1,2,3,4' \
-      --preview 'id=$(echo {} | sed "s/^[[:space:]]*└─[[:space:]]*//" | cut -f1); bd show "$id"' \
+      --preview 'id=$(echo {} | sed "s/\x1b\[[0-9;]*m//g" | sed "s/^[[:space:]]*└─[[:space:]]*//" | sed "s/^[○●✗✓◌][[:space:]]*//" | cut -f1); bd show "$id"' \
       --preview-window 'right:60%:wrap:border-left' \
-      --header $'ENTER: implement | DEL: delete | ESC: cancel' \
+      --header $'ENTER: implement │ DEL: delete │ ESC: cancel' \
+      --header-first \
+      --border=rounded \
+      --border-label=' Beads ' \
+      --border-label-pos=3 \
+      --color='header:yellow,border:blue,label:cyan:bold' \
+      --color='pointer:cyan,marker:cyan,spinner:cyan' \
+      --color='hl:yellow:bold,hl+:yellow:bold:reverse' \
+      --pointer='▶' \
+      --marker='✓' \
       --expect 'enter,del,delete' \
       2>/dev/null) || exit 0
 
@@ -55,8 +124,8 @@ let
 
     [[ -z "$line" ]] && exit 0
 
-    # Strip indent/tree chars and extract ID
-    clean_line=$(echo "$line" | sed 's/^[[:space:]]*└─[[:space:]]*//')
+    # Strip ANSI codes, indent/tree chars, and status icons, then extract ID
+    clean_line=$(echo "$line" | sed 's/\x1b\[[0-9;]*m//g' | sed 's/^[[:space:]]*└─[[:space:]]*//' | sed 's/^[○●✗✓◌][[:space:]]*//')
     id=$(echo "$clean_line" | cut -f1)
     title=$(echo "$clean_line" | cut -f2)
 
