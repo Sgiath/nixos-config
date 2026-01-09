@@ -9,24 +9,40 @@ let
   bd-picker = pkgs.writeShellScriptBin "bd-picker" ''
     set -euo pipefail
 
-    # Format issues for fzf: id<TAB>title<TAB>type<TAB>priority
+    # Format issues hierarchically: parents first, then their children indented
     format_issues() {
-      bd ready --json 2>/dev/null | \
-        ${pkgs.jq}/bin/jq -r '.[] | "\(.id)\t\(.title)\t\(.type // "task")\tP\(.priority // 2)"' || true
+      bd list --json --all 2>/dev/null | ${pkgs.jq}/bin/jq -r '
+        # Sort by priority for stable ordering
+        sort_by(.priority // 2, .id) |
+
+        # Separate into parents (no parent) and children (has parent)
+        . as $all |
+        ($all | map(select(.parent == null or .parent == ""))) as $parents |
+        ($all | map(select(.parent != null and .parent != "")) | group_by(.parent) | map({key: .[0].parent, value: .}) | from_entries) as $children |
+
+        # Output parents, each followed by their children
+        $parents[] |
+        "\(.id)\t\(.title)\t\(.type // "task")\tP\(.priority // 2)",
+        (($children[.id] // []) | sort_by(.priority // 2) | .[] | "  └─ \(.id)\t\(.title)\t\(.type // "task")\tP\(.priority // 2)")
+      ' || true
     }
 
     issues=$(format_issues)
 
     if [[ -z "$issues" ]]; then
-      echo "No beads ready"
+      echo "No beads found"
       read -n 1 -s -r -p "Press any key to close..."
       exit 0
     fi
 
+    # Preview function that extracts clean ID
+    export -f format_issues 2>/dev/null || true
+
     selection=$(echo "$issues" | ${pkgs.fzf}/bin/fzf \
+      --ansi \
       --delimiter '\t' \
       --with-nth '1,2,3,4' \
-      --preview 'bd show {1}' \
+      --preview 'id=$(echo {} | sed "s/^[[:space:]]*└─[[:space:]]*//" | cut -f1); bd show "$id"' \
       --preview-window 'right:60%:wrap:border-left' \
       --header $'ENTER: implement | DEL: delete | ESC: cancel' \
       --expect 'enter,del,delete' \
@@ -39,8 +55,10 @@ let
 
     [[ -z "$line" ]] && exit 0
 
-    id=$(cut -f1 <<< "$line")
-    title=$(cut -f2 <<< "$line")
+    # Strip indent/tree chars and extract ID
+    clean_line=$(echo "$line" | sed 's/^[[:space:]]*└─[[:space:]]*//')
+    id=$(echo "$clean_line" | cut -f1)
+    title=$(echo "$clean_line" | cut -f2)
 
     case "$key" in
       enter)
