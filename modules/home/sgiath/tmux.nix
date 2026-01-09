@@ -134,7 +134,7 @@ let
         details=$(bd show "$id" 2>/dev/null || echo "")
         # Split window and start claude in plan mode
         ${pkgs.tmux}/bin/tmux split-window -h \
-          "claude --plan \"Implement bead $id: $title\""
+          "claude --permission-mode plan \"Implement bead $id: $title\""
         ;;
       del|delete)
         bd delete "$id"
