@@ -5,10 +5,62 @@
   ...
 }:
 
+let
+  bd-picker = pkgs.writeShellScriptBin "bd-picker" ''
+    set -euo pipefail
+
+    # Format issues for fzf: id<TAB>title<TAB>type<TAB>priority
+    format_issues() {
+      bd ready --json 2>/dev/null | \
+        ${pkgs.jq}/bin/jq -r '.[] | "\(.id)\t\(.title)\t\(.type // "task")\tP\(.priority // 2)"' || true
+    }
+
+    issues=$(format_issues)
+
+    if [[ -z "$issues" ]]; then
+      echo "No beads ready"
+      read -n 1 -s -r -p "Press any key to close..."
+      exit 0
+    fi
+
+    selection=$(echo "$issues" | ${pkgs.fzf}/bin/fzf \
+      --delimiter '\t' \
+      --with-nth '1,2,3,4' \
+      --preview 'bd show {1}' \
+      --preview-window 'right:60%:wrap:border-left' \
+      --header $'ENTER: implement | DEL: delete | ESC: cancel' \
+      --expect 'enter,del,delete' \
+      2>/dev/null) || exit 0
+
+    [[ -z "$selection" ]] && exit 0
+
+    key=$(head -1 <<< "$selection")
+    line=$(sed -n '2p' <<< "$selection")
+
+    [[ -z "$line" ]] && exit 0
+
+    id=$(cut -f1 <<< "$line")
+    title=$(cut -f2 <<< "$line")
+
+    case "$key" in
+      enter)
+        details=$(bd show "$id" 2>/dev/null || echo "")
+        # Split window and start claude in plan mode
+        ${pkgs.tmux}/bin/tmux split-window -h \
+          "claude --plan \"Implement bead $id: $title\n\n$details\""
+        ;;
+      del|delete)
+        bd delete "$id"
+        exec "$0"  # Re-run to show updated list
+        ;;
+    esac
+  '';
+in
 {
   config = lib.mkIf config.programs.tmux.enable {
     home.packages = [
       pkgs.tmux-sessionizer
+      bd-picker
     ];
 
     xdg = {
@@ -42,6 +94,9 @@
         bind c display-popup -E "tms"
         unbind s
         bind s display-popup -E "tms switch"
+
+        # Beads picker
+        bind b display-popup -E -w 80% -h 80% "${bd-picker}/bin/bd-picker"
 
         # New window
         bind m new-window
