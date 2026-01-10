@@ -12,12 +12,6 @@ Personal NixOS configuration using **Snowfall Lib** framework for organization. 
 # Rebuild and switch current system
 nixos-rebuild switch --sudo --flake .
 
-# Rebuild specific system
-nixos-rebuild switch --sudo --flake '.#ceres'
-
-# Remote deployment
-nixos-rebuild switch --sudo --flake '.#vesta' --target-host 'sgiath@vesta.local'
-
 # Update flake lockfile
 nix flake update
 
@@ -26,6 +20,9 @@ nixfmt <file.nix>
 
 # Enter development shell
 nix develop
+
+# Build specific package
+nix build ".#ntm"
 ```
 
 Custom shell scripts are available after system build: `update`, `update-limited`, `upgrade`, `clear-cache`.
