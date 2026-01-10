@@ -1,12 +1,9 @@
 {
   lib,
-  callPackage,
-  stdenv,
-  fetchurl,
+  buildNpmPackage,
   fetchzip,
-  nodejs,
+  fetchurl,
   p7zip,
-  ...
 }:
 let
   version = "2.22.0";
@@ -68,20 +65,15 @@ let
     let
       img = fetchurl {
         pname = "5etools-img-${v.name}";
-        version = "2.22.0";
-        # inherit version;
+        inherit version;
         inherit (v) hash;
         url = "https://github.com/5etools-mirror-2/5etools-img/releases/download/v${version}/img-v${version}.${v.name}";
       };
     in
     "cp ${img} img-v${version}.${v.name}"
   );
-
-  # to update copy new package.json and package-lock.json and run:
-  # node2nix -i package.json -l package-lock.json -d
-  nodeDependencies = (callPackage ./deps { inherit nodejs; }).nodeDependencies;
 in
-stdenv.mkDerivation {
+buildNpmPackage {
   inherit version pname;
 
   src = fetchzip {
@@ -92,30 +84,38 @@ stdenv.mkDerivation {
     hash = "sha256-HgmyXWeq9JfkRMaU8pl6EXQySAAKHEya5G0sEhh9bq0=";
   };
 
-  buildInputs = [
-    nodejs
-    p7zip
-  ];
+  # To update: nix run nixpkgs#prefetch-npm-deps -- package-lock.json
+  npmDepsHash = "sha256-9fww7mZcM4J0iwmPZv6MBc0Qkb7lPaYUCIZ40GImiCU=";
 
-  buildPhase = ''
-    # copy images
+  nativeBuildInputs = [ p7zip ];
+
+  preBuild = ''
+    # Copy image archives
     ${lib.strings.concatStringsSep "\n" copyImgs}
 
-    # unpack images
+    # Unpack images (split 7z archive)
     ${p7zip}/bin/7z x -aoa img-v${version}.zip
 
-    # remove ZIP files
+    # Remove archive files
     rm -f img-v*
-
-    # link Node deps
-    ln -s ${nodeDependencies}/lib/node_modules ./node_modules
-    export PATH="${nodeDependencies}/bin:$PATH"
-
-    # generate service worker
-    ${nodejs}/bin/npm run build:sw:prod
   '';
 
+  # Build service worker
+  npmBuildScript = "build:sw:prod";
+
+  # Don't install as npm package - we want static files
+  dontNpmInstall = true;
+
   installPhase = ''
+    runHook preInstall
+
+    # Copy all static files
     cp -r ./ $out/
+
+    # Remove unnecessary files from output
+    rm -rf $out/node_modules
+    rm -f $out/package*.json
+
+    runHook postInstall
   '';
 }
