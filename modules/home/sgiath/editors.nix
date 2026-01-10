@@ -70,6 +70,7 @@
       pkgs.claude-code
       pkgs.${namespace}.claude-code-acp
       pkgs.${namespace}.openspec
+      pkgs.${namespace}.ntm
 
       # Beads
       inputs.beads.packages.${pkgs.stdenv.hostPlatform.system}.default
