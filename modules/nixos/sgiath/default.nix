@@ -70,6 +70,8 @@ in
           "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
           "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
           "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
+          "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU="
+          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         ];
         substituters = [
           "https://cache.nixos.org"
@@ -77,6 +79,8 @@ in
           "https://nixpkgs-wayland.cachix.org"
           "https://hyprland.cachix.org"
           "https://claude-code.cachix.org"
+          "https://zed.cachix.org"
+          "https://cache.garnix.io"
         ];
       };
       channel.enable = false;

@@ -37,7 +37,6 @@
       # install zed-server even in terminal environment
       zed-editor = {
         enable = true;
-        package = inputs.zed-editor.packages.${pkgs.stdenv.hostPlatform.system}.default;
         installRemoteServer = true;
       };
     };

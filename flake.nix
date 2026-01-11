@@ -82,7 +82,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # https://github.com/zed-industries/zed/releases/latest
     zed-editor = {
       url = "github:zed-industries/zed";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -141,6 +140,7 @@
       };
 
       overlays = with inputs; [
+        zed-editor.overlays.default
         claude-code.overlays.default
         nix-minecraft.overlay
       ];
