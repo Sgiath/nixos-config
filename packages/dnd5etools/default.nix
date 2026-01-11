@@ -2,7 +2,7 @@
   lib,
   buildNpmPackage,
   fetchzip,
-  # fetchurl,
+  fetchurl,
   p7zip,
 }:
 let
@@ -63,7 +63,7 @@ let
   copyImgs = lib.lists.forEach imgHashes (
     v:
     let
-      img = builtins.fetchurl {
+      img = fetchurl {
         pname = "5etools-img-${v.name}";
         inherit version;
         inherit (v) hash;
