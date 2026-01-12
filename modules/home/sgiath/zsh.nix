@@ -67,7 +67,7 @@
             "utility"
             "archive"
             "docker"
-            "git"
+            # "git"
             "gpg"
             "ssh"
             "completion"

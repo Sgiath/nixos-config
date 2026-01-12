@@ -22,7 +22,7 @@
       gh = {
         enable = true;
         settings = {
-          editor = "nvim";
+          editor = "zed";
           git_protocol = "ssh";
         };
       };
