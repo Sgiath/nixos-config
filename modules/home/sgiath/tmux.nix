@@ -228,8 +228,12 @@ in
 
         set -g status-left "$wg_session"
         set -g status-right "#[fg=$blue]$wg_date_time #{prefix_highlight}"
-        setw -g window-status-format "#[bg=$bg,fg=$fg] #I "
-        setw -g window-status-current-format "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$bg]#I#[fg=$yellow,bg=$bg]"
+        setw -g window-status-format "#[bg=$bg,fg=$fg] #W "
+        setw -g window-status-current-format "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$bg]#W#[fg=$yellow,bg=$bg]"
+
+        # Auto-rename windows to git branch name
+        set-option -g automatic-rename on
+        set-hook -g after-select-pane 'run-shell "tmux rename-window \"$(cd #{pane_current_path} && git branch --show-current 2>/dev/null || basename #{pane_current_path})\"" 2>/dev/null'
 
         set-option -g status-justify centre
         set-option -g status-left-length 100
