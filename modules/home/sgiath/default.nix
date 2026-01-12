@@ -236,6 +236,12 @@
           echo ""; echo "=== claude-code-acp ==="
           ./claude-code-acp/update.sh
 
+          echo ""; echo "=== dnd5etools ==="
+          ./dnd5etools/update.sh
+
+          echo ""; echo "=== gastown ==="
+          ./gastown/update.sh
+
           echo ""; echo "=== n8n ==="
           ./n8n/update.sh
 
@@ -244,9 +250,6 @@
 
           echo ""; echo "=== openspec ==="
           ./openspec/update.sh
-
-          echo ""; echo "=== dnd5etools ==="
-          ./dnd5etools/update.sh
 
           popd > /dev/null
 

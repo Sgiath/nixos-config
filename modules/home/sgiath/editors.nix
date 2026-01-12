@@ -73,6 +73,7 @@
 
       # Beads
       inputs.beads.packages.${pkgs.stdenv.hostPlatform.system}.default
+      pkgs.${namespace}.gastown
     ];
 
     # Codex
