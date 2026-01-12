@@ -143,6 +143,85 @@
           doas nix-store --optimise
         '')
 
+        (writeShellScriptBin "gw" ''
+          set -euo pipefail
+
+          if [[ $# -lt 1 ]]; then
+            echo "Usage: gw <branch-name>"
+            echo ""
+            echo "Creates a git worktree in .worktrees/<branch-name>"
+            echo "Copies .env and runs direnv allow"
+            exit 1
+          fi
+
+          branch="$1"
+          repo_root=$(git rev-parse --show-toplevel)
+          worktree_dir="$repo_root/.worktrees/$branch"
+
+          # Create .worktrees directory if needed
+          mkdir -p "$repo_root/.worktrees"
+
+          # Add to .gitignore if not already there
+          if ! grep -qxF ".worktrees/" "$repo_root/.gitignore" 2>/dev/null; then
+            echo ".worktrees/" >> "$repo_root/.gitignore"
+            echo "Added .worktrees/ to .gitignore"
+          fi
+
+          # Check if branch exists locally or remotely
+          if git show-ref --verify --quiet "refs/heads/$branch"; then
+            echo "Creating worktree for existing local branch: $branch"
+            git worktree add "$worktree_dir" "$branch"
+          elif git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+            echo "Creating worktree for remote branch: $branch"
+            git worktree add "$worktree_dir" "$branch"
+          else
+            echo "Creating worktree with new branch: $branch"
+            git worktree add -b "$branch" "$worktree_dir"
+          fi
+
+          # Copy .env if it exists
+          if [[ -f "$repo_root/.env" ]]; then
+            cp "$repo_root/.env" "$worktree_dir/.env"
+            echo "Copied .env to worktree"
+          fi
+
+          # Run direnv allow in the new worktree
+          pushd "$worktree_dir" > /dev/null
+          direnv allow
+          popd > /dev/null
+
+          echo ""
+          echo "Worktree ready at: $worktree_dir"
+          echo "cd $worktree_dir"
+        '')
+
+        (writeShellScriptBin "gw-rm" ''
+          set -euo pipefail
+
+          if [[ $# -lt 1 ]]; then
+            echo "Usage: gw-rm <branch-name>"
+            echo ""
+            echo "Removes a git worktree from .worktrees/<branch-name>"
+            exit 1
+          fi
+
+          branch="$1"
+          repo_root=$(git rev-parse --show-toplevel)
+          worktree_dir="$repo_root/.worktrees/$branch"
+
+          if [[ ! -d "$worktree_dir" ]]; then
+            echo "Worktree not found: $worktree_dir"
+            exit 1
+          fi
+
+          git worktree remove "$worktree_dir"
+          echo "Removed worktree: $worktree_dir"
+        '')
+
+        (writeShellScriptBin "gw-ls" ''
+          git worktree list
+        '')
+
         (writeShellScriptBin "update-pkgs" ''
           echo "==> Updating all custom packages..."
 
