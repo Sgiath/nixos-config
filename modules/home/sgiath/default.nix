@@ -190,9 +190,15 @@
           direnv allow
           popd > /dev/null
 
-          echo ""
-          echo "Worktree ready at: $worktree_dir"
-          echo "cd $worktree_dir"
+          # Create new tmux window if inside tmux
+          if [[ -n "''${TMUX:-}" ]]; then
+            tmux new-window -n "$branch" -c "$worktree_dir"
+            echo "Created tmux window: $branch"
+          else
+            echo ""
+            echo "Worktree ready at: $worktree_dir"
+            echo "cd $worktree_dir"
+          fi
         '')
 
         (writeShellScriptBin "gw-rm" ''
