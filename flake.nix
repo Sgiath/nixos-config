@@ -82,8 +82,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # https://github.com/zed-industries/zed/releases/latest
     zed-editor = {
-      url = "github:zed-industries/zed";
+      url = "github:zed-industries/zed/v0.218.7";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
