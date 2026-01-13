@@ -1,4 +1,5 @@
 pkgs: {
+  bdui = pkgs.callPackage ./bdui { };
   claude-code-acp = pkgs.callPackage ./claude-code-acp { };
   dnd5etools = pkgs.callPackage ./dnd5etools { };
   gastown = pkgs.callPackage ./gastown { };
