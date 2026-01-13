@@ -108,6 +108,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    beads-viewer = {
+      url = "Dicklesworthstone/beads_viewer";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 

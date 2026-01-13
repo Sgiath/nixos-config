@@ -71,9 +71,12 @@
       pkgs.${namespace}.ntm
       pkgs.python3
 
+      # gas town
+      pkgs.${namespace}.gastown
+
       # Beads
       inputs.beads.packages.${pkgs.stdenv.hostPlatform.system}.default
-      pkgs.${namespace}.gastown
+      inputs.beads-viewer.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
     # Codex
