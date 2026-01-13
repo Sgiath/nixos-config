@@ -109,7 +109,7 @@
     };
 
     beads-viewer = {
-      url = "Dicklesworthstone/beads_viewer";
+      url = "github:Dicklesworthstone/beads_viewer";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
