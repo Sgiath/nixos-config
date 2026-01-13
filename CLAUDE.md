@@ -25,6 +25,8 @@ nix develop
 nix build ".#ntm"
 ```
 
+**Important**: Nix flakes only see files tracked by git. When creating new files (packages, modules, etc.), you must `git add` them before Nix can evaluate them.
+
 Custom shell scripts are available after system build: `update`, `update-limited`, `upgrade`, `clear-cache`.
 
 ## Architecture

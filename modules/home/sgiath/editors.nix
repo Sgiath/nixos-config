@@ -78,6 +78,7 @@
       inputs.beads.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.beads-viewer.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.${namespace}.bdui
+      pkgs.${namespace}.lazybeads
     ];
 
     # Codex

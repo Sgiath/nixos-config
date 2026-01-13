@@ -146,7 +146,7 @@
       };
 
       overlays = with inputs; [
-        zed-editor.overlays.default
+        # zed-editor.overlays.default
         claude-code.overlays.default
         nix-minecraft.overlay
       ];
