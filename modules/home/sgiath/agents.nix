@@ -27,7 +27,7 @@
       enable = true;
       package = pkgs.claude-code;
     };
-    zsh.shellAliases.cc = "${pkgs.claude-code}/bin/claude --allow-dangerously-skip-permissions";
+    programs.zsh.shellAliases.cc = "${pkgs.claude-code}/bin/claude --allow-dangerously-skip-permissions";
 
     # Codex
     programs.codex = {
@@ -40,7 +40,7 @@
       enable = true;
       package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
-    zsh.shellAliases.oc = "${
+    programs.zsh.shellAliases.oc = "${
       inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
     }/bin/opencode";
   };
