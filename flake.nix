@@ -6,11 +6,6 @@
 
     home-manager.url = "github:nix-community/home-manager/38e187fd2f9efac197e03be0c25f3ee215974144";
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -109,11 +104,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    beads-viewer = {
-      url = "github:Dicklesworthstone/beads_viewer";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
@@ -160,7 +150,6 @@
       ];
 
       homes.modules = with inputs; [
-        nixvim.homeModules.nixvim
         sops-nix.homeManagerModules.sops
         nix-index-database.homeModules.nix-index
       ];
