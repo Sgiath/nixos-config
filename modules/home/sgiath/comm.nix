@@ -12,6 +12,7 @@
   config = lib.mkIf (config.sgiath.comm.enable) {
     home.packages = with pkgs; [
       # webcord
+      discordo
       telegram-desktop
       signal-desktop-bin
       mattermost-desktop
