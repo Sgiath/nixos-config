@@ -11,7 +11,7 @@
     enable = lib.mkEnableOption "LLM agents";
   };
 
-  config = lib.mkIf config.programs.agents.enable {
+  config = lib.mkIf config.sgiath.agents.enable {
     home.packages = [
       pkgs.python3
 
