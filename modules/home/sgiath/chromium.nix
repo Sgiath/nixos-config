@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 {
   config = lib.mkIf config.programs.chromium.enable {
     programs.chromium = {

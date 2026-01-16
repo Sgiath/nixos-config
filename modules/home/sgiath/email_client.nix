@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 {
   options.sgiath.email_client = {
     enable = lib.mkEnableOption "Email Client";

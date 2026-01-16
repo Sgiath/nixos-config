@@ -9,7 +9,7 @@ let
   zed = pkgs.zed-editor;
   # zed = inputs.zed-editor.packages.${pkgs.stdenv.hostPlatform.system}.default;
   cursor = inputs.cursor.packages.${pkgs.stdenv.hostPlatform.system}.cursor;
-in:
+in
 {
   options.sgiath.editors = {
     enable = lib.mkEnableOption "my editors";
