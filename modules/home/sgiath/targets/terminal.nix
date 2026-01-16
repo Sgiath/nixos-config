@@ -23,6 +23,10 @@
       gnumake
     ];
 
+    sgiath = {
+      agents.enable = true;
+    };
+
     programs = {
       git.enable = true;
       gpg.enable = true;
@@ -32,7 +36,6 @@
       tmux.enable = true;
       yazi.enable = true;
       zsh.enable = true;
-      agents.enable = true;
 
       # install zed-server even in terminal environment
       zed-editor = {
