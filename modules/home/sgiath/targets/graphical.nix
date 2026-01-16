@@ -65,6 +65,7 @@
       audio.enable = true;
       bitcoin.enable = true;
       comm.enable = true;
+      editors.enable = true;
       email_client.enable = true;
       web_browsers.enable = true;
     };
