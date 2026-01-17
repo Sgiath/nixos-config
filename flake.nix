@@ -158,6 +158,7 @@
       homes.modules = with inputs; [
         sops-nix.homeManagerModules.sops
         nix-index-database.homeModules.nix-index
+        clawdbot.homeManagerModules.clawdbot
       ];
     };
 }
