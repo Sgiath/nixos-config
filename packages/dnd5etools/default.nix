@@ -65,7 +65,7 @@ let
     let
       img = fetchurl {
         pname = "5etools-img-${v.name}";
-        inherit version;
+        version = "2.22.2";
         inherit (v) hash;
         url = "https://github.com/5etools-mirror-2/5etools-img/releases/download/v${version}/img-v${version}.${v.name}";
       };
