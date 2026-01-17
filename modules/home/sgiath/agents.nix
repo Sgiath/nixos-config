@@ -15,6 +15,8 @@
     home.packages = [
       pkgs.python3
 
+      pkgs.clawdbot
+
       # Claude Code
       pkgs.${namespace}.claude-code-acp
       pkgs.${namespace}.openspec
