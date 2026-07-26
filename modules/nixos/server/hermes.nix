@@ -41,7 +41,7 @@ in
         };
 
         environment = {
-          HERMES_MANAGED = "true";
+          HERMES_MANAGED = "false";
           HERMES_DASHBOARD_TUI = "1";
           HERMES_HOME = "/home/sgiath/hermes/.hermes";
         };
@@ -219,7 +219,7 @@ in
                 reference_models = [
                   {
                     provider = "anthropic";
-                    model = "claude-fable-5";
+                    model = "claude-opus-5";
                     reasoning_effort = "high";
                   }
                   {
