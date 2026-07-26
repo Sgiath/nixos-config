@@ -18,7 +18,10 @@
   ];
 
   services = {
-    buzz-relay.enable = true;
+    buzz-relay = {
+      enable = true;
+      ownerPubkey = "0000002855ad7906a7568bf4d971d82056994aa67af3cf0048a825415ac90672"
+    };
     i2p.enable = true;
 
     audiobookshelf.enable = true;
