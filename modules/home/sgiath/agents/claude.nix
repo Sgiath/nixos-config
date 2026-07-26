@@ -10,8 +10,8 @@
       enable = false;
       enableMcpIntegration = true;
       package = pkgs.llm-agents.claude-code;
-      memory.source = ./AGENTS.md;
-      skillsDir = ./skills;
+      context = ./AGENTS.md;
+      skills = ./skills;
     };
 
     programs.zsh.shellAliases = {
