@@ -171,7 +171,7 @@ in
     systemd.services.buzz-minio-bucket = {
       description = "Create the Buzz object-storage bucket";
       wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.glibc.bin ];
+      environment.HOME = "/root";
       requires = [
         "buzz-secrets.service"
         "minio.service"

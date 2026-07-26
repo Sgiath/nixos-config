@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf (config.sgiath.agents.enable && false) {
+  config = lib.mkIf config.sgiath.agents.enable {
     programs.claude-code = {
       enable = false;
       enableMcpIntegration = true;
