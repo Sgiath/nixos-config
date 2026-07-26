@@ -38,7 +38,7 @@ in
 
     healthPort = lib.mkOption {
       type = lib.types.port;
-      default = 8081;
+      default = 8082;
     };
 
     metricsPort = lib.mkOption {
