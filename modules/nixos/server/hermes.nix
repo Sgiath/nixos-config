@@ -85,12 +85,12 @@ in
 
         settings = {
           model = {
-            default = "claude-opus-5";
-            provider = "anthropic";
+            default = "gpt-5.6-sol";
+            provider = "openai-codex";
           };
           fallback_model = {
-            model = "gpt-5.6-sol";
-            provider = "openai-codex";
+            model = "claude-opus-5";
+            provider = "anthropic";
           };
 
           timezone = "UTC";
