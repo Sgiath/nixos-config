@@ -1,5 +1,7 @@
 pkgs: {
   bird = pkgs.callPackage ./bird { };
+  buzz = pkgs.callPackage ./buzz { };
+  buzz-relay = pkgs.callPackage ./buzz-relay { };
   clawpatch = pkgs.callPackage ./clawpatch { };
   dnd5etools = pkgs.callPackage ./dnd5etools { };
   eve-flipper = pkgs.callPackage ./eve-flipper { };

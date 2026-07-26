@@ -1,0 +1,46 @@
+{
+  lib,
+  appimageTools,
+  fetchurl,
+}:
+
+let
+  pname = "buzz";
+  version = "0.4.26";
+
+  src = fetchurl {
+    url = "https://github.com/block/buzz/releases/download/v${version}/Buzz_${version}_amd64.AppImage";
+    hash = "sha256-XOelbuUdtmw9IZ9Plb2SAh/GiVY+pqQlRBdR9oWCgg8=";
+  };
+
+  appimageContents = appimageTools.extractType2 {
+    inherit pname version src;
+  };
+in
+appimageTools.wrapType2 {
+  inherit pname version src;
+
+  extraPkgs = pkgs: with pkgs; [
+    elfutils
+    zstd
+  ];
+
+  extraInstallCommands = ''
+    install -Dm444 ${appimageContents}/Buzz.desktop \
+      $out/share/applications/buzz.desktop
+    substituteInPlace $out/share/applications/buzz.desktop \
+      --replace-fail 'Exec=buzz-desktop' 'Exec=buzz'
+
+    install -Dm444 ${appimageContents}/buzz-desktop.png \
+      $out/share/pixmaps/buzz-desktop.png
+  '';
+
+  meta = with lib; {
+    description = "Workspace where humans and agents build together";
+    homepage = "https://github.com/block/buzz";
+    license = licenses.asl20;
+    mainProgram = pname;
+    platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
+  };
+}

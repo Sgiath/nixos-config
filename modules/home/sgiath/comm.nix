@@ -24,6 +24,9 @@
 
       # nostr CLI
       pkgs.${namespace}.nak
+
+      # buzz
+      pkgs.${namespace}.buzz
     ];
 
     programs = {

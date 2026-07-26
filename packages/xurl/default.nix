@@ -6,16 +6,16 @@
 
 buildGoModule rec {
   pname = "xurl";
-  version = "1.2.3";
+  version = "1.3.1";
 
   src = fetchFromGitHub {
     owner = "xdevplatform";
     repo = "xurl";
     rev = "v${version}";
-    hash = "sha256-yeNSyTqsvltcy2VeOB6CTRvhAWQsp1CvxUzC8iqga0Y=";
+    hash = "sha256-dwVBzuUhQpfRWFOZOf1DCGNKoetdZlcretnyv9AShbw=";
   };
 
-  vendorHash = "sha256-sYGm/Yrcu+i+EsjcJfZcCrp3tvWLxo8cte5YnC0fEbI=";
+  vendorHash = "sha256-3yUZZYHcDpCaK55uiVw4X9mxvda9iL+XwPpSXheKOSc=";
 
   postPatch = ''
     substituteInPlace api/client_test.go \

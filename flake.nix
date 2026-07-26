@@ -37,7 +37,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.55.4";
+    hyprland.url = "github:hyprwm/Hyprland/v0.56.0";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -83,7 +83,7 @@
     };
 
     worktrunk = {
-      url = "github:max-sixty/worktrunk/v0.68.0";
+      url = "github:max-sixty/worktrunk/v0.69.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -93,14 +93,14 @@
     };
 
     voxtype.url = "github:peteonrails/voxtype/v1.0.0-rc1";
-    comfyui.url = "github:utensils/comfyui-nix/v0.25.0";
+    comfyui.url = "github:utensils/comfyui-nix/v0.28.2";
 
     # LLM tools
 
     llm-agents.url = "github:numtide/llm-agents.nix";
 
     hermes-agent = {
-      url = "github:NousResearch/hermes-agent/v2026.7.7.2";
+      url = "github:NousResearch/hermes-agent/v2026.7.20";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

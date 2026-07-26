@@ -15,13 +15,13 @@
 
 let
   pname = "eve-flipper";
-  version = "1.6.13";
+  version = "1.6.14";
 
   src = fetchFromGitHub {
     owner = "ilyaux";
     repo = "Eve-flipper";
     rev = "v${version}";
-    hash = "sha256-FXpUPY0VEWfTktIv6/Sp8kj3ZpRRPPP8wRQL2WCurPw=";
+    hash = "sha256-voveK3nB4n++G+9AFAbAJHBRXZzRiNEXqT+L/fNYH2o=";
   };
 
   frontend = stdenvNoCC.mkDerivation (finalAttrs: {
@@ -37,7 +37,7 @@ let
         sourceRoot
         ;
       fetcherVersion = 4;
-      hash = "sha256-S5R5RHjbpHuc6E5zJZZfbTo44iFdSxcG5xyrLaUCN9g=";
+      hash = "sha256-mEZezTgyjFzcN8QgYAeNVYYNIQNUZgR7FUCn+TeiRM0=";
     };
 
     nativeBuildInputs = [

@@ -7,13 +7,13 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "linear-cli";
-  version = "2.1.1";
+  version = "2.3.0";
 
   src = fetchFromGitHub {
     owner = "schpet";
     repo = "linear-cli";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-aiTHUH0mxhGSnH7kmsVTk2TsXe5SbXcsawVOqUPbd/o=";
+    hash = "sha256-n/inNMeNM2MvRKhw2tB2Avh7ORWNEzMXW9mCy/3ShwA=";
   };
 
   nativeBuildInputs = [ deno ];
@@ -53,5 +53,5 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   outputHashMode = "recursive";
   outputHashAlgo = "sha256";
-  outputHash = "sha256-OCRJSYNncaiTbXlqDFEjPeasJPTSJ3SYCuG6rrwQvBs=";
+  outputHash = "sha256-vE5i6WDIaKSjSSlGc3cp4If6M1YhqApkJNUY8Q52koU=";
 })

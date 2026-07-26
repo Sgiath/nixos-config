@@ -13,7 +13,12 @@
     server.enable = true;
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "minio-2025-10-15T17-29-55Z"
+  ];
+
   services = {
+    buzz-relay.enable = true;
     i2p.enable = true;
 
     audiobookshelf.enable = true;
