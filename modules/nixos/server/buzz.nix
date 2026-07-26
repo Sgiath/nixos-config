@@ -10,7 +10,7 @@ let
   secretsFile = "/var/lib/buzz-secrets/environment";
   relayUrl = "wss://${cfg.domain}";
   mediaUrl = "https://${cfg.domain}/media";
-  databaseUrl = "postgresql://buzz@/${cfg.databaseName}?host=/run/postgresql";
+  databaseUrl = "postgresql:///${cfg.databaseName}?host=/run/postgresql&user=buzz";
   redisUrl = "redis://127.0.0.1:${toString cfg.redisPort}";
   minioUrl = "http://127.0.0.1:${toString cfg.minioPort}";
 in

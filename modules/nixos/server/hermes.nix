@@ -85,7 +85,7 @@ in
 
         settings = {
           model = {
-            default = "claude-fable-5";
+            default = "claude-opus-5";
             provider = "anthropic";
           };
           fallback_model = {
