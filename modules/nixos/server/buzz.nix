@@ -261,8 +261,6 @@ in
         proxyPass = "http://${cfg.listenAddress}:${toString cfg.port}";
         proxyWebsockets = true;
         extraConfig = ''
-          allow ${cfg.localNetwork};
-          deny all;
           client_max_body_size 600m;
           proxy_read_timeout 3600s;
           proxy_send_timeout 3600s;
