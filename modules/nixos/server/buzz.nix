@@ -171,6 +171,7 @@ in
     systemd.services.buzz-minio-bucket = {
       description = "Create the Buzz object-storage bucket";
       wantedBy = [ "multi-user.target" ];
+      path = [ pkgs.glibc.bin ];
       requires = [
         "buzz-secrets.service"
         "minio.service"
@@ -228,7 +229,8 @@ in
         REDIS_URL = redisUrl;
         RELAY_URL = relayUrl;
         RUST_LOG = "buzz_relay=info";
-      } // lib.optionalAttrs (cfg.ownerPubkey != null) {
+      }
+      // lib.optionalAttrs (cfg.ownerPubkey != null) {
         RELAY_OWNER_PUBKEY = cfg.ownerPubkey;
       };
       serviceConfig = {
