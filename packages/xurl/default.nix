@@ -15,7 +15,8 @@ buildGoModule rec {
     hash = "sha256-dwVBzuUhQpfRWFOZOf1DCGNKoetdZlcretnyv9AShbw=";
   };
 
-  vendorHash = "sha256-3yUZZYHcDpCaK55uiVw4X9mxvda9iL+XwPpSXheKOSc=";
+  vendorHash = "sha256-b38O+w1E236YNH0Ut0c01ymuwIHBe3wts6UhCO6ViOo=";
+  proxyVendor = true;
 
   postPatch = ''
     substituteInPlace api/client_test.go \

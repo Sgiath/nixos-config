@@ -45,6 +45,7 @@ pkgs.buildGoModule {
     hash = "${SRC_HASH}";
   };
   vendorHash = pkgs.lib.fakeHash;
+  proxyVendor = true;
   subPackages = [ "." ];
 }
 EOF
