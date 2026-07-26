@@ -7,7 +7,7 @@
 {
   config = lib.mkIf config.sgiath.agents.enable {
     programs.claude-code = {
-      enable = false;
+      enable = true;
       enableMcpIntegration = true;
       package = pkgs.llm-agents.claude-code;
       context = ./AGENTS.md;
