@@ -2,6 +2,7 @@
   lib,
   appimageTools,
   fetchurl,
+  writeShellScript,
 }:
 
 let
@@ -13,17 +14,30 @@ let
     hash = "sha256-XOelbuUdtmw9IZ9Plb2SAh/GiVY+pqQlRBdR9oWCgg8=";
   };
 
+  launcher = writeShellScript "buzz-desktop" ''
+    export GST_PLUGIN_SYSTEM_PATH_1_0=/usr/lib64/gstreamer-1.0
+    exec -a "$0" "$0.bin" "$@"
+  '';
+
   appimageContents = appimageTools.extractType2 {
     inherit pname version src;
+    postExtract = ''
+      mv "$out/usr/bin/buzz-desktop" "$out/usr/bin/buzz-desktop.bin"
+      install -Dm755 ${launcher} "$out/usr/bin/buzz-desktop"
+    '';
   };
 in
-appimageTools.wrapType2 {
-  inherit pname version src;
+appimageTools.wrapAppImage {
+  inherit pname version;
+  src = appimageContents;
 
-  extraPkgs = pkgs: with pkgs; [
-    elfutils
-    zstd
-  ];
+  extraPkgs =
+    pkgs: with pkgs; [
+      elfutils
+      gst_all_1.gst-libav
+      gst_all_1.gst-plugins-good
+      zstd
+    ];
 
   extraInstallCommands = ''
     install -Dm444 ${appimageContents}/Buzz.desktop \
@@ -34,6 +48,8 @@ appimageTools.wrapType2 {
     install -Dm444 ${appimageContents}/buzz-desktop.png \
       $out/share/pixmaps/buzz-desktop.png
   '';
+
+  passthru.src = src;
 
   meta = with lib; {
     description = "Workspace where humans and agents build together";
