@@ -20,7 +20,7 @@
 
   services = {
     ollama.enable = true;
-    comfyui.enable = true;
+    comfyui.enable = false;
   };
 
   environment.systemPackages = with pkgs; [
