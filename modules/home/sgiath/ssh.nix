@@ -48,6 +48,7 @@
         "scramble.crazyegg.com" = {
           HostName = "ec2-52-90-188-158.compute-1.amazonaws.com";
           User = "ubuntu";
+          ProxyJump = "bastion.crazyegg.com";
         };
         "bastion.crazyegg.com" = {
           HostName = "us-east-1.general-purpose.bastion.crazyegg.com";
