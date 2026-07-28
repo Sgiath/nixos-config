@@ -71,6 +71,7 @@ in
           ".slim/"
           "opencode.json*"
           "AGENTS.sgiath.md"
+          ".pi-subagents/"
         ];
 
         signing = {
