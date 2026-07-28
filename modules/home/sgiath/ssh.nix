@@ -58,7 +58,7 @@
         };
         "i.*.crazyegg.com" = {
           User = "crazyegg";
-          ProxyCommand = "ssh bastion.crazyegg.com -W %h:%p";
+          ProxyJump = "bastion.crazyegg.com";
         };
 
         # defaults
