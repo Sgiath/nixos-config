@@ -72,14 +72,16 @@
             X-MCP-Insiders = "true";
           };
         };
-        backlog = {
-          command = "${lib.getExe pkgs.llm-agents.backlog-md}";
-          args = [
-            "mcp"
-            "start"
-          ];
-        };
+        gitlab.url = "https://gitlab.com/api/v4/mcp";
         linear.url = "https://mcp.linear.app/mcp";
+        linear-remote.url = "https://mcp.linear.app/mcp";
+        shortcut.url = "https://mcp.shortcut.com/mcp";
+        notion-crazyegg.url = "https://mcp.notion.com/mcp";
+        notion-remote.url = "https://mcp.notion.com/mcp";
+        agent-skills = {
+          enabled = false;
+          url = "https://agentskills.io/mcp";
+        };
       };
     };
   };
