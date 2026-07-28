@@ -17,8 +17,5 @@
       google-chrome
       insomnia
     ];
-    wayland.windowManager.hyprland.settings.windowrule = [
-      "match:class google-chrome, workspace 3 silent"
-    ];
   };
 }

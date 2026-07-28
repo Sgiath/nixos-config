@@ -7,7 +7,7 @@
 
 {
   options.remote = {
-    enable = lib.mkEnableOption "CrazyEgg home manager";
+    enable = lib.mkEnableOption "Remote home manager";
   };
 
   config = lib.mkIf config.remote.enable {

@@ -39,6 +39,8 @@
         "turris.local" = {
           HostName = "192.168.1.1";
           User = "root";
+          IdentityFile = "~/.ssh/personal_pgp.pub";
+          IdentitiesOnly = "yes";
         };
         "vesta.local".HostName = "192.168.1.2";
         "nas.local".HostName = "192.168.1.4";
