@@ -42,8 +42,16 @@
           IdentityFile = "~/.ssh/personal_pgp.pub";
           IdentitiesOnly = "yes";
         };
-        "vesta.local".HostName = "192.168.1.2";
-        "nas.local".HostName = "192.168.1.4";
+        "vesta.local" = {
+          HostName = "192.168.1.2";
+          IdentityFile = "~/.ssh/personal_pgp.pub";
+          IdentitiesOnly = "yes";
+        };
+        "nas.local" = {
+          HostName = "192.168.1.4";
+          IdentityFile = "~/.ssh/personal_pgp.pub";
+          IdentitiesOnly = "yes";
+        };
         "ceres.local".HostName = "192.168.1.6";
 
         # CrazyEgg
