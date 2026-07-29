@@ -38,7 +38,7 @@ nothing else in this file should need to change.
 
 ## Writing code
 
-- Keep files under ~500 lines of code; split/refactor as needed
+- Keep implementation files under ~500 lines of code; split/refactor as needed. The test files can be much longer, do not concern yourself with their length at all
 - Always strive for concise, simple solutions
 - If a problem can be solved in a simpler way, propose it
 - If asked to do too much work at once, stop and state that clearly
