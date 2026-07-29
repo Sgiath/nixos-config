@@ -47,7 +47,7 @@
     };
 
     wayland.windowManager.hyprland.settings.windowrule = [
-      "match:class firefox, workspace 4 silent"
+      "match:class firefox, workspace 8 silent"
     ];
   };
 }
