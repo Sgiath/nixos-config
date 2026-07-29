@@ -41,16 +41,16 @@
 
         workspace = [
           "special:special, gapsout:30"
-          "1,monitor:DP-1,default:true,persistent:true"
-          "2,monitor:DP-3,default:true,persistent:true"
-          "3,monitor:DP-3,persistent:true"
-          "4,monitor:DP-1,persistent:true"
-          "5,monitor:DP-3,persistent:true"
-          "6,monitor:DP-1,persistent:true"
-          "7,monitor:DP-3,persistent:true"
-          "8,monitor:DP-3,persistent:true"
-          "9,monitor:DP-3,persistent:true"
-          "10,monitor:DP-2,default:true,gapsin:0,gapsout:0,border:false,persistent:true"
+          "1,monitor:DP-1,default:true,persistent:true,defaultName:1-terminal"
+          "2,monitor:DP-3,default:true,persistent:true,defaultName:2-personal"
+          "3,monitor:DP-3,persistent:true,defaultName:3-CrazyEgg"
+          "4,monitor:DP-1,persistent:true,defaultName:4-Remote"
+          "5,monitor:DP-3,persistent:true,defaultName:5"
+          "6,monitor:DP-1,persistent:true,defaultName:6"
+          "7,monitor:DP-3,persistent:true,defaultName:7"
+          "8,monitor:DP-3,persistent:true,defaultName:8-firefox"
+          "9,monitor:DP-3,persistent:true,defaultName:9-email"
+          "10,monitor:DP-2,default:true,gapsin:0,gapsout:0,border:false,persistent:true,defaultName:comm"
         ];
       };
     };

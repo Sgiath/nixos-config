@@ -19,7 +19,6 @@
     wayland.windowManager.hyprland.settings = {
       exec-once = [
         "${lib.getExe pkgs.kitty}"
-        "${lib.getExe pkgs.obsidian}"
       ];
       bind = [
         "$mod, Return, exec, ${lib.getExe pkgs.kitty}"
@@ -29,10 +28,6 @@
         "match:class kitty, workspace 1"
         "match:class wezterm, workspace 1"
         "match:class ghostty, workspace 1"
-
-        "match:class obsidian, workspace 5 silent, no_initial_focus on"
-
-        "match:class com.obsproject.Studio, workspace 7 silent"
       ];
     };
 
