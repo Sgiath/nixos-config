@@ -13,6 +13,7 @@
     virtualisation = {
       docker = {
         enable = true;
+        logDriver = "local";
         extraPackages = with pkgs; [
           docker-credential-helpers
           amazon-ecr-credential-helper
