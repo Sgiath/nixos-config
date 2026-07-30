@@ -55,6 +55,7 @@ in
   };
 
   crazyegg.enable = true;
+  remote.enable = true;
 
   stylix.fonts.sizes = {
     applications = 10;
