@@ -40,7 +40,29 @@
           pushd ~/nixos
 
           git add --all
-          git commit --signoff -m "changes"
+          if ! commit_message="$(${lib.getExe pkgs.llm-agents.pi} \
+            --model openai/gpt-5.6-luna:low \
+            --print \
+            --no-session \
+            --no-tools \
+            --no-extensions \
+            --no-context-files \
+            --no-prompt-templates \
+            --no-skills \
+            --skill "$HOME/.agents/skills/conventional-commit" \
+            "Use the loaded conventional-commit skill to write exactly one commit message for the staged diff supplied on stdin. The first line must match '<type>(<optional-scope>): <imperative subject>'. Output only the commit message. Do not describe the change, mention implementation status, or use Markdown fences." \
+            < <(git diff --cached))"; then
+            echo "Failed to generate a commit message with pi" >&2
+            exit 1
+          fi
+
+          if [[ ! "$commit_message" =~ ^(feat|fix|docs|style|refactor|perf|build|test|ci|chore)(\([a-z0-9._/-]+\))?!?:[[:space:]][^[:space:]] ]]; then
+            echo "pi generated an invalid Conventional Commit message:" >&2
+            echo "$commit_message" >&2
+            exit 1
+          fi
+
+          git commit --signoff -m "$commit_message"
           git push
 
           case "$1" in
