@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
 {
@@ -14,6 +15,7 @@
       kdePackages.okular
       libwacom
       appimage-run
+      pkgs.${namespace}.orca
     ];
 
     wayland.windowManager.hyprland.settings = {
