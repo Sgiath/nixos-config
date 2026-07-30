@@ -10,13 +10,13 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "buzz-relay";
-  version = "0.5.0";
+  version = "0.5.2";
 
   src = fetchFromGitHub {
     owner = "block";
     repo = "buzz";
     tag = "v${version}";
-    hash = "sha256-rrTpV4wYRdL1o0cJXifHz5qGJ4tlr2Go1g3MdNrj26w=";
+    hash = "sha256-VWqoIS5FMyou6fEuuUq1OUIPycAtn0kVLbm5yCQAsOs=";
   };
 
   cargoHash = "sha256-0a0SJqDjSTWXU6k3yZ6iisDaUdnHqzjZU33ItzGs8AY=";
