@@ -83,7 +83,7 @@
     };
 
     worktrunk = {
-      url = "github:max-sixty/worktrunk/v0.70.0";
+      url = "github:max-sixty/worktrunk/v0.71.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -100,7 +100,7 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
 
     hermes-agent = {
-      url = "github:NousResearch/hermes-agent/v2026.7.20";
+      url = "github:NousResearch/hermes-agent/v2026.7.30";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
