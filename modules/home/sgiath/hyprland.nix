@@ -61,6 +61,7 @@
 
     gtk = pkgs.lib.mkForce {
       enable = true;
+      gtk4.theme = null;
       theme = {
         package = pkgs.gnome-themes-extra;
         name = "Adwaita";
