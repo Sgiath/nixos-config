@@ -62,12 +62,13 @@
     gtk = pkgs.lib.mkForce {
       enable = true;
       theme = {
-        package = pkgs.gnome.gnome-themes-extra;
+        package = pkgs.gnome-themes-extra;
         name = "Adwaita";
       };
       cursorTheme = {
-        package = pkgs.vanilla-dmz;
-        name = "Vanilla-DMZ";
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+        size = 24;
       };
       iconTheme = {
         package = pkgs.adwaita-icon-theme;
