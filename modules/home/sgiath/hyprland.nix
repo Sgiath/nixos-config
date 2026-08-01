@@ -61,10 +61,13 @@
 
     gtk = pkgs.lib.mkForce {
       enable = true;
-      gtk4.theme = null;
       theme = {
-        package = pkgs.flat-remix-gtk;
-        name = "Flat-Remix-GTK-Grey-Darkest";
+        package = pkgs.gnome.gnome-themes-extra;
+        name = "Adwaita";
+      };
+      cursorTheme = {
+        package = pkgs.vanilla-dmz;
+        name = "Vanilla-DMZ";
       };
       iconTheme = {
         package = pkgs.adwaita-icon-theme;
