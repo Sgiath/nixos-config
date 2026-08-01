@@ -19,7 +19,7 @@ in
       enableReleaseChecks = false;
 
       polarity = "dark";
-      base16Scheme = ./nord.yaml;
+      base16Scheme = ./yoru.yaml;
 
       cursor = {
         package = pkgs.nordzy-cursor-theme;

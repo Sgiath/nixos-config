@@ -8,7 +8,7 @@
     stylix = {
       enable = true;
       enableReleaseChecks = false;
-      base16Scheme = ./../../home/sgiath/nord.yaml;
+      base16Scheme = ./../../home/sgiath/yoru.yaml;
 
       targets.kmscon.enable = false;
     };
