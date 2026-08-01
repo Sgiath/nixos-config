@@ -19,11 +19,11 @@ in
       enableReleaseChecks = false;
 
       polarity = "dark";
-      base16Scheme = ./theme.yaml;
+      base16Scheme = ./nord.yaml;
 
       cursor = {
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Classic";
+        package = pkgs.nordzy-cursor-theme;
+        name = "Nordzy-cursors";
         size = 24;
       };
 

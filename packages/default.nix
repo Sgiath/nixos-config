@@ -9,6 +9,7 @@ pkgs: {
   kimi-webbridge = pkgs.callPackage ./kimi-webbridge { };
   linear-cli = pkgs.callPackage ./linear-cli { };
   nak = pkgs.callPackage ./nak { };
+  nordic-gtk-theme = pkgs.callPackage ./nordic-gtk-theme { };
   omnisearch = pkgs.callPackage ./omnisearch { };
   orca = pkgs.callPackage ./orca { };
   plannotator = pkgs.callPackage ./plannotator { };

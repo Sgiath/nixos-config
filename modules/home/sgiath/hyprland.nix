@@ -63,17 +63,17 @@
       enable = true;
       gtk4.theme = null;
       theme = {
-        package = pkgs.gnome-themes-extra;
-        name = "Adwaita";
+        package = pkgs.sgiath.nordic-gtk-theme;
+        name = "Nordic";
       };
       cursorTheme = {
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Classic";
+        package = pkgs.nordzy-cursor-theme;
+        name = "Nordzy-cursors";
         size = 24;
       };
       iconTheme = {
-        package = pkgs.adwaita-icon-theme;
-        name = "Adwaita";
+        package = pkgs.nordzy-icon-theme;
+        name = "Nordzy";
       };
     };
 
