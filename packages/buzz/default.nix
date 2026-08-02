@@ -2,7 +2,6 @@
   lib,
   appimageTools,
   fetchurl,
-  writeShellScript,
 }:
 
 let
@@ -14,17 +13,8 @@ let
     hash = "sha256-XchCo9rjISX7Zisy4ePdumXi+xySd0Tfu3vKfqJMwuM=";
   };
 
-  launcher = writeShellScript "buzz-desktop" ''
-    export GST_PLUGIN_SYSTEM_PATH_1_0=/usr/lib64/gstreamer-1.0
-    exec -a "$0" "$0.bin" "$@"
-  '';
-
   appimageContents = appimageTools.extractType2 {
     inherit pname version src;
-    postExtract = ''
-      mv "$out/usr/bin/buzz-desktop" "$out/usr/bin/buzz-desktop.bin"
-      install -Dm755 ${launcher} "$out/usr/bin/buzz-desktop"
-    '';
   };
 in
 appimageTools.wrapAppImage {
