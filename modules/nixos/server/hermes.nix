@@ -141,7 +141,7 @@ in
               channels = [ ];
               home_channel = "";
               poll_interval = 4;
-              cli_path = "buzz";
+              cli_path = lib.getExe pkgs.${namespace}.buzz-cli;
               allowed_users = [ ];
               require_mention = true;
               allow_all_users = true;
