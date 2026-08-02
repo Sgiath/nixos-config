@@ -82,6 +82,7 @@ in
           WEBHOOK_ENABLED = "true";
           OBSIDIAN_VAULT_PATH = "~/notes";
           SEARXNG_URL = "https://search.sgiath.dev";
+          BUZZ_CLI_PATH = lib.getExe pkgs.${namespace}.buzz-cli;
         };
 
         settings = {
@@ -242,7 +243,7 @@ in
                 reference_models = [
                   {
                     provider = "anthropic";
-                    model = "claude-opus-5";
+                    model = "claude-fable-5";
                     reasoning_effort = "high";
                   }
                   {

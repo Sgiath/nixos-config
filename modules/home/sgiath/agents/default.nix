@@ -21,6 +21,7 @@
 
   config = lib.mkIf config.sgiath.agents.enable {
     home.file.".agents/skills".source = ./skills;
+    home.sessionVariables.GROK_SANDBOX = "off";
 
     home.packages = [
       pkgs.llm-agents.herdr
