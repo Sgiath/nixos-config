@@ -6,13 +6,28 @@ DEFAULT_NIX="${SCRIPT_DIR}/default.nix"
 REPO="block/buzz"
 
 if [[ -n "${1:-}" ]]; then
-	VERSION="${1#v}"
-	echo "==> Fetching Buzz release v${VERSION} from GitHub..."
-	RELEASE_JSON="$(gh api "repos/${REPO}/releases/tags/v${VERSION}")"
+	VERSION="${1#desktop-v}"
+	VERSION="${VERSION#v}"
+	if [[ ! "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+		echo "ERROR: Expected version X.Y.Z, vX.Y.Z, or desktop-vX.Y.Z; got ${1}" >&2
+		exit 1
+	fi
+	RELEASE_TAG="desktop-v${VERSION}"
+	echo "==> Fetching Buzz release ${RELEASE_TAG} from GitHub..."
+	RELEASE_JSON="$(curl --fail --silent --show-error --location \
+		-H "Accept: application/vnd.github+json" \
+		"https://api.github.com/repos/${REPO}/releases/tags/${RELEASE_TAG}")"
 else
 	echo "==> Fetching latest Buzz version from GitHub..."
-	RELEASE_JSON="$(gh api "repos/${REPO}/releases/latest")"
-	VERSION="$(jq -r '.tag_name | ltrimstr("v")' <<<"${RELEASE_JSON}")"
+	RELEASE_JSON="$(curl --fail --silent --show-error --location \
+		-H "Accept: application/vnd.github+json" \
+		"https://api.github.com/repos/${REPO}/releases/latest")"
+	RELEASE_TAG="$(jq -r '.tag_name // empty' <<<"${RELEASE_JSON}")"
+	if [[ ! "${RELEASE_TAG}" =~ ^desktop-v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+		echo "ERROR: Latest release tag must match desktop-vX.Y.Z; got ${RELEASE_TAG:-<empty>}" >&2
+		exit 1
+	fi
+	VERSION="${BASH_REMATCH[1]}"
 fi
 
 CURRENT_VERSION=$(grep 'version = "' "${DEFAULT_NIX}" | head -1 | sed 's/.*version = "\([^"]*\)".*/\1/')

@@ -7,24 +7,34 @@ REPO="block/buzz"
 
 if [[ -n "${1:-}" ]]; then
 	VERSION="${1#v}"
+	if [[ ! "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+		echo "Failed to parse version: expected X.Y.Z or vX.Y.Z; got ${1}" >&2
+		exit 1
+	fi
+	RELEASE_TAG="v${VERSION}"
 else
-	VERSION="$(curl --fail --silent --show-error --location \
+	RELEASE_TAG="$(curl --fail --silent --show-error --location \
 		-H "Accept: application/vnd.github+json" \
-		"https://api.github.com/repos/${REPO}/releases/latest" | jq -r '.tag_name | ltrimstr("v")')"
+		"https://api.github.com/repos/${REPO}/tags?per_page=100" | \
+		jq -r '[.[].name | select(test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))][0] // empty')"
+	if [[ -z "${RELEASE_TAG}" ]]; then
+		echo "Failed to determine buzz-relay version: no generic vX.Y.Z tag found" >&2
+		exit 1
+	fi
+	VERSION="${RELEASE_TAG#v}"
+	if [[ ! "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+		echo "Failed to parse generic buzz-relay tag: ${RELEASE_TAG}" >&2
+		exit 1
+	fi
 fi
 
-if [[ -z "${VERSION}" || "${VERSION}" == "null" ]]; then
-	echo "Failed to determine Buzz version" >&2
-	exit 1
-fi
-
-CURRENT_VERSION="$(sed -n 's/^[[:space:]]*version = "\([^"]*\)";.*/\1/p' "${DEFAULT_NIX}" | head -n1)"
+CURRENT_VERSION="$(sed -n 's/^[[:space:]]*version = "\([^"]*\)";.*/\1/p' "${DEFAULT_NIX}")"
 if [[ "${CURRENT_VERSION}" == "${VERSION}" ]]; then
 	echo "buzz-relay is already at ${VERSION}"
 	exit 0
 fi
 
-SOURCE_URL="https://github.com/${REPO}/archive/refs/tags/v${VERSION}.tar.gz"
+SOURCE_URL="https://github.com/${REPO}/archive/refs/tags/${RELEASE_TAG}.tar.gz"
 SOURCE_HASH="$(nix-prefetch-url --unpack "${SOURCE_URL}" 2>/dev/null | tail -n1)"
 SOURCE_HASH="$(nix hash convert --hash-algo sha256 --to sri "${SOURCE_HASH}")"
 

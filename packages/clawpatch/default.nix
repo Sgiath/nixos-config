@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "clawpatch";
-  version = "0.7.1";
+  version = "0.7.2";
 
   src = fetchFromGitHub {
     owner = "openclaw";
     repo = "clawpatch";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-DS4/u97jQYGzaBpS/U52IxE8K6wCx1rQ6StxPboYiyE=";
+    hash = "sha256-Qqo3QwWDQbPgAgg5tD8iH0mHSBDtvHuU+TGA7x3DUlk=";
   };
 
   pnpmDeps = fetchPnpmDeps {
@@ -28,7 +28,7 @@ stdenv.mkDerivation (finalAttrs: {
     prePnpmInstall = ''
       pnpm config set trust-lockfile true
     '';
-    hash = "sha256-UYGKwrnPyaMp81w+77m3AfaDJEAszLShQOEfsju3pAY=";
+    hash = "sha256-pzhMi3/nnv36VhIfhdsnLoQSVVS++m5xiOCaO4YMbls=";
   };
 
   nativeBuildInputs = [

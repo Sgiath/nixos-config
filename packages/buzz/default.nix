@@ -7,11 +7,11 @@
 
 let
   pname = "buzz";
-  version = "0.5.2";
+  version = "0.5.3";
 
   src = fetchurl {
-    url = "https://github.com/block/buzz/releases/download/v${version}/Buzz_${version}_amd64.AppImage";
-    hash = "sha256-aMEEg0ZyDX08OYzLcB6d8e69zRrNfqCyWl1C6VZCi4c=";
+    url = "https://github.com/block/buzz/releases/download/desktop-v${version}/Buzz_${version}_amd64.AppImage";
+    hash = "sha256-XchCo9rjISX7Zisy4ePdumXi+xySd0Tfu3vKfqJMwuM=";
   };
 
   launcher = writeShellScript "buzz-desktop" ''
