@@ -72,8 +72,9 @@
     prismlauncher.url = "github:PrismLauncher/PrismLauncher";
 
     # https://forgejo.ellis.link/continuwuation/continuwuity/releases
+    # v26.7.2
     continuwuity = {
-      url = "git+https://forgejo.ellis.link/continuwuation/continuwuity?rev=051449118911b03960d5d09f630d7d2959c8330c";
+      url = "git+https://forgejo.ellis.link/continuwuation/continuwuity?rev=59c2649cdef53d900872aac2ff475fa5daa8274d";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

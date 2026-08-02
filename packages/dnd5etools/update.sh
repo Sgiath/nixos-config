@@ -60,8 +60,7 @@ echo "    npm deps hash: ${NPM_DEPS_HASH}"
 # Step 4: Update default.nix
 echo "==> Updating default.nix..."
 
-# Update version
-sed -i "s/version = \"[0-9.]*\";/version = \"${VERSION}\";/" "${DEFAULT_NIX}"
+sed -i "0,/version = \"[0-9.]*\";/s//version = \"${VERSION}\";/" "${DEFAULT_NIX}"
 
 # Update source hash (the one after url = ...5etools-src...)
 sed -i "/5etools-src/,/hash = \"sha256-/ s|hash = \"sha256-[^\"]*\"|hash = \"${SRC_SRI}\"|" "${DEFAULT_NIX}"

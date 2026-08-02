@@ -123,7 +123,11 @@ in
     stylix.targets.opencode.enable = false;
 
     programs.zsh.shellAliases = {
-      omo-update = "pushd ~/.cache/opencode && bun update && pushd ~/.cache/opencode/packages/oh-my-openagent@latest && bun add  oh-my-openagent@latest && popd && popd";
+      omo-update = ''
+        pushd ~/.cache/opencode && bun update && popd \
+        && pushd ~/.cache/opencode/packages/oh-my-openagent@latest && bun add  oh-my-openagent@latest && popd \
+        && pushd ~/.config/opencode && bun add @opencode-ai/plugin@latest && popd
+      '';
     };
   };
 }

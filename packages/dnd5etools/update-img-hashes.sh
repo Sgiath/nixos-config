@@ -13,6 +13,10 @@ set -euo pipefail
 #   - Fetches all files in parallel for faster execution.
 #   - You can change NAMES if the set of parts changes.
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEFAULT_NIX="${SCRIPT_DIR}/default.nix"
+OUTPUT_FILE="${SCRIPT_DIR}/imgHashes.nix"
+
 VERSION="${1:-}"
 if [[ -z "${VERSION}" ]]; then
   echo "Usage: $0 <version>    e.g. $0 2.12.0" >&2
@@ -27,9 +31,6 @@ base_url="https://github.com/5etools-mirror-2/5etools-img/releases/download/v${V
 # Create temp directory for parallel results
 TMPDIR="$(mktemp -d)"
 trap 'rm -rf "${TMPDIR}"' EXIT
-
-# Output file
-OUTPUT_FILE="imgHashes.nix"
 
 # Launch all fetches in parallel
 for name in "${NAMES[@]}"; do
@@ -64,3 +65,5 @@ for name in "${NAMES[@]}"; do
   [[ -f "${TMPDIR}/${name}.nix" ]] && cat "${TMPDIR}/${name}.nix" >>"${OUTPUT_FILE}"
 done
 echo "];" >>"${OUTPUT_FILE}"
+
+sed -i "/pname = \"5etools-img-\${v.name}\";/,/inherit (v) hash;/ s/version = \"[0-9.]*\";/version = \"${VERSION}\";/" "${DEFAULT_NIX}"
