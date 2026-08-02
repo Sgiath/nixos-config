@@ -2,6 +2,7 @@
   lib,
   appimageTools,
   fetchurl,
+  makeWrapper,
 }:
 
 let
@@ -21,6 +22,8 @@ appimageTools.wrapAppImage {
   inherit pname version;
   src = appimageContents;
 
+  nativeBuildInputs = [ makeWrapper ];
+
   extraPkgs =
     pkgs: with pkgs; [
       elfutils
@@ -30,6 +33,9 @@ appimageTools.wrapAppImage {
     ];
 
   extraInstallCommands = ''
+    wrapProgram $out/bin/buzz \
+      --prefix GST_PLUGIN_PATH : /usr/lib64/gstreamer-1.0
+
     install -Dm444 ${appimageContents}/Buzz.desktop \
       $out/share/applications/buzz.desktop
     substituteInPlace $out/share/applications/buzz.desktop \
