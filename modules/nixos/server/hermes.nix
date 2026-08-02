@@ -144,7 +144,7 @@ in
               poll_interval = 4;
               cli_path = lib.getExe pkgs.${namespace}.buzz-cli;
               allowed_users = [ ];
-              require_mention = true;
+              require_mention = false;
               allow_all_users = true;
             };
           };
