@@ -7,7 +7,7 @@
 {
   config = lib.mkIf config.sgiath.agents.enable {
     home = {
-      packages = [ pkgs.llm-agents.pi ];
+      packages = [ pkgs.llm-agents.pi pkgs.llm-agents.omp ];
     };
   };
 }

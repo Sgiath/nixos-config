@@ -58,7 +58,7 @@ let
 in
 {
   config = lib.mkIf config.sgiath.agents.enable {
-    home.packages = [ oc ];
+    home.packages = [ oc pkgs.llm-agents.opencode2 ];
 
     programs.opencode = {
       enable = true;
