@@ -65,6 +65,7 @@ in
           jq
           pkgs.${namespace}.xurl
           pkgs.${namespace}.bird
+          pkgs.${namespace}.buzz-cli
         ];
 
         environmentFiles = [ "/data/hermes_env" ];
@@ -123,11 +124,33 @@ in
             memory_enabled = true;
             user_profile_enabled = true;
           };
-          plugins.hermes-memory-store = {
-            auto_extract = true;
-            db_path = "/home/sgiath/hermes/.hermes/memory_store.db";
-            default_trust = 0.5;
-            hrr_dim = 1024;
+          plugins = {
+            enabled = [ "buzz-platform" ];
+            hermes-memory-store = {
+              auto_extract = true;
+              db_path = "/home/sgiath/hermes/.hermes/memory_store.db";
+              default_trust = 0.5;
+              hrr_dim = 1024;
+            };
+          };
+
+          gateway.platforms.buzz = {
+            enabled = true;
+            extra = {
+              relay_url = "https://ai.sgiath.dev";
+              channels = [ ];
+              home_channel = "";
+              poll_interval = 4;
+              cli_path = "buzz";
+              allowed_users = [ ];
+              require_mention = true;
+              allow_all_users = true;
+            };
+          };
+
+          display.platforms.buzz = {
+            interim_assistant_messages = false;
+            tool_progress = "off";
           };
 
           agent = {
