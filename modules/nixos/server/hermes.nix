@@ -174,9 +174,9 @@ in
             threshold = 0.5;
             target_ratio = 0.2;
             protect_last_n = 20;
-            summary_model = "";
-            summary_provider = "auto";
-            summary_base_url = null;
+            min_tail_user_messages = 2;
+            micro_compact = true;
+            threshold_tokens = 100000;
           };
 
           session_reset = {
