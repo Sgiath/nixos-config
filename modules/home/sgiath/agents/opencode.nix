@@ -68,7 +68,12 @@ in
 
       tui = {
         plugin = [ "oh-my-openagent@latest" ];
-        scroll_acceleration = true;
+        scroll_acceleration.enabled = true;
+        attention = {
+          enabled = true;
+          notifications = true;
+          sound = true;
+        };
       };
 
       settings = {
