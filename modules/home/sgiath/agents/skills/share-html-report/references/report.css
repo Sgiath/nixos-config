@@ -1,0 +1,780 @@
+/* ==========================================================================
+   share-html-report — base stylesheet
+   Dark, sci-fi / mission-control inspired theme (near-black, signal red,
+   telemetry white). Styles bare HTML elements so any report gets a
+   consistent look without per-report CSS. Inline this file into the
+   report's <style> block (reports must stay standalone).
+
+   Layout contract (all optional except <main>):
+     <body>
+       <header>  — report title + metadata line
+       <main>    — report content; <section>s render as HUD panels
+       <aside>   — optional side panel (status, metadata, quick links);
+                   sits right of <main> on wide screens, stacks below on
+                   narrow ones. Without an <aside>, <main> takes full width.
+       <footer>  — provenance line
+     </body>
+
+   Utility classes (optional, for telemetry-style side panels):
+     .dot / .dot-ok / .dot-warn / .dot-err — pulsing status indicator
+     .bar + inner <span style="width:NN%">  — animated gauge bar
+     .cursor                                — blinking terminal cursor
+     .metric                                — big numeric readout
+   ========================================================================== */
+
+/* ---- tokens ------------------------------------------------------------ */
+
+:root {
+  /* surfaces */
+  --bg: #060709;
+  --bg-panel: #0c0e12;
+  --bg-panel-alt: #10131a;
+  --bg-inset: #040507;
+
+  /* lines */
+  --line: #232833;
+  --line-strong: #39404f;
+
+  /* text */
+  --fg: #d6dae3;
+  --fg-muted: #8b92a1;
+  --fg-faint: #5c6373;
+
+  /* signal colors */
+  --accent: #ff3347;
+  --accent-dim: #a3202e;
+  --accent-glow: rgba(255, 51, 71, 0.35);
+  --ok: #4cd97b;
+  --warn: #ffb347;
+
+  /* type */
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo,
+    Consolas, "Liberation Mono", monospace;
+  --font-body: var(--font-mono);
+
+  /* rhythm */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.75rem;
+  --space-5: 3rem;
+  --radius: 2px;
+  --measure: 85ch;    /* prose line length cap */
+  --shell: 1560px;    /* page shell width */
+  --panel-w: 320px;   /* side panel width */
+
+  color-scheme: dark;
+}
+
+/* ---- reset / base ------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: var(--space-4) var(--space-3) var(--space-5);
+  background-color: var(--bg);
+  /* faint dot-grid, pure CSS, no assets */
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(139, 146, 161, 0.07) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+::selection {
+  background: var(--accent);
+  color: #0a0a0c;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- page layout: header / main / aside / footer ----------------------- */
+
+body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--panel-w);
+  gap: 0 var(--space-4);
+  max-width: var(--shell);
+  margin-inline: auto;
+}
+
+body > header,
+body > footer {
+  grid-column: 1 / -1;
+}
+
+body > main {
+  grid-column: 1;
+  min-width: 0;
+}
+
+body > aside {
+  grid-column: 2;
+  min-width: 0;
+  align-self: start;
+  position: sticky;
+  top: var(--space-3);
+}
+
+/* no side panel → main spans the full shell */
+body:not(:has(> aside)) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body:not(:has(> aside)) > main {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 980px) {
+  body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body > main,
+  body > aside {
+    grid-column: 1;
+  }
+
+  body > aside {
+    position: static;
+  }
+}
+
+/* ---- headings ---------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  line-height: 1.25;
+  color: #f2f4f8;
+  margin: var(--space-4) 0 var(--space-3);
+  letter-spacing: 0.04em;
+}
+
+/* H1: mission title — pulsing red marker + rule, like a HUD readout header */
+h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--line-strong);
+  position: relative;
+}
+
+h1::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-right: 0.5em;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 8ch;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* H2: section header — bracketed, uppercase */
+h2 {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #e8ebf1;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--space-1);
+}
+
+h2::before {
+  content: "// ";
+  color: var(--accent);
+  font-weight: 400;
+}
+
+/* H3: subsection — muted prefix tick */
+h3 {
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+}
+
+h3::before {
+  content: "▸ ";
+  color: var(--accent-dim);
+}
+
+h4,
+h5,
+h6 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+}
+
+/* ---- text -------------------------------------------------------------- */
+
+p {
+  margin: 0 0 var(--space-3);
+  max-width: var(--measure);
+}
+
+small {
+  color: var(--fg-muted);
+}
+
+strong,
+b {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+em,
+i {
+  color: #e8ebf1;
+}
+
+mark {
+  background: var(--accent);
+  color: #0a0a0c;
+  padding: 0 0.25em;
+}
+
+del {
+  color: var(--fg-faint);
+}
+
+ins {
+  color: var(--ok);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--ok);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  margin: var(--space-4) 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--line-strong) 0 12px,
+    transparent 12px 20px
+  );
+}
+
+/* ---- links ------------------------------------------------------------- */
+
+a {
+  color: #ff5c6d;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 92, 109, 0.35);
+  transition: color 120ms linear, border-color 120ms linear,
+    background-color 120ms linear;
+}
+
+a:hover {
+  color: #ffffff;
+  border-bottom-color: var(--accent);
+  background: rgba(255, 51, 71, 0.08);
+}
+
+a:visited {
+  color: #d16a9e;
+}
+
+a:visited:hover {
+  color: #ffffff;
+}
+
+/* external links get a tiny outbound marker */
+a[target="_blank"]::after {
+  content: " ↗";
+  color: var(--fg-faint);
+  font-size: 0.85em;
+}
+
+/* ---- lists ------------------------------------------------------------- */
+
+ul,
+ol {
+  margin: 0 0 var(--space-3);
+  padding-left: 1.5em;
+  max-width: var(--measure);
+}
+
+li {
+  margin-bottom: var(--space-1);
+}
+
+li::marker {
+  color: var(--accent);
+}
+
+dl {
+  margin: 0 0 var(--space-3);
+  max-width: var(--measure);
+}
+
+dt {
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+dd {
+  margin: 0 0 var(--space-2) 1.5em;
+}
+
+/* ---- tables ------------------------------------------------------------ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 var(--space-4);
+  font-size: 0.875rem;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-panel);
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  padding: var(--space-2) 0;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+}
+
+caption::before {
+  content: "[ ";
+  color: var(--accent);
+}
+
+caption::after {
+  content: " ]";
+  color: var(--accent);
+}
+
+th {
+  background: var(--bg-panel-alt);
+  color: #f2f4f8;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--accent-dim);
+}
+
+td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+tbody tr:hover {
+  background: rgba(255, 51, 71, 0.05);
+}
+
+tfoot td {
+  border-bottom: 0;
+  border-top: 1px solid var(--line-strong);
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+}
+
+/* ---- code -------------------------------------------------------------- */
+
+code,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+code {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.1em 0.4em;
+  color: #ffd7db;
+}
+
+pre {
+  background: var(--bg-inset);
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  margin: 0 0 var(--space-4);
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: #cfd6e4;
+  font-size: 0.85rem;
+}
+
+kbd {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  padding: 0.1em 0.45em;
+  color: #f2f4f8;
+}
+
+/* ---- quotes ------------------------------------------------------------ */
+
+blockquote {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  max-width: var(--measure);
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent-dim);
+  color: var(--fg-muted);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+cite {
+  color: var(--fg-faint);
+  font-style: normal;
+  font-size: 0.85em;
+}
+
+/* ---- structure / panels ------------------------------------------------ */
+
+/* sections inside <main> and <aside> read as HUD panels */
+main section,
+body > aside section {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: var(--space-3) var(--space-4);
+  margin: 0 0 var(--space-4);
+  position: relative;
+}
+
+/* corner brackets, drawn with one gradient layer per corner */
+main section::before,
+body > aside section::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--accent), var(--accent)) top left / 14px 1px,
+    linear-gradient(var(--accent), var(--accent)) top left / 1px 14px,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 14px 1px,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 1px 14px;
+  background-repeat: no-repeat;
+}
+
+main section > h2:first-child,
+body > aside section > h2:first-child {
+  margin-top: 0;
+}
+
+body > header {
+  margin-bottom: var(--space-4);
+}
+
+/* report metadata line under the title: <header><p>date · author</p></header> */
+body > header p,
+header time {
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ---- side panel -------------------------------------------------------- */
+
+body > aside {
+  font-size: 0.85rem;
+}
+
+body > aside section {
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+body > aside h2 {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: var(--fg-muted);
+}
+
+body > aside ul {
+  padding-left: 1.2em;
+}
+
+body > aside dl {
+  margin-bottom: 0;
+}
+
+body > aside dt {
+  font-size: 0.7rem;
+}
+
+body > aside dd {
+  margin-left: 0;
+  margin-bottom: var(--space-2);
+}
+
+body > footer {
+  margin-top: var(--space-5);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+  color: var(--fg-faint);
+  font-size: 0.8rem;
+}
+
+figure {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+}
+
+figcaption {
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: var(--space-2);
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+details {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: var(--space-2) var(--space-3);
+  margin: 0 0 var(--space-3);
+}
+
+summary {
+  cursor: pointer;
+  color: #e8ebf1;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+summary::marker {
+  color: var(--accent);
+}
+
+/* ---- forms (rarely used, kept minimal) --------------------------------- */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: var(--fg);
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: var(--space-1) var(--space-2);
+}
+
+button {
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-color: var(--accent-dim);
+}
+
+button:hover {
+  border-color: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* ---- utilities: telemetry widgets -------------------------------------- */
+
+/* pulsing status indicator: <span class="dot dot-ok"></span> */
+.dot {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--fg-muted);
+  vertical-align: baseline;
+  margin-right: 0.4em;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.dot-ok {
+  background: var(--ok);
+  box-shadow: 0 0 8px rgba(76, 217, 123, 0.5);
+}
+
+.dot-warn {
+  background: var(--warn);
+  box-shadow: 0 0 8px rgba(255, 179, 71, 0.5);
+}
+
+.dot-err {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* gauge: <div class="bar"><span style="width: 62%"></span></div> */
+.bar {
+  height: 9px;
+  background: var(--bg-inset);
+  border: 1px solid var(--line);
+  margin: var(--space-1) 0 var(--space-2);
+  overflow: hidden;
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--accent-dim) 0 6px,
+    var(--accent) 6px 12px
+  );
+  animation: bar-flow 1.6s linear infinite;
+}
+
+/* blinking terminal cursor: <span class="cursor"></span> */
+.cursor::after {
+  content: "▊";
+  color: var(--accent);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+/* big numeric readout: <p class="metric">98.4%</p> */
+.metric {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-1);
+  text-shadow: 0 0 18px var(--accent-glow);
+}
+
+/* ---- animation keyframes ----------------------------------------------- */
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes bar-flow {
+  to {
+    background-position: 17px 0;
+  }
+}
+
+/* ---- motion / print ---------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  :root {
+    --bg: #ffffff;
+    --bg-panel: #ffffff;
+    --bg-panel-alt: #f2f2f2;
+    --bg-inset: #f7f7f7;
+    --fg: #111111;
+    --fg-muted: #444444;
+    --fg-faint: #666666;
+    --line: #bbbbbb;
+    --line-strong: #888888;
+    --accent: #b00020;
+    --accent-dim: #b00020;
+  }
+
+  body {
+    background-image: none;
+    padding: 0;
+    display: block;
+    max-width: none;
+  }
+
+  a {
+    color: #b00020;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #666666;
+  }
+
+  main section::before,
+  body > aside section::before {
+    display: none;
+  }
+}

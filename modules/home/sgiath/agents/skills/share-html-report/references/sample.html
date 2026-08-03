@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report Theme Sample — share-html-report</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+
+<header>
+  <h1>Report Theme Sample<span class="cursor"></span></h1>
+  <p><time datetime="2026-08-03">2026-08-03</time> · share-html-report · theme reference</p>
+</header>
+
+<main>
+
+  <section>
+    <h2>Purpose</h2>
+    <p>
+      This page exercises every element styled by <code>report.css</code> so the
+      theme can be reviewed at a glance. Real reports inline this stylesheet and
+      write <strong>plain semantic HTML</strong> — no classes required for the
+      core look. Body copy stays readable at a <em>comfortable measure</em>,
+      while headings, tables, and code take on the mission-control look. An
+      optional <code>&lt;aside&gt;</code> renders as the side panel you see on
+      the right; omit it and <code>&lt;main&gt;</code> takes the full shell.
+    </p>
+    <p>
+      Links render as signal-red: an <a href="#internal-anchor">internal anchor</a>
+      stays in-tab, while an
+      <a href="https://sgiath.dev" target="_blank" rel="noopener">external source</a>
+      opens in a new tab and carries an outbound marker. Inline
+      <code>code spans</code>, <kbd>Ctrl</kbd>+<kbd>K</kbd> keys,
+      <mark>highlighted findings</mark>, <del>retracted claims</del>, and
+      <ins>verified corrections</ins> each have distinct treatments.
+    </p>
+  </section>
+
+  <section id="internal-anchor">
+    <h2>Heading Hierarchy</h2>
+    <h3>Level three — subsection</h3>
+    <p>Used for topic groups inside a panel.</p>
+    <h4>Level four — minor label</h4>
+    <p>Muted, uppercase; for fine-grained structure.</p>
+    <hr>
+    <h3>Lists</h3>
+    <ul>
+      <li>Unordered item with a red marker</li>
+      <li>Second item with a nested list
+        <ul>
+          <li>Nested detail one</li>
+          <li>Nested detail two</li>
+        </ul>
+      </li>
+    </ul>
+    <ol>
+      <li>Ordered step one</li>
+      <li>Ordered step two</li>
+    </ol>
+    <dl>
+      <dt>Definition term</dt>
+      <dd>Description of the term, indented under its label.</dd>
+      <dt>Confidence</dt>
+      <dd>High — verified against two independent sources.</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Data Table</h2>
+    <table>
+      <caption>Host inventory — telemetry snapshot</caption>
+      <thead>
+        <tr>
+          <th scope="col">Host</th>
+          <th scope="col">Role</th>
+          <th scope="col">Status</th>
+          <th scope="col">Uptime</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ceres</td><td>Desktop / AMD</td><td><span class="dot dot-ok"></span>online</td><td>14d 03h</td></tr>
+        <tr><td>pallas</td><td>Notebook</td><td><span class="dot dot-ok"></span>online</td><td>2d 11h</td></tr>
+        <tr><td>vesta</td><td>Home server</td><td><span class="dot dot-warn"></span>degraded</td><td>91d 22h</td></tr>
+        <tr><td>hygiea</td><td>Legacy</td><td><span class="dot dot-err"></span>decommissioned</td><td>—</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="4">4 hosts · snapshot taken 2026-08-03 UTC</td></tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <section>
+    <h2>Code &amp; Quotes</h2>
+    <pre><code># deploy the report
+FILENAME="2026-08-03-report-theme-sample.html"
+scp "docs/${FILENAME}" "vesta.local:/data/www/sgiath.dev/llm/${FILENAME}"
+curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
+    <blockquote>
+      <p>
+        The page is a technical artifact, not marketing copy. Prefer labels,
+        tables, diagrams, and terse annotations over prose.
+      </p>
+      <cite>— share-html-report SKILL.md</cite>
+    </blockquote>
+    <details>
+      <summary>Collapsed appendix</summary>
+      <p>Secondary material lives in a collapsible panel so the main flow stays short.</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>Figure</h2>
+    <figure>
+      <svg viewBox="0 0 400 120" role="img" aria-label="Bar chart of build times per host" width="100%">
+        <line x1="30" y1="100" x2="390" y2="100" stroke="#39404f" stroke-width="1"/>
+        <rect x="50"  y="40" width="48" height="60" fill="#ff3347" opacity="0.85"/>
+        <rect x="140" y="60" width="48" height="40" fill="#8b92a1" opacity="0.7"/>
+        <rect x="230" y="25" width="48" height="75" fill="#8b92a1" opacity="0.7"/>
+        <rect x="320" y="70" width="48" height="30" fill="#8b92a1" opacity="0.7"/>
+        <text x="74"  y="114" fill="#8b92a1" font-size="10" text-anchor="middle">ceres</text>
+        <text x="164" y="114" fill="#8b92a1" font-size="10" text-anchor="middle">pallas</text>
+        <text x="254" y="114" fill="#8b92a1" font-size="10" text-anchor="middle">vesta</text>
+        <text x="344" y="114" fill="#8b92a1" font-size="10" text-anchor="middle">iso</text>
+      </svg>
+      <figcaption>Fig 1 — relative rebuild times (inline SVG, no assets)</figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<aside>
+  <section>
+    <h2>System Status</h2>
+    <dl>
+      <dt>Uplink</dt>
+      <dd><span class="dot dot-ok"></span>nominal</dd>
+      <dt>Cache</dt>
+      <dd><span class="dot dot-warn"></span>rebuilding</dd>
+      <dt>Legacy node</dt>
+      <dd><span class="dot dot-err"></span>offline</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Telemetry</h2>
+    <p class="metric">98.4%</p>
+    <p><small>substrate integrity</small></p>
+    <div class="bar"><span style="width: 72%"></span></div>
+    <p><small>storage — 72% allocated</small></p>
+    <div class="bar"><span style="width: 31%"></span></div>
+    <p><small>compute — 31% load</small></p>
+  </section>
+
+  <section>
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#internal-anchor">Heading hierarchy</a></li>
+      <li><a href="#internal-anchor">Data table</a></li>
+      <li><a href="#internal-anchor">Code &amp; quotes</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Report Meta</h2>
+    <dl>
+      <dt>Generated</dt>
+      <dd>2026-08-03 UTC</dd>
+      <dt>Source</dt>
+      <dd>share-html-report skill</dd>
+      <dt>Classification</dt>
+      <dd>public / demo</dd>
+    </dl>
+  </section>
+</aside>
+
+<footer>
+  <p>Generated locally · theme reference for the share-html-report skill · not published</p>
+</footer>
+
+</body>
+</html>
