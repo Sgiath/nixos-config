@@ -65,7 +65,12 @@ in
       enableMcpIntegration = true;
       context = ./AGENTS.md;
       package = pkgs.llm-agents.opencode;
-      tui.plugin = [ "oh-my-openagent@latest" ];
+
+      tui = {
+        plugin = [ "oh-my-openagent@latest" ];
+        scroll_acceleration = true;
+      };
+
       settings = {
         autoupdate = false;
         plugin = [
