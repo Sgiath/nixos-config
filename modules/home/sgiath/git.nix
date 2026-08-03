@@ -72,6 +72,7 @@ in
           "opencode.json*"
           "AGENTS.sgiath.md"
           ".pi-subagents/"
+          ".playwright-mcp/"
         ];
 
         signing = {
