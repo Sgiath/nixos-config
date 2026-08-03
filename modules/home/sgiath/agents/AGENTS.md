@@ -1,3 +1,20 @@
+## Writing code
+
+- Keep implementation files under ~500 lines of code; split/refactor as needed. The test files can be much longer, do not concern yourself with their length at all
+- Choose the simplest implementation that fully meets the current requirements. Avoid speculative abstractions, configuration, and indirection. If a problem can be solved in a simpler way, propose it.
+- Grow the system in layers. Start from the smallest version that works end-to-end, and add each new capability on top of a product that already works. Never trade a working product for unfinished complexity.
+- Keep components and modules modular and concerns clearly separated.
+- Make architectural decisions for the long term. Do not accept a stopgap that only works for now and is meant to be replaced later.
+- When implementing bug fix or new functionality, prefer using test-driven development approach
+
+## Writing tests
+
+Test externally observable behavior, public APIs, contracts, regressions, and meaningful invariants. Avoid tests coupled to private helpers or mirroring the current implementation structure unless that internal behavior is independently consequential.
+
+## Debug Logging
+
+Features must log errors, unexpected exceptions, and operational issues with enough context to debug failures. Long-running jobs must also log start, progress checkpoints, and completion so a stuck run can be diagnosed from logs. In general everything should have enough logs so we can use them to debug if anything goes unexpected.
+
 ## Work contexts
 
 The user works for multiple companies plus his own personal work. Each context has its own
@@ -35,21 +52,3 @@ nothing else in this file should need to change.
 3. Bare "ticket" while discussing company work → that company's tracker; while breaking down or
    tracking agent work → personal Linear.
 4. Still ambiguous → ask. Never guess across companies.
-
-## Writing code
-
-- Keep implementation files under ~500 lines of code; split/refactor as needed. The test files can be much longer, do not concern yourself with their length at all
-- Always strive for concise, simple solutions
-- If a problem can be solved in a simpler way, propose it
-- If asked to do too much work at once, stop and state that clearly
-- when implementing bug fix or new functionality, prefer using test-driven development approach
-- run check/format/lint commands when your done making a change. if they don't exist, suggest making them for the project you're in
-
-## Debug Logging
-
-Features must log errors, unexpected exceptions, and operational issues with enough context to debug failures. Long-running jobs must also log start, progress checkpoints, and completion so a stuck run can be diagnosed from logs. In general everything should have enough logs so we can use them to debug if anything goes unexpected.
-
-## Critical Thinking
-
-- Fix root cause (not band-aid).
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. NEVER delete or change unrecognised changes.
