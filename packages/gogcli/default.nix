@@ -1,21 +1,21 @@
 {
   lib,
-  buildGo127Module,
+  buildGo126Module,
   fetchFromGitHub,
 }:
 
-buildGo127Module rec {
+buildGo126Module rec {
   pname = "gogcli";
-  version = "0.34.1";
+  version = "0.34.2";
 
   src = fetchFromGitHub {
     owner = "steipete";
     repo = "gogcli";
     rev = "v${version}";
-    hash = "sha256-ocC+A63GLrZQA3mXEPjIfsM7Af9NiYjGF8DZI/2yNS0=";
+    hash = "sha256-op6R5Q7GX0Oi6T7KKR71Zim7QqzO79+x/TTWN3SQQ88=";
   };
 
-  vendorHash = "sha256-MAbbCLdoOLWer7HO3+RZJuN10gLeTgN6/CbNn6pzGwQ=";
+  vendorHash = "sha256-e6frnFi+e+0CPb7hcR7X/1n5j2cOavHEay9WXXPWMnI=";
 
   env.CGO_ENABLED = 0;
 
