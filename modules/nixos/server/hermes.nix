@@ -171,6 +171,7 @@ in
 
           compression = {
             enabled = true;
+            codex_gpt55_autoraise = true;
             threshold = 0.5;
             target_ratio = 0.2;
             protect_last_n = 20;
