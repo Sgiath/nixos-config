@@ -94,7 +94,7 @@
     };
 
     voxtype.url = "github:peteonrails/voxtype/v1.0.0-rc1";
-    comfyui.url = "github:utensils/comfyui-nix/v0.28.2";
+    comfyui.url = "github:utensils/comfyui-nix/v0.30.0";
 
     # LLM tools
 
