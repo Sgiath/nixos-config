@@ -9,6 +9,7 @@
     ./foundry.nix
     ./hermes.nix
     ./jellyfin.nix
+    ./litellm.nix
     ./matrix.nix
     ./minecraft.nix
     ./monitoring.nix

@@ -140,6 +140,7 @@ in
             addEmptyPathspec = false;
             pushNonFastForward = false;
             statusHints = true;
+            skippedCherryPicks = false;
           };
 
           commit = {

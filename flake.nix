@@ -37,7 +37,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.56.1";
+    hyprland.url = "github:hyprwm/Hyprland/v0.56.2";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -94,7 +94,7 @@
     };
 
     voxtype.url = "github:peteonrails/voxtype/v1.0.0-rc1";
-    comfyui.url = "github:utensils/comfyui-nix/v0.30.0";
+    comfyui.url = "github:utensils/comfyui-nix/v0.30.2";
 
     # LLM tools
 
