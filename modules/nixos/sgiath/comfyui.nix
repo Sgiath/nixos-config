@@ -13,9 +13,6 @@
         "--use-pytorch-cross-attention"
         "--lowvram"
       ];
-      environment = {
-        PYTORCH_ALLOC_CONF = "expandable_segments:True";
-      };
     };
   };
 }
