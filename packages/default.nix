@@ -14,7 +14,6 @@ pkgs: {
   omnisearch = pkgs.callPackage ./omnisearch { };
   orca = pkgs.callPackage ./orca { };
   plannotator = pkgs.callPackage ./plannotator { };
-  prime-agent = pkgs.callPackage ./prime-agent { };
   relay-tester = pkgs.callPackage ./relay-tester { };
   t3code = pkgs.callPackage ./t3code { };
   xurl = pkgs.callPackage ./xurl { };
