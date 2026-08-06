@@ -173,7 +173,7 @@
         nix-gaming.nixosModules.pipewireLowLatency
         nix-gaming.nixosModules.platformOptimizations
         nix-gaming.nixosModules.wine
-        comfyui.nixosModules.default
+        # comfyui.nixosModules.default
       ];
 
       homes.modules = with inputs; [
