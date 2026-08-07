@@ -8,6 +8,7 @@
 {
   imports = [
     ./claude.nix
+    ./cli-proxy-api.nix
     ./codex.nix
     ./cursor.nix
     ./forge.nix
