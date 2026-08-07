@@ -57,6 +57,10 @@ in
   crazyegg.enable = true;
   remote.enable = true;
   services = {
+    ccflare = {
+      enable = true;
+      port = 18080;
+    };
     cli-proxy-api.enable = true;
   };
 

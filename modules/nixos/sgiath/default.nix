@@ -25,7 +25,6 @@ in
     ./amd-gpu.nix
     ./audio.nix
     ./bluetooth.nix
-    ./ccflare.nix
     ./comfyui.nix
     ./docker.nix
     ./graphics.nix
