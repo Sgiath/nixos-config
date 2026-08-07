@@ -8,6 +8,7 @@ let
   secrets = builtins.fromJSON (builtins.readFile ./../../../../secrets.json);
   cfg = config.services.cli-proxy-api;
   configPath = "${config.xdg.configHome}/cli-proxy-api/config.yaml";
+  configDirectory = builtins.dirOf configPath;
   stateDirectory = "${config.xdg.stateHome}/cli-proxy-api";
   yaml = pkgs.formats.yaml { };
   configFile = yaml.generate "cli-proxy-api.yaml" (
@@ -58,15 +59,30 @@ in
         ];
       };
       description = ''
-        CLIProxyAPI configuration. The authentication directory is managed by
-        this module and is always set to ${stateDirectory}.
+        Initial CLIProxyAPI configuration. Home Manager seeds this configuration
+        when it is absent; CLIProxyAPI owns the writable file afterwards. The
+        initial authentication directory is ${stateDirectory}.
       '';
     };
   };
 
   config = lib.mkIf cfg.enable {
     home.packages = [ cfg.package ];
-    xdg.configFile."cli-proxy-api/config.yaml".source = configFile;
+
+    home.activation.seedCliProxyApiConfig = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+      config_path=${lib.escapeShellArg configPath}
+      config_directory=${lib.escapeShellArg configDirectory}
+
+      if [[ -L "$config_path" ]]; then
+        target="$(${pkgs.coreutils}/bin/readlink -f "$config_path")"
+        ${pkgs.coreutils}/bin/install -Dm600 "$target" "$config_path.mutable"
+        ${pkgs.coreutils}/bin/rm "$config_path"
+        ${pkgs.coreutils}/bin/mv "$config_path.mutable" "$config_path"
+      elif [[ ! -e "$config_path" ]]; then
+        ${pkgs.coreutils}/bin/install -d -m700 "$config_directory"
+        ${pkgs.coreutils}/bin/install -m600 ${configFile} "$config_path"
+      fi
+    '';
 
     systemd.user.services.cli-proxy-api = {
       Unit = {
