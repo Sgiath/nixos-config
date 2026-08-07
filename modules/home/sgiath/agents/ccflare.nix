@@ -15,6 +15,7 @@ let
     ccflare_CONFIG_PATH = "${stateDirectory}/ccflare.json";
     ccflare_DB_PATH = "${stateDirectory}/ccflare.db";
   };
+  environmentArguments = lib.mapAttrsToList (name: value: "${name}=${value}") environment;
 in
 {
   options.services.ccflare = {
@@ -61,19 +62,21 @@ in
     systemd.user.services.ccflare = {
       Unit = {
         Description = "ccflare API proxy";
-        After = [ "network-online.target" ];
-        Wants = [ "network-online.target" ];
       };
 
       Service = {
-        ExecStart = lib.getExe' cfg.package "ccflare-server";
+        ExecStart = "${pkgs.coreutils}/bin/env -i ${lib.escapeShellArgs environmentArguments} ${lib.getExe' cfg.package "ccflare-server"}";
         WorkingDirectory = stateDirectory;
-        Environment = lib.mapAttrsToList (name: value: "${name}=${value}") environment;
         StateDirectory = "ccflare";
         StateDirectoryMode = "0700";
         Restart = "on-failure";
         RestartSec = 5;
         UMask = "0077";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = "read-only";
+        ProtectSystem = "strict";
+        ReadWritePaths = [ stateDirectory ];
       };
 
       Install.WantedBy = [ "default.target" ];
