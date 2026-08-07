@@ -58,7 +58,6 @@ in
   remote.enable = true;
   services = {
     cli-proxy-api.enable = true;
-    easy-cli-proxy-api.enable = true;
   };
 
   stylix.fonts.sizes = {
