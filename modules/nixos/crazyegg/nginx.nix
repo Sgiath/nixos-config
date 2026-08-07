@@ -58,6 +58,7 @@
 
           # Auth service
           auth.app.crazyeggdev.com 'http://127.0.0.1:4041';
+          accounts.crazyeggdev.com 'http://127.0.0.1:4041';
           keycloak.crazyeggdev.com 'http://127.0.0.1:8095';
 
           # Chat services
@@ -87,9 +88,6 @@
 
           # Integration API, ce3/apps/integration_api
           integration-api.crazyeggdev.com 'http://127.0.0.1:4002';
-
-          # SSO Accounts proxy, accounts
-          accounts.crazyeggdev.com 'http://127.0.0.1:4202';
 
           # Old Internal Metrics, global-metrics-system, in conflict with interagent. Not used anymore?
           # info.crazyeggdev.com 'http://127.0.0.1:9009';
