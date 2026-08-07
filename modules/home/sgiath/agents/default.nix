@@ -8,7 +8,6 @@
 {
   imports = [
     ./claude.nix
-    ./ccflare.nix
     ./cli-proxy-api.nix
     ./codex.nix
     ./cursor.nix

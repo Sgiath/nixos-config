@@ -96,6 +96,7 @@ in
       OPENROUTER_API_KEY = secrets.openrouter;
       GITHUB_PERSONAL_ACCESS_TOKEN = secrets.github_token;
       LINEAR_API_KEY = secrets.linear_api_key;
+      CLIPROXY_API_KEY = secrets.cliproxy_api_key;
     };
     programs = {
       nix-ld.enable = true;

@@ -78,10 +78,30 @@ in
 
       settings = {
         autoupdate = false;
+        small_model = "cli-proxy/gpt-5.6-luna";
         plugin = [
           "oh-my-openagent@latest"
           "opencode-claude-auth@latest"
         ];
+        provider = {
+          cli-proxy = {
+            name = "CLIProxyAPI";
+            npm = "@ai-sdk/openai-compatible";
+            options = {
+              baseURL = "http://127.0.0.1:8317/v1";
+              apiKey = "{env:CLIPROXY_API_KEY}";
+            };
+            models = {
+              "gpt-5.6-sol".name = "GPT 5.6 Sol";
+              "gpt-5.6-terra".name = "GPT 5.6 Terra";
+              "gpt-5.6-luna".name = "GPT 5.6 Luna";
+              "claude-fable-5".name = "Fable 5";
+              "claude-opus-5".name = "Opus 5";
+              "grok-4.5".name = "Grok 4.5";
+              "kimi-k3".name = "Kimi K3";
+            };
+          };
+        };
         permission = {
           bash = {
             "*" = "allow";
