@@ -46,6 +46,7 @@
       pkgs.${namespace}.clawpatch
       pkgs.${namespace}.linear-cli
       pkgs.${namespace}.xurl
+      pkgs.${namespace}.easy-cli-proxy-api
 
       # Hermes
       pkgs.llm-agents.hermes-agent

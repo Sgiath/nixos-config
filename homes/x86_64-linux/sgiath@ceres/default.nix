@@ -56,7 +56,10 @@ in
 
   crazyegg.enable = true;
   remote.enable = true;
-  services.cli-proxy-api.enable = true;
+  services = {
+    cli-proxy-api.enable = true;
+    easy-cli-proxy-api.enable = true;
+  };
 
   stylix.fonts.sizes = {
     applications = 10;

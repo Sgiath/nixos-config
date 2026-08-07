@@ -5,6 +5,7 @@
   ...
 }:
 let
+  secrets = builtins.fromJSON (builtins.readFile ./../../../../secrets.json);
   cfg = config.services.cli-proxy-api;
   configPath = "${config.xdg.configHome}/cli-proxy-api/config.yaml";
   stateDirectory = "${config.xdg.stateHome}/cli-proxy-api";
@@ -27,6 +28,29 @@ in
       default = {
         host = "127.0.0.1";
         port = 8317;
+        openai-compatibility = [
+          {
+            name = "openai";
+            base-url = "https://api.openai.com/v1";
+            api-key-entries = [
+              { api-key = secrets.openai; }
+            ];
+            models = [
+              {
+                name = "gpt-5.6-sol";
+                alias = "gpt-5.6-sol";
+              }
+              {
+                name = "gpt-5.6-terra";
+                alias = "gpt-5.6-terra";
+              }
+              {
+                name = "gpt-5.6-luna";
+                alias = "gpt-5.6-luna";
+              }
+            ];
+          }
+        ];
       };
       description = ''
         CLIProxyAPI configuration. The authentication directory is managed by

@@ -3,8 +3,10 @@ pkgs: {
   buzz = pkgs.callPackage ./buzz { };
   buzz-cli = pkgs.callPackage ./buzz-cli { };
   buzz-relay = pkgs.callPackage ./buzz-relay { };
+  ccflare = pkgs.callPackage ./ccflare { };
   clawpatch = pkgs.callPackage ./clawpatch { };
   dnd5etools = pkgs.callPackage ./dnd5etools { };
+  easy-cli-proxy-api = pkgs.callPackage ./easy-cli-proxy-api { };
   eve-flipper = pkgs.callPackage ./eve-flipper { };
   gogcli = pkgs.callPackage ./gogcli { };
   kimi-webbridge = pkgs.callPackage ./kimi-webbridge { };
