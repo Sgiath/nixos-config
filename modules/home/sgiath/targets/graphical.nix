@@ -5,6 +5,9 @@
   namespace,
   ...
 }:
+let
+  terminalCommand = lib.getExe pkgs.kitty;
+in
 {
   options.sgiath.targets.graphical = lib.mkEnableOption "graphical target";
 
@@ -19,17 +22,43 @@
     ];
 
     wayland.windowManager.hyprland.settings = {
-      exec-once = [
-        "${lib.getExe pkgs.kitty}"
+      on = [
+        {
+          _args = [
+            "hyprland.start"
+            (lib.generators.mkLuaInline ''
+              function()
+                hl.exec_cmd(${builtins.toJSON terminalCommand})
+              end
+            '')
+          ];
+        }
       ];
       bind = [
-        "$mod, Return, exec, ${lib.getExe pkgs.kitty}"
+        {
+          _args = [
+            "SUPER + Return"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON terminalCommand})")
+          ];
+        }
       ];
-      windowrule = [
-        "match:class alacritty, workspace 1"
-        "match:class kitty, workspace 1"
-        "match:class wezterm, workspace 1"
-        "match:class ghostty, workspace 1"
+      window_rule = [
+        {
+          match.class = "alacritty";
+          workspace = "1";
+        }
+        {
+          match.class = "kitty";
+          workspace = "1";
+        }
+        {
+          match.class = "wezterm";
+          workspace = "1";
+        }
+        {
+          match.class = "ghostty";
+          workspace = "1";
+        }
       ];
     };
 

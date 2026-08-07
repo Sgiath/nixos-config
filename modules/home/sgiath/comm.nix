@@ -62,23 +62,37 @@
     };
 
     wayland.windowManager.hyprland.settings = {
-      exec-once = [
-        "${lib.getExe pkgs.slack}"
-        # "${lib.getExe pkgs.webcord}"
-        # "${lib.getExe pkgs.telegram-desktop}"
-        "${lib.getExe pkgs.signal-desktop}"
-        "${lib.getExe pkgs.cinny-desktop}"
+      on = [
+        {
+          _args = [
+            "hyprland.start"
+            (lib.generators.mkLuaInline ''
+              function()
+                hl.exec_cmd(${builtins.toJSON (lib.getExe pkgs.slack)})
+                hl.exec_cmd(${builtins.toJSON (lib.getExe pkgs.signal-desktop)})
+                hl.exec_cmd(${builtins.toJSON (lib.getExe pkgs.cinny-desktop)})
+              end
+            '')
+          ];
+        }
       ];
-      windowrule = [
-        "match:class slack, workspace 10 silent, no_initial_focus on"
-        "match:class WebCord, workspace 10 silent, no_initial_focus on"
-        "match:class signal, workspace 10 silent, no_initial_focus on"
-        "match:class org.telegram.desktop, workspace 10 silent, no_initial_focus on"
-        "match:class Hexchat, workspace 10 silent, no_initial_focus on"
-        "match:class fluffychat, workspace 10 silent, no_initial_focus on"
-        "match:class Element, workspace 10 silent, no_initial_focus on"
-        "match:class cinny, workspace 10 silent, no_initial_focus on"
-      ];
+      window_rule =
+        map
+          (class: {
+            match.class = class;
+            workspace = "10 silent";
+            no_initial_focus = true;
+          })
+          [
+            "slack"
+            "WebCord"
+            "signal"
+            "org.telegram.desktop"
+            "Hexchat"
+            "fluffychat"
+            "Element"
+            "cinny"
+          ];
     };
   };
 }

@@ -46,8 +46,11 @@
       librewolf.enable = false;
     };
 
-    wayland.windowManager.hyprland.settings.windowrule = [
-      "match:class firefox, workspace 8 silent"
+    wayland.windowManager.hyprland.settings.window_rule = [
+      {
+        match.class = "firefox";
+        workspace = "8 silent";
+      }
     ];
   };
 }

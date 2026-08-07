@@ -35,10 +35,29 @@
     };
 
     wayland.windowManager.hyprland.settings = {
-      exec-once = [ "${lib.getExe pkgs.protonmail-desktop}" ];
-      windowrule = [
-        "match:class claws-mail, workspace 9 silent, no_initial_focus on"
-        "match:title Proton Mail, workspace 9 silent, no_initial_focus on"
+      on = [
+        {
+          _args = [
+            "hyprland.start"
+            (lib.generators.mkLuaInline ''
+              function()
+                hl.exec_cmd(${builtins.toJSON (lib.getExe pkgs.protonmail-desktop)})
+              end
+            '')
+          ];
+        }
+      ];
+      window_rule = [
+        {
+          match.class = "claws-mail";
+          workspace = "9 silent";
+          no_initial_focus = true;
+        }
+        {
+          match.title = "Proton Mail";
+          workspace = "9 silent";
+          no_initial_focus = true;
+        }
       ];
     };
 

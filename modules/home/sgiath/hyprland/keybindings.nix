@@ -1,4 +1,20 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
+let
+  lua = lib.generators.mkLuaInline;
+  bind = keys: dispatcher: {
+    _args = [
+      keys
+      (lua dispatcher)
+    ];
+  };
+  mouseBind = keys: dispatcher: {
+    _args = [
+      keys
+      (lua dispatcher)
+      { mouse = true; }
+    ];
+  };
+in
 {
   home.packages = with pkgs; [
     grim
@@ -9,57 +25,54 @@
   ];
 
   wayland.windowManager.hyprland.settings = {
-    "$mod" = "SUPER";
     bind = [
-      "$mod SHIFT, C, killactive,"
-      "$mod, F, togglefloating, active"
-      "$mod SHIFT, Space, fullscreen, 0"
+      (bind "SUPER + SHIFT + C" "hl.dsp.window.close()")
+      (bind "SUPER + F" ''hl.dsp.window.float({ action = "toggle" })'')
+      (bind "SUPER + SHIFT + Space" ''hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })'')
 
       # move focus
-      "$mod, H, movefocus, l"
-      "$mod, L, movefocus, r"
-      "$mod, K, movefocus, u"
-      "$mod, J, movefocus, d"
+      (bind "SUPER + H" ''hl.dsp.focus({ direction = "left" })'')
+      (bind "SUPER + L" ''hl.dsp.focus({ direction = "right" })'')
+      (bind "SUPER + K" ''hl.dsp.focus({ direction = "up" })'')
+      (bind "SUPER + J" ''hl.dsp.focus({ direction = "down" })'')
 
-      "$mod, left, workspace, r-1"
-      "$mod, right, workspace, r+1"
+      (bind "SUPER + left" ''hl.dsp.focus({ workspace = "r-1" })'')
+      (bind "SUPER + right" ''hl.dsp.focus({ workspace = "r+1" })'')
 
       # go to workspace
-      "$mod, grave, togglespecialworkspace, special:nasa"
-      "$mod, 1, focusworkspaceoncurrentmonitor, 1"
-      "$mod, 2, focusworkspaceoncurrentmonitor, 2"
-      "$mod, 3, focusworkspaceoncurrentmonitor, 3"
-      "$mod, 4, focusworkspaceoncurrentmonitor, 4"
-      "$mod, 5, focusworkspaceoncurrentmonitor, 5"
-      "$mod, 6, focusworkspaceoncurrentmonitor, 6"
-      "$mod, 7, focusworkspaceoncurrentmonitor, 7"
-      "$mod, 8, focusworkspaceoncurrentmonitor, 8"
-      "$mod, 9, focusworkspaceoncurrentmonitor, 9"
-      "$mod, 0, focusworkspaceoncurrentmonitor, 10"
+      (bind "SUPER + grave" ''hl.dsp.workspace.toggle_special("nasa")'')
+      (bind "SUPER + 1" ''hl.dsp.focus({ workspace = "1", on_current_monitor = true })'')
+      (bind "SUPER + 2" ''hl.dsp.focus({ workspace = "2", on_current_monitor = true })'')
+      (bind "SUPER + 3" ''hl.dsp.focus({ workspace = "3", on_current_monitor = true })'')
+      (bind "SUPER + 4" ''hl.dsp.focus({ workspace = "4", on_current_monitor = true })'')
+      (bind "SUPER + 5" ''hl.dsp.focus({ workspace = "5", on_current_monitor = true })'')
+      (bind "SUPER + 6" ''hl.dsp.focus({ workspace = "6", on_current_monitor = true })'')
+      (bind "SUPER + 7" ''hl.dsp.focus({ workspace = "7", on_current_monitor = true })'')
+      (bind "SUPER + 8" ''hl.dsp.focus({ workspace = "8", on_current_monitor = true })'')
+      (bind "SUPER + 9" ''hl.dsp.focus({ workspace = "9", on_current_monitor = true })'')
+      (bind "SUPER + 0" ''hl.dsp.focus({ workspace = "10", on_current_monitor = true })'')
 
       # move to workspace
-      "$mod SHIFT, grave, movetoworkspace, special:nasa"
-      "$mod SHIFT, 1, movetoworkspace, 1"
-      "$mod SHIFT, 2, movetoworkspace, 2"
-      "$mod SHIFT, 3, movetoworkspace, 3"
-      "$mod SHIFT, 4, movetoworkspace, 4"
-      "$mod SHIFT, 5, movetoworkspace, 5"
-      "$mod SHIFT, 6, movetoworkspace, 6"
-      "$mod SHIFT, 7, movetoworkspace, 7"
-      "$mod SHIFT, 8, movetoworkspace, 8"
-      "$mod SHIFT, 9, movetoworkspace, 9"
-      "$mod SHIFT, 0, movetoworkspace, 10"
+      (bind "SUPER + SHIFT + grave" ''hl.dsp.window.move({ workspace = "special:nasa" })'')
+      (bind "SUPER + SHIFT + 1" ''hl.dsp.window.move({ workspace = "1" })'')
+      (bind "SUPER + SHIFT + 2" ''hl.dsp.window.move({ workspace = "2" })'')
+      (bind "SUPER + SHIFT + 3" ''hl.dsp.window.move({ workspace = "3" })'')
+      (bind "SUPER + SHIFT + 4" ''hl.dsp.window.move({ workspace = "4" })'')
+      (bind "SUPER + SHIFT + 5" ''hl.dsp.window.move({ workspace = "5" })'')
+      (bind "SUPER + SHIFT + 6" ''hl.dsp.window.move({ workspace = "6" })'')
+      (bind "SUPER + SHIFT + 7" ''hl.dsp.window.move({ workspace = "7" })'')
+      (bind "SUPER + SHIFT + 8" ''hl.dsp.window.move({ workspace = "8" })'')
+      (bind "SUPER + SHIFT + 9" ''hl.dsp.window.move({ workspace = "9" })'')
+      (bind "SUPER + SHIFT + 0" ''hl.dsp.window.move({ workspace = "10" })'')
 
-      "$mod, G, togglegroup,"
-      "$mod SHIFT, H, moveintogroup, l"
-      "$mod SHIFT, J, moveintogroup, d"
-      "$mod SHIFT, K, moveintogroup, u"
-      "$mod SHIFT, L, moveintogroup, r"
-    ];
+      (bind "SUPER + G" "hl.dsp.group.toggle({})")
+      (bind "SUPER + SHIFT + H" ''hl.dsp.window.move({ into_group = "left" })'')
+      (bind "SUPER + SHIFT + J" ''hl.dsp.window.move({ into_group = "down" })'')
+      (bind "SUPER + SHIFT + K" ''hl.dsp.window.move({ into_group = "up" })'')
+      (bind "SUPER + SHIFT + L" ''hl.dsp.window.move({ into_group = "right" })'')
 
-    bindm = [
-      "$mod, mouse:272, movewindow"
-      "$mod SHIFT, mouse:272, resizewindow"
+      (mouseBind "SUPER + mouse:272" "hl.dsp.window.drag()")
+      (mouseBind "SUPER + SHIFT + mouse:272" "hl.dsp.window.resize()")
     ];
   };
 }

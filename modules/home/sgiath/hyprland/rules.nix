@@ -1,15 +1,28 @@
 {
   wayland.windowManager.hyprland.settings = {
-    windowrule = [
+    window_rule = [
       # Disable blur for xwayland context menus
-      "no_blur on, match:class ^()$, match:title ^()$"
+      {
+        match.class = "^()$";
+        match.title = "^()$";
+        no_blur = true;
+      }
       # Disable blur for all xwayland apps
-      "no_blur on, match:xwayland 1"
+      {
+        match.xwayland = true;
+        no_blur = true;
+      }
       # Disable blur for every window
-      "no_blur on, match:class .*"
+      {
+        match.class = ".*";
+        no_blur = true;
+      }
 
       # No shadow for tiled windows (matches windows that are not floating).
-      "no_shadow on, match:float 0"
+      {
+        match.float = false;
+        no_shadow = true;
+      }
     ];
   };
 }

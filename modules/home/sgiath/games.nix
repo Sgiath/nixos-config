@@ -56,10 +56,19 @@ in
       # inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen
     ];
 
-    wayland.windowManager.hyprland.settings.windowrule = [
-      "match:class .factorio-wrapped, workspace 6 silent"
-      "match:class lutris, workspace 6 silent"
-      "match:class steam_app_8500, float on"
+    wayland.windowManager.hyprland.settings.window_rule = [
+      {
+        match.class = ".factorio-wrapped";
+        workspace = "6 silent";
+      }
+      {
+        match.class = "lutris";
+        workspace = "6 silent";
+      }
+      {
+        match.class = "steam_app_8500";
+        float = true;
+      }
     ];
   };
 }

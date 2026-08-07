@@ -8,6 +8,8 @@
 
 let
   voxtype = inputs.voxtype.packages.${pkgs.stdenv.hostPlatform.system}.vulkan;
+  startCommand = "${lib.getExe voxtype} record start";
+  stopCommand = "${lib.getExe voxtype} record stop";
 in
 {
   config = lib.mkIf config.programs.voxtype.enable {
@@ -31,10 +33,19 @@ in
 
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "$mod, B, exec, ${lib.getExe voxtype} record start"
-      ];
-      bindr = [
-        "$mod, B, exec, ${lib.getExe voxtype} record stop"
+        {
+          _args = [
+            "SUPER + B"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON startCommand})")
+          ];
+        }
+        {
+          _args = [
+            "SUPER + B"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON stopCommand})")
+            { release = true; }
+          ];
+        }
       ];
     };
 

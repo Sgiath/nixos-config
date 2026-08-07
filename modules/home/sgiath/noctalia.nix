@@ -4,6 +4,10 @@
   lib,
   ...
 }:
+let
+  sessionMenuCommand = "${lib.getExe pkgs.noctalia-shell} ipc call sessionMenu toggle";
+  launcherCommand = "${lib.getExe pkgs.noctalia-shell} ipc call launcher toggle";
+in
 {
   config = lib.mkIf config.programs.noctalia-shell.enable {
     home.packages = with pkgs; [
@@ -81,16 +85,25 @@
     };
 
     wayland.windowManager.hyprland.settings = {
-      "$ipc" = "${lib.getExe pkgs.noctalia-shell} ipc call";
       bind = [
-        "$mod SHIFT, Q, exec, $ipc sessionMenu toggle"
-        "$mod, slash, exec, $ipc launcher toggle"
+        {
+          _args = [
+            "SUPER + SHIFT + Q"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON sessionMenuCommand})")
+          ];
+        }
+        {
+          _args = [
+            "SUPER + slash"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON launcherCommand})")
+          ];
+        }
       ];
 
-      layerrule = [
+      layer_rule = [
         {
           name = "noctalia";
-          "match:namespace" = "noctalia-background-.*$";
+          match.namespace = "noctalia-background-.*$";
           ignore_alpha = 0.5;
           blur = true;
           blur_popups = true;

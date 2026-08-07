@@ -37,20 +37,76 @@
       };
 
       settings = {
-        group.groupbar.font_size = 14;
+        config.group.groupbar.font_size = 14;
 
-        workspace = [
-          "special:special, gapsout:30"
-          "1,monitor:DP-1,default:true,persistent:true,defaultName:terminal"
-          "2,monitor:DP-3,default:true,persistent:true,defaultName:personal"
-          "3,monitor:DP-3,persistent:true,defaultName:CrazyEgg"
-          "4,monitor:DP-3,persistent:true,defaultName:Remote"
-          "5,monitor:DP-3,persistent:true,defaultName:"
-          "6,monitor:DP-1,persistent:true,defaultName:"
-          "7,monitor:DP-1,persistent:true,defaultName:"
-          "8,monitor:DP-1,persistent:true,defaultName:firefox"
-          "9,monitor:DP-3,persistent:true,defaultName:email"
-          "10,monitor:DP-2,default:true,gapsin:0,gapsout:0,border:false,persistent:true,defaultName:comm"
+        workspace_rule = [
+          {
+            workspace = "special:special";
+            gaps_out = 30;
+          }
+          {
+            workspace = "1";
+            monitor = "DP-1";
+            default = true;
+            persistent = true;
+            default_name = "terminal";
+          }
+          {
+            workspace = "2";
+            monitor = "DP-3";
+            default = true;
+            persistent = true;
+            default_name = "personal";
+          }
+          {
+            workspace = "3";
+            monitor = "DP-3";
+            persistent = true;
+            default_name = "CrazyEgg";
+          }
+          {
+            workspace = "4";
+            monitor = "DP-3";
+            persistent = true;
+            default_name = "Remote";
+          }
+          {
+            workspace = "5";
+            monitor = "DP-3";
+            persistent = true;
+          }
+          {
+            workspace = "6";
+            monitor = "DP-1";
+            persistent = true;
+          }
+          {
+            workspace = "7";
+            monitor = "DP-1";
+            persistent = true;
+          }
+          {
+            workspace = "8";
+            monitor = "DP-1";
+            persistent = true;
+            default_name = "firefox";
+          }
+          {
+            workspace = "9";
+            monitor = "DP-3";
+            persistent = true;
+            default_name = "email";
+          }
+          {
+            workspace = "10";
+            monitor = "DP-2";
+            default = true;
+            gaps_in = 0;
+            gaps_out = 0;
+            no_border = true;
+            persistent = true;
+            default_name = "comm";
+          }
         ];
       };
     };

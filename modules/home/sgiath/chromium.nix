@@ -35,8 +35,11 @@
       ];
     };
 
-    wayland.windowManager.hyprland.settings.windowrule = [
-      "match:class chromium-browser, workspace 2 silent"
+    wayland.windowManager.hyprland.settings.window_rule = [
+      {
+        match.class = "chromium-browser";
+        workspace = "2 silent";
+      }
     ];
   };
 }

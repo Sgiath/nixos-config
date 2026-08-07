@@ -12,6 +12,7 @@ let
         --copy-command wl-copy \
         --floating-hack
   '';
+  command = lib.getExe screenshot;
 in
 {
   home.packages = [
@@ -20,11 +21,19 @@ in
 
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "$mod, S, exec, ${lib.getExe screenshot}"
+      {
+        _args = [
+          "SUPER + S"
+          (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON command})")
+        ];
+      }
     ];
 
-    windowrule = [
-      "match:class com.gabm.satty, float on"
+    window_rule = [
+      {
+        match.class = "com.gabm.satty";
+        float = true;
+      }
     ];
   };
 }

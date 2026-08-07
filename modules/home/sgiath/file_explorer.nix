@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  command = "${lib.getExe pkgs.kitty} --class files -e ${lib.getExe pkgs.superfile}";
+in
 {
   config = lib.mkIf config.programs.hyprland.enable {
     home.packages = with pkgs; [
@@ -15,7 +18,12 @@
       exiftool
     ];
     wayland.windowManager.hyprland.settings.bind = [
-      "$mod, E, exec, ${lib.getExe pkgs.kitty} --class files -e ${lib.getExe pkgs.superfile}"
+      {
+        _args = [
+          "SUPER + E"
+          (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON command})")
+        ];
+      }
     ];
   };
 }

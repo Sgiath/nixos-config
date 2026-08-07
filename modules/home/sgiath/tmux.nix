@@ -4,10 +4,30 @@
   pkgs,
   ...
 }:
+let
+  # A trailing colon keeps tmux from resolving the session as a prefix-matching worktree window.
+  tmux-sessionizer = pkgs.tmux-sessionizer.overrideAttrs (old: {
+    postPatch = (old.postPatch or "") + ''
+      substituteInPlace src/tmux.rs \
+        --replace-fail \
+          '        if let Some(session) = session {
+                  args.extend(["-t", session])
+              }
+
+              self.execute_tmux_command(&args)' \
+          '        let session = session.map(|session| format!("{session}:"));
+              if let Some(session) = session.as_deref() {
+                  args.extend(["-t", session])
+              }
+
+              self.execute_tmux_command(&args)'
+    '';
+  });
+in
 {
   config = lib.mkIf config.programs.tmux.enable {
     home.packages = [
-      pkgs.tmux-sessionizer
+      tmux-sessionizer
     ];
 
     xdg = {
@@ -93,11 +113,9 @@
         setw -g window-status-format "#[bg=$bg,fg=$fg] #W "
         setw -g window-status-current-format "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$bg]#W#[fg=$yellow,bg=$bg]"
 
-        # Auto-rename windows to git branch name
+        # Name the initial session window after its Git branch.
         set-option -g automatic-rename off
-
-        # Rename command - used by multiple hooks
-        set -g @branch-rename 'run-shell "sleep 0.1; tmux rename-window \"$(cd #{pane_current_path} && git branch --show-current 2>/dev/null || basename #{pane_current_path})\"" 2>/dev/null'
+        set-hook -g after-new-session 'run-shell "sleep 0.1; tmux rename-window -t \"#{session_name}:#{window_index}\" \"$(cd \"#{pane_current_path}\" && git branch --show-current 2>/dev/null || basename \"#{pane_current_path}\")\"" 2>/dev/null'
 
         set-option -g status-justify centre
         set-option -g status-left-length 100
