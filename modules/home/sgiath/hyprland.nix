@@ -25,7 +25,7 @@
 
     wayland.windowManager.hyprland = {
       enable = true;
-      configType = "hyprlang";
+      configType = "lua";
       xwayland.enable = true;
       package = null;
       portalPackage = null;

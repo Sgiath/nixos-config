@@ -42,8 +42,8 @@
     # CMake falls back to FetchContent, and the build sandbox has no network access.
     # Upstream removed the version limit on main in 91f29f2 (2026-08-04), code unchanged.
     # Pin the tag again when a release contains that commit (v0.56.3 or later).
-    # hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.url = "github:hyprwm/Hyprland/v0.56.1";
+    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.url = "github:hyprwm/Hyprland/v0.56.3";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
