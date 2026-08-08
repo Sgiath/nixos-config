@@ -26,42 +26,16 @@ let
       ];
       output = [ "text" ];
     };
+    options = {
+      textVerbosity = "low";
+      reasoningSummary = "auto";
+    };
     variants = {
-      minimal = {
-        reasoningEffort = "minimal";
-        textVerbosity = "low";
-        reasoningSummary = "auto";
-      };
-      low = {
-        reasoningEffort = "low";
-        textVerbosity = "low";
-        reasoningSummary = "auto";
-      };
-      medium = {
-        reasoningEffort = "medium";
-        textVerbosity = "low";
-        reasoningSummary = "auto";
-      };
-      high = {
-        reasoningEffort = "high";
-        textVerbosity = "low";
-        reasoningSummary = "auto";
-      };
-      xhigh = {
-        reasoningEffort = "xhigh";
-        textVerbosity = "low";
-        reasoningSummary = "auto";
-      };
-      max = {
-        reasoningEffort = "max";
-        textVerbosity = "low";
-        reasoningSummary = "auto";
-      };
-      auto = {
-        reasoningEffort = "auto";
-        textVerbosity = "low";
-        reasoningSummary = "auto";
-      };
+      low.reasoningEffort = "low";
+      medium.reasoningEffort = "medium";
+      high.reasoningEffort = "high";
+      xhigh.reasoningEffort = "xhigh";
+      auto.reasoningEffort = "auto";
     };
   };
 
