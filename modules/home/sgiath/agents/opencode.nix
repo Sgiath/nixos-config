@@ -12,6 +12,13 @@ let
     inherit name;
     attachment = true;
     reasoning = true;
+    tool_call = true;
+
+    limit = {
+      context = 1050000;
+      output = 128000;
+    };
+
     modalities = {
       input = [
         "text"
@@ -19,9 +26,43 @@ let
       ];
       output = [ "text" ];
     };
-    # variants = [
-    #   {name = "high"; value.reasoningEffort = "high";}
-    # ];
+    variants = {
+      minimal = {
+        reasoningEffort = "minimal";
+        textVerbosity = "low";
+        reasoningSummary = "auto";
+      };
+      low = {
+        reasoningEffort = "low";
+        textVerbosity = "low";
+        reasoningSummary = "auto";
+      };
+      medium = {
+        reasoningEffort = "medium";
+        textVerbosity = "low";
+        reasoningSummary = "auto";
+      };
+      high = {
+        reasoningEffort = "high";
+        textVerbosity = "low";
+        reasoningSummary = "auto";
+      };
+      xhigh = {
+        reasoningEffort = "xhigh";
+        textVerbosity = "low";
+        reasoningSummary = "auto";
+      };
+      max = {
+        reasoningEffort = "max";
+        textVerbosity = "low";
+        reasoningSummary = "auto";
+      };
+      auto = {
+        reasoningEffort = "auto";
+        textVerbosity = "low";
+        reasoningSummary = "auto";
+      };
+    };
   };
 
   # https://opencode.ai/docs/cli/#environment-variables
