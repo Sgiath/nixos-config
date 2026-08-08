@@ -53,7 +53,7 @@
           if [[ "$no_commit" == false ]]; then
             git add --all
             if ! commit_message="$(${lib.getExe pkgs.llm-agents.pi} \
-              --model openai/gpt-5.6-luna:low \
+              --model cliproxy/gpt-5.6-luna:low \
               --print \
               --no-session \
               --no-tools \
