@@ -165,7 +165,7 @@
         hyprland.overlays.default
         noctalia.overlays.default
         hermes-agent.overlays.default
-        # llm-agents.overlays.default
+        llm-agents.overlays.default
         prismlauncher.overlays.default
         comfyui.overlays.default
       ];

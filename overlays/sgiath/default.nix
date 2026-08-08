@@ -1,8 +1,6 @@
 { inputs, ... }:
 final: prev:
 let
-  llmAgents = inputs.llm-agents.packages.${prev.stdenv.hostPlatform.system};
-
   pkgs-master = import inputs.nixpkgs-master {
     system = prev.stdenv.hostPlatform.system;
     config.allowUnfree = true;
@@ -16,5 +14,4 @@ in
 {
   ksa = pkgs-ksa.ksa;
   factorio-space-age-experimental = pkgs-master.factorio-space-age-experimental;
-  llm-agents = llmAgents;
 }
