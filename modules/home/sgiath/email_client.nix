@@ -34,6 +34,16 @@
       '';
     };
 
+    xdg.configFile."autostart/ProtonMailBridge.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Proton Mail Bridge
+      Exec=${lib.getExe pkgs.protonmail-bridge-gui} --no-window
+      Icon=protonmail-bridge-gui
+      Terminal=false
+      X-GNOME-Autostart-enabled=true
+    '';
+
     wayland.windowManager.hyprland.settings = {
       on = [
         {
