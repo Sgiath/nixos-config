@@ -115,6 +115,7 @@ in
 
       settings = {
         autoupdate = false;
+        model = "cli-proxy/gpt-5.6-terra";
         small_model = "cli-proxy/gpt-5.6-luna";
         plugin = [
           "oh-my-openagent@latest"

@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Report Theme Sample — share-html-report</title>
   <link rel="stylesheet" href="report.css">
+  <!-- interactive node graphs; sample uses relative paths because it sits next
+       to both files — real reports use https://sgiath.dev/llm/litegraph.js and
+       https://sgiath.dev/llm/report.js (see SKILL.md) -->
+  <script src="litegraph.js" defer></script>
+  <script src="report.js" defer></script>
 </head>
 <body>
 
@@ -113,18 +117,180 @@ curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
     <h2>Figure</h2>
     <figure>
       <svg viewBox="0 0 400 120" role="img" aria-label="Bar chart of build times per host" width="100%">
-        <line x1="30" y1="100" x2="390" y2="100" stroke="#39404f" stroke-width="1"/>
-        <rect x="50"  y="40" width="48" height="60" fill="#ff3347" opacity="0.85"/>
-        <rect x="140" y="60" width="48" height="40" fill="#8b92a1" opacity="0.7"/>
-        <rect x="230" y="25" width="48" height="75" fill="#8b92a1" opacity="0.7"/>
-        <rect x="320" y="70" width="48" height="30" fill="#8b92a1" opacity="0.7"/>
-        <text x="74"  y="114" fill="#8b92a1" font-size="10" text-anchor="middle">ceres</text>
-        <text x="164" y="114" fill="#8b92a1" font-size="10" text-anchor="middle">pallas</text>
-        <text x="254" y="114" fill="#8b92a1" font-size="10" text-anchor="middle">vesta</text>
-        <text x="344" y="114" fill="#8b92a1" font-size="10" text-anchor="middle">iso</text>
+        <line x1="30" y1="100" x2="390" y2="100" style="stroke: var(--line-strong, #463a22); stroke-width: 1"/>
+        <rect x="50"  y="40" width="48" height="60" style="fill: var(--accent, #ffb000); opacity: 0.9"/>
+        <rect x="140" y="60" width="48" height="40" style="fill: var(--accent-2, #6fc7b2); opacity: 0.45"/>
+        <rect x="230" y="25" width="48" height="75" style="fill: var(--accent-2, #6fc7b2); opacity: 0.45"/>
+        <rect x="320" y="70" width="48" height="30" style="fill: var(--accent-2, #6fc7b2); opacity: 0.45"/>
+        <text x="74"  y="114" font-size="10" text-anchor="middle" style="fill: var(--fg-muted, #a89e8a)">ceres</text>
+        <text x="164" y="114" font-size="10" text-anchor="middle" style="fill: var(--fg-muted, #a89e8a)">pallas</text>
+        <text x="254" y="114" font-size="10" text-anchor="middle" style="fill: var(--fg-muted, #a89e8a)">vesta</text>
+        <text x="344" y="114" font-size="10" text-anchor="middle" style="fill: var(--fg-muted, #a89e8a)">iso</text>
       </svg>
       <figcaption>Fig 1 — relative rebuild times (inline SVG, no assets)</figcaption>
     </figure>
+  </section>
+
+  <section>
+    <h2>Console Widgets <span class="status status-ok">scanning</span></h2>
+    <p>
+      Opt-in "spaceship console" utilities. A status chip works inline too:
+      reactor loop <span class="status status-warn">degraded</span>, coolant pump
+      <span class="status status-err">fault</span>.
+    </p>
+
+    <h3>Nav scope &amp; readout</h3>
+    <div class="scope" aria-hidden="true">
+      <i class="blip" style="left: 62%; top: 28%"></i>
+      <i class="blip" style="left: 35%; top: 67%"></i>
+      <i class="blip" style="left: 58%; top: 61%"></i>
+    </div>
+    <dl class="readout">
+      <dt>RNG</dt><dd>4.7 AU</dd>
+      <dt>BRG</dt><dd>047.2°</dd>
+      <dt>CON</dt><dd>03 tracked</dd>
+      <dt>DOP</dt><dd>+0.4 km/s</dd>
+      <dt>Mode</dt><dd>passive</dd>
+    </dl>
+
+    <h3>Reactor trace</h3>
+    <div class="trace" aria-hidden="true">
+      <svg viewBox="0 0 400 120" preserveAspectRatio="none">
+        <polyline class="trace-line" points="0,70 30,58 60,74 90,44 120,66 150,52 180,80 210,48 240,64 270,38 300,72 330,56 360,68 400,50"/>
+        <polyline class="trace-line-alt" points="0,84 40,78 80,88 120,72 160,82 200,76 240,90 280,74 320,84 360,78 400,86"/>
+      </svg>
+      <i class="trace-scan"></i>
+    </div>
+    <dl class="readout">
+      <dt>Out</dt><dd>98.2%</dd>
+      <dt>Flux</dt><dd>3.41 MW</dd>
+      <dt>Temp</dt><dd>341 K</dd>
+    </dl>
+
+    <h3>Ops log</h3>
+    <ul class="log">
+      <li><time>09:32:07</time> UPLINK SYNC ............. OK</li>
+      <li><time>09:32:41</time> NAV DRIFT CORRECTED ..... +0.02°</li>
+      <li><time>09:33:15</time> COOLANT LOOP B .......... NOMINAL</li>
+    </ul>
+
+    <h3>Crew manifest</h3>
+    <div class="manifest">
+      <dl>
+        <dt>Callsign</dt><dd>SGIATH</dd>
+        <dt>ID</dt><dd>CRW-1409-FV</dd>
+        <dt>Clearance</dt><dd>LVL 5</dd>
+        <dt>Station</dt><dd>BEAM DECK</dd>
+        <dt>Status</dt><dd><span class="dot dot-ok"></span>active</dd>
+      </dl>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Interactive Diagrams</h2>
+    <p>
+      The node graph below is LiteGraph-powered: drag nodes, pan the canvas,
+      zoom with the wheel, collapse a node via its title-bar dot. The stepper,
+      tooltips, and clickable panel further down stay CSS-only. The CSS
+      <code>.node-graph</code> classes remain available as a no-JS fallback
+      for static node diagrams.
+    </p>
+
+    <h3>Node graph — sensor rig wiring</h3>
+    <figure class="graph">
+      <script type="application/json">
+      {
+        "height": 460,
+        "nodes": [
+          { "id": "button", "title": "button", "sub": "momentary",
+            "body": "Debounced in firmware, 20 ms window. Pulled up internally; press pulls GP2 low.",
+            "pos": [40, 50], "size": [190, 110],
+            "outputs": ["SIG", "GND"], "accent": "a" },
+          { "id": "led", "title": "led", "sub": "status, 3 mm",
+            "body": "Heartbeat blink at 0.5 Hz; solid on sensor fault. 220 \u03a9 series resistor.",
+            "pos": [40, 290], "size": [190, 110],
+            "inputs": ["PWM", "GND"], "accent": "c" },
+          { "id": "pico", "title": "pico", "sub": "RP2040",
+            "body": "Firmware polls BME280 every 10 s, pushes frames to the display over SPI at 8 MHz. GP2 button IRQ falling edge; GP15 LED PWM 1 kHz.",
+            "pos": [330, 130], "size": [230, 190],
+            "inputs": ["GP2", "GND", "5V", "FLT"],
+            "outputs": ["I\u00b2C", "3V3", "SPI", "PWM", "GND"], "accent": "b" },
+          { "id": "sensor", "title": "sensor", "sub": "BME280 \u00b7 I\u00b2C",
+            "body": "Temp, humidity, pressure at address 0x76. Forced mode, \u00d71 oversampling.",
+            "pos": [660, 40], "size": [200, 120],
+            "inputs": ["SDA", "SCL", "PWR"], "accent": "b" },
+          { "id": "display", "title": "display", "sub": "SSD1306 \u00b7 128\u00d764",
+            "body": "OLED readout: current reading plus 1 h sparkline. Dimmed after 30 s idle.",
+            "pos": [660, 320], "size": [200, 110],
+            "inputs": ["SPI"], "accent": "a" },
+          { "id": "psu", "title": "psu", "sub": "5 V / 2 A USB",
+            "body": "FLT high below 4.6 V.",
+            "pos": [330, 370], "size": [200, 90],
+            "outputs": ["5V", "FLT"], "accent": "e" }
+        ],
+        "links": [
+          ["button:SIG", "pico:GP2", "a"],
+          ["button:GND", "pico:GND", "d"],
+          ["pico:PWM", "led:PWM", "c"],
+          ["pico:GND", "led:GND", "d"],
+          ["pico:I\u00b2C", "sensor:SDA", "b"],
+          ["pico:I\u00b2C", "sensor:SCL", "b"],
+          ["pico:3V3", "sensor:PWR", "c"],
+          ["pico:SPI", "display:SPI", "a"],
+          ["psu:5V", "pico:5V", "c"],
+          ["psu:FLT", "pico:FLT", "e"]
+        ]
+      }
+      </script>
+      <noscript><p>Interactive graph requires JavaScript.</p></noscript>
+      <figcaption>Fig 2 — drag nodes, pan, zoom (LiteGraph)</figcaption>
+    </figure>
+
+    <h3>Publish workflow</h3>
+    <ol class="steps">
+      <li>
+        <details>
+          <summary>Draft</summary>
+          <p>Write <code>docs/YYYY-MM-DD-slug.html</code> linking the shared stylesheet; run the public-content safety gate.</p>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Verify</summary>
+          <p>Static checks (one title, one h1, no TODOs) plus browser render at desktop width (1280 px).</p>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Upload</summary>
+          <p><code>scp</code> to <code>vesta.local:/data/www/sgiath.dev/llm/</code>; never overwrite an existing report silently.</p>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Confirm</summary>
+          <p>Compare local and remote sha256, then require HTTP 200 with an HTML content type on the public URL.</p>
+        </details>
+      </li>
+    </ol>
+
+    <h3>Inline tooltips</h3>
+    <p>
+      The rig reports over
+      <span class="tip" data-tip="Two-wire serial bus: SDA carries data, SCL the clock. The BME280 sits at address 0x76." tabindex="0">I²C</span>
+      and refreshes the OLED via
+      <span class="tip" data-tip="Four-wire serial bus clocked at 8 MHz here; full frame pushed in under 2 ms." tabindex="0">SPI</span>,
+      so a stuck bus shows up as a frozen sparkline within one poll cycle.
+    </p>
+
+    <h3>Clickable panel</h3>
+    <a href="#internal-anchor" style="display: block; max-width: 24rem; border-bottom: 0">
+      <figure class="clickable" style="margin-bottom: 0">
+        <p class="metric" style="margin: 0">10 wires</p>
+        <figcaption>full pin map in “heading hierarchy” — click through</figcaption>
+      </figure>
+    </a>
   </section>
 
 </main>
@@ -143,7 +309,7 @@ curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
   </section>
 
   <section>
-    <h2>Telemetry</h2>
+    <h2>Telemetry <span class="status status-ok">live</span></h2>
     <p class="metric">98.4%</p>
     <p><small>substrate integrity</small></p>
     <div class="bar"><span style="width: 72%"></span></div>
