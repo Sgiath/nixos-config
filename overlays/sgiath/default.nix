@@ -16,14 +16,5 @@ in
 {
   ksa = pkgs-ksa.ksa;
   factorio-space-age-experimental = pkgs-master.factorio-space-age-experimental;
-  llm-agents = llmAgents // {
-    grok = llmAgents.grok.overrideAttrs (old: {
-      postFixup = (old.postFixup or "") + ''
-        substituteInPlace "$out/bin/grok" "$out/bin/agent" \
-          --replace-fail \
-          '--dev-bind / / --tmpfs /bin' \
-          '--dev-bind / / --dir /bin --tmpfs /bin'
-      '';
-    });
-  };
+  llm-agents = llmAgents;
 }
