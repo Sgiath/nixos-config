@@ -8,36 +8,39 @@ let
   port = 24096;
   url = "http://127.0.0.1:${toString port}";
 
-  imageModel = name: {
-    inherit name;
-    attachment = true;
-    reasoning = true;
-    tool_call = true;
+  imageModel =
+    name: overrides:
+    lib.recursiveUpdate {
+      inherit name;
+      attachment = true;
+      reasoning = true;
+      tool_call = true;
 
-    limit = {
-      context = 1050000;
-      output = 128000;
-    };
+      limit = {
+        context = 1050000;
+        input = 1050000;
+        output = 128000;
+      };
 
-    modalities = {
-      input = [
-        "text"
-        "image"
-      ];
-      output = [ "text" ];
-    };
-    options = {
-      textVerbosity = "low";
-      reasoningSummary = "auto";
-    };
-    variants = {
-      low.reasoningEffort = "low";
-      medium.reasoningEffort = "medium";
-      high.reasoningEffort = "high";
-      xhigh.reasoningEffort = "xhigh";
-      auto.reasoningEffort = "auto";
-    };
-  };
+      modalities = {
+        input = [
+          "text"
+          "image"
+        ];
+        output = [ "text" ];
+      };
+      options = {
+        textVerbosity = "low";
+        reasoningSummary = "auto";
+      };
+      variants = {
+        low.reasoningEffort = "low";
+        medium.reasoningEffort = "medium";
+        high.reasoningEffort = "high";
+        xhigh.reasoningEffort = "xhigh";
+        auto.reasoningEffort = "auto";
+      };
+    } overrides;
 
   # https://opencode.ai/docs/cli/#environment-variables
   # feature flags are read by the server process; exported in `oc` too so the
@@ -126,13 +129,30 @@ in
               apiKey = "{env:CLIPROXY_API_KEY}";
             };
             models = {
-              "gpt-5.6-sol" = imageModel "GPT 5.6 Sol";
-              "gpt-5.6-terra" = imageModel "GPT 5.6 Terra";
-              "gpt-5.6-luna" = imageModel "GPT 5.6 Luna";
-              "claude-fable-5" = imageModel "Fable 5";
-              "claude-opus-5" = imageModel "Opus 5";
-              "grok-4.5" = imageModel "Grok 4.5";
-              "kimi-k3" = imageModel "Kimi K3";
+              "gpt-5.6-sol" = imageModel "GPT 5.6 Sol" { };
+              "gpt-5.6-terra" = imageModel "GPT 5.6 Terra" { };
+              "gpt-5.6-luna" = imageModel "GPT 5.6 Luna" { };
+              "claude-fable-5" = imageModel "Fable 5" {
+                limit = {
+                  context = 1000000;
+                  input = 1000000;
+                };
+              };
+              "claude-opus-5" = imageModel "Opus 5" {
+                limit = {
+                  context = 1000000;
+                  input = 1000000;
+                };
+              };
+              "grok-4.5" = imageModel "Grok 4.5" {
+                limit = {
+                  context = 500000;
+                  input = 500000;
+                };
+              };
+              "kimi-k3" = imageModel "Kimi K3" {
+                limit.output = 1050000;
+              };
             };
           };
         };
