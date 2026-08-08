@@ -8,6 +8,22 @@ let
   port = 24096;
   url = "http://127.0.0.1:${toString port}";
 
+  imageModel = name: {
+    inherit name;
+    attachment = true;
+    reasoning = true;
+    modalities = {
+      input = [
+        "text"
+        "image"
+      ];
+      output = [ "text" ];
+    };
+    # variants = [
+    #   {name = "high"; value.reasoningEffort = "high";}
+    # ];
+  };
+
   # https://opencode.ai/docs/cli/#environment-variables
   # feature flags are read by the server process; exported in `oc` too so the
   # attach-side TUI/plugins see identical settings
@@ -58,7 +74,10 @@ let
 in
 {
   config = lib.mkIf config.sgiath.agents.enable {
-    home.packages = [ oc pkgs.llm-agents.opencode2 ];
+    home.packages = [
+      oc
+      pkgs.llm-agents.opencode2
+    ];
 
     programs.opencode = {
       enable = true;
@@ -92,13 +111,13 @@ in
               apiKey = "{env:CLIPROXY_API_KEY}";
             };
             models = {
-              "gpt-5.6-sol".name = "GPT 5.6 Sol";
-              "gpt-5.6-terra".name = "GPT 5.6 Terra";
-              "gpt-5.6-luna".name = "GPT 5.6 Luna";
-              "claude-fable-5".name = "Fable 5";
-              "claude-opus-5".name = "Opus 5";
-              "grok-4.5".name = "Grok 4.5";
-              "kimi-k3".name = "Kimi K3";
+              "gpt-5.6-sol" = imageModel "GPT 5.6 Sol";
+              "gpt-5.6-terra" = imageModel "GPT 5.6 Terra";
+              "gpt-5.6-luna" = imageModel "GPT 5.6 Luna";
+              "claude-fable-5" = imageModel "Fable 5";
+              "claude-opus-5" = imageModel "Opus 5";
+              "grok-4.5" = imageModel "Grok 4.5";
+              "kimi-k3" = imageModel "Kimi K3";
             };
           };
         };
