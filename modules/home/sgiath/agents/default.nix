@@ -41,6 +41,7 @@
       pkgs.llm-agents.codegraph
       pkgs.llm-agents.amp
       pkgs.llm-agents.goose-cli
+      pkgs.llm-agents.plannotator
 
       pkgs.${namespace}.plannotator
       pkgs.${namespace}.clawpatch
