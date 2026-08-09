@@ -32,16 +32,3 @@ update
 update --vesta
 ```
 
-## Useful fixes
-
-Fonts not rendering anywhere
-
-```bash
-fc-cache -f -v
-```
-
-Proton Mail app not starting - run it once like this to migrate to Wayland
-
-```bash
-XDG_SESSION_TYPE=x11 proton-mail
-```
