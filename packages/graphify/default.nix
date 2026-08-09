@@ -13,14 +13,14 @@ let
 in
 python313Packages.buildPythonApplication rec {
   pname = "graphify";
-  version = "0.9.36";
+  version = "0.9.37";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "Graphify-Labs";
     repo = "graphify";
     tag = "v${version}";
-    hash = "sha256-0jU4Y6vKjmmtASjIe3rec7CwbBReuUMNQnLwZAEGboU=";
+    hash = "sha256-uD6NEFL2ky5e60RKjl20+gYUHtMjABPoABmZ63vT/SM=";
   };
 
   build-system = [ python313Packages.setuptools ];
