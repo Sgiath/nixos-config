@@ -32,8 +32,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flake-utils-plus-fixed.url = "path:./vendor/flake-utils-plus-fixed";
+
     snowfall-lib = {
       url = "github:snowfallorg/lib";
+      inputs.flake-utils-plus.follows = "flake-utils-plus-fixed";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -161,7 +164,6 @@
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
-        permittedInsecurePackages = [ ];
       };
 
       overlays = with inputs; [
