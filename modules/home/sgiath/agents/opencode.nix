@@ -120,6 +120,7 @@ in
         plugin = [
           "oh-my-openagent@latest"
           "opencode-claude-auth@latest"
+          "@plannotator/opencode@latest"
         ];
         provider = {
           cli-proxy = {
