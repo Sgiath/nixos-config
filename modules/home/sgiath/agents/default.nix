@@ -43,7 +43,6 @@
       pkgs.llm-agents.goose-cli
       pkgs.llm-agents.plannotator
 
-      pkgs.${namespace}.plannotator
       pkgs.${namespace}.clawpatch
       pkgs.${namespace}.linear-cli
       pkgs.${namespace}.xurl
