@@ -2,6 +2,7 @@
 name: share-html-report
 description: Create and publish a dated, standalone HTML visualization of the current conversation's data, plan, analysis, comparison, or decision. Use ONLY when the user asks for a shareable HTML report, visual summary, single-page visualization, or to publish the current discussion to sgiath.dev/vesta.
 compatibility: Requires SSH/SCP access to vesta.local and write access to /data/www/sgiath.dev/llm
+disable-model-invocation: true
 ---
 
 # Share HTML Report

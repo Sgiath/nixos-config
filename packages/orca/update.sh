@@ -15,7 +15,23 @@ if [[ -n "${1:-}" ]]; then
 	RELEASE_JSON="$(gh api "repos/stablyai/orca/releases/tags/v${VERSION}")"
 else
 	echo "==> Fetching latest stable Orca version from GitHub..."
-	RELEASE_JSON="$(gh api repos/stablyai/orca/releases/latest)"
+	RELEASE_JSON="$({
+		gh api 'repos/stablyai/orca/releases?per_page=100'
+	} | jq -c --arg asset_name "${ASSET_NAME}" '
+		[
+			.[]
+			| select(
+				.draft == false
+				and .prerelease == false
+				and (.tag_name | test("^v[0-9]+(\\.[0-9]+)*$"))
+				and any(.assets[]; .name == $asset_name)
+			)
+		][0]
+	')"
+	if [[ -z "${RELEASE_JSON}" || "${RELEASE_JSON}" == "null" ]]; then
+		echo "ERROR: Could not find a stable Orca release with asset ${ASSET_NAME}" >&2
+		exit 1
+	fi
 	VERSION="$(jq -r '.tag_name | ltrimstr("v")' <<<"${RELEASE_JSON}")"
 fi
 
