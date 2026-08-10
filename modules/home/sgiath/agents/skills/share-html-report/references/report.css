@@ -85,7 +85,7 @@
   --space-4: 1.75rem;
   --space-5: 3rem;
   --radius: 2px;
-  --measure: 85ch;    /* prose line length cap */
+  --measure: none;    /* prose line length cap; panels are narrow enough already */
   --shell: 1560px;    /* page shell width */
   --panel-w: 320px;   /* side panel width */
 
@@ -1269,7 +1269,8 @@ ol.steps {
   list-style: none;
   counter-reset: step;
   padding-left: 0;
-  max-width: var(--measure);
+  /* structural widget like tables: spans the panel, no prose measure cap */
+  max-width: none;
 }
 
 ol.steps > li {
