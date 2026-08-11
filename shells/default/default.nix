@@ -15,9 +15,12 @@ mkShell {
 
     # package updater
     curl
+    dpkg
+    gnupg
     jq
     nix-prefetch
     nix-prefetch-github
+    perl
     prefetch-npm-deps
   ];
 }

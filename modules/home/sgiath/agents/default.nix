@@ -52,10 +52,11 @@
       pkgs.llm-agents.hermes-agent
       pkgs.llm-agents.hermes-desktop
       pkgs.llm-agents.hermes-hud
-
-      # T3 code
-      (lib.mkIf (config.sgiath.targets.graphical) pkgs.${namespace}.t3code)
-    ];
+    ] ++ (lib.mkIf (config.sgiath.targets.graphical) [
+      pkgs.${namespace}.t3code
+      pkgs.${namespace}.codex-desktop
+      pkgs.${namespace}.grok-bot
+    ]);
 
     programs.zsh.shellAliases = {
       bl = "${lib.getExe pkgs.llm-agents.backlog-md}";
