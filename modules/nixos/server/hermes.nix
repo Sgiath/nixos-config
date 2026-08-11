@@ -149,6 +149,14 @@ in
             };
           };
 
+          gateway.platforms.api_server = {
+            enabled = true;
+            extra = {
+              host = "0.0.0.0";
+              port = 8642;
+            };
+          };
+
           display.platforms.buzz = {
             interim_assistant_messages = false;
             tool_progress = "off";

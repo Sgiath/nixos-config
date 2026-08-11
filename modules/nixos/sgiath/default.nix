@@ -89,6 +89,7 @@ in
 
     users.defaultUserShell = pkgs.zsh;
     environment.sessionVariables = {
+      SSH_AUTH_SOCK = "/run/user/1000/gnupg/S.gpg-agent.ssh";
       OPENAI_API_KEY = secrets.openai;
       # XAI_API_KEY = secrets.xai;
       # GEMINI_API_KEY = secrets.gemini;

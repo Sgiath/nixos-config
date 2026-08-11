@@ -73,6 +73,7 @@ in
           "AGENTS.sgiath.md"
           ".pi-subagents/"
           ".playwright-mcp/"
+          ".debug-journal.md"
         ];
 
         signing = {
