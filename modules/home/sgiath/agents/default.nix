@@ -46,14 +46,13 @@
       pkgs.${namespace}.clawpatch
       pkgs.${namespace}.linear-cli
       pkgs.${namespace}.xurl
-      pkgs.${namespace}.graphify
 
       # Hermes
       pkgs.llm-agents.hermes-agent
-      pkgs.llm-agents.hermes-desktop
       pkgs.llm-agents.hermes-hud
     ]
     ++ (lib.optionals config.sgiath.targets.graphical [
+      pkgs.llm-agents.hermes-one
       pkgs.${namespace}.t3code
       pkgs.${namespace}.codex-desktop
       pkgs.${namespace}.grok-bot

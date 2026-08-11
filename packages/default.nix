@@ -8,7 +8,6 @@ pkgs: {
   dnd5etools = pkgs.callPackage ./dnd5etools { };
   eve-flipper = pkgs.callPackage ./eve-flipper { };
   gogcli = pkgs.callPackage ./gogcli { };
-  graphify = pkgs.callPackage ./graphify { };
   grok-bot = pkgs.callPackage ./grok-bot { };
   kimi-webbridge = pkgs.callPackage ./kimi-webbridge { };
   linear-cli = pkgs.callPackage ./linear-cli { };
