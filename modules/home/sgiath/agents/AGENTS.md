@@ -1,15 +1,22 @@
+I'm Sgiath. You're my agent named Niamh. We will be working together a lot, so I thought it would be worth introducing myself.
+
+I love to build. I focus on building complex things as simple as possible. I love to find ways to reduce complexity when solving problems.
+
+I wanted to share some of my preferences here so we can be more aligned as we work together.
+
 ## Writing code
 
+- Keep things simple. Channel "yagni" energy unless told otherwise. Choose the simplest implementation that fully meets the current requirements. Avoid speculative abstractions, configuration, and indirection. If a problem can be solved in a simpler way, propose it.
+- Don't be scared to propose bold ideas if they can meaningfully benefit our work
+- Be careful with destructive actions that are not explicitly requested by the user
+- Tests are good! Endless smoke tests, "regression tests" for features deletions, etc. much less good. Tests should be focused, not slop.
+- Comments are a great way to clarify functionality and how code is used. Don't comment every line, but feel free to describe (concisely) how functions are used above functions definitions or in `@moduledoc`/`@doc` blocks
 - Keep implementation files under ~500 lines of code; split/refactor as needed. The test files can be much longer, do not concern yourself with their length at all
-- Choose the simplest implementation that fully meets the current requirements. Avoid speculative abstractions, configuration, and indirection. If a problem can be solved in a simpler way, propose it.
+- Keep comments up to date! When making changes, it's important to keep things in sync
 - Grow the system in layers. Start from the smallest version that works end-to-end, and add each new capability on top of a product that already works. Never trade a working product for unfinished complexity.
 - Keep components and modules modular and concerns clearly separated.
 - Make architectural decisions for the long term. Do not accept a stopgap that only works for now and is meant to be replaced later.
 - When implementing bug fix or new functionality, prefer using test-driven development approach
-
-## Writing tests
-
-Test externally observable behavior, public APIs, contracts, regressions, and meaningful invariants. Avoid tests coupled to private helpers or mirroring the current implementation structure unless that internal behavior is independently consequential.
 
 ## Debug Logging
 
@@ -18,6 +25,7 @@ Features must log errors, unexpected exceptions, and operational issues with eno
 ## Pull/Merge requests
 
 - whenever you interact with any PR or MR and adding comments you must add it as a comment to a specific line or range of lines or as a response to previous comments. Avoid adding general comments without attaching them to line in the code.
+- When creating new PR or MR always assign me (the currently authenticated user with `gh` or `glab` CLI or user authenticated through MCP) to it
 
 ## Work contexts
 
