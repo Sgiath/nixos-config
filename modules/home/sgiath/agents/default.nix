@@ -52,7 +52,8 @@
       pkgs.llm-agents.hermes-agent
       pkgs.llm-agents.hermes-desktop
       pkgs.llm-agents.hermes-hud
-    ] ++ (lib.mkIf (config.sgiath.targets.graphical) [
+    ]
+    ++ (lib.optionals config.sgiath.targets.graphical [
       pkgs.${namespace}.t3code
       pkgs.${namespace}.codex-desktop
       pkgs.${namespace}.grok-bot
