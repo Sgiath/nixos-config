@@ -41,11 +41,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "codex-desktop";
-  version = "26.803.81509";
+  version = "26.810.41047";
 
   src = fetchurl {
-    url = "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.803.81509_amd64.deb";
-    hash = "sha256-qb+Ro2j598Tuo4CCqfuPtGuNAFtxmm13FdLloZgsOOs=";
+    url = "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.810.41047_amd64.deb";
+    hash = "sha256-eHFfo80Tb/ZwcNqnaBmtrsxbQumYUVWWWWRdzh+/KvM=";
   };
 
   nativeBuildInputs = [
