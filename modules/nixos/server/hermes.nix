@@ -12,7 +12,6 @@ let
       "voice"
       "anthropic"
       "firecrawl"
-      "cli"
       "youtube"
       "web"
     ];
