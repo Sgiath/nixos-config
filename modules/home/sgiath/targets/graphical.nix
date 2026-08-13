@@ -85,7 +85,12 @@ in
       voxtype.enable = true;
       pandoc.enable = true;
       vscode.enable = false;
-      obs-studio.enable = true;
+      obs-studio = {
+        enable = true;
+        plugins = with pkgs.obs-studio-plugins; [
+          obs-backgroundremoval
+        ];
+      };
 
       obsidian = {
         enable = true;
