@@ -152,7 +152,7 @@ in
           gateway.platforms.api_server = {
             enabled = true;
             extra = {
-              host = "0.0.0.0";
+              host = "127.0.0.1";
               port = 8642;
             };
           };

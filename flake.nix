@@ -93,7 +93,7 @@
     };
 
     worktrunk = {
-      url = "github:max-sixty/worktrunk/v0.72.0";
+      url = "github:max-sixty/worktrunk/v0.73.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -102,7 +102,7 @@
       flake = false;
     };
 
-    voxtype.url = "github:peteonrails/voxtype/v1.0.0-rc1";
+    voxtype.url = "github:peteonrails/voxtype/v0.7.5";
     comfyui.url = "github:utensils/comfyui-nix/v0.30.2";
 
     # LLM tools

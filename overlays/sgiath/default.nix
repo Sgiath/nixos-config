@@ -14,4 +14,10 @@ in
 {
   ksa = pkgs-ksa.ksa;
   factorio-space-age-experimental = pkgs-master.factorio-space-age-experimental;
+
+  llm-agents = prev.llm-agents // {
+    hermes-one = prev.llm-agents.hermes-one.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [ ./hermes-one-compat.patch ];
+    });
+  };
 }
