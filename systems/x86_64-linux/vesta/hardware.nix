@@ -65,6 +65,14 @@
         "noauto"
       ];
     };
+    "/nas/music" = {
+      device = "192.168.1.4:/volume1/Music";
+      fsType = "nfs";
+      options = [
+        "x-systemd.automount"
+        "noauto"
+      ];
+    };
     "/nas/series" = {
       device = "192.168.1.4:/volume1/Series";
       fsType = "nfs";
