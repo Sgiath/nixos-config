@@ -29,18 +29,22 @@
       pkgs.uv
       pkgs.${namespace}.bird
       pkgs.nodejs
+      pkgs.bun
 
+      # agents
+      pkgs.llm-agents.grok
+      pkgs.llm-agents.prime-agent
+      pkgs.llm-agents.goose-cli
+
+      # tools
       pkgs.llm-agents.backlog-md
       pkgs.llm-agents.openspec
       pkgs.llm-agents.beads
       pkgs.llm-agents.coderabbit-cli
       pkgs.llm-agents.qmd
-      pkgs.llm-agents.grok
       pkgs.llm-agents.codegraph
       pkgs.llm-agents.amp
-      pkgs.llm-agents.goose-cli
       pkgs.llm-agents.plannotator
-
       pkgs.${namespace}.clawpatch
       pkgs.${namespace}.linear-cli
       pkgs.${namespace}.xurl
@@ -55,13 +59,6 @@
       pkgs.${namespace}.codex-desktop
       pkgs.${namespace}.grok-bot
     ]);
-
-    programs.zsh.shellAliases = {
-      bl = "${lib.getExe pkgs.llm-agents.backlog-md}";
-      gr = "${lib.getExe pkgs.llm-agents.grok} --experimental-memory";
-    };
-
-    programs.bun.enable = true;
 
     programs.mcp = {
       enable = true;
