@@ -11,14 +11,17 @@
   dpkg,
   expat,
   fetchurl,
+  fontconfig,
+  freetype,
   gdk-pixbuf,
   glib,
   gtk3,
   lib,
   libdrm,
   libgbm,
-  libglvnd,
+  libGL,
   libnotify,
+  libpulseaudio,
   libsecret,
   libusb1,
   libx11,
@@ -33,8 +36,12 @@
   nspr,
   nss,
   pango,
+  pipewire,
+  qt5,
+  qt6,
   stdenv,
   systemd,
+  wayland,
   wrapGAppsHook3,
   xdg-utils,
 }:
@@ -64,13 +71,16 @@ stdenv.mkDerivation (finalAttrs: {
     cups
     dbus
     expat
+    fontconfig
+    freetype
     gdk-pixbuf
     glib
     gtk3
     libdrm
     libgbm
-    libglvnd
+    libGL
     libnotify
+    libpulseaudio
     libsecret
     libusb1
     libx11
@@ -84,23 +94,40 @@ stdenv.mkDerivation (finalAttrs: {
     nspr
     nss
     pango
+    pipewire
     stdenv.cc.cc
     systemd
+    wayland
   ];
 
-  runtimeDependencies = [ systemd ];
+  # Electron loads these at runtime rather than linking them directly. Put
+  # them on each ELF object's RPATH without leaking a broad LD_LIBRARY_PATH
+  # into Electron's Node and Chromium children.
+  runtimeDependencies = [
+    libGL
+    libgbm
+    libsecret
+    pipewire
+    systemd
+    wayland
+  ];
 
-  # The app ships optional Qt integration shims and musl prebuilds. Debian does
-  # not depend on Qt or musl because those files are loaded only in matching
-  # target processes; the glibc prebuilds are used on this platform.
+  # The archive includes musl, glibc, and Android prebuilds for a few Node
+  # modules. NixOS uses the glibc variants, so the other runtimes are
+  # intentionally absent.
+  # The Qt shims are optional and selected dynamically, so autoPatchelf cannot
+  # resolve both of their runtimes during its direct dependency pass. Their
+  # version-specific RPATHs are added in postFixup below.
   autoPatchelfIgnoreMissingDeps = [
+    "libc++_shared.so"
+    "libc.musl-x86_64.so.1"
+    "liblog.so"
     "libQt5Core.so.5"
     "libQt5Gui.so.5"
     "libQt5Widgets.so.5"
     "libQt6Core.so.6"
     "libQt6Gui.so.6"
     "libQt6Widgets.so.6"
-    "libc.musl-x86_64.so.1"
   ];
 
   dontConfigure = true;
@@ -126,17 +153,22 @@ stdenv.mkDerivation (finalAttrs: {
     substituteInPlace "$out/share/applications/chatgpt.desktop" \
       --replace-fail "Exec=chatgpt %U" "Exec=codex-desktop %U"
 
+    # @parcel/watcher uses detect-libc in a named worker. Its process.report
+    # fallback trips a CFI guard in the bundled Owl/Electron runtime on NixOS,
+    # which shows up as SIGILL / "illegal hardware instruction".
+    # Keep the replacement the same length so the asar offsets remain valid;
+    # detect-libc will use its ELF/filesystem/ldd fallbacks instead.
+    appAsar="$out/lib/chatgpt/resources/app.asar"
+    grep -aFq "isLinux() && process.report" "$appAsar"
+    sed -i 's/isLinux() \&\& process\.report/false \/\* nix:skip report \*\//' "$appAsar"
+    ! grep -aFq "isLinux() && process.report" "$appAsar"
+    grep -aFq "false /* nix:skip report */" "$appAsar"
+
     makeWrapper "$out/lib/chatgpt/ChatGPT" "$out/bin/codex-desktop" \
       --prefix PATH : ${
         lib.makeBinPath [
           bubblewrap
           xdg-utils
-        ]
-      } \
-      --prefix LD_LIBRARY_PATH : ${
-        lib.makeLibraryPath [
-          libglvnd
-          libsecret
         ]
       }
 
@@ -149,6 +181,13 @@ stdenv.mkDerivation (finalAttrs: {
   preFixup = ''
     wrapProgram "$out/lib/chatgpt/ChatGPT" \
       "''${gappsWrapperArgs[@]}"
+  '';
+
+  postFixup = ''
+    patchelf --add-rpath ${lib.makeLibraryPath [ qt5.qtbase ]} \
+      "$out/lib/chatgpt/libqt5_shim.so"
+    patchelf --add-rpath ${lib.makeLibraryPath [ qt6.qtbase ]} \
+      "$out/lib/chatgpt/libqt6_shim.so"
   '';
 
   passthru.updateScript = ./update.sh;
