@@ -25,8 +25,6 @@
     home.sessionVariables.GROK_SANDBOX = "off";
 
     home.packages = [
-      pkgs.llm-agents.herdr
-
       pkgs.python3
       pkgs.uv
       pkgs.${namespace}.bird
