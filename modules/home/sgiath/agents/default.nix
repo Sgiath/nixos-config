@@ -35,6 +35,7 @@
       pkgs.llm-agents.grok
       pkgs.llm-agents.prime-agent
       pkgs.llm-agents.goose-cli
+      pkgs.llm-agents.t3code
 
       # tools
       pkgs.llm-agents.backlog-md
@@ -55,8 +56,8 @@
     ]
     ++ (lib.optionals config.sgiath.targets.graphical [
       pkgs.llm-agents.hermes-one
-      pkgs.${namespace}.t3code
-      pkgs.${namespace}.codex-desktop
+      pkgs.llm-agents.codex-desktop
+      pkgs.llm-agents.t3code-desktop
       pkgs.${namespace}.grok-bot
     ]);
 
