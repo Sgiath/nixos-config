@@ -56,7 +56,7 @@
     ]
     ++ (lib.optionals config.sgiath.targets.graphical [
       pkgs.llm-agents.hermes-one
-      pkgs.llm-agents.codex-desktop
+      pkgs.llm-agents.chatgpt
       pkgs.llm-agents.t3code-desktop
       pkgs.${namespace}.grok-bot
     ]);
