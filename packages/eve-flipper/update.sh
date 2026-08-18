@@ -27,7 +27,7 @@ fi
 echo "==> Updating from ${current_version} to ${version}"
 
 echo "==> Computing source hash..."
-src_hash="$(nix-prefetch-github "${REPO_OWNER}" "${REPO_NAME}" --rev "v${version}" | jq -r .hash)"
+src_hash="$(nix flake prefetch --json "github:${REPO_OWNER}/${REPO_NAME}/v${version}" | jq -r .hash)"
 echo "    Source hash: ${src_hash}"
 
 tmp="$(mktemp -d)"

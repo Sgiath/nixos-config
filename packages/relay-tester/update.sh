@@ -26,7 +26,7 @@ if [[ -n "${1:-}" ]]; then
 	fi
 else
 	echo "==> Fetching latest relay-tester commit from ${BRANCH}..."
-	REF="$(git ls-remote "${REPO_URL}" "refs/heads/${BRANCH}" | awk '{ print $1 }')"
+	REF="$(gh api "repos/${OWNER}/${REPO}/commits/${BRANCH}" --jq .sha)"
 	if [[ -z "${REF}" ]]; then
 		echo "ERROR: Could not resolve refs/heads/${BRANCH} for ${REPO_URL}" >&2
 		exit 1
@@ -47,12 +47,12 @@ TMPDIR="$(mktemp -d)"
 trap 'rm -rf "${TMPDIR}"' EXIT
 
 echo "==> Computing source hash..."
-SRC_JSON=$(nix run nixpkgs#nix-prefetch-github -- "${OWNER}" "${REPO}" --rev "${REF}" 2>/dev/null)
+SRC_JSON=$(nix flake prefetch --json "github:${OWNER}/${REPO}/${REF}")
 SRC_HASH=$(echo "${SRC_JSON}" | jq -r '.hash')
 echo "    Source hash: ${SRC_HASH}"
 
 echo "==> Updating Cargo.lock..."
-git -C "${TMPDIR}" clone --no-checkout --depth 1 "${REPO_URL}" src
+gh repo clone "${OWNER}/${REPO}" "${TMPDIR}/src" -- --no-checkout --depth 1
 git -C "${TMPDIR}/src" fetch --depth 1 origin "${REF}"
 git -C "${TMPDIR}/src" checkout --detach FETCH_HEAD
 VERSION="${VERSION_IN#v}"

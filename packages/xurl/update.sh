@@ -26,7 +26,7 @@ TMPDIR="$(mktemp -d)"
 trap 'rm -rf "${TMPDIR}"' EXIT
 
 echo "==> Computing source hash..."
-SRC_JSON="$(nix run nixpkgs#nix-prefetch-github -- xdevplatform xurl --rev "v${VERSION}" 2>/dev/null)"
+SRC_JSON="$(nix flake prefetch --json "github:xdevplatform/xurl/v${VERSION}")"
 SRC_HASH="$(jq -r '.hash' <<<"${SRC_JSON}")"
 echo "    Source hash: ${SRC_HASH}"
 

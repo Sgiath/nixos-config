@@ -13,10 +13,12 @@ if [[ -n "${1:-}" && "${1#v}" != "${VERSION}" ]]; then
 	echo "ERROR: requested version ${1#v} is not the current stable release (${VERSION})" >&2
 	exit 1
 fi
-RELEASE_ID="$(
-	jq -er '.url | capture("/sand/stable/(?<release>[0-9a-f]+)/").release' <<<"${RELEASE_JSON}"
+RELEASE_META="$(
+	jq -er '.url | capture("/(?<product>sand|grokbot)/stable/(?<release>[0-9a-f]+)/")' <<<"${RELEASE_JSON}"
 )"
-URL="https://downloads.cursor.com/sand/stable/${RELEASE_ID}/linux/x64/Grok_Bot_${VERSION}.deb"
+PRODUCT="$(jq -er '.product' <<<"${RELEASE_META}")"
+RELEASE_ID="$(jq -er '.release' <<<"${RELEASE_META}")"
+URL="https://downloads.cursor.com/${PRODUCT}/stable/${RELEASE_ID}/linux/x64/Grok_Bot_${VERSION}.deb"
 
 echo "    Latest version: ${VERSION}"
 
@@ -36,7 +38,7 @@ PACKAGE="$(dpkg-deb --field "${STORE_PATH}" Package)"
 PACKAGE_VERSION="$(dpkg-deb --field "${STORE_PATH}" Version)"
 ARCHITECTURE="$(dpkg-deb --field "${STORE_PATH}" Architecture)"
 
-if [[ "${PACKAGE}" != "sand" || "${PACKAGE_VERSION}" != "${VERSION}" || "${ARCHITECTURE}" != "amd64" ]]; then
+if [[ ("${PACKAGE}" != "sand" && "${PACKAGE}" != "grok-bot") || "${PACKAGE_VERSION}" != "${VERSION}" || "${ARCHITECTURE}" != "amd64" ]]; then
 	echo "ERROR: downloaded package metadata did not match the requested Grok Bot release" >&2
 	echo "       Package=${PACKAGE} Version=${PACKAGE_VERSION} Architecture=${ARCHITECTURE}" >&2
 	exit 1
@@ -46,9 +48,10 @@ echo "    Release ID: ${RELEASE_ID}"
 echo "    Hash: ${HASH}"
 echo "==> Updating default.nix..."
 
-VERSION="${VERSION}" RELEASE_ID="${RELEASE_ID}" HASH="${HASH}" perl -0pi -e '
+VERSION="${VERSION}" RELEASE_ID="${RELEASE_ID}" PRODUCT="${PRODUCT}" HASH="${HASH}" perl -0pi -e '
   s/(version = ")[^"]+(";)/$1$ENV{VERSION}$2/;
   s/(releaseId = ")[^"]+(";)/$1$ENV{RELEASE_ID}$2/;
+  s#(downloads\.cursor\.com/)[^/]+(/stable/)#$1$ENV{PRODUCT}$2#;
   s/(hash = ")[^"]+(";)/$1$ENV{HASH}$2/;
 ' "${DEFAULT_NIX}"
 

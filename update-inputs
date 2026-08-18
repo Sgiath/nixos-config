@@ -58,8 +58,23 @@ require_cmd() {
   fi
 }
 
-require_cmd curl
+require_cmd gh
 require_cmd jq
+
+# Nix access-tokens only apply to Nix fetches. Prefetch helpers and child
+# update.sh scripts look at GITHUB_TOKEN / GH_TOKEN instead.
+if [[ -z "${GITHUB_TOKEN:-}" ]]; then
+  if [[ -n "${GH_TOKEN:-}" ]]; then
+    export GITHUB_TOKEN="${GH_TOKEN}"
+  elif [[ -n "${GITHUB_PERSONAL_ACCESS_TOKEN:-}" ]]; then
+    export GITHUB_TOKEN="${GITHUB_PERSONAL_ACCESS_TOKEN}"
+  elif token="$(gh auth token 2>/dev/null)" && [[ -n "${token}" ]]; then
+    export GITHUB_TOKEN="${token}"
+  fi
+fi
+if [[ -z "${GH_TOKEN:-}" && -n "${GITHUB_TOKEN:-}" ]]; then
+  export GH_TOKEN="${GITHUB_TOKEN}"
+fi
 if [[ ! -f "${FLAKE_NIX}" ]]; then
   echo "ERROR: ${FLAKE_NIX} does not exist" >&2
   exit 1

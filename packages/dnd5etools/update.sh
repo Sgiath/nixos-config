@@ -33,18 +33,18 @@ echo "==> Updating from ${CURRENT_VERSION} to ${VERSION}"
 TMPDIR="$(mktemp -d)"
 trap 'rm -rf "${TMPDIR}"' EXIT
 
-# Step 1: Compute source hash
-echo "==> Computing source hash..."
-SRC_URL="https://github.com/5etools-mirror-3/5etools-src/releases/download/v${VERSION}/5etools-v${VERSION}.zip"
-SRC_HASH=$(nix-prefetch-url --unpack "${SRC_URL}" 2>/dev/null)
+# Step 1: Download source and compute hash
+echo "==> Downloading source..."
+gh release download "v${VERSION}" --repo 5etools-mirror-3/5etools-src \
+  --pattern "5etools-v${VERSION}.zip" --dir "${TMPDIR}"
+SRC_HASH=$(nix-prefetch-url --unpack "file://${TMPDIR}/5etools-v${VERSION}.zip" 2>/dev/null)
 SRC_SRI=$(nix hash convert --hash-algo sha256 --to sri "${SRC_HASH}")
 echo "    Source hash: ${SRC_SRI}"
 
-# Step 2: Download source and extract package-lock.json
-echo "==> Downloading source for package-lock.json..."
-curl -sL "${SRC_URL}" -o "${TMPDIR}/src.zip"
-unzip -q "${TMPDIR}/src.zip" "package-lock.json" -d "${TMPDIR}" 2>/dev/null || \
-  unzip -q "${TMPDIR}/src.zip" "*/package-lock.json" -d "${TMPDIR}"
+# Step 2: Extract package-lock.json
+echo "==> Extracting package-lock.json..."
+unzip -q "${TMPDIR}/5etools-v${VERSION}.zip" "package-lock.json" -d "${TMPDIR}" 2>/dev/null || \
+  unzip -q "${TMPDIR}/5etools-v${VERSION}.zip" "*/package-lock.json" -d "${TMPDIR}"
 
 LOCKFILE=$(find "${TMPDIR}" -name "package-lock.json" | head -1)
 if [[ -z "${LOCKFILE}" ]]; then

@@ -13,10 +13,7 @@ if [[ -n "${1:-}" ]]; then
 	fi
 	RELEASE_TAG="v${VERSION}"
 else
-	RELEASE_TAG="$(curl --fail --silent --show-error --location \
-		-H "Accept: application/vnd.github+json" \
-		"https://api.github.com/repos/${REPO}/tags?per_page=100" | \
-		jq -r '[.[].name | select(test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))][0] // empty')"
+	RELEASE_TAG="$(gh api "repos/${REPO}/tags?per_page=100" --jq '[.[].name | select(test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))][0] // empty')"
 	if [[ -z "${RELEASE_TAG}" ]]; then
 		echo "Failed to determine buzz-relay version: no generic vX.Y.Z tag found" >&2
 		exit 1
@@ -34,9 +31,7 @@ if [[ "${CURRENT_VERSION}" == "${VERSION}" ]]; then
 	exit 0
 fi
 
-SOURCE_URL="https://github.com/${REPO}/archive/refs/tags/${RELEASE_TAG}.tar.gz"
-SOURCE_HASH="$(nix-prefetch-url --unpack "${SOURCE_URL}" 2>/dev/null | tail -n1)"
-SOURCE_HASH="$(nix hash convert --hash-algo sha256 --to sri "${SOURCE_HASH}")"
+SOURCE_HASH="$(nix flake prefetch --json "github:${REPO}/${RELEASE_TAG}" | jq -r .hash)"
 
 sed -i \
 	-e "s|version = \"${CURRENT_VERSION}\";|version = \"${VERSION}\";|" \

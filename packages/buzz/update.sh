@@ -14,14 +14,10 @@ if [[ -n "${1:-}" ]]; then
 	fi
 	RELEASE_TAG="desktop-v${VERSION}"
 	echo "==> Fetching Buzz release ${RELEASE_TAG} from GitHub..."
-	RELEASE_JSON="$(curl --fail --silent --show-error --location \
-		-H "Accept: application/vnd.github+json" \
-		"https://api.github.com/repos/${REPO}/releases/tags/${RELEASE_TAG}")"
+	RELEASE_JSON="$(gh api "repos/${REPO}/releases/tags/${RELEASE_TAG}")"
 else
 	echo "==> Fetching latest Buzz version from GitHub..."
-	RELEASE_JSON="$(curl --fail --silent --show-error --location \
-		-H "Accept: application/vnd.github+json" \
-		"https://api.github.com/repos/${REPO}/releases/latest")"
+	RELEASE_JSON="$(gh api "repos/${REPO}/releases/latest")"
 	RELEASE_TAG="$(jq -r '.tag_name // empty' <<<"${RELEASE_JSON}")"
 	if [[ ! "${RELEASE_TAG}" =~ ^desktop-v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
 		echo "ERROR: Latest release tag must match desktop-vX.Y.Z; got ${RELEASE_TAG:-<empty>}" >&2

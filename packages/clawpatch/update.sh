@@ -14,8 +14,9 @@ if [[ -n "${1:-}" ]]; then
 else
   echo "==> Fetching latest clawpatch version from GitHub..."
   VERSION="$(
-    git ls-remote --tags --refs --sort='v:refname' https://github.com/openclaw/clawpatch.git 'refs/tags/v*' |
+    gh api --paginate "repos/openclaw/clawpatch/git/matching-refs/tags/v" --jq '.[].ref' |
       sed 's#.*refs/tags/v##' |
+      sort -V |
       tail -1
   )"
   echo "    Latest version: ${VERSION}"

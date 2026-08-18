@@ -96,7 +96,7 @@ TMPDIR="$(mktemp -d)"
 trap 'rm -rf "${TMPDIR}"' EXIT
 
 CURRENT_BUILD_ATTR=$(grep -oE 'buildGo[0-9A-Za-z]*Module' "${DEFAULT_NIX}" | head -1)
-REQUIRED_GO_VERSION=$(curl -LfsS "https://raw.githubusercontent.com/steipete/gogcli/v${VERSION}/go.mod" | awk '/^go / { print $2; exit }' || true)
+REQUIRED_GO_VERSION=$(gh api -H "Accept: application/vnd.github.raw" "repos/steipete/gogcli/contents/go.mod?ref=v${VERSION}" | awk '/^go / { print $2; exit }' || true)
 BUILD_GO_ATTR=$(resolve_go_builder "${REQUIRED_GO_VERSION}" "${CURRENT_BUILD_ATTR}")
 if [[ -n "${REQUIRED_GO_VERSION}" ]]; then
 	echo "==> Using ${BUILD_GO_ATTR} for Go ${REQUIRED_GO_VERSION}"
@@ -106,7 +106,7 @@ fi
 
 # Step 1: Compute source hash
 echo "==> Computing source hash..."
-SRC_JSON=$(nix run nixpkgs#nix-prefetch-github -- steipete gogcli --rev "v${VERSION}" 2>/dev/null)
+SRC_JSON=$(nix flake prefetch --json "github:steipete/gogcli/v${VERSION}")
 SRC_HASH=$(echo "${SRC_JSON}" | jq -r '.hash')
 echo "    Source hash: ${SRC_HASH}"
 

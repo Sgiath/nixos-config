@@ -5,12 +5,11 @@ set -euo pipefail
 #   ./update-img-hashes.sh 2.10.0
 #
 # Requires:
-#   - nix-prefetch-url
-#   - nix (for `nix hash to-sri`)
+#   - gh
+#   - nix (for `nix hash file`)
 #
 # Notes:
 #   - Outputs a complete `imgHashes = [ ... ];` block to imgHashes.nix.
-#   - Fetches all files in parallel for faster execution.
 #   - You can change NAMES if the set of parts changes.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -23,41 +22,31 @@ if [[ -z "${VERSION}" ]]; then
   exit 1
 fi
 
-# All the parts you currently have
 NAMES=(z01 z02 z03 z04 z05 z06 z07 z08 z09 z10 z11 z12 zip)
 
-base_url="https://github.com/5etools-mirror-2/5etools-img/releases/download/v${VERSION}"
-
-# Create temp directory for parallel results
+# Create temp directory for results
 TMPDIR="$(mktemp -d)"
 trap 'rm -rf "${TMPDIR}"' EXIT
 
-# Launch all fetches in parallel
+echo "==> Downloading 5etools image assets for v${VERSION}..."
+gh release download "v${VERSION}" --repo 5etools-mirror-2/5etools-img --dir "${TMPDIR}"
+
 for name in "${NAMES[@]}"; do
-  (
-    url="${base_url}/img-v${VERSION}.${name}"
+  file="${TMPDIR}/img-v${VERSION}.${name}"
+  if [[ ! -f "${file}" ]]; then
+    echo "  # WARNING: missing ${name} in release v${VERSION}" >&2
+    continue
+  fi
 
-    # nix-prefetch-url prints the base32 hash to stdout
-    # (it also downloads to the store so subsequent builds are fast)
-    if ! base32_hash="$(nix-prefetch-url --type sha256 "${url}" 2>/dev/null)"; then
-      echo "  # WARNING: failed to prefetch ${name} from ${url}" >&2
-      exit 0
-    fi
+  sri_hash="$(nix hash file --sri --type sha256 "${file}")"
 
-    # Convert nix base32 -> SRI format used by modern Nix fetchers
-    sri_hash="$(nix hash convert --hash-algo sha256 --to sri "${base32_hash}")"
-
-    # Write to temp file named after the part
-    cat >"${TMPDIR}/${name}.nix" <<EOF
+  cat >"${TMPDIR}/${name}.nix" <<EOF
   {
     name = "${name}";
     hash = "${sri_hash}";
   }
 EOF
-  ) &
 done
-
-wait # Wait for all background jobs to complete
 
 # Combine results into output file
 echo "imgHashes = [" >"${OUTPUT_FILE}"

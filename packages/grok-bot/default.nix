@@ -38,15 +38,15 @@
 
 let
   pname = "grok-bot";
-  version = "0.16.0";
-  releaseId = "076e9d4bf42abbfa576702aea18ddbc49d9d3ab5";
+  version = "0.20.0";
+  releaseId = "ca2c2b6f79b6130a4822d8189711b0f79f9d4661";
 in
 stdenvNoCC.mkDerivation {
   inherit pname version;
 
   src = fetchurl {
-    url = "https://downloads.cursor.com/sand/stable/${releaseId}/linux/x64/Grok_Bot_${version}.deb";
-    hash = "sha256-mdizlmQZQbpLiJp5HpMGc3s5jAw5NPY6lUVDCRAZK8w=";
+    url = "https://downloads.cursor.com/grokbot/stable/${releaseId}/linux/x64/Grok_Bot_${version}.deb";
+    hash = "sha256-Z6brYWSrIzpcXU1QZl762iy6rp8i763oXpNKZf37sg0=";
   };
 
   nativeBuildInputs = [
@@ -108,14 +108,14 @@ stdenvNoCC.mkDerivation {
 
     rm "$out/lib/grok-bot/chrome-sandbox"
 
-    makeWrapper "$out/lib/grok-bot/sand" "$out/bin/grok-bot" \
+    makeWrapper "$out/lib/grok-bot/grok-bot" "$out/bin/grok-bot" \
       --prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH" \
       --suffix PATH : ${lib.makeBinPath [ xdg-utils ]} \
       --add-flags "--disable-setuid-sandbox" \
       --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer --enable-wayland-ime=true}}"
 
-    substituteInPlace "$out/share/applications/sand.desktop" \
-      --replace-fail 'Exec="/opt/Grok Bot/sand" %U' 'Exec=grok-bot %U'
+    substituteInPlace "$out/share/applications/grok-bot.desktop" \
+      --replace-fail 'Exec="/opt/Grok Bot/grok-bot" %U' 'Exec=grok-bot %U'
 
     runHook postInstall
   '';

@@ -11,8 +11,9 @@ if [[ -n "${1:-}" ]]; then
 else
 	echo "==> Fetching latest linear-cli version from GitHub..."
 	VERSION="$(
-		git ls-remote --tags --sort='v:refname' "https://github.com/${REPO}.git" 'refs/tags/v*' |
+		gh api --paginate "repos/${REPO}/git/matching-refs/tags/v" --jq '.[].ref' |
 			sed 's#.*refs/tags/v##; s#\\^{}##' |
+			sort -V |
 			tail -1
 	)"
 	echo "    Latest version: ${VERSION}"
