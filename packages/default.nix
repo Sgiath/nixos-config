@@ -6,6 +6,7 @@ pkgs: {
   clawpatch = pkgs.callPackage ./clawpatch { };
   codex-desktop = pkgs.callPackage ./codex-desktop { };
   dnd5etools = pkgs.callPackage ./dnd5etools { };
+  dsh = pkgs.callPackage ./dsh { };
   eve-flipper = pkgs.callPackage ./eve-flipper { };
   gogcli = pkgs.callPackage ./gogcli { };
   grok-bot = pkgs.callPackage ./grok-bot { };

@@ -36,6 +36,7 @@
       pkgs.llm-agents.prime-agent
       pkgs.llm-agents.goose-cli
       pkgs.llm-agents.t3code
+      pkgs.llm-agents.dsh
 
       # tools
       pkgs.llm-agents.backlog-md
