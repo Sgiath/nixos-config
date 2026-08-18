@@ -13,7 +13,7 @@
 <body>
 
 <header>
-  <h1>Report Theme Sample<span class="cursor"></span></h1>
+  <h1>Report Theme Sample</h1>
   <p><time datetime="2026-08-03">2026-08-03</time> · share-html-report · theme reference</p>
 </header>
 
@@ -23,11 +23,12 @@
     <h2>Purpose</h2>
     <p>
       This page exercises every element styled by <code>report.css</code> so the
-      theme can be reviewed at a glance. Real reports inline this stylesheet and
+      theme can be reviewed at a glance. Real reports link this stylesheet and
       write <strong>plain semantic HTML</strong> — no classes required for the
       core look. Body copy stays readable at a <em>comfortable measure</em>,
-      while headings, tables, and code take on the mission-control look. An
-      optional <code>&lt;aside&gt;</code> renders as the side panel you see on
+      while headings, tables, and code follow the sgiath.dev design language:
+      hairlines on poster black, tracked uppercase captions. An optional
+      <code>&lt;aside&gt;</code> renders as the side rail you see on
       the right; omit it and <code>&lt;main&gt;</code> takes the full shell.
     </p>
     <p>
@@ -50,7 +51,7 @@
     <hr>
     <h3>Lists</h3>
     <ul>
-      <li>Unordered item with a red marker</li>
+      <li>Unordered item with a muted marker</li>
       <li>Second item with a nested list
         <ul>
           <li>Nested detail one</li>
@@ -117,34 +118,29 @@ curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
     <h2>Figure</h2>
     <figure>
       <svg viewBox="0 0 400 120" role="img" aria-label="Bar chart of build times per host" width="100%">
-        <line x1="30" y1="100" x2="390" y2="100" style="stroke: var(--line-strong, #463a22); stroke-width: 1"/>
-        <rect x="50"  y="40" width="48" height="60" style="fill: var(--accent, #ffb000); opacity: 0.9"/>
-        <rect x="140" y="60" width="48" height="40" style="fill: var(--accent-2, #6fc7b2); opacity: 0.45"/>
-        <rect x="230" y="25" width="48" height="75" style="fill: var(--accent-2, #6fc7b2); opacity: 0.45"/>
-        <rect x="320" y="70" width="48" height="30" style="fill: var(--accent-2, #6fc7b2); opacity: 0.45"/>
-        <text x="74"  y="114" font-size="10" text-anchor="middle" style="fill: var(--fg-muted, #a89e8a)">ceres</text>
-        <text x="164" y="114" font-size="10" text-anchor="middle" style="fill: var(--fg-muted, #a89e8a)">pallas</text>
-        <text x="254" y="114" font-size="10" text-anchor="middle" style="fill: var(--fg-muted, #a89e8a)">vesta</text>
-        <text x="344" y="114" font-size="10" text-anchor="middle" style="fill: var(--fg-muted, #a89e8a)">iso</text>
+        <line x1="30" y1="100" x2="390" y2="100" style="stroke: var(--stroke, rgba(230, 230, 233, 0.3)); stroke-width: 1"/>
+        <rect x="50"  y="40" width="48" height="60" style="fill: var(--accent, #e25d52); opacity: 0.9"/>
+        <rect x="140" y="60" width="48" height="40" style="fill: var(--hue-b, #5b8ac6); opacity: 0.45"/>
+        <rect x="230" y="25" width="48" height="75" style="fill: var(--hue-b, #5b8ac6); opacity: 0.45"/>
+        <rect x="320" y="70" width="48" height="30" style="fill: var(--hue-b, #5b8ac6); opacity: 0.45"/>
+        <text x="74"  y="114" font-size="10" text-anchor="middle" style="fill: var(--text-low, #606069)">ceres</text>
+        <text x="164" y="114" font-size="10" text-anchor="middle" style="fill: var(--text-low, #606069)">pallas</text>
+        <text x="254" y="114" font-size="10" text-anchor="middle" style="fill: var(--text-low, #606069)">vesta</text>
+        <text x="344" y="114" font-size="10" text-anchor="middle" style="fill: var(--text-low, #606069)">iso</text>
       </svg>
       <figcaption>Fig 1 — relative rebuild times (inline SVG, no assets)</figcaption>
     </figure>
   </section>
 
   <section>
-    <h2>Console Widgets <span class="status status-ok">scanning</span></h2>
+    <h2>Instrument Readouts <span class="status status-ok">scanning</span></h2>
     <p>
-      Opt-in "spaceship console" utilities. A status chip works inline too:
+      Opt-in instrument-readout utilities. A status chip works inline too:
       reactor loop <span class="status status-warn">degraded</span>, coolant pump
       <span class="status status-err">fault</span>.
     </p>
 
-    <h3>Nav scope &amp; readout</h3>
-    <div class="scope" aria-hidden="true">
-      <i class="blip" style="left: 62%; top: 28%"></i>
-      <i class="blip" style="left: 35%; top: 67%"></i>
-      <i class="blip" style="left: 58%; top: 61%"></i>
-    </div>
+    <h3>Nav readout</h3>
     <dl class="readout">
       <dt>RNG</dt><dd>4.7 AU</dd>
       <dt>BRG</dt><dd>047.2°</dd>
@@ -153,14 +149,7 @@ curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
       <dt>Mode</dt><dd>passive</dd>
     </dl>
 
-    <h3>Reactor trace</h3>
-    <div class="trace" aria-hidden="true">
-      <svg viewBox="0 0 400 120" preserveAspectRatio="none">
-        <polyline class="trace-line" points="0,70 30,58 60,74 90,44 120,66 150,52 180,80 210,48 240,64 270,38 300,72 330,56 360,68 400,50"/>
-        <polyline class="trace-line-alt" points="0,84 40,78 80,88 120,72 160,82 200,76 240,90 280,74 320,84 360,78 400,86"/>
-      </svg>
-      <i class="trace-scan"></i>
-    </div>
+    <h3>Reactor readout</h3>
     <dl class="readout">
       <dt>Out</dt><dd>98.2%</dd>
       <dt>Flux</dt><dd>3.41 MW</dd>
@@ -183,7 +172,6 @@ curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
         <dt>Station</dt><dd>BEAM DECK</dd>
         <dt>Status</dt><dd><span class="dot dot-ok"></span>active</dd>
       </dl>
-      <div class="barcode" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -206,7 +194,7 @@ curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
           { "id": "button", "title": "button", "sub": "momentary",
             "body": "Debounced in firmware, 20 ms window. Pulled up internally; press pulls GP2 low.",
             "pos": [40, 50], "size": [190, 110],
-            "outputs": ["SIG", "GND"], "accent": "a" },
+            "outputs": ["SIG", "GND"], "accent": "c" },
           { "id": "led", "title": "led", "sub": "status, 3 mm",
             "body": "Heartbeat blink at 0.5 Hz; solid on sensor fault. 220 \u03a9 series resistor.",
             "pos": [40, 290], "size": [190, 110],
@@ -215,7 +203,7 @@ curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
             "body": "Firmware polls BME280 every 10 s, pushes frames to the display over SPI at 8 MHz. GP2 button IRQ falling edge; GP15 LED PWM 1 kHz.",
             "pos": [330, 130], "size": [230, 190],
             "inputs": ["GP2", "GND", "5V", "FLT"],
-            "outputs": ["I\u00b2C", "3V3", "SPI", "PWM", "GND"], "accent": "b" },
+            "outputs": ["I\u00b2C", "3V3", "SPI", "PWM", "GND"], "accent": "a" },
           { "id": "sensor", "title": "sensor", "sub": "BME280 \u00b7 I\u00b2C",
             "body": "Temp, humidity, pressure at address 0x76. Forced mode, \u00d71 oversampling.",
             "pos": [660, 40], "size": [200, 120],
@@ -223,22 +211,22 @@ curl --fail --head "https://sgiath.dev/llm/${FILENAME}"</code></pre>
           { "id": "display", "title": "display", "sub": "SSD1306 \u00b7 128\u00d764",
             "body": "OLED readout: current reading plus 1 h sparkline. Dimmed after 30 s idle.",
             "pos": [660, 320], "size": [200, 110],
-            "inputs": ["SPI"], "accent": "a" },
+            "inputs": ["SPI"], "accent": "b" },
           { "id": "psu", "title": "psu", "sub": "5 V / 2 A USB",
             "body": "FLT high below 4.6 V.",
             "pos": [330, 370], "size": [200, 90],
-            "outputs": ["5V", "FLT"], "accent": "e" }
+            "outputs": ["5V", "FLT"], "accent": "d" }
         ],
         "links": [
           ["button:SIG", "pico:GP2", "a"],
-          ["button:GND", "pico:GND", "d"],
+          ["button:GND", "pico:GND", "e"],
           ["pico:PWM", "led:PWM", "c"],
-          ["pico:GND", "led:GND", "d"],
+          ["pico:GND", "led:GND", "e"],
           ["pico:I\u00b2C", "sensor:SDA", "b"],
           ["pico:I\u00b2C", "sensor:SCL", "b"],
-          ["pico:3V3", "sensor:PWR", "c"],
+          ["pico:3V3", "sensor:PWR", "d"],
           ["pico:SPI", "display:SPI", "a"],
-          ["psu:5V", "pico:5V", "c"],
+          ["psu:5V", "pico:5V", "d"],
           ["psu:FLT", "pico:FLT", "e"]
         ]
       }

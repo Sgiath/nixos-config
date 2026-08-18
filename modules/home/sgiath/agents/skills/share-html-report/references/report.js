@@ -32,9 +32,10 @@
      links[] — ["fromId:outputName", "toId:inputName", "variantLetter"]
                unknown node/slot refs are console.warn'd and skipped
 
-   Palette (matches report.css):
-     a = #ffb000 amber   b = #6fc7b2 teal   c = #59c37a green
-     d = #b18cff violet  e = #ff4d4d red
+   Palette (matches report.css --hue-a..e) — monochrome + one accent;
+   structure is distinguished by value, not hue:
+     a = #e25d52 accent   b = #e6e6e9 ink-hi   c = #9d9da6 ink-mid
+     d = #606069 ink-low  e = #3a3a41 faint
 
    Graphs are display-only: draggable nodes, pan, wheel zoom, collapse.
    No node creation, no searchbox, no context menu, no graph execution
@@ -47,20 +48,21 @@
   /* ---- palette (mirrors report.css custom properties) ------------------- */
 
   var ACCENTS = {
-    a: "#ffb000", // amber  — var(--accent)
-    b: "#6fc7b2", // teal   — var(--accent-2)
-    c: "#59c37a", // green  — var(--ok) family
-    d: "#b18cff", // violet — var(--accent-3)
-    e: "#ff4d4d", // red    — var(--err)
+    a: "#e25d52", // accent — the one highlight — var(--hue-a)
+    b: "#e6e6e9", // ink high   — var(--hue-b)
+    c: "#9d9da6", // ink mid    — var(--hue-c)
+    d: "#606069", // ink low    — var(--hue-d)
+    e: "#3a3a41", // faint      — var(--hue-e)
   };
 
-  /* dark tints of the accents used as node title-bar colors */
+  /* node title-bar colors: accent gets a dim red tint, the rest stay
+     neutral surface greys of stepped value */
   var TITLE_TINTS = {
-    a: "#3a2c10",
-    b: "#16332d",
-    c: "#143321",
-    d: "#241c38",
-    e: "#3a1414",
+    a: "#2a1512",
+    b: "#1a1a1d",
+    c: "#141416",
+    d: "#101012",
+    e: "#0c0c0e",
   };
 
   var DEFAULT_HEIGHT = 440;
@@ -102,26 +104,26 @@
     });
   }
 
-  /* ---- LiteGraph global theme (amber mission-console) -------------------- */
+  /* ---- LiteGraph global theme (sgiath.dev design language) ---------------- */
 
   function applyTheme() {
     var LG = window.LiteGraph;
 
-    LG.NODE_TITLE_COLOR = "#ffb000";
-    LG.NODE_SELECTED_TITLE_COLOR = "#ffd766";
-    LG.NODE_TEXT_COLOR = "#ddd3c0";
+    LG.NODE_TITLE_COLOR = "#e6e6e9";
+    LG.NODE_SELECTED_TITLE_COLOR = "#ffffff";
+    LG.NODE_TEXT_COLOR = "#9d9da6";
     LG.NODE_TEXT_SIZE = 13;
     LG.NODE_TITLE_HEIGHT = 28;
     LG.NODE_SLOT_HEIGHT = 20;
 
-    LG.NODE_DEFAULT_COLOR = "#2a2118"; // title bar
-    LG.NODE_DEFAULT_BGCOLOR = "#0f0c08"; // body
-    LG.NODE_DEFAULT_BOXCOLOR = "#7a6a4f"; // collapse box / status glyph
+    LG.NODE_DEFAULT_COLOR = "#101012"; // title bar
+    LG.NODE_DEFAULT_BGCOLOR = "#0a0a0a"; // body
+    LG.NODE_DEFAULT_BOXCOLOR = "#606069"; // collapse box / status glyph
 
-    LG.WIDGET_BGCOLOR = "#131009";
-    LG.WIDGET_OUTLINE_COLOR = "#463a22";
-    LG.WIDGET_TEXT_COLOR = "#ddd3c0";
-    LG.WIDGET_SECONDARY_TEXT_COLOR = "#a89e8a";
+    LG.WIDGET_BGCOLOR = "#0a0a0a";
+    LG.WIDGET_OUTLINE_COLOR = "#2a2a2e";
+    LG.WIDGET_TEXT_COLOR = "#9d9da6";
+    LG.WIDGET_SECONDARY_TEXT_COLOR = "#606069";
   }
 
   /* Reports never create nodes interactively: drop every built-in node type
@@ -200,8 +202,8 @@
       ctx.textAlign = "left";
 
       if (this.properties.sub) {
-        ctx.font = "11px monospace";
-        ctx.fillStyle = "#a89e8a";
+        ctx.font = '11px "JetBrains Mono", monospace';
+        ctx.fillStyle = "#606069";
         y += 14;
         ctx.fillText(this.properties.sub, pad, y);
         y += 4;
@@ -209,8 +211,8 @@
 
       var lines = [];
       if (this.properties.body) {
-        ctx.font = "12px monospace";
-        ctx.fillStyle = "#ddd3c0";
+        ctx.font = '12px "JetBrains Mono", monospace';
+        ctx.fillStyle = "#9d9da6";
         lines = wrapText(ctx, String(this.properties.body), maxWidth);
         var lineHeight = 16;
         for (var i = 0; i < lines.length; i++) {
@@ -294,20 +296,20 @@
 
     /* canvas look */
     canvas.background_image = null;
-    canvas.clear_background_color = "#0b0806";
+    canvas.clear_background_color = "#050505";
     canvas.render_shadows = false;
     canvas.render_canvas_border = false;
-    canvas.default_link_color = "#a89e8a";
-    canvas.connections_width = 2;
+    canvas.default_link_color = "#606069";
+    canvas.connections_width = 1; // hairline wires
     canvas.render_connection_arrows = false;
     canvas.links_render_mode = window.LiteGraph.SPLINE_LINK; // curved links
     canvas.show_info = false; // hide litegraph's FPS/debug overlay
-    /* port dots: warm palette instead of litegraph's default green */
+    /* port dots: neutral ink — accent stays reserved for `a` links/nodes */
     canvas.default_connection_color = {
-      input_off: "#7a6a4f",
-      input_on: "#ffb000",
-      output_off: "#7a6a4f",
-      output_on: "#ffb000",
+      input_off: "#3a3a41",
+      input_on: "#9d9da6",
+      output_off: "#3a3a41",
+      output_on: "#9d9da6",
     };
 
     /* interaction: drag/pan/zoom/collapse stay on; authoring UI off */
@@ -322,11 +324,34 @@
     /* Never graph.start(): these graphs are display-only. LGraphCanvas's own
        render loop (started in its constructor) handles drawing. */
 
-    /* sizing: fill figure width at the spec'd height */
+    /* fit: scale and center the node layout inside the canvas so specs are
+       unit-free — a layout wider than the column shrinks instead of clipping.
+       Reapplied on resize (resets any user pan/zoom, which is acceptable). */
+    function fitGraph(w, h) {
+      var nodes = graph._nodes;
+      if (!nodes || !nodes.length) return;
+      var titleH = window.LiteGraph.NODE_TITLE_HEIGHT || 28;
+      var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        x0 = Math.min(x0, n.pos[0]);
+        y0 = Math.min(y0, n.pos[1] - titleH);
+        x1 = Math.max(x1, n.pos[0] + n.size[0]);
+        y1 = Math.max(y1, n.pos[1] + n.size[1]);
+      }
+      var bw = x1 - x0, bh = y1 - y0;
+      if (bw <= 0 || bh <= 0) return;
+      var s = Math.min((w / bw) * 0.92, (h / bh) * 0.92, 1);
+      canvas.ds.scale = s;
+      canvas.ds.offset = [(w / s - bw) / 2 - x0, (h / s - bh) / 2 - y0];
+    }
+
+    /* sizing: fill figure width at the spec'd height, then refit */
     function resizeCanvas() {
       var w = figure.clientWidth;
       if (w <= 0) return;
       canvas.resize(w, height);
+      fitGraph(w, height);
       canvas.setDirty(true, true);
     }
     resizeCanvas();
