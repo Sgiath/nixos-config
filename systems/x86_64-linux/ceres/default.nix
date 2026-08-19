@@ -16,8 +16,6 @@
     wayland.enable = true;
   };
 
-  crazyegg.enable = false;
-
   services = {
     ollama.enable = false;
     comfyui.enable = false;
