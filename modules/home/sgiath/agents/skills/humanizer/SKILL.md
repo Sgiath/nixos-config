@@ -1,15 +1,6 @@
 ---
 name: humanizer
-description: |
-  Remove signs of AI-generated writing from text. Use when editing or reviewing
-  text to make it sound more natural and human-written. Based on Wikipedia's
-  comprehensive "Signs of AI writing" guide. Detects and fixes patterns including:
-  inflated symbolism, promotional language, superficial -ing analyses, vague
-  attributions, em dash overuse, rule of three, AI vocabulary words, passive
-  voice, negative parallelisms, and filler phrases.
-license: MIT
-metadata:
-  version: "2.10.0"
+description: Cut AI tells from any writing. Must always apply.
 ---
 
 # Humanizer: Remove AI Writing Patterns
@@ -205,6 +196,8 @@ Before returning the final rewrite, scan it for `—` and `–`. Any hit means t
 **After:**
 > The update improves the interface, speeds up load times through optimized algorithms, and adds end-to-end encryption.
 
+The tell is the bold label and colon that restates the line. A bold lead-in that ends in a period, names the item, and is followed by genuinely new detail is fine: **Schema in TypeScript.** Tables live in one file.
+
 ### 18. Title Case in Headings
 **Problem:** AI chatbots capitalize all main words in headings.
 **Before:**
@@ -232,7 +225,7 @@ Before returning the final rewrite, scan it for `—` and `–`. Any hit means t
 
 ### 21. Collaborative Communication Artifacts
 
-**Words to watch:** I hope this helps, Of course!, Certainly!, You're absolutely right!, Would you like..., Want me to...?, Want me to give examples?, Should I continue?, let me know, here is a...
+**Words to watch:** I hope this helps, Of course!, Certainly!, You're absolutely right!, Would you like..., Want me to...?, Want me to give examples?, Should I continue?, let me know, here is a..., Found the smoking gun!
 **Problem:** Text meant as chatbot correspondence gets pasted as content.
 **Before:**
 > Here is an overview of the French Revolution. I hope this helps! Let me know if you'd like me to expand on any section.
@@ -270,6 +263,9 @@ Before returning the final rewrite, scan it for `—` and `–`. Any hit means t
 - "In the event that you need help" → "If you need help"
 - "The system has the ability to process" → "The system can process"
 - "It is important to note that the data shows" → "The data shows"
+- "utilize" / "leverage" → "use"
+- "facilitate" → "help"
+- "numerous" → "many"
 
 ### 25. Excessive Hedging
 **Problem:** Over-qualifying statements.
@@ -359,13 +355,49 @@ Before returning the final rewrite, scan it for `—` and `–`. Any hit means t
 **After:**
 > Whether it's worth the price depends on how often you'll use it.
 
-### 35. Colon-Reveal Constructions
-**Problem:** LLMs build a noun phrase, drop a colon, then stage a dramatic lowercase payoff as if revealing a secret: "The best part: it learns." An ordinary statement gets inflated into a staged reveal.
-**Rule:** Prefer sentence case after a colon unless grammar, a proper noun, a title, or code requires otherwise, and prefer a plain sentence over the noun-colon-payoff shape when the reveal isn't earned.
+### 35. Colon Crutches and Colon-Reveal Constructions
+**Problem:** Two related tells. (a) The colon-reveal: a noun phrase, then a colon, then a dramatic lowercase payoff, as if revealing a secret: "The best part: it learns." (b) A mid-sentence colon used as a connector or comparison hinge: "If you're coming from traditional automation: instead of registering event handlers, you describe conditions." Colons are fine before a list, an example, or a quotation.
+**Rule:** Prefer sentence case after a colon unless grammar, a proper noun, a title, or code requires otherwise. Prefer a plain sentence over the noun-colon-payoff or comparison-colon shape when the colon is doing atmosphere rather than introducing something.
 **Before:**
 > The real cost isn't the subscription: it's the hours spent onboarding a team that never adopts it.
 **After:**
 > The subscription is cheap. The real cost is the hours spent onboarding a team that never adopts it.
+**Before (comparison colon):**
+> If you're coming from traditional automation: instead of registering event handlers, you describe conditions.
+**After:**
+> You describe when the scheduler should fire in plain English instead of registering event handlers.
+
+### 36. Abstract Metaphor Nouns
+
+**Words to watch:** substrate, wedge, vector, locus, vantage, nexus, primitive (as noun), harness (as metaphor), surface (as in figurative "API surface"), bedrock, scaffolding (as metaphor), modality, paradigm, gold-plating
+**Problem:** LLMs reach for technical-sounding metaphor nouns that read as precise but usually just mean a plainer word. "Substrate" becomes "base". "Wedge in" becomes "add". "Vector" becomes "way" or "method". "Gold-plating" becomes "more than the job needs". The tell is the metaphor, not the domain term: a language primitive, a test harness, or a math vector stays.
+**Before:**
+> The plugin is a new vector into the substrate of the editor. From that vantage, the test harness becomes the nexus of the workflow.
+**After:**
+> The plugin hooks into the editor. The test harness is where the rest of the workflow meets.
+
+### 37. Felt Language Instead of Mechanism
+**Problem:** LLMs wrap a simple point in abstract framing, or describe how something feels instead of what it does. "the database stays close at hand" and "SQL you can read" name a mood. The fix names the mechanism or a number that is already in the source.
+**Rule:** Ask what the sentence tells the reader to do or know, then write that. If you cannot restate it as a concrete instruction, fact, or number from the source, cut it. Do not invent a mechanism, API, or measurement to replace a feeling.
+**Before:**
+> The query helper keeps the database close at hand: it prints the SQL it sends, and types that follow your schema mean a mismatch fails the build.
+**After:**
+> The query helper prints the SQL it sends to the database. A schema mismatch fails the build.
+**Before (mood only):**
+> The query helper keeps the database close at hand, with SQL you can read.
+**After:**
+> (Cut the sentence. The source only names a feeling.)
+
+### 38. Weak-verb Adverbs
+
+**Words to watch:** significantly, seamlessly, effortlessly, robustly, carefully, thoughtfully, deeply (as intensifier)
+**Problem:** An adverb propping up a weak verb usually means the verb is wrong, or the missing number is being hidden. "significantly improves" is a measured delta with the measurement left out. "seamlessly integrates" is promotional filler.
+**Before:**
+> The new cache significantly improves load times and seamlessly integrates with the existing router.
+**After:**
+> The new cache is faster and works with the existing router.
+
+(If the source has a measured delta, use that number: "cut load times from 2.1s to 400ms.")
 
 ## DETECTION GUIDANCE
 
@@ -386,6 +418,7 @@ A clean human writer can hit several of the patterns above without any AI involv
 - **Unsourced claims.** Most of the web is unsourced. Lack of citations doesn't prove anything.
 - **Correct, complex formatting.** Visual editors and templates produce clean output without any AI.
 - **Secondhand text.** Do not rewrite watched phrases inside quotations, titles, proper names, or examples where the phrase is being discussed rather than used.
+- **Literal technical terms.** *primitive*, *harness*, *vector*, *surface*, *scaffolding*, *modality* are not tells when they name the actual thing (a language primitive, a test harness, a math vector). The tell is the metaphor: "the substrate of the organization", "a new vector for growth".
 
 When in doubt, look for **clusters** of tells, not isolated ones. A single em dash means nothing; em dashes plus rule-of-three plus *vibrant tapestry* plus a "Conclusion" section is a confession.
 

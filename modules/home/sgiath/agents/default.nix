@@ -80,6 +80,7 @@
         shortcut.url = "https://mcp.shortcut.com/mcp";
         notion-crazyegg.url = "https://mcp.notion.com/mcp";
         notion-remote.url = "https://mcp.notion.com/mcp";
+        slack-crazyegg.url = "https://mcp.slack.com/mcp";
         agent-skills = {
           enabled = false;
           url = "https://agentskills.io/mcp";

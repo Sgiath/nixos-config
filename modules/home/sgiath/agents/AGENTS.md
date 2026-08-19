@@ -17,6 +17,7 @@ Never mix contexts: don't read one company's tools from another's repo.
 
 - **Write only personal Linear (`linear`).** Company tools (`shortcut`, `linear-remote`, `notion-crazyegg`, `notion-remote`) are read-only unless the user explicitly permits a write for this task.
 - Company trackers/docs are input. Agent progress lives in personal Linear. A personal issue derived from a company ticket must link that URL; personal-only issues are fine.
+- you can post to `slack-crazyegg` and reply to threads if needed or asked. The messages should be direct, short and to the point, using the `humanizer` skill, to avoid all AI-like writing traps. Consider each message in context of previous meassages in the channel or threat
 
 ### Disambiguating "ticket"
 
