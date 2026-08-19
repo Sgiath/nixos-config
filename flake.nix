@@ -116,6 +116,11 @@
       url = "github:NousResearch/hermes-agent/v2026.8.18";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    oh-my-pi = {
+      url = "github:can1357/oh-my-pi/v17.3.8";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -173,6 +178,7 @@
         llm-agents.overlays.shared-nixpkgs
         prismlauncher.overlays.default
         comfyui.overlays.default
+        oh-my-pi.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -186,6 +192,7 @@
         nix-gaming.nixosModules.platformOptimizations
         nix-gaming.nixosModules.wine
         # comfyui.nixosModules.default
+        oh-my-pi.nixosModules.default
       ];
 
       homes.modules = with inputs; [
@@ -194,6 +201,7 @@
         sops-nix.homeManagerModules.sops
         nix-index-database.homeModules.nix-index
         voxtype.homeManagerModules.default
+        oh-my-pi.homeManagerModules.default
       ];
     };
 }
