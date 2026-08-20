@@ -16,6 +16,7 @@
     ./omp.nix
     ./opencode.nix
     ./pi.nix
+    ./t3code.nix
   ];
 
   options.sgiath.agents = {
@@ -37,7 +38,7 @@
       pkgs.llm-agents.grok
       pkgs.llm-agents.prime-agent
       pkgs.llm-agents.goose-cli
-      pkgs.llm-agents.t3code
+      pkgs.llm-agents.fx
 
       # tools
       pkgs.llm-agents.backlog-md
@@ -49,7 +50,6 @@
       pkgs.llm-agents.amp
       pkgs.llm-agents.plannotator
       pkgs.${namespace}.clawpatch
-      pkgs.${namespace}.linear-cli
       pkgs.${namespace}.xurl
 
       # Hermes
@@ -59,7 +59,6 @@
     ++ (lib.optionals config.sgiath.targets.graphical [
       pkgs.llm-agents.hermes-one
       pkgs.llm-agents.chatgpt
-      pkgs.llm-agents.t3code-desktop
       pkgs.${namespace}.grok-bot
     ]);
 

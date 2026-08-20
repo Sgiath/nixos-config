@@ -20,7 +20,7 @@ Shared Home Manager modules for user apps, shells, profiles, desktop config, and
 - `sgiath.targets.terminal` enables CLI/editor/agent stack; `sgiath.targets.graphical` enables desktop apps and Hyprland-adjacent services.
 - Feature modules usually expose `programs.<name>.enable`, `services.<name>.enable`, or `sgiath.<feature>.enable`.
 - Agent tooling intentionally writes some tool-local config/memory files; do not over-normalize it into pure Nix state.
-- `agents/default.nix` has a small graphical coupling for `t3code`; preserve profile awareness.
+- `agents/t3code.nix` owns the T3 Code CLI, optional desktop package, and user service.
 
 ## ANTI-PATTERNS
 

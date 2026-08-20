@@ -1,13 +1,8 @@
 {
   config,
-  lib,
-  namespace,
   pkgs,
   ...
 }:
-let
-  eveFlipper = pkgs.${namespace}.eve-flipper;
-in
 {
   home = {
     packages = with pkgs; [
@@ -20,27 +15,6 @@ in
     sessionVariables = {
       # cd ~/.local/share/whisper-cpp && whisper-cpp-download-ggml-model large-v3-turbo
       WHISPER_MODEL = "${config.xdg.dataHome}/whisper-cpp/ggml-large-v3-turbo.bin";
-    };
-  };
-
-  systemd.user.services.eve-flipper = {
-    Unit = {
-      Description = "EVE Flipper local web app";
-      After = [ "network-online.target" ];
-      Wants = [ "network-online.target" ];
-    };
-    Service = {
-      Restart = "always";
-      RestartSec = 5;
-      KillMode = "process";
-      WorkingDirectory = "${config.xdg.dataHome}/eve-flipper";
-      Environment = [
-        "HOME=${config.home.homeDirectory}"
-      ];
-      ExecStart = "${lib.getExe eveFlipper} --host 127.0.0.1 --port 13370";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
     };
   };
 
@@ -58,6 +32,7 @@ in
   remote.enable = true;
   services = {
     cli-proxy-api.enable = true;
+    t3code.enable = true;
   };
 
   stylix.fonts.sizes = {

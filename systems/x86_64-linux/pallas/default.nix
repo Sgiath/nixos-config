@@ -23,8 +23,4 @@
     razer.enable = true;
     wayland.enable = true;
   };
-
-  services = { };
-
-  crazyegg.enable = true;
 }

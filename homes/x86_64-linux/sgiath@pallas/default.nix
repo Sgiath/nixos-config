@@ -9,7 +9,7 @@
     };
   };
 
-  crazyegg.enable = true;
+  services.t3code.enable = true;
 
   stylix.fonts.sizes = {
     applications = 12;
