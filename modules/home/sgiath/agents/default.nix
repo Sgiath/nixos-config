@@ -36,15 +36,11 @@
 
       # agents
       pkgs.llm-agents.grok
-      pkgs.llm-agents.prime-agent
       pkgs.llm-agents.goose-cli
-      pkgs.llm-agents.fx
 
       # tools
       pkgs.llm-agents.backlog-md
-      pkgs.llm-agents.openspec
       pkgs.llm-agents.beads
-      pkgs.llm-agents.coderabbit-cli
       pkgs.llm-agents.qmd
       pkgs.llm-agents.codegraph
       pkgs.llm-agents.amp
@@ -57,6 +53,7 @@
       pkgs.llm-agents.hermes-hud
     ]
     ++ (lib.optionals config.sgiath.targets.graphical [
+      pkgs.llm-agents.hermes-desktop
       pkgs.llm-agents.hermes-one
       pkgs.llm-agents.chatgpt
       pkgs.${namespace}.grok-bot
