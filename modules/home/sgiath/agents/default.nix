@@ -37,13 +37,10 @@
       # agents
       pkgs.llm-agents.grok
       pkgs.llm-agents.goose-cli
-      pkgs.llm-agents.zcode
-      pkgs.llm-agents.voxterm
-
-      pkgs.llm-agents.sidecar
-      pkgs.llm-agents.td
 
       # tools
+      pkgs.llm-agents.herdr
+      pkgs.llm-agents.td
       pkgs.llm-agents.backlog-md
       pkgs.llm-agents.beads
       pkgs.llm-agents.qmd
@@ -55,11 +52,9 @@
 
       # Hermes
       pkgs.llm-agents.hermes-agent
-      pkgs.llm-agents.hermes-hud
     ]
     ++ (lib.optionals config.sgiath.targets.graphical [
       pkgs.llm-agents.hermes-desktop
-      pkgs.llm-agents.hermes-one
       pkgs.llm-agents.chatgpt
       pkgs.${namespace}.grok-bot
     ]);

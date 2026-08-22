@@ -87,12 +87,6 @@
             dotExpansion = true;
             promptContext = true;
           };
-
-          tmux = lib.mkIf config.programs.tmux.enable {
-            autoStartLocal = true;
-            autoStartRemote = false;
-            defaultSessionName = "Main";
-          };
         };
       };
     };

@@ -76,8 +76,9 @@ in
           WorkingDirectory = config.home.homeDirectory;
           Environment = [
             "HOME=${config.home.homeDirectory}"
-            "PATH=${config.home.profileDirectory}/bin:/run/current-system/sw/bin"
+            "PATH=/run/wrappers/bin:${config.home.profileDirectory}/bin:/run/current-system/sw/bin"
           ];
+          KillMode = "mixed";
           Restart = "always";
           RestartSec = 5;
           UMask = "0077";

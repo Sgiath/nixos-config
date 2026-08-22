@@ -76,6 +76,7 @@ in
           ".playwright-mcp/"
           ".playwright-cli/"
           ".debug-journal.md"
+          ".todos/"
         ];
 
         signing = {

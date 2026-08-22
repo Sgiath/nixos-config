@@ -4,12 +4,9 @@
   pkgs,
   ...
 }:
-let
-  omp = pkgs.omp.override { withWaylandScreencast = true; };
-in
 {
   config = lib.mkIf config.sgiath.agents.enable {
-    home.packages = [ omp ];
+    home.packages = [ pkgs.omp ];
 
     # programs.omp = {
     #   enable = true;

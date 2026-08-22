@@ -86,12 +86,31 @@ in
 
         settings = {
           model = {
-            default = "gpt-5.6-sol";
-            provider = "openai-codex";
+            default = "grok-4.6";
+            provider = "xai-oauth";
           };
           fallback_model = {
-            model = "claude-opus-5";
-            provider = "anthropic";
+            model = "gpt-5.6-sol";
+            provider = "openai-codex";
+          };
+
+          auxiliary = {
+            web_extract = {
+              provider = "openai-codex";
+              model = "gpt-5.6-luna";
+            };
+            title_generation = {
+              provider = "openai-codex";
+              model = "gpt-5.6-luna";
+            };
+            # vision = {};
+            # compression = {};
+            # skills_hub = {};
+            # approval = {};
+            # mcp = {};
+            # kanban_decomposer = {};
+            # profile_describer = {};
+            # curator = {};
           };
 
           timezone = "UTC";
@@ -234,7 +253,7 @@ in
             };
           };
 
-          x_search.model = "grok-4.5";
+          x_search.model = "grok-4.6";
 
           moa = {
             default_preset = "default";
