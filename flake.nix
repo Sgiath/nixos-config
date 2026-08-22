@@ -121,6 +121,11 @@
       url = "github:can1357/oh-my-pi/v18.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    opencode = {
+      url = "github:anomalyco/opencode/v1.18.21";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -179,6 +184,7 @@
         prismlauncher.overlays.default
         comfyui.overlays.default
         oh-my-pi.overlays.default
+        opencode.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [

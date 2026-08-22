@@ -66,7 +66,7 @@ let
     name = "oc";
     runtimeInputs = [
       pkgs.curl
-      pkgs.llm-agents.opencode
+      pkgs.opencode
     ];
     text = ''
       ${lib.toShellVars env}
@@ -94,6 +94,7 @@ in
   config = lib.mkIf config.sgiath.agents.enable {
     home.packages = [
       oc
+      pkgs.opencode-desktop
       pkgs.llm-agents.opencode2
     ];
 
@@ -101,7 +102,7 @@ in
       enable = true;
       enableMcpIntegration = true;
       context = ./AGENTS.md;
-      package = pkgs.llm-agents.opencode;
+      package = pkgs.opencode;
 
       tui = {
         plugin = [ "oh-my-openagent@latest" ];
@@ -115,7 +116,7 @@ in
 
       settings = {
         autoupdate = false;
-        model = "cli-proxy/gpt-5.6-terra";
+        model = "cli-proxy/gpt-5.6-sol";
         small_model = "cli-proxy/gpt-5.6-luna";
         plugin = [
           "oh-my-openagent@latest"
@@ -146,14 +147,11 @@ in
                   input = 1000000;
                 };
               };
-              "grok-4.5" = imageModel "Grok 4.5" {
+              "grok-4.6" = imageModel "Grok 4.6" {
                 limit = {
                   context = 500000;
                   input = 500000;
                 };
-              };
-              "kimi-k3" = imageModel "Kimi K3" {
-                limit.output = 1050000;
               };
             };
           };
