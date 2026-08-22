@@ -37,6 +37,11 @@
       # agents
       pkgs.llm-agents.grok
       pkgs.llm-agents.goose-cli
+      pkgs.llm-agents.zcode
+      pkgs.llm-agents.voxterm
+
+      pkgs.llm-agents.sidecar
+      pkgs.llm-agents.td
 
       # tools
       pkgs.llm-agents.backlog-md

@@ -118,7 +118,7 @@
     };
 
     oh-my-pi = {
-      url = "github:can1357/oh-my-pi/v17.4.2";
+      url = "github:can1357/oh-my-pi/v18.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
