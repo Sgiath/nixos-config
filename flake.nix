@@ -113,12 +113,12 @@
     };
 
     hermes-agent = {
-      url = "github:NousResearch/hermes-agent/v2026.8.18";
+      url = "github:NousResearch/hermes-agent/v2026.8.19";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     oh-my-pi = {
-      url = "github:can1357/oh-my-pi/v17.4.0";
+      url = "github:can1357/oh-my-pi/v17.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

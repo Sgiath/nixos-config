@@ -7,11 +7,11 @@
 
 let
   pname = "buzz";
-  version = "0.5.17";
+  version = "0.5.18";
 
   src = fetchurl {
     url = "https://github.com/block/buzz/releases/download/desktop-v${version}/Buzz_${version}_amd64.AppImage";
-    hash = "sha256-uwlYPGhzXKuPX19BH2txfKCaaLZ7fa1A3TXB7FrE/1Q=";
+    hash = "sha256-0ErOc3u/juQdV3MGG+q7Fx04orrdUSks3Qa8fBhNP3E=";
   };
 
   appimageContents = appimageTools.extract {

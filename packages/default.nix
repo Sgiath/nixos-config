@@ -6,7 +6,6 @@ pkgs: {
   clawpatch = pkgs.callPackage ./clawpatch { };
   codex-desktop = pkgs.callPackage ./codex-desktop { };
   dnd5etools = pkgs.callPackage ./dnd5etools { };
-  dsh = pkgs.callPackage ./dsh { };
   grok-bot = pkgs.callPackage ./grok-bot { };
   nak = pkgs.callPackage ./nak { };
   nordic-gtk-theme = pkgs.callPackage ./nordic-gtk-theme { };
