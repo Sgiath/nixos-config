@@ -9,10 +9,25 @@ let
   awscli = pkgs.awscli2;
   mfaCredFile = "/home/sgiath/.aws-cred";
   awsSecrets = pkgs.writeShellScriptBin "aws-secrets" ''
+    set -euo pipefail
+    umask 077
+
     mfa="arn:aws:iam::173509387151:mfa/filip"
-    token=$(${lib.getExe pass} otp 2fa/amazon/code)
-    cred=$(${lib.getExe awscli} sts get-session-token --profile crazyegg --serial-number $mfa --token-code $token | ${lib.getExe pkgs.jq} -r '.Credentials' | ${lib.getExe pkgs.jq} '. += {"Version": 1}')
-    echo $cred > ${mfaCredFile}
+    credential_file=${lib.escapeShellArg mfaCredFile}
+    temporary_file="$(${pkgs.coreutils}/bin/mktemp "$credential_file.XXXXXX")"
+    trap '${pkgs.coreutils}/bin/rm -f "$temporary_file"' EXIT
+
+    token="$(${lib.getExe pass} otp 2fa/amazon/code)"
+    ${lib.getExe awscli} sts get-session-token \
+      --profile crazyegg \
+      --serial-number "$mfa" \
+      --token-code "$token" \
+      --duration-seconds 43200 \
+      | ${lib.getExe pkgs.jq} -e '.Credentials | select(type == "object") | . + {"Version": 1}' \
+      > "$temporary_file"
+
+    ${pkgs.coreutils}/bin/mv "$temporary_file" "$credential_file"
+    trap - EXIT
     echo "AWS credentials updated"
   '';
 in
@@ -30,6 +45,28 @@ in
       };
       package = awscli;
     };
+
+    systemd.user = {
+      services.aws-secrets = {
+        Unit.Description = "Refresh AWS session credentials";
+        Service = {
+          Type = "oneshot";
+          ExecStart = lib.getExe awsSecrets;
+        };
+      };
+
+      timers.aws-secrets = {
+        Unit.Description = "Refresh AWS session credentials hourly";
+        Timer = {
+          OnBootSec = "1min";
+          OnCalendar = "hourly";
+          Persistent = true;
+          Unit = "aws-secrets.service";
+        };
+        Install.WantedBy = [ "timers.target" ];
+      };
+    };
+
     home = {
       packages = with pkgs; [
         awsSecrets

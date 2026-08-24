@@ -103,7 +103,7 @@
     };
 
     voxtype.url = "github:peteonrails/voxtype/v0.7.5";
-    comfyui.url = "github:utensils/comfyui-nix/v0.30.2";
+    comfyui.url = "github:utensils/comfyui-nix/v0.33.1";
 
     # LLM tools
 
@@ -123,7 +123,7 @@
     };
 
     opencode = {
-      url = "github:anomalyco/opencode/v1.18.21";
+      url = "github:anomalyco/opencode/v1.18.22";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
