@@ -12,7 +12,6 @@
     ./codex.nix
     ./cursor.nix
     ./dsh.nix
-    ./forge.nix
     ./omp.nix
     ./opencode.nix
     ./pi.nix
