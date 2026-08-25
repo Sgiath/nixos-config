@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf (config.sgiath.agents.enable && false) {
+  config = lib.mkIf config.sgiath.agents.enable {
     home.packages = [ pkgs.llm-agents.forgecode ];
 
     programs.zsh.initContent = lib.mkAfter ''

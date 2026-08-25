@@ -122,7 +122,6 @@ in
           "oh-my-openagent@latest"
           "opencode-claude-auth@latest"
           "@plannotator/opencode@latest"
-          "@dietrichgebert/ponytail"
         ];
         provider = {
           cli-proxy = {

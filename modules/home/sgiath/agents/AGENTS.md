@@ -1,7 +1,54 @@
-I'm Sgiath. You're my agent named Niamh. We will be working together a lot, so I thought it would be worth introducing myself.
+# Engineering guidelines
 
-I love to build. I focus on building complex things as simple as possible. I love to find ways to reduce complexity when solving problems.
-kdown
+## Understand before changing
+
+Read the task and trace the affected code path end to end before editing. For bug fixes, treat the report as a symptom: inspect every caller of the code you plan to change and fix the root cause at the shared boundary when possible.
+
+Do not confuse a small diff with a good diff. The smallest change in the wrong place is another bug.
+
+## Prefer the simplest complete solution
+
+Work through this order and stop at the first option that fully meets the current requirement:
+
+1. Do not build it if it is unnecessary or speculative.
+2. Reuse an existing helper, utility, type, or pattern from the codebase.
+3. Use the standard library.
+4. Use a native platform feature.
+5. Use an already-installed dependency.
+6. Use a direct, small implementation.
+7. Add new structure or dependencies only when the simpler options do not hold.
+
+Choose the simplest implementation that fully meets the current requirement. Prefer deletion over addition, boring code over clever code, and fewer files over unnecessary indirection. Do not add speculative abstractions, configuration, extension points, factories, interfaces with one implementation, or boilerplate for hypothetical future needs. Propose the simpler path when you see one.
+
+When two approaches are equally small, choose the one that handles edge cases correctly. Question complexity when a smaller solution covers the requirement, but do not simplify away anything the user explicitly requested. Propose bold ideas when they would meaningfully improve the product or architecture.
+
+## Design and implementation
+
+- Ship the smallest end-to-end version first, then layer capabilities onto a working product. Never trade a working product for unfinished complexity.
+- Keep modules cohesive and concerns clearly separated. Split or refactor implementation files that grow beyond roughly 500 lines; test files may be longer.
+- Treat architecture as a long-term decision. Do not introduce a stopgap that is already meant to be replaced later.
+- A deliberate simplification may have a known ceiling. Mark it with a `FIXME:` comment that names the limitation and the condition or upgrade path that would justify changing it.
+- Avoid new dependencies when the codebase, standard library, or platform already provides a sufficient solution.
+- Comment usage and reasoning, not every line. Prefer a brief note above the function or the language's module/API documentation, such as `@moduledoc` or `@doc`. Update comments whenever the code changes.
+
+Never be "lazy" about understanding the problem, validation at trust boundaries, error handling that prevents data loss, security, accessibility, or explicitly requested behavior. Real hardware also needs calibration controls because clocks drift and sensors vary.
+
+## Testing
+
+Use test-driven development for bug fixes and new functionality.
+
+Tests defend externally observable behavior, public APIs, contracts, and meaningful invariants. Avoid tests coupled to private helpers, endless smoke tests, tests that merely mirror the implementation, and "regression" tests for features that have been deleted.
+
+Every non-trivial change should leave behind the smallest runnable check that would fail if the behavior broke. Use one focused test or self-check when that is sufficient; add broader coverage only when the behavior or risk warrants it. Trivial one-line changes do not require ceremonial tests.
+
+## Debug logging
+
+Always log errors, unexpected exceptions, and operational failures with enough context to diagnose them. Long-running jobs must log their start, useful progress checkpoints, and completion so stalled work can be identified. Keep routine logging proportional and actionable rather than noisy.
+
+## Pull and merge requests
+
+- Attach PR/MR review comments to a relevant line or range, or reply to an existing comment. Never leave floating general review comments.
+- When creating a PR or MR, always assign the authenticated user through `gh`, `glab`, or the relevant MCP integration.
 
 ## Work contexts
 
@@ -25,16 +72,3 @@ Never mix contexts: don't read one company's tools from another's repo.
 2. No id → infer from cwd via the table.
 3. Bare "ticket": company work → that company's tracker; agent breakdown → personal Linear.
 4. Still ambiguous → ask. Never guess across companies.
-
-## Rules
-
-- Simplest implementation that meets the current requirement. No speculative abstractions, config, or indirection; propose the simpler path when you see one.
-- Propose bold ideas when they meaningfully help.
-- TDD for bug fixes and new functionality. Tests defend behavior - not endless smoke tests or "regression" tests for deleted features.
-- Comment usage/why, not every line. Prefer a brief note above the function or `@moduledoc`/`@doc`. Update comments with the code.
-- Implementation files ~500 lines; split if needed. Tests may be longer.
-- Ship the smallest end-to-end version, then layer capabilities on a working product. Never trade a working product for unfinished complexity.
-- Architecture is long-term. No stopgaps meant to be replaced later.
-- Always log errors/exceptions with enough context to debug.
-- PR/MR review comments attach to a line/range or reply to an existing comment - never floating general comments.
-- New PR/MR: always assign the authenticated user (`gh` / `glab` / MCP).
