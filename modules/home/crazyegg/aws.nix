@@ -51,6 +51,7 @@ in
         Unit.Description = "Refresh AWS session credentials";
         Service = {
           Type = "oneshot";
+          Environment = [ "PASSWORD_STORE_DIR=${config.xdg.dataHome}/password-store" ];
           ExecStart = lib.getExe awsSecrets;
         };
       };
