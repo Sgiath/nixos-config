@@ -76,23 +76,6 @@
         shortcut.url = "https://mcp.shortcut.com/mcp";
         notion-crazyegg.url = "https://mcp.notion.com/mcp";
         notion-remote.url = "https://mcp.notion.com/mcp";
-        slack-crazyegg = {
-          url = "https://mcp.slack.com/mcp";
-          oauth = {
-            clientId = "";
-            clientSecret = "";
-            callbackPort = 3000;
-            callbackPath = "/callback";
-          };
-          auth = {
-            type = "oauth";
-            clientId = "";
-            clientSecret = "";
-            credentialId = "mcp_oauth:profile:default:https://mcp.slack.com/mcp";
-            tokenUrl = "https://slack.com/api/oauth.v2.user.access";
-            resource = "https://mcp.slack.com";
-          };
-        };
         agent-skills = {
           enabled = false;
           url = "https://agentskills.io/mcp";
