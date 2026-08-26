@@ -45,7 +45,8 @@
     # CMake falls back to FetchContent, and the build sandbox has no network access.
     # Upstream removed the version limit on main in 91f29f2 (2026-08-04), code unchanged.
     # Pin the tag again when a release contains that commit (v0.56.3 or later).
-    # hyprland.url = "github:hyprwm/Hyprland";
+
+    # pin to v0.56.1
     hyprland.url = "github:hyprwm/Hyprland/v0.56.1";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -81,9 +82,9 @@
     prismlauncher.url = "github:PrismLauncher/PrismLauncher";
 
     # https://forgejo.ellis.link/continuwuation/continuwuity/releases
-    # v26.7.2
+    # v26.8.1
     continuwuity = {
-      url = "git+https://forgejo.ellis.link/continuwuation/continuwuity?rev=59c2649cdef53d900872aac2ff475fa5daa8274d";
+      url = "git+https://forgejo.ellis.link/continuwuation/continuwuity?rev=ab3c05dac6372ddda3d3279c59b998838094a8bc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -118,7 +119,7 @@
     };
 
     oh-my-pi = {
-      url = "github:can1357/oh-my-pi/v18.0.4";
+      url = "github:can1357/oh-my-pi/v18.0.5";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

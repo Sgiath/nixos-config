@@ -38,15 +38,15 @@
 
 let
   pname = "grok-bot";
-  version = "0.24.0";
-  releaseId = "302d75da596fc8d11ee0446a19b31c33c6676c2c";
+  version = "0.27.0";
+  releaseId = "62e6d780d1801f60e35f761c55b494b56b0ff01f";
 in
 stdenvNoCC.mkDerivation {
   inherit pname version;
 
   src = fetchurl {
     url = "https://downloads.cursor.com/grokbot/stable/${releaseId}/linux/x64/Grok_Bot_${version}.deb";
-    hash = "sha256-X9CR1j+kEHF3N3l64LFJZ+TxVnyuIB0QyDRDDkgH8y0=";
+    hash = "sha256-lJRLJUfjdLdNt2K/Lsyxkoz6c0vxuTRdsyfdlmrjFNg=";
   };
 
   nativeBuildInputs = [

@@ -59,41 +59,10 @@ let
   envFile = pkgs.writeText "opencode-web.env" (
     lib.concatLines (lib.mapAttrsToList (name: value: "${name}=${value}") env)
   );
-
-  # attach to the persistent server so sessions survive closing the TUI;
-  # `--dir` is required, otherwise the server falls back to its own cwd
-  oc = pkgs.writeShellApplication {
-    name = "oc";
-    runtimeInputs = [
-      pkgs.curl
-      pkgs.opencode
-    ];
-    text = ''
-      ${lib.toShellVars env}
-      export ${lib.concatStringsSep " " (builtins.attrNames env)}
-
-      if ! curl -sf --max-time 1 "${url}/global/health" > /dev/null; then
-        systemctl --user start opencode-web.service
-        for _ in $(seq 1 50); do
-          curl -sf --max-time 1 "${url}/global/health" > /dev/null && break
-          sleep 0.2
-        done
-      fi
-
-      if ! curl -sf --max-time 1 "${url}/global/health" > /dev/null; then
-        echo "opencode server did not come up on ${url}" >&2
-        echo "check: journalctl --user -u opencode-web.service" >&2
-        exit 1
-      fi
-
-      exec opencode attach "${url}" --dir "$PWD" "$@"
-    '';
-  };
 in
 {
   config = lib.mkIf config.sgiath.agents.enable {
     home.packages = [
-      oc
       pkgs.opencode-desktop
       pkgs.llm-agents.opencode2
     ];
@@ -194,7 +163,7 @@ in
         };
       };
       web = {
-        enable = true;
+        enable = false;
         environmentFile = envFile;
         extraArgs = [
           "--port"
@@ -207,6 +176,7 @@ in
     stylix.targets.opencode.enable = false;
 
     programs.zsh.shellAliases = {
+      oc = lib.getExe pkgs.opencode;
       omo-update = ''
         pushd ~/.cache/opencode && bun update && popd \
         && pushd ~/.cache/opencode/packages/oh-my-openagent@latest && bun add  oh-my-openagent@latest && popd \
