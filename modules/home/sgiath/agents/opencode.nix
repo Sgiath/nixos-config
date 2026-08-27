@@ -6,7 +6,7 @@
 }:
 let
   port = 24096;
-  url = "http://127.0.0.1:${toString port}";
+  # url = "http://127.0.0.1:${toString port}";
 
   imageModel =
     name: overrides:
