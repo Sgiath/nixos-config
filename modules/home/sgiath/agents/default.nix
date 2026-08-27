@@ -35,7 +35,6 @@
 
       # agents
       pkgs.llm-agents.grok
-      pkgs.llm-agents.goose-cli
 
       # tools
       pkgs.llm-agents.herdr
