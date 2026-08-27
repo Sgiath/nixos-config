@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  namespace,
   ...
 }:
 let
@@ -18,7 +17,6 @@ in
       kdePackages.okular
       libwacom
       appimage-run
-      pkgs.${namespace}.orca
     ];
 
     wayland.windowManager.hyprland.settings = {
@@ -73,13 +71,13 @@ in
       waybar.enable = false;
 
       # terminals
-      alacritty.enable = false;
+      alacritty.enable = true;
       kitty = {
         enable = true;
         settings.auto_reload_config = -1;
       };
-      wezterm.enable = false;
-      ghostty.enable = false;
+      wezterm.enable = true;
+      ghostty.enable = true;
 
       # utils
       voxtype.enable = true;

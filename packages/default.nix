@@ -10,7 +10,6 @@ pkgs: {
   nak = pkgs.callPackage ./nak { };
   nordic-gtk-theme = pkgs.callPackage ./nordic-gtk-theme { };
   omnisearch = pkgs.callPackage ./omnisearch { };
-  orca = pkgs.callPackage ./orca { };
   relay-tester = pkgs.callPackage ./relay-tester { };
   xurl = pkgs.callPackage ./xurl { };
 }
