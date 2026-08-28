@@ -7,7 +7,7 @@ let
   screenshot = pkgs.writeShellScriptBin "screenshot" ''
     if [[ ''${1:-} == "--monitor" ]]; then
       output="$(hyprctl -j monitors | ${lib.getExe pkgs.jq} -er '.[] | select(.focused) | .name')"
-      grim_args=(-o "$output")
+      grim_args=(-c -o "$output")
     else
       grim_args=(-g "$(${lib.getExe pkgs.slurp} -b 1B1F28CC -c E06B74ff -s C778DD0D -w 2)")
     fi
