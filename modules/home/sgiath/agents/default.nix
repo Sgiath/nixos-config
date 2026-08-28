@@ -12,6 +12,7 @@
     ./codex.nix
     ./cursor.nix
     ./dsh.nix
+    ./herdr.nix
     ./omp.nix
     ./opencode.nix
     ./pi.nix
@@ -38,7 +39,6 @@
       pkgs.llm-agents.grok
 
       # tools
-      pkgs.llm-agents.herdr
       pkgs.llm-agents.td
       pkgs.llm-agents.backlog-md
       pkgs.llm-agents.beads
