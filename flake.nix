@@ -79,7 +79,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    prismlauncher.url = "github:PrismLauncher/PrismLauncher";
+    prismlauncher = {
+      url = "github:PrismLauncher/PrismLauncher/11.0.3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # https://forgejo.ellis.link/continuwuation/continuwuity/releases
     # v26.8.1

@@ -1543,11 +1543,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1787360063,
-        "narHash": "sha256-95aJfHyQTLWslCXFVNB0odgmVkpdmDezQwTg9mhqV1E=",
-        "rev": "2c423e03bbafcff28bfadc6781a4a8257f205cb5",
+        "lastModified": 1774709303,
+        "narHash": "sha256-D4ely1FsBcvtj/qSrNhSWpq+CUZKNiKwJIxpxnfy9o4=",
+        "rev": "8110df5ad7abf5d4c0f6fb0f8f978390e77f9685",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1059570.2c423e03bbaf/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre971119.8110df5ad7ab/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
@@ -1736,15 +1736,16 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1787867852,
-        "narHash": "sha256-BPFDQnyrj2U4cnvbVVKsd2XvMbZU2O9+/2FUld6ZAq0=",
+        "lastModified": 1782496393,
+        "narHash": "sha256-0o31pLKnYY0mulLrZKzZtaTPzCviGsgCnEcBt0Y/aG4=",
         "owner": "PrismLauncher",
         "repo": "PrismLauncher",
-        "rev": "de7034be3d0f11be01bfd0f9cc43f8225b92af56",
+        "rev": "8ae894c7b1f74a58405a2dabd5614dae4ef3f08c",
         "type": "github"
       },
       "original": {
         "owner": "PrismLauncher",
+        "ref": "11.0.3",
         "repo": "PrismLauncher",
         "type": "github"
       }
