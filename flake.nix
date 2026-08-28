@@ -119,12 +119,12 @@
     };
 
     oh-my-pi = {
-      url = "github:can1357/oh-my-pi/v18.0.8";
+      url = "github:can1357/oh-my-pi/v18.0.9";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     opencode = {
-      url = "github:anomalyco/opencode/v1.18.23";
+      url = "github:anomalyco/opencode/v1.18.25";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
