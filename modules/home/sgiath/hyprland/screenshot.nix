@@ -5,7 +5,14 @@
 }:
 let
   screenshot = pkgs.writeShellScriptBin "screenshot" ''
-    ${lib.getExe pkgs.grim} -g "$(${lib.getExe pkgs.slurp} -b 1B1F28CC -c E06B74ff -s C778DD0D -w 2)" - \
+    if [[ ''${1:-} == "--monitor" ]]; then
+      output="$(hyprctl -j monitors | ${lib.getExe pkgs.jq} -er '.[] | select(.focused) | .name')"
+      grim_args=(-o "$output")
+    else
+      grim_args=(-g "$(${lib.getExe pkgs.slurp} -b 1B1F28CC -c E06B74ff -s C778DD0D -w 2)")
+    fi
+
+    ${lib.getExe pkgs.grim} "''${grim_args[@]}" - \
       | ${lib.getExe pkgs.satty} \
         --filename - \
         --output-filename "~/Pictures/Screenshots/%Y-%m-%dT%H%M%S.png" \
@@ -13,6 +20,7 @@ let
         --floating-hack
   '';
   command = lib.getExe screenshot;
+  monitorCommand = "${command} --monitor";
 in
 {
   home.packages = [
@@ -25,6 +33,12 @@ in
         _args = [
           "SUPER + S"
           (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON command})")
+        ];
+      }
+      {
+        _args = [
+          "SUPER + SHIFT + S"
+          (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON monitorCommand})")
         ];
       }
     ];
