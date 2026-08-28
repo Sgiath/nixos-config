@@ -32,6 +32,7 @@
   remote.enable = true;
   services = {
     cli-proxy-api.enable = true;
+    system-failure-watcher.enable = true;
     t3code.enable = true;
   };
 
