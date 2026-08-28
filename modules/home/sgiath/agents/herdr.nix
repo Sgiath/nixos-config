@@ -18,7 +18,7 @@ in
         toast.delivery = "system";
 
         sidebar.spaces = {
-          row_gap = 0;
+          row_gap = 1;
           rows = [
             [
               {
