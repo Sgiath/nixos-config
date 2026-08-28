@@ -37,6 +37,7 @@
 
       # agents
       pkgs.llm-agents.grok
+      pkgs.llm-agents.zcode
 
       # tools
       pkgs.llm-agents.td
