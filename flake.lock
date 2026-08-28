@@ -1479,11 +1479,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1787896377,
-        "narHash": "sha256-u1HnUhJrx177QYK/l3fvREA7RXNTbr4D0Oa8ARPBrFA=",
+        "lastModified": 1787898358,
+        "narHash": "sha256-FfubZev8M7stoA6LIGaIq4c2rVNtke0zM1Qx5wuJPrg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f480af0d223f97cb3699612e6359f8da3b2571ee",
+        "rev": "1f64d375096d8d662e6bd96a5f75148ceddd406a",
         "type": "github"
       },
       "original": {
@@ -1542,19 +1542,6 @@
       }
     },
     "nixpkgs_5": {
-      "locked": {
-        "lastModified": 1787736819,
-        "narHash": "sha256-IkjmqLoWzeqBAi1VIkdhDLMGjQDJ4suEDp59Zwxpswg=",
-        "rev": "9fbb54b33e91ee4ca368e35a78e0613c720600b3",
-        "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1062397.9fbb54b33e91/nixexprs.tar.xz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
-      }
-    },
-    "nixpkgs_6": {
       "locked": {
         "lastModified": 1774386573,
         "narHash": "sha256-4hAV26quOxdC6iyG7kYaZcM3VOskcPUrdCQd/nx8obc=",
@@ -1733,19 +1720,20 @@
     "prismlauncher": {
       "inputs": {
         "libnbtplusplus": "libnbtplusplus",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1782496393,
-        "narHash": "sha256-0o31pLKnYY0mulLrZKzZtaTPzCviGsgCnEcBt0Y/aG4=",
+        "lastModified": 1787867852,
+        "narHash": "sha256-BPFDQnyrj2U4cnvbVVKsd2XvMbZU2O9+/2FUld6ZAq0=",
         "owner": "PrismLauncher",
         "repo": "PrismLauncher",
-        "rev": "8ae894c7b1f74a58405a2dabd5614dae4ef3f08c",
+        "rev": "de7034be3d0f11be01bfd0f9cc43f8225b92af56",
         "type": "github"
       },
       "original": {
         "owner": "PrismLauncher",
-        "ref": "11.0.3",
         "repo": "PrismLauncher",
         "type": "github"
       }
@@ -2370,7 +2358,7 @@
     "voxtype": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_6"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1780004034,
