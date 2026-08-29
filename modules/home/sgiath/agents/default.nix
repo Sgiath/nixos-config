@@ -25,6 +25,10 @@
   };
 
   config = lib.mkIf config.sgiath.agents.enable {
+    home.activation.registerZcodeUrlHandler = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      run ${lib.getExe' pkgs.xdg-utils "xdg-mime"} default zcode.desktop x-scheme-handler/zcode
+    '';
+
     home.file.".agents/skills".source = ./skills;
     home.sessionVariables.GROK_SANDBOX = "off";
 

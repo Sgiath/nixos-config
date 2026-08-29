@@ -35,6 +35,10 @@
       ];
     };
 
+    home.activation.setChromiumAsPdfHandler = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      run ${lib.getExe' pkgs.xdg-utils "xdg-mime"} default chromium-browser.desktop application/pdf
+    '';
+
     wayland.windowManager.hyprland.settings.window_rule = [
       {
         match.class = "chromium-browser";
