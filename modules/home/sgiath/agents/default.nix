@@ -47,6 +47,7 @@
       pkgs.llm-agents.zcode
 
       # tools
+      pkgs.llm-agents.crit
       pkgs.llm-agents.td
       pkgs.llm-agents.backlog-md
       pkgs.llm-agents.beads
