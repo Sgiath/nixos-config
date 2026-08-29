@@ -1,14 +1,14 @@
 ---
 name: agent-session-evidence
-description: Scan local Oh My Pi, Pi, OpenCode, oh-my-openagent/Oh My OpenAgents, and Grok conversations for places agents were confused, stuck, or corrected; connect follow-up fixes across sessions and harnesses; and save project-grouped evidence for a separate diagnostic agent. Use when the user wants to review local coding-agent history, collect agent friction, find corrections or stalled work, or prepare conversation evidence for later root-cause analysis.
+description: Scan local Oh My Pi, Pi, OpenCode, oh-my-openagent/Oh My OpenAgents, and Grok conversations for places agents were confused, stuck, or corrected; connect follow-up fixes across sessions and harnesses; and save project-grouped evidence for agent-session-diagnostics. Use when the user wants to review local coding-agent history, collect agent friction, find corrections or stalled work, or prepare conversation evidence for later root-cause analysis.
 compatibility: Requires local access to the harness data directories, Python 3 with sqlite3, and Git. Reads transcript stores without modifying them.
 ---
 
 # Agent session evidence
 
-Collect evidence of agent friction from local coding-agent sessions. Keep storage-specific complexity inside this skill and produce one stable handoff format for the separate diagnostic skill.
+Collect evidence of agent friction from local coding-agent sessions. Keep storage-specific complexity inside this skill and produce one stable handoff format for `agent-session-diagnostics`.
 
-This skill finds and packages evidence. It does not decide why an agent failed, grade agents, recommend model or prompt changes, or repair the affected projects. Leave causal analysis to the downstream skill.
+This skill finds and packages evidence. It does not decide why an agent failed, grade agents, recommend model or prompt changes, or repair the affected projects. Leave causal analysis and preventive recommendations to `agent-session-diagnostics`.
 
 Read these before scanning:
 
@@ -40,15 +40,20 @@ Defaults:
 
 Create state and run directories with mode `0700` and files with mode `0600`. These artifacts can contain private source, prompts, and tool output. Keep them local. Never upload them or post them to a tracker.
 
-## Deterministic ledger helper
+## Deterministic helpers
 
-The helper is a bundled Python 3 CLI with its schema in `scripts/ledger_schema.sql`; it has no third-party dependencies. Run `python3 scripts/evidence_ledger.py --help` for the complete command interface.
+Two bundled Python 3 CLIs, both dependency-free:
+
+- `python3 scripts/inventory.py <run-dir>/inventory.jsonl [--window-hours 24] [--since ISO] [--until ISO] [--harness omp|pi|opencode|grok ...]` — metadata-only inventory of all stores (transcript headers/title slots, SQLite session tables, Grok `summary.json`). Emits `source_item` JSONL records ready for `pending`, plus `<output>.manifest` with store probes and the exact fingerprint algorithms. It never reads transcript bodies or credential stores. OMP subagent JSONLs are inventoried recursively; sibling `.log` artifacts are excluded.
+- `python3 scripts/evidence_ledger.py` — ledger creation, pending-item selection, batch checkpoints, and run state; schema in `scripts/ledger_schema.sql`. Run with `--help` for the complete interface.
+
+Ledger workflow:
 
 1. Run `init` once for a new state database. Every command also applies safe schema initialization and migration.
 2. Run `start-run --output-dir <run-dir> --filters-json '<json>'` before inventory processing. Keep the returned `run_id`.
 3. Send metadata-only inventory records as JSONL to `pending --schema-version <version>`. Use `--input <path>` or standard input. The command emits only records that require work and adds `pending_reason`.
 4. After a worker has durably written its batch files, send result records as JSONL to `checkpoint --run-id <id> --schema-version <version>`. The whole input batch validates before one transaction is committed. Records with `candidate` or `bundled` status must list `durable_paths` relative to the run output directory. Bundled source records must also list `case_ids`.
-5. Run `finish-run` with final counts and coverage, then use `status` when a compact ledger summary is needed.
+5. Write the final `manifest.json`, then run `finish-run` with the same final counts and coverage. `finish-run` validates both the supplied `cases`/`projects_with_cases` and the bundle manifest against durable `projects/*/cases/*.md` files before completing the ledger row. Use `status` when a compact ledger summary is needed.
 
 The JSONL record fields and status rules are in [handoff-format.md](references/handoff-format.md). Active sessions must be checkpointed as `partial`. Never call `checkpoint` before the referenced files exist.
 
@@ -84,6 +89,8 @@ For OpenCode, query session/project tables first and fetch message rows only for
 
 Inventory nested OMP subagent JSONL files recursively. Do not confuse sibling `.log` artifacts with transcripts.
 
+The run itself produces sessions: the coordinator's own OMP session and its subagent worker transcripts (named `<batch-id>.jsonl` under the coordinator's session artifact directory) land in the window and will be inventoried. That is expected meta-evidence — scan them normally, but expect the coordinator session to stay `partial` until the run ends, and expect worker-session activity (IRC, interrupts) to look like ordinary coordination, not friction.
+
 ### 3. Canonicalize projects
 
 Group by repository, not raw cwd. Worktrees and separate harnesses often record different paths for the same project.
@@ -94,6 +101,8 @@ Use this order:
 2. Absolute `git rev-parse --git-common-dir` identity for worktrees without a remote.
 3. Recorded repository root or harness project ID mapped back to its worktree.
 4. Normalized absolute cwd for non-Git work.
+
+Fusion/OMO worktrees are frequently pruned mid-project, so their recorded cwd may no longer be a git checkout (`git remote`/`rev-parse` both fail). Do not leave such sessions under a bare `cwd:` key when sibling evidence identifies the repository: merge them into the canonical remote using directory adjacency (worktree named after the repo, sitting beside the clone) plus OpenCode/OMO sessions in the same window that record the main repo directory. Record the merge and its justification in the manifest coverage notes.
 
 A session can touch more than one repository. Assign each candidate problem thread to the repository containing the affected files. Put a genuinely cross-repository thread under `_cross-project` and link it from each project index.
 
@@ -111,7 +120,9 @@ For repository context, fingerprint relevant `.omo`, legacy `.sisyphus`, and ref
 
 Never load all local history into one context. Use parallel subagents, with one canonical project per worker. A worker may receive sessions from several harnesses for that project because cross-harness linking is part of the task.
 
-Default first-pass batch limit: 25 sessions or 16 MiB of decoded transcript text, whichever comes first. Reduce the batch when tool outputs are dense. Run at most eight workers concurrently. Pass file paths or local artifacts to workers instead of pasting transcript bodies into prompts.
+Default first-pass batch limit: 12 sessions or 16 MiB of decoded transcript text, whichever comes first. Reduce further when tool outputs are dense. Prefer maximum parallelism: dispatch every unit as soon as its inputs exist, up to the harness subagent cap (32 concurrent) — do not hold workers back to keep phases tidy. Smaller batches mean more concurrent workers; per-batch candidate files keep them from colliding, and per-batch ledger checkpoints bound interruption loss to one batch. Pass file paths or local artifacts to workers instead of pasting transcript bodies into prompts.
+
+Schedule against the dependency graph, not against wave barriers. The only hard dependency in a first pass is per project: a project's linking and case materialization waits for every batch of that project, and nothing else. Do not hold a whole phase open until every worker finishes — dispatch the next queued worker or case writer whenever a concurrency slot frees and its own inputs are ready. Global barriers between phases are allowed only when a shared input actually changed for everyone (for example, after recovering a destroyed deliverable, only the affected projects must re-sync).
 
 The first pass is a candidate skim:
 
@@ -122,7 +133,11 @@ The first pass is a candidate skim:
 
 Do not materialize large successful tool outputs during the skim. Fetch the full session and relevant externalized outputs only after a signal is found.
 
-Each worker writes structured candidate records. The project coordinator links candidates only after every batch for that project has completed. It then materializes full evidence for linked sessions and updates the ledger.
+Each worker writes structured candidate records to `projects/<slug>/candidates-<batch-id>.jsonl` — one file per batch, never a shared per-project file. Concurrent workers for the same project MUST NOT write, truncate, merge, or prune anything outside their own batch namespace (`candidates-<batch-id>.jsonl`, `report-<batch-id>.json`, `transcripts/<harness>_<session-id>.jsonl`). A cleanup step that deletes "unreferenced" transcripts or rewrites a shared candidates file destroys sibling batches silently; the project coordinator merges batch files by union over `candidate_id` after every batch for that project has completed, materializes full evidence for linked sessions, and updates the ledger.
+
+Pass shared worker instructions either inline in the prompt or at one stable path recorded in the run manifest (e.g. `<run>/worker-instructions.md`) before dispatch. Do not move or rewrite that file while workers are running; workers that cannot find it will improvise contracts and drift.
+
+Recovery: if a worker's deliverables are destroyed or truncated, its own harness transcript usually contains the final materialization code and is enough to rebuild them. For OMP workers, read `<parent-session-dir>/<batch-id>.jsonl` (tool calls carry full `arguments.code` blocks; large outputs land in sibling `*.log` artifacts) and re-execute the last candidate/transcript-writing blocks in dependency order, then union by `candidate_id`. Verify recovered counts against each batch report before checkpointing.
 
 ### 6. Detect observable friction
 
@@ -138,6 +153,8 @@ A finding needs transcript evidence. Use these signal classes:
 Do not count a single handled tool error, an intentional red test in TDD, ordinary exploration, or a genuine user change of mind as friction.
 
 Quote exact evidence and include enough surrounding turns to distinguish these cases. Record confidence in detection and linkage, but do not infer a cause.
+
+These six classes are a closed enum. Workers sometimes invent plausible labels (`stuck.vanished_subject`, `confused.contradictory_observations`); before linking, the coordinator validates every candidate's `signal` against the enum, normalizes nonconforming values to the closest class above, preserves the original label in the record, and notes the normalization in the manifest.
 
 ### 7. Link work across sessions and harnesses
 

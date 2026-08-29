@@ -69,6 +69,8 @@ Data root is XDG data plus `opencode`, normally `~/.local/share/opencode/`. The 
 - `opencode.db` for `latest`, `beta`, and `prod`, or when `OPENCODE_DISABLE_CHANNEL_DB` is true.
 - `opencode-<channel>.db` for another installation channel.
 
+Multiple databases can exist side by side (e.g. `opencode.db` plus `opencode-next.db` from another schema/channel generation). Probe each with `mode=ro` and enumerate tables dynamically; skip databases whose `session` table is empty, and record skipped ones in the run manifest. Do not assume the newest-named file is the live one.
+
 The database uses WAL, normal synchronous mode, foreign keys, and a busy timeout. Open it read-only with WAL visibility.
 
 Current core tables:

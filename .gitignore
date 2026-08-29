@@ -7,3 +7,4 @@
 imgHashes.nix
 .omo/
 .opencode/
+__pycache__/

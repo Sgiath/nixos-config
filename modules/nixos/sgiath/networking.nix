@@ -25,6 +25,11 @@
         users.users.sgiath.extraGroups = [ "networkmanager" ];
       }
 
+      (lib.mkIf config.networking.networkmanager.enable {
+        networking.networkmanager.wifi.powersave = false;
+        systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+      })
+
       (lib.mkIf (!config.networking.networkmanager.enable) {
         networking = {
           defaultGateway = "192.168.1.1";

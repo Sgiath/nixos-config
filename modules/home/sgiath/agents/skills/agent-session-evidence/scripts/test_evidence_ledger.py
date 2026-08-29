@@ -72,6 +72,9 @@ class EvidenceLedgerCliTest(unittest.TestCase):
         self.assertEqual(started["run_id"], "run_test")
         self.assertEqual(started["status"], "running")
         self.assertEqual(stat.S_IMODE(self.output.stat().st_mode), 0o700)
+        case_path = self.output / "projects" / "project-a" / "cases" / "case_aaaaaaaaaaaa.md"
+        case_path.parent.mkdir(parents=True)
+        case_path.write_text("# case\n", encoding="utf-8")
 
         finished = self.output_records(
             self.run_cli(
@@ -90,6 +93,56 @@ class EvidenceLedgerCliTest(unittest.TestCase):
 
         status = self.output_records(self.run_cli("status"))[0]
         self.assertEqual(status["runs"], {"completed": 1})
+
+    def test_finish_run_rejects_case_count_mismatch(self):
+        self.start_run()
+        case_path = self.output / "projects" / "project-a" / "cases" / "case_aaaaaaaaaaaa.md"
+        case_path.parent.mkdir(parents=True)
+        case_path.write_text("# case\n", encoding="utf-8")
+
+        result = self.run_cli(
+            "finish-run",
+            "--run-id",
+            "run_test",
+            "--status",
+            "completed",
+            "--counts-json",
+            '{"cases":0}',
+            "--coverage-json",
+            "[]",
+            check=False,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("case files exist", result.stderr)
+        status = self.output_records(self.run_cli("status"))[0]
+        self.assertEqual(status["runs"], {"running": 1})
+
+    def test_finish_run_rejects_manifest_case_count_mismatch(self):
+        self.start_run()
+        case_path = self.output / "projects" / "project-a" / "cases" / "case_aaaaaaaaaaaa.md"
+        case_path.parent.mkdir(parents=True)
+        case_path.write_text("# case\n", encoding="utf-8")
+        (self.output / "manifest.json").write_text(
+            json.dumps({"counts": {"cases": 0}}),
+            encoding="utf-8",
+        )
+
+        result = self.run_cli(
+            "finish-run",
+            "--run-id",
+            "run_test",
+            "--status",
+            "completed",
+            "--counts-json",
+            '{"cases":1}',
+            "--coverage-json",
+            "[]",
+            check=False,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("manifest.json reports 0 cases", result.stderr)
+        status = self.output_records(self.run_cli("status"))[0]
+        self.assertEqual(status["runs"], {"running": 1})
 
     def test_pending_and_checkpoint_follow_incremental_rules(self):
         self.start_run()

@@ -418,10 +418,62 @@ def command_checkpoint(connection, _db_path, args):
                 )
     emit({"run_id": args.run_id, "checkpointed": len(records)})
 
+def validate_output_counts(output_dir, counts):
+    case_files = list(output_dir.glob("projects/*/cases/*.md"))
+    if "cases" in counts:
+        reported = counts["cases"]
+        if not isinstance(reported, int) or isinstance(reported, bool) or reported < 0:
+            raise UsageError("counts.cases must be a non-negative integer")
+        if reported != len(case_files):
+            raise UsageError(
+                f"counts reports {reported} cases but {len(case_files)} case files exist"
+            )
+    if "projects_with_cases" in counts:
+        reported = counts["projects_with_cases"]
+        if not isinstance(reported, int) or isinstance(reported, bool) or reported < 0:
+            raise UsageError("counts.projects_with_cases must be a non-negative integer")
+        actual = len({path.parents[1].name for path in case_files})
+        if reported != actual:
+            raise UsageError(
+                f"counts reports {reported} projects_with_cases but {actual} project case directories exist"
+            )
+    manifest_path = output_dir / "manifest.json"
+    if manifest_path.exists():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            raise UsageError(f"cannot validate {manifest_path}: {error}") from error
+        manifest_counts = manifest.get("counts", {})
+        if not isinstance(manifest_counts, dict):
+            raise UsageError("manifest.json counts must be an object")
+        if "cases" in manifest_counts:
+            reported = manifest_counts["cases"]
+            if not isinstance(reported, int) or isinstance(reported, bool) or reported < 0:
+                raise UsageError("manifest.json counts.cases must be a non-negative integer")
+            if reported != len(case_files):
+                raise UsageError(
+                    f"manifest.json reports {reported} cases but {len(case_files)} case files exist"
+                )
+        if "projects_with_cases" in manifest_counts:
+            reported = manifest_counts["projects_with_cases"]
+            if not isinstance(reported, int) or isinstance(reported, bool) or reported < 0:
+                raise UsageError(
+                    "manifest.json counts.projects_with_cases must be a non-negative integer"
+                )
+            actual = len({path.parents[1].name for path in case_files})
+            if reported != actual:
+                raise UsageError(
+                    f"manifest.json reports {reported} projects_with_cases but "
+                    f"{actual} project case directories exist"
+                )
+
+
 
 def command_finish_run(connection, _db_path, args):
     counts = parse_json_argument(args.counts_json, "--counts-json", dict)
     coverage = parse_json_argument(args.coverage_json, "--coverage-json", (dict, list))
+    output_dir = get_running_output_dir(connection, args.run_id)
+    validate_output_counts(output_dir, counts)
     finished_at = utc_now()
     cursor = connection.execute(
         """

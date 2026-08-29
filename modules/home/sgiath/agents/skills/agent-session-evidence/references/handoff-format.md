@@ -1,6 +1,6 @@
 # Handoff and ledger format
 
-This is the interface between the evidence collector and the separate diagnostic skill. Keep it stable. Add fields without renaming or removing existing fields; bump `schema_version` for an incompatible change.
+This is the interface between the evidence collector and `agent-session-diagnostics`. Keep it stable. Add fields without renaming or removing existing fields; bump `schema_version` for an incompatible change.
 
 ## Incremental ledger
 
@@ -101,6 +101,10 @@ The command emits only pending records and adds `pending_reason`: `new`, `active
 Checkpoint records keep their inventory fields and add `status`. They may also include `error`, `case_ids`, or `linked_session_ids` as appropriate. A `candidate` or `bundled` record must include `durable_paths`, an array of files relative to the run output directory. The CLI rejects missing files, absolute paths, and paths that escape the run directory. A bundled source item must include at least one case ID.
 
 `checkpoint` reads and validates the complete JSONL input before opening its transaction. A malformed line or invalid record leaves the whole batch uncommitted.
+
+Typical flow is two checkpoint passes: after each batch, commit scanned sessions as `no_signal`/`candidate`/`partial`; after cases are materialized, commit a second pass that upgrades case sessions to `bundled` with `case_ids` and re-checkpoints active sessions back to `partial`. A session materialized into a case beyond its original batch (e.g. a parent session pulled in by linking) gets its first checkpoint in that second pass.
+
+`context_file` checkpoint records follow the same rules as source items: they require `status` and, for `bundled`, `durable_paths` pointing at the copied file under the run output directory.
 
 ### Fingerprints
 
