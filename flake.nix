@@ -130,6 +130,11 @@
       url = "github:anomalyco/opencode/v1.18.25";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    crit = {
+      url = "github:tomasz-tomczyk/crit/v0.19.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {

@@ -3,6 +3,7 @@
   lib,
   pkgs,
   namespace,
+  inputs,
   ...
 }:
 {
@@ -47,7 +48,7 @@
       pkgs.llm-agents.zcode
 
       # tools
-      pkgs.llm-agents.crit
+      inputs.crit.packages.${pkgs.stdenv.hostPlatform.system}.crit
       pkgs.llm-agents.td
       pkgs.llm-agents.backlog-md
       pkgs.llm-agents.beads

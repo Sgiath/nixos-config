@@ -308,6 +308,27 @@
         "type": "github"
       }
     },
+    "crit": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787913935,
+        "narHash": "sha256-SY+BOdZpqSGGKl8MN4Yc/kVuGzLLgo8hPWkZuYvFhcc=",
+        "owner": "tomasz-tomczyk",
+        "repo": "crit",
+        "rev": "de61b1bb07d92df4869ea7b4438592d7105d9113",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tomasz-tomczyk",
+        "ref": "v0.19.1",
+        "repo": "crit",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -1794,6 +1815,7 @@
         "btc-clients": "btc-clients",
         "comfyui": "comfyui",
         "continuwuity": "continuwuity",
+        "crit": "crit",
         "disko": "disko",
         "flake-utils-plus-fixed": "flake-utils-plus-fixed",
         "foundryvtt": "foundryvtt",
