@@ -202,6 +202,10 @@ A case must contain:
 
 Keep cause and remedy sections absent. The downstream skill should be able to read the bundle and decide why the friction occurred without reopening every harness store.
 
+Case IDs are durable problem-thread identities, not run-local filenames. Reuse the same `case_id` when a later evidence run materializes the same thread, even when it adds a follow-up session or more context. Never include a run ID, run directory, output path, or collection timestamp in the identity. A genuinely separate problem gets a new case ID.
+
+`agent-session-review` records fixed evidence by this stable case ID. `agent-session-diagnostics` excludes those cases by default. The evidence ledger must still revisit a source when its fingerprint changes because appended transcript content can contain a different problem; do not suppress changed sources merely because one older case was fixed.
+
 Redact credential values, bearer tokens, private keys, and secrets found incidentally in transcript content. Preserve the surrounding command/error shape, record that redaction occurred, and keep the raw source locator and hash. Do not copy binary attachments; record path, MIME type, size, and hash, and copy only text needed to understand the case.
 
 ### 10. Finish the run

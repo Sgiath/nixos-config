@@ -86,6 +86,8 @@ List every evidence case and current project, instruction, skill, harness, or sy
 
 A non-preventable finding must use `remedy_target: none`. Every other finding must choose a concrete target.
 
+`status: proposed` describes the immutable diagnostic artifact and never changes in place. `agent-session-review` stores fixed findings and evidence cases in `${XDG_STATE_HOME:-$HOME/.local/state}/agent-session-review/state.json`; do not write review status into this frontmatter or the generated indexes.
+
 ## Cross-project findings
 
 Use `projects/_cross-project/findings/` with both `project_slug` and `project_key` set to `_cross-project` when a finding cites cases from at least two distinct project slugs. A case already emitted by the evidence collector under `projects/_cross-project/cases/` also qualifies by itself because its case bundle is the source-verified cross-project link. Cross-project remedy targets are limited to `global-agents`, `skill`, `harness`, `system`, or `none`.

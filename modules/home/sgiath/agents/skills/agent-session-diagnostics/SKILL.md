@@ -20,13 +20,16 @@ Accept a natural-language request or these flag-like arguments:
 - `--project <name|slug|path|remote>`: repeatable project filter.
 - `--case <case-id>`: repeatable case filter.
 - `--output <directory>`: diagnostic run directory.
+- `--include-fixed`: reassess evidence cases already marked fixed by `agent-session-review`.
+- `--review-state <file>`: override the review state used for fixed-case filtering.
 
-Without an explicit evidence run, use the latest finished run containing cases. Without project or case filters, assess every case. Filters narrow analysis but every selected case must still be covered by a finding. Record filters in the diagnostic manifest when invoking the helper through an orchestrator.
+Without an explicit evidence run, use the latest finished run containing cases. Without project or case filters, assess every unresolved case. The helper excludes evidence cases marked fixed by `agent-session-review`; use `--include-fixed` only when the user explicitly wants to reassess them. Filters narrow analysis, but every selected case must still be covered by a finding. Record filters in the diagnostic manifest when invoking the helper through an orchestrator.
 
 Defaults:
 
 - Evidence runs: `${XDG_STATE_HOME:-$HOME/.local/state}/agent-session-evidence/runs/`
 - Diagnostic runs: `${XDG_STATE_HOME:-$HOME/.local/state}/agent-session-diagnostics/runs/<UTC-run-id>/`
+- Review state: `${XDG_STATE_HOME:-$HOME/.local/state}/agent-session-review/state.json`
 
 Artifacts can contain private company and personal context. Keep directories mode `0700` and files mode `0600`. Never upload findings or post them to a tracker.
 
@@ -37,10 +40,10 @@ Artifacts can contain private company and personal context. Keep directories mod
 From this skill directory, run:
 
 ```bash
-python3 scripts/diagnostic_run.py prepare [--evidence-run <dir>] [--output-dir <dir>] [--project <filter>]... [--case <case-id>]...
+python3 scripts/diagnostic_run.py prepare [--evidence-run <dir>] [--output-dir <dir>] [--project <filter>]... [--case <case-id>]... [--include-fixed]
 ```
 
-Pass project and case filters to `prepare`; coverage is computed from its selected inventory, not from later worker prompts. Use the returned run directory and read `case-inventory.jsonl` plus the upstream manifest before dispatching analysis. Reject unfinished evidence runs, unsupported schemas, missing cases, or per-project manifest/file mismatches rather than guessing. If only an older manifest's aggregate case count is stale while every per-project count matches durable files, keep all files and record the helper's `input_warnings`; current collector finalization validates both its supplied counts and bundle manifest against durable case files.
+Pass project and case filters to `prepare`; coverage is computed from its selected unresolved inventory, not from later worker prompts. The manifest records how many fixed cases were skipped. Use the returned run directory and read `case-inventory.jsonl` plus the upstream manifest before dispatching analysis. Reject unfinished evidence runs, unsupported schemas, missing cases, invalid review state, or per-project manifest/file mismatches rather than guessing. If only an older manifest's aggregate case count is stale while every per-project count matches durable files, keep all files and record the helper's `input_warnings`; current collector finalization validates both its supplied counts and bundle manifest against durable case files.
 
 ### 2. Partition by project and dispatch immediately
 
@@ -142,3 +145,5 @@ python3 scripts/diagnostic_run.py finalize --run-dir <diagnostic-run>
 Finalization must succeed. It rejects malformed findings, unsupported targets, cross-project leakage, non-preventable findings with a remedy target, preventable findings without one, duplicate IDs, and uncovered cases. It writes project and top-level indexes and marks the manifest complete.
 
 Then review the generated indexes and spot-check at least one high-confidence finding, the lowest-confidence finding present, and every cross-project finding against cited evidence and current target files. Report the diagnostic run path, case and finding counts, and a short remedy-target breakdown. Do not claim any proposed remedy was applied.
+
+When the user wants to inspect or act on the proposals, hand the completed run to `agent-session-review`. That skill keeps mutable review state outside this immutable diagnostic run.

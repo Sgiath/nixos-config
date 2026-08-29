@@ -169,6 +169,64 @@ class DiagnosticRunCliTests(unittest.TestCase):
         self.assertEqual([item["case_id"] for item in inventory], ["case_bbbbbbbbbbbb"])
         manifest = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["filters"]["cases"], ["case_bbbbbbbbbbbb"])
+    def test_prepare_skips_fixed_evidence_cases(self) -> None:
+        review_state = self.root / "state" / "agent-session-review" / "state.json"
+        review_state.parent.mkdir(parents=True)
+        review_state.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "findings": {},
+                    "cases": {
+                        "case_aaaaaaaaaaaa": {
+                            "status": "fixed",
+                            "fixed_at": "2026-08-29T09:00:00Z",
+                        }
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        run_dir = self.prepare()
+        inventory = [
+            json.loads(line)
+            for line in (run_dir / "case-inventory.jsonl").read_text(encoding="utf-8").splitlines()
+        ]
+        manifest = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual([item["case_id"] for item in inventory], ["case_bbbbbbbbbbbb"])
+        self.assertEqual(manifest["counts"]["skipped_fixed_cases"], 1)
+        self.assertFalse(manifest["filters"]["include_fixed"])
+
+    def test_prepare_can_include_fixed_evidence_cases(self) -> None:
+        review_state = self.root / "state" / "agent-session-review" / "state.json"
+        review_state.parent.mkdir(parents=True)
+        review_state.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "findings": {},
+                    "cases": {"case_aaaaaaaaaaaa": {"status": "fixed"}},
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        result = self.run_cli(
+            "prepare",
+            "--evidence-run",
+            str(self.evidence_run),
+            "--include-fixed",
+        )
+        run_dir = Path(json.loads(result.stdout)["run_dir"])
+        inventory = [
+            json.loads(line)
+            for line in (run_dir / "case-inventory.jsonl").read_text(encoding="utf-8").splitlines()
+        ]
+        self.assertEqual(
+            [item["case_id"] for item in inventory],
+            ["case_aaaaaaaaaaaa", "case_bbbbbbbbbbbb"],
+        )
 
     def test_finalize_rejects_uncovered_cases(self) -> None:
         run_dir = self.prepare()

@@ -124,6 +124,25 @@ def default_diagnostic_root() -> Path:
     state = Path(os.environ.get("XDG_STATE_HOME", Path.home() / ".local" / "state"))
     return state / "agent-session-diagnostics" / "runs"
 
+def default_review_state_path() -> Path:
+    state = Path(os.environ.get("XDG_STATE_HOME", Path.home() / ".local" / "state"))
+    return state / "agent-session-review" / "state.json"
+
+
+def fixed_case_ids(path: Path) -> set[str]:
+    if not path.exists():
+        return set()
+    state = read_json(path)
+    if str(state.get("schema_version")) != "1" or not isinstance(state.get("cases"), dict):
+        raise DiagnosticError(f"invalid agent-session-review state: {path}")
+    return {
+        case_id
+        for case_id, record in state["cases"].items()
+        if CASE_ID_RE.fullmatch(case_id)
+        and isinstance(record, dict)
+        and record.get("status") == "fixed"
+    }
+
 
 def latest_finished_evidence_run(root: Path) -> Path:
     candidates: list[tuple[str, Path]] = []
@@ -221,7 +240,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     ]
     if unmatched_projects:
         raise DiagnosticError(f"unmatched project filters: {', '.join(unmatched_projects)}")
-    inventory = [
+    selected = [
         record
         for record in all_inventory
         if (not case_filters or record["case_id"] in case_filters)
@@ -235,7 +254,22 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
             )
         )
     ]
+    resolved = (
+        set()
+        if args.include_fixed
+        else fixed_case_ids(Path(args.review_state).expanduser().resolve())
+    )
+    skipped_fixed = sorted(
+        record["case_id"] for record in selected if record["case_id"] in resolved
+    )
+    inventory = [
+        record for record in selected if record["case_id"] not in resolved
+    ]
     if not inventory:
+        if skipped_fixed:
+            raise DiagnosticError(
+                "all selected evidence cases are fixed; pass --include-fixed to reassess them"
+            )
         raise DiagnosticError("case and project filters select no evidence cases")
     started_at = utc_now()
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "_" + secrets.token_hex(4)
@@ -267,8 +301,18 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         "evidence_run_id": evidence_manifest.get("run_id"),
         "evidence_manifest_sha256": source_sha256(evidence_run / "manifest.json"),
         "input_warnings": input_warnings,
-        "filters": {"cases": case_filters, "projects": project_filters},
-        "counts": {"input_cases": len(inventory), "covered_cases": 0, "findings": 0, "projects": len(projects)},
+        "filters": {
+            "cases": case_filters,
+            "projects": project_filters,
+            "include_fixed": args.include_fixed,
+        },
+        "counts": {
+            "input_cases": len(inventory),
+            "covered_cases": 0,
+            "findings": 0,
+            "projects": len(projects),
+            "skipped_fixed_cases": len(skipped_fixed),
+        },
         "projects": [projects[slug] for slug in sorted(projects)],
     }
     write_json(run_dir / "manifest.json", manifest)
@@ -475,6 +519,16 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_parser.add_argument("--output-dir", help="Explicit diagnostic output directory")
     prepare_parser.add_argument("--project", action="append", help="Project slug, key fragment, or path filter")
     prepare_parser.add_argument("--case", action="append", help="Exact evidence case ID filter")
+    prepare_parser.add_argument(
+        "--include-fixed",
+        action="store_true",
+        help="include evidence cases marked fixed by agent-session-review",
+    )
+    prepare_parser.add_argument(
+        "--review-state",
+        default=str(default_review_state_path()),
+        help="agent-session-review state JSON",
+    )
     prepare_parser.set_defaults(handler=prepare)
     finalize_parser = subparsers.add_parser("finalize", help="Validate findings, require case coverage, and write indexes")
     finalize_parser.add_argument("--run-dir", required=True, help="Diagnostic run directory")

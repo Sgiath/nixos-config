@@ -275,6 +275,8 @@ status: evidence-only
 ## Source map
 ```
 
+`case_id` is stable across runs for the same problem thread. Keep it when later evidence adds sessions or context. Its identity must not depend on the evidence run ID, output directory, or collection time because `agent-session-review` uses it to keep fixed evidence out of later diagnostic runs.
+
 Rules for case content:
 
 - `Session chain` is chronological and names harness, session ID, agent/model when known, cwd/worktree, start/end time, parent/fork relationship, and what joins it to the case.
