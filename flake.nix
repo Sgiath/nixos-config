@@ -106,7 +106,7 @@
       flake = false;
     };
 
-    voxtype.url = "github:peteonrails/voxtype/v0.7.5";
+    voxtype.url = "github:peteonrails/voxtype/v1.0.0";
     comfyui.url = "github:utensils/comfyui-nix/v0.34.0";
 
     # LLM tools
@@ -122,7 +122,7 @@
     };
 
     oh-my-pi = {
-      url = "github:can1357/oh-my-pi/v18.0.10";
+      url = "github:can1357/oh-my-pi/v18.0.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
