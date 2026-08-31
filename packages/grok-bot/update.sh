@@ -3,12 +3,12 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_NIX="${SCRIPT_DIR}/default.nix"
-UPDATE_URL="https://api2.cursor.sh/updates/api/update/darwin-arm64/sand/0.0.0/nix-package-updater/stable"
+UPDATE_URL="https://api2.cursor.sh/updates/api/update/linux-x64/sand/0.0.0/nix-package-updater/stable"
 
 echo "==> Fetching latest Grok Bot stable release metadata..."
 RELEASE_JSON="$(curl -fsSL "${UPDATE_URL}")"
 
-VERSION="$(jq -er '.name | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))' <<<"${RELEASE_JSON}")"
+VERSION="$(jq -er '.version | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))' <<<"${RELEASE_JSON}")"
 if [[ -n "${1:-}" && "${1#v}" != "${VERSION}" ]]; then
 	echo "ERROR: requested version ${1#v} is not the current stable release (${VERSION})" >&2
 	exit 1
@@ -18,7 +18,7 @@ RELEASE_META="$(
 )"
 PRODUCT="$(jq -er '.product' <<<"${RELEASE_META}")"
 RELEASE_ID="$(jq -er '.release' <<<"${RELEASE_META}")"
-URL="https://downloads.cursor.com/${PRODUCT}/stable/${RELEASE_ID}/linux/x64/Grok_Bot_${VERSION}.deb"
+URL="https://downloads.cursor.com/${PRODUCT}/stable/${RELEASE_ID}/linux/x64/grok-bot_${VERSION}_amd64.deb"
 
 echo "    Latest version: ${VERSION}"
 
