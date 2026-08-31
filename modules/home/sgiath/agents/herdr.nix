@@ -29,7 +29,7 @@ in
       theme = {
         name = "terminal";
         custom = {
-          accent = palette.peach;
+          accent = palette.red;
           panel_bg = palette.background;
           sidebar_bg = palette.panel;
           active_row_bg = palette.surface;
@@ -56,7 +56,7 @@ in
       };
 
       ui = {
-        accent = palette.peach;
+        accent = palette.green;
         agent_panel_scope = "all";
         agent_panel_sort = "spaces";
         status_indicators = "symbols";
