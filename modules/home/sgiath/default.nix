@@ -26,6 +26,7 @@
     ./tmux.nix
     ./waybar.nix
     ./web_browsers.nix
+    ./worktrunk.nix
     ./zsh.nix
   ];
 

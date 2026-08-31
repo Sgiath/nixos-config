@@ -2,18 +2,13 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
-let
-  worktrunk = inputs.worktrunk.packages.${pkgs.stdenv.hostPlatform.system}.default;
-in
 {
   config = lib.mkIf config.programs.git.enable {
     home = {
       packages = with pkgs; [
         git-crypt
-        worktrunk
       ];
     };
 
@@ -26,10 +21,6 @@ in
     };
 
     programs = {
-      zsh.initContent = lib.mkOrder 1000 ''
-        eval "$(${lib.getExe worktrunk} config shell init zsh)"
-      '';
-
       gh = {
         enable = true;
         settings = {

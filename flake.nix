@@ -217,6 +217,7 @@
         nix-index-database.homeModules.nix-index
         voxtype.homeManagerModules.default
         oh-my-pi.homeManagerModules.default
+        worktrunk.homeModules.default
       ];
     };
 }
