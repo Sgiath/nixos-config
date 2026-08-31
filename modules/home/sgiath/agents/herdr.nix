@@ -26,6 +26,8 @@ in
     settings = {
       onboarding = false;
 
+      experimental.kitty_graphics = true;
+
       theme = {
         name = "terminal";
         custom = {
@@ -76,11 +78,12 @@ in
           { type = "hostname"; }
           {
             type = "datetime";
-            format = "%H:%M";
+            format = "%H:%M:%S";
           }
+          { type = "text"; text = "    "; }
         ];
         tab_bar_right_separator = " · ";
-        window_title = "{workspace} — herdr";
+        window_title = "{workspace} - herdr";
 
         toast.delivery = "system";
 
@@ -126,6 +129,13 @@ in
             ];
           };
         };
+      };
+
+      keys = {
+        new_tab = "prefix+m";
+        next_tab = "prefix+n";
+        split_horizontal = "prefix+qote";
+        split_vertical = "prefix+qote";
       };
     };
   };
