@@ -31,7 +31,7 @@ in
       theme = {
         name = "terminal";
         custom = {
-          accent = palette.red;
+          accent = palette.green;
           panel_bg = palette.background;
           sidebar_bg = palette.panel;
           active_row_bg = palette.surface;
@@ -58,7 +58,7 @@ in
       };
 
       ui = {
-        accent = palette.green;
+        accent = palette.red;
         agent_panel_scope = "all";
         agent_panel_sort = "spaces";
         status_indicators = "symbols";
@@ -132,7 +132,7 @@ in
       };
 
       keys = {
-        split_horizontal = "prefix+qote";
+        split_horizontal = "prefix+quote";
         split_vertical = "prefix+percent";
       };
     };
