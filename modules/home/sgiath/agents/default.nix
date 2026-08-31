@@ -45,7 +45,6 @@
 
       # agents
       pkgs.llm-agents.grok
-      pkgs.llm-agents.zcode
 
       # tools
       inputs.crit.packages.${pkgs.stdenv.hostPlatform.system}.crit

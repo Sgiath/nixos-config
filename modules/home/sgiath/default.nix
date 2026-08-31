@@ -51,10 +51,10 @@
           done
           set -- "''${update_args[@]}"
 
+          git add --all
           if [[ "$no_commit" == false ]]; then
-            git add --all
             if ! commit_message="$(${lib.getExe pkgs.llm-agents.pi} \
-              --model cliproxy/gpt-5.6-luna:low \
+              --model openai-codex/gpt-5.6-luna:minimal \
               --print \
               --no-session \
               --no-tools \

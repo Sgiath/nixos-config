@@ -125,7 +125,7 @@ in
                 "state_text"
                 {
                   token = "agent";
-                  fg = palette.mauve;
+                  fg = palette.red;
                   bold = true;
                 }
               ]
