@@ -132,10 +132,8 @@ in
       };
 
       keys = {
-        new_tab = "prefix+m";
-        next_tab = "prefix+n";
         split_horizontal = "prefix+qote";
-        split_vertical = "prefix+qote";
+        split_vertical = "prefix+percent";
       };
     };
   };
