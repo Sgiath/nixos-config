@@ -80,7 +80,10 @@ in
             type = "datetime";
             format = "%H:%M:%S";
           }
-          { type = "text"; text = "    "; }
+          {
+            type = "text";
+            text = "  ";
+          }
         ];
         tab_bar_right_separator = " · ";
         window_title = "{workspace} - herdr";

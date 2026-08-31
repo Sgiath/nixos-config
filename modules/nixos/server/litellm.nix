@@ -5,10 +5,10 @@
       litellm = {
         port = 11111;
         settings = {
-          general_settings = {};
-          litellm_settings = {};
-          router_settings = {};
-          model_list = [];
+          general_settings = { };
+          litellm_settings = { };
+          router_settings = { };
+          model_list = [ ];
         };
       };
 

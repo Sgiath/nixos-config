@@ -8,7 +8,6 @@ mkShell {
     nil
     nixd
     nixfmt
-    nixfmt-tree
     nodejs
     shfmt
     prettier

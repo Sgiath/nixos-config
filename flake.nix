@@ -39,6 +39,10 @@
       inputs.flake-utils-plus.follows = "flake-utils-plus-fixed";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Unpinned from v0.56.2: that release requires glaze 7, but nixpkgs ships glaze 8.
     # Its CMakeLists.txt has `find_package(glaze 7...<8 QUIET)`, which then fails.
@@ -181,6 +185,17 @@
       };
     in
     lib.mkFlake {
+      outputs-builder =
+        channels:
+        let
+          treefmt = inputs.treefmt-nix.lib.evalModule channels.nixpkgs {
+            projectRootFile = "flake.nix";
+            programs.nixfmt.enable = true;
+          };
+        in
+        {
+          formatter = treefmt.config.build.wrapper;
+        };
       channels-config = {
         allowUnfree = true;
       };
