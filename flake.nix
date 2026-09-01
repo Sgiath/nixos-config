@@ -110,7 +110,7 @@
       flake = false;
     };
 
-    voxtype.url = "github:peteonrails/voxtype/v1.0.0";
+    voxtype.url = "github:peteonrails/voxtype/v1.0.1";
     comfyui.url = "github:utensils/comfyui-nix/v0.34.0";
 
     # LLM tools
@@ -121,7 +121,7 @@
     };
 
     hermes-agent = {
-      url = "github:NousResearch/hermes-agent/v2026.8.27";
+      url = "github:NousResearch/hermes-agent/v2026.8.31";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
