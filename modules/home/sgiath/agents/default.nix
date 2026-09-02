@@ -64,7 +64,6 @@
     ]
     ++ (lib.optionals config.sgiath.targets.graphical [
       pkgs.llm-agents.hermes-desktop
-      pkgs.${namespace}.grok-bot
     ]);
 
     programs.mcp = {
