@@ -8,3 +8,4 @@ imgHashes.nix
 .omo/
 .opencode/
 __pycache__/
+/packages/delta/delta-linux-x86_64.tar.gz

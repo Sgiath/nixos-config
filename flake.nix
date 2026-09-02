@@ -101,7 +101,7 @@
     };
 
     worktrunk = {
-      url = "github:max-sixty/worktrunk/v0.75.0";
+      url = "github:max-sixty/worktrunk/v0.76.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -126,12 +126,12 @@
     };
 
     oh-my-pi = {
-      url = "github:can1357/oh-my-pi/v18.0.11";
+      url = "github:can1357/oh-my-pi/v18.1.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     opencode = {
-      url = "github:anomalyco/opencode/v1.18.25";
+      url = "github:anomalyco/opencode/v1.18.26";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

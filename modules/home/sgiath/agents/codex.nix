@@ -7,7 +7,8 @@
 {
   config = lib.mkIf config.sgiath.agents.enable {
     home = {
-      packages = [ pkgs.llm-agents.codex ];
+      packages = [ pkgs.llm-agents.codex ]
+      ++ (lib.optionals config.sgiath.targets.graphical [ pkgs.llm-agents.chatgpt ]);
       file.".codex/AGENTS.md".source = ./AGENTS.md;
     };
 

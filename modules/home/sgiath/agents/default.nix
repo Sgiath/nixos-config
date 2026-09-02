@@ -57,13 +57,13 @@
       pkgs.llm-agents.plannotator
       pkgs.${namespace}.clawpatch
       pkgs.${namespace}.xurl
+      pkgs.${namespace}.delta
 
       # Hermes
       pkgs.llm-agents.hermes-agent
     ]
     ++ (lib.optionals config.sgiath.targets.graphical [
       pkgs.llm-agents.hermes-desktop
-      pkgs.llm-agents.chatgpt
       pkgs.${namespace}.grok-bot
     ]);
 

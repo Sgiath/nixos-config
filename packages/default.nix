@@ -5,6 +5,7 @@ pkgs: {
   buzz-relay = pkgs.callPackage ./buzz-relay { };
   clawpatch = pkgs.callPackage ./clawpatch { };
   codex-desktop = pkgs.callPackage ./codex-desktop { };
+  delta = pkgs.callPackage ./delta { };
   dnd5etools = pkgs.callPackage ./dnd5etools { };
   grok-bot = pkgs.callPackage ./grok-bot { };
   nak = pkgs.callPackage ./nak { };
