@@ -18,7 +18,8 @@
         "vm.watermark_scale_factor" = 125;
         "vm.dirty_background_bytes" = 67108864;
         "vm.dirty_bytes" = 268435456;
-        "vm.dirty_writeback_centisecs" = 1500;
+        "vm.dirty_writeback_centisecs" = 500;
+        "vm.dirty_expire_centisecs" = 1500;
       };
       kernelParams = [ "threadirqs" ];
       extraModprobeConfig = ''
@@ -53,9 +54,17 @@
           DefaultMemoryPressureDurationSec = "20s";
         };
       };
-      user.slices.app.sliceConfig = {
-        ManagedOOMMemoryPressure = "kill";
-        ManagedOOMSwap = "kill";
+      user.slices = {
+        app.sliceConfig = {
+          ManagedOOMMemoryPressure = "kill";
+          ManagedOOMSwap = "kill";
+        };
+
+        background-build.sliceConfig = {
+          IOAccounting = true;
+          CPUWeight = 25;
+          IOWriteBandwidthMax = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_4TB_S7DPNF0XA13591K 200M";
+        };
       };
       settings.Manager = {
         DefaultTimeoutStopSec = "5s";

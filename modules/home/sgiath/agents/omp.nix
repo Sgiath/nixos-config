@@ -17,5 +17,9 @@ in
         PUPPETEER_EXECUTABLE_PATH = lib.getExe config.programs.chromium.package;
       };
     };
+
+    programs.zsh.shellAliases = {
+      omp = "systemd-run --user --scope --quiet --slice=background-build.slice ${lib.getExe omp}";
+    };
   };
 }

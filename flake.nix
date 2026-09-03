@@ -57,11 +57,7 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    # pin to v4.7.7
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell/v4.7.7";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    noctalia.url = "github:noctalia-dev/noctalia/v5.0.1";
 
     btc-clients = {
       url = "github:emmanuelrosa/btc-clients-nix";
@@ -126,7 +122,7 @@
     };
 
     oh-my-pi = {
-      url = "github:can1357/oh-my-pi/v18.1.5";
+      url = "github:can1357/oh-my-pi/v18.1.7";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -202,7 +198,6 @@
 
       overlays = with inputs; [
         hyprland.overlays.default
-        noctalia.overlays.default
         hermes-agent.overlays.default
         llm-agents.overlays.shared-nixpkgs
         prismlauncher.overlays.default

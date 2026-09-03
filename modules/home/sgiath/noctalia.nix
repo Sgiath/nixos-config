@@ -5,84 +5,99 @@
   ...
 }:
 let
-  sessionMenuCommand = "${lib.getExe pkgs.noctalia-shell} ipc call sessionMenu toggle";
-  launcherCommand = "${lib.getExe pkgs.noctalia-shell} ipc call launcher toggle";
+  noctalia = lib.getExe config.programs.noctalia.package;
+  sessionMenuCommand = "${noctalia} msg panel-toggle session";
+  launcherCommand = "${noctalia} msg panel-toggle launcher";
 in
 {
-  config = lib.mkIf config.programs.noctalia-shell.enable {
-    home.packages = with pkgs; [
-      grim
-      imagemagick
-      wl-clipboard
-      satty
-      swappy
-    ];
+  config = lib.mkIf config.programs.noctalia.enable {
+    programs.noctalia = {
+      systemd.enable = true;
 
-    programs.noctalia-shell = {
       settings = {
-        bar = {
-          density = "spacious";
-          monitors = [
-            "DP-1"
-            "DP-3"
-            "eDP-1"
-          ];
-          widgets = {
-            left = [
-              { id = "Launcher"; }
-              { id = "ActiveWindow"; }
-              { id = "MediaMini"; }
-            ];
-            center = [
-              {
-                id = "Workspace";
-                occupiedColor = "tertiary";
-                showLabelsOnlyWhenOccupied = false;
-                pillSize = 0.75;
-              }
-            ];
-            right = [
-              { id = "SystemMonitor"; }
-              { id = "NotificationHistory"; }
-              { id = "Battery"; }
-              { id = "Volume"; }
-              { id = "Clock"; }
-              { id = "Tray"; }
-              { id = "ControlCenter"; }
-            ];
-          };
-        };
+        shell = {
+          avatar_path = "/home/sgiath/Pictures/profile/cyborg_cowboy_head.jpg";
+          time_format = "{:%H:%M:%S}";
+          date_format = "%Y-%m-%d";
+          launch_apps_as_systemd_services = true;
 
-        general = {
-          avatarImage = "/home/sgiath/Pictures/profile/cyborg_cowboy_head.jpg";
-          clockFormat = "HH:mm:ss yyyy-MM-dd";
-        };
-
-        location = {
-          monthBeforeDay = true;
-          name = "Ostrava, Czechia";
-        };
-
-        appLauncher = {
-          pinnedApps = [
+          launcher.pinned = [
             "chromium-browser"
             "google-chrome"
             "firefox"
           ];
-          terminalCommand = "${lib.getExe pkgs.kitty} -e";
+        };
+
+        location.address = "Ostrava, Czechia";
+        weather.enabled = true;
+
+        bar.main = {
+          enabled = false;
+          thickness = 47;
+          capsule_thickness = 0.65;
+
+          start = [
+            "launcher"
+            "active_window"
+            "media"
+          ];
+          center = [ "workspaces" ];
+          end = [
+            "cpu"
+            "temperature"
+            "memory"
+            "notifications"
+            "battery"
+            "volume"
+            "clock"
+            "tray"
+            "control-center"
+          ];
+
+          monitor = {
+            "DP-1".enabled = true;
+            "DP-3".enabled = true;
+            "eDP-1".enabled = true;
+          };
+        };
+
+        widget = {
+          workspaces = {
+            occupied_color = "tertiary";
+            labels_only_when_occupied = false;
+            pill_scale = 0.75;
+          };
+          media.album_art_only = true;
+
+          cpu = {
+            type = "sysmon";
+            stat = "cpu_usage";
+          };
+          temperature = {
+            type = "sysmon";
+            stat = "cpu_temp";
+          };
+          memory = {
+            type = "sysmon";
+            stat = "ram_used";
+          };
+
+          clock.format = "{:%H:%M:%S %Y-%m-%d}";
         };
 
         dock = {
-          size = 2;
-          onlySameOutput = false;
+          enabled = true;
+          icon_size = 60;
+          active_monitor_only = false;
           monitors = [ "DP-1" ];
+          auto_hide = true;
         };
 
-        notifications = {
-          monitors = [ "DP-1" ];
-        };
+        notification.monitors = [ "DP-1" ];
       };
     };
+
+    systemd.user.services.noctalia.Service.Environment = "TERMINAL=${lib.getExe pkgs.kitty}";
 
     wayland.windowManager.hyprland.settings = {
       bind = [
@@ -103,30 +118,13 @@ in
       layer_rule = [
         {
           name = "noctalia";
-          match.namespace = "noctalia-background-.*$";
+          match.namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$";
+          no_anim = true;
           ignore_alpha = 0.5;
           blur = true;
           blur_popups = true;
         }
       ];
-    };
-
-    systemd.user.services.noctalia-shell = {
-      Unit = {
-        Description = "Noctalia shell";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-
-      Service = {
-        ExecStart = "${lib.getExe pkgs.noctalia-shell}";
-        Restart = "on-failure";
-        RestartSec = 2;
-      };
-
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
     };
   };
 }
