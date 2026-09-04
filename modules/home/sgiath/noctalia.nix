@@ -34,7 +34,13 @@ in
         bar.main = {
           enabled = false;
           thickness = 47;
+          background_opacity = 0.93;
+          padding = 2;
+          capsule = true;
           capsule_thickness = 0.65;
+          capsule_padding = 10;
+          widget_spacing = 10;
+          margin_ends = 0;
 
           start = [
             "launcher"
@@ -43,15 +49,26 @@ in
           ];
           center = [ "workspaces" ];
           end = [
-            "cpu"
-            "temperature"
-            "memory"
+            "group:system-monitor"
             "notifications"
             "battery"
             "volume"
             "clock"
             "tray"
             "control-center"
+          ];
+
+          capsule_group = [
+            {
+              id = "system-monitor";
+              padding = 5;
+              widget_spacing = 24;
+              members = [
+                "cpu"
+                "temperature"
+                "memory"
+              ];
+            }
           ];
 
           monitor = {
@@ -65,7 +82,8 @@ in
           workspaces = {
             occupied_color = "tertiary";
             labels_only_when_occupied = false;
-            pill_scale = 0.75;
+            scale = 1.45;
+            pill_scale = 1.0;
           };
           media.album_art_only = true;
 
@@ -82,7 +100,7 @@ in
             stat = "ram_used";
           };
 
-          clock.format = "{:%H:%M:%S %Y-%m-%d}";
+          clock.format = "{:%Y-%m-%d %H:%M:%S}";
         };
 
         dock = {
@@ -91,6 +109,7 @@ in
           active_monitor_only = false;
           monitors = [ "DP-1" ];
           auto_hide = true;
+          reserve_space = false;
         };
 
         notification.monitors = [ "DP-1" ];
