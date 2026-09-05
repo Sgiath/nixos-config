@@ -4,11 +4,30 @@
   pkgs,
   ...
 }:
-let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.searx.enable) {
+    sops.secrets.searx_secret.restartUnits = [
+      "searx-init.service"
+      (if config.services.searx.configureUwsgi then "uwsgi.service" else "searx.service")
+    ];
+    # The upstream envsubst step does not escape JSON string values.
+    systemd.services.searx-init = {
+      serviceConfig.LoadCredential = [
+        "secret-key:${config.sops.secrets.searx_secret.path}"
+      ];
+      script = lib.mkForce ''
+        umask 077
+        ${pkgs.jq}/bin/jq --rawfile secret "$CREDENTIALS_DIRECTORY/secret-key" \
+          '.server.secret_key = $secret' \
+          ${
+            pkgs.writeText "searx-settings.json" (
+              builtins.toJSON (builtins.removeAttrs config.services.searx.settings [ "redis" ])
+            )
+          } \
+          > /run/searx/settings.yml
+      '';
+    };
+
     services.searx = {
       package = pkgs.searxng;
       settings = {
@@ -51,7 +70,6 @@ in
           bind_address = "127.0.0.1";
           port = 8080;
           base_url = "https://search.sgiath.dev/";
-          secret_key = secrets.searx_secret;
           http_protocol_version = "1.1";
         };
         outgoing = {

@@ -4,6 +4,32 @@
   pkgs,
   ...
 }:
+let
+  deployVesta = pkgs.writeShellScript "deploy-vesta" ''
+    set -euo pipefail
+
+    signing_key=/run/secrets/nix-signing-key
+    if ! sudo test -r "$signing_key"; then
+      echo "Vesta deployment requires the signing key at $signing_key. Activate the Ceres signing-key configuration first." >&2
+      exit 1
+    fi
+
+    nix-store --add-fixed sha256 "$HOME/nix-root/FoundryVTT-Linux-14.367.zip"
+
+    # Keep this closure rooted until activation without replacing the user's result.
+    build_dir=$(mktemp -d)
+    trap 'rm -rf -- "$build_dir"' EXIT
+    nix build "$@" --no-update-lock-file --out-link "$build_dir/result" \
+      '.#nixosConfigurations.vesta.config.system.build.toplevel'
+    toplevel=$(readlink -e "$build_dir/result")
+
+    # Cached outputs may predate daemon signing; sign only this deployment closure.
+    sudo nix store sign --recursive --key-file "$signing_key" "$toplevel"
+    NIX_SSHOPTS="''${NIX_SSHOPTS:+$NIX_SSHOPTS }-o IdentityAgent=$SSH_AUTH_SOCK" \
+      nixos-rebuild switch --sudo --store-path "$toplevel" \
+      --target-host 'sgiath@vesta.local'
+  '';
+in
 {
   imports = [
     ./audio.nix
@@ -19,6 +45,7 @@
     ./gnupg.nix
     ./hyprland.nix
     ./noctalia.nix
+    ./secrets.nix
     ./ssh.nix
     ./starship.nix
     ./stt.nix
@@ -50,6 +77,10 @@
             fi
           done
           set -- "''${update_args[@]}"
+          case "''${1:-}" in
+            ""|--ceres|--vesta|--iso) ;;
+            *) echo "Unknown update target: $1" >&2; exit 2 ;;
+          esac
 
           git add --all
           if [[ "$no_commit" == false ]]; then
@@ -85,12 +116,8 @@
               ;;
 
             --vesta)
-              nix-store --add-fixed sha256 ~/nix-root/FoundryVTT-Linux-14.367.zip
-              NIX_SSHOPTS="-o IdentityAgent=$SSH_AUTH_SOCK" nixos-rebuild switch --sudo --flake '.#vesta' --target-host 'vesta.local'
-              ;;
-
-            --hygiea)
-              nixos-rebuild switch --sudo --flake '.#hygiea' --target-host 'sgiath@hygiea.sgiath.dev'
+              shift
+              ${deployVesta} "$@" || exit $?
               ;;
 
             --iso)
@@ -110,6 +137,10 @@
 
         (writeShellScriptBin "update-limited" ''
           pushd ~/nixos
+          case "''${1:-}" in
+            ""|--ceres|--vesta|--iso) ;;
+            *) echo "Unknown update target: $1" >&2; exit 2 ;;
+          esac
 
           case "$1" in
             --ceres)
@@ -117,12 +148,8 @@
               ;;
 
             --vesta)
-              nix-store --add-fixed sha256 ~/nix-root/FoundryVTT-Linux-13.361.zip
-              nixos-rebuild switch --sudo --max-jobs 2 --cores 12 --flake '.#vesta' --target-host 'sgiath@vesta.local'
-              ;;
-
-            --hygiea)
-              nixos-rebuild switch --sudo --max-jobs 2 --cores 12 --flake '.#hygiea' --target-host 'sgiath@hygiea.sgiath.dev'
+              shift
+              ${deployVesta} --max-jobs 2 --cores 12 "$@" || exit $?
               ;;
 
             --iso)

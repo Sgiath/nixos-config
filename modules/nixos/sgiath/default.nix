@@ -5,9 +5,6 @@
   pkgs,
   ...
 }:
-let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
 {
   imports = [
     # always enabled
@@ -16,6 +13,7 @@ in
     ./networking.nix
     ./optimizations.nix
     ./security.nix
+    ./secrets.nix
     ./stylix.nix
     ./time_lang.nix
     ./udev.nix
@@ -60,14 +58,9 @@ in
       nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       package = pkgs.nixVersions.latest;
       settings = {
-        access-tokens = "github.com=${secrets.github_token}";
         auto-optimise-store = true;
-        require-sigs = false;
-        trusted-users = [
-          "root"
-          "sgiath"
-          "@wheel"
-        ];
+        require-sigs = true;
+        trusted-users = [ "root" ];
         experimental-features = [
           "nix-command"
           "flakes"
@@ -90,16 +83,6 @@ in
     users.defaultUserShell = pkgs.zsh;
     environment.sessionVariables = {
       SSH_AUTH_SOCK = "/run/user/1000/gnupg/S.gpg-agent.ssh";
-      OPENAI_API_KEY = secrets.openai;
-      # XAI_API_KEY = secrets.xai;
-      # GEMINI_API_KEY = secrets.gemini;
-      # ANTHROPIC_API_KEY = secrets.anthropic;
-      OPENROUTER_API_KEY = secrets.openrouter;
-      GITHUB_PERSONAL_ACCESS_TOKEN = secrets.github_token;
-      GITHUB_TOKEN = secrets.github_token;
-      GH_TOKEN = secrets.github_token;
-      LINEAR_API_KEY = secrets.linear_api_key;
-      CLIPROXY_API_KEY = secrets.cliproxy_api_key;
     };
     programs = {
       nix-ld.enable = true;

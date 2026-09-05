@@ -16,33 +16,104 @@ let
       "web"
     ];
   };
+  stateDir = "/var/lib/hermes-agent";
+  birdVesta = pkgs.writeShellApplication {
+    name = "bird-vesta";
+    runtimeInputs = [ pkgs.nodejs_22 ];
+    text = ''
+      CREDS_FILE=${lib.escapeShellArg config.sops.secrets.hermes-bird-env.path}
+      SCRAPER_DIR=${lib.escapeShellArg "${stateDir}/workspace/twitter-scraper"}
+      BIRD_BIN=${lib.getExe pkgs.${namespace}.bird}
+    ''
+    + builtins.readFile ./hermes-bird-vesta.sh;
+  };
+  migrateState = pkgs.writeShellApplication {
+    name = "hermes-migrate-state";
+    runtimeInputs = with pkgs; [
+      (python3.withPackages (ps: [ ps.pyyaml ]))
+      rsync
+      systemd
+    ];
+    text = ''
+      exec python3 ${./hermes-migrate.py}
+    '';
+  };
+  confinement = {
+    NoNewPrivileges = true;
+    ProtectSystem = "strict";
+    ProtectHome = true;
+    PrivateTmp = true;
+    ReadWritePaths = [ stateDir ];
+    InaccessiblePaths = [
+      "-/run/docker.sock"
+      "-/run/podman"
+      "-/data"
+    ];
+    UMask = "0007";
+  };
 in
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.hermes-agent.enable) {
     users.groups.hermes.members = [ "sgiath" ];
+    # Upstream activation creates the home after migration, without skeleton
+    # files that would make an otherwise empty destination ambiguous.
+    users.users.hermes.createHome = lib.mkForce false;
+    users.users.hermes.extraGroups = lib.mkForce [ ];
+
+    # Only the initial, no-follow state copy runs as root. Upstream setup
+    # operates on agent-writable files and must not follow symlinks as root.
+    system.activationScripts.hermes-agent-setup.text = lib.mkMerge [
+      (lib.mkBefore ''
+        (
+        set -e
+        rm -f /run/hermes-agent-setup.ready
+        ${lib.getExe migrateState}
+        ${pkgs.util-linux}/bin/setpriv --reuid=hermes --regid=hermes \
+          --clear-groups --no-new-privs \
+          ${pkgs.coreutils}/bin/env -i PATH="$PATH" HOME=${stateDir} USER=hermes LOGNAME=hermes \
+          ${pkgs.bash}/bin/bash -e <<'HERMES_UNPRIVILEGED_SETUP'
+        install -d -m 2770 ${stateDir}/.local/bin
+        ln -sfn ${lib.getExe pkgs.${namespace}.bird} ${stateDir}/.local/bin/bird
+        ln -sfn ${lib.getExe birdVesta} ${stateDir}/.local/bin/bird-vesta
+      '')
+      (lib.mkAfter ''
+        HERMES_UNPRIVILEGED_SETUP
+        touch /run/hermes-agent-setup.ready
+        )
+      '')
+    ];
 
     systemd.services = {
-      hermes-agent.after = [ "continuwuity.service" ];
+      hermes-agent = {
+        after = [ "continuwuity.service" ];
+        unitConfig.ConditionPathExists = "/run/hermes-agent-setup.ready";
+        serviceConfig = confinement // {
+          ProtectHome = lib.mkForce true;
+        };
+      };
       hermes-dashboard = {
         description = "Hermes Agent web dashboard";
         wantedBy = [ "multi-user.target" ];
         after = [ "hermes-agent.service" ];
         wants = [ "hermes-agent.service" ];
+        unitConfig.ConditionPathExists = "/run/hermes-agent-setup.ready";
 
-        serviceConfig = {
-          User = "sgiath";
+        path = config.services.hermes-agent.extraPackages;
+        serviceConfig = confinement // {
+          User = "hermes";
           Group = "hermes";
-          WorkingDirectory = "/home/sgiath/hermes";
-          EnvironmentFile = [ "/home/sgiath/hermes/.hermes/.env" ];
-          ExecStart = "${hermesPackage}/bin/hermes dashboard --host 0.0.0.0 --port 9119 --no-open";
+          WorkingDirectory = stateDir;
+          EnvironmentFile = [ "${stateDir}/.hermes/.env" ];
+          ExecStart = "${hermesPackage}/bin/hermes dashboard --host 127.0.0.1 --port 9119 --no-open";
           Restart = "on-failure";
           RestartSec = 5;
         };
 
         environment = {
+          HOME = stateDir;
           HERMES_MANAGED = "false";
           HERMES_DASHBOARD_TUI = "1";
-          HERMES_HOME = "/home/sgiath/hermes/.hermes";
+          HERMES_HOME = "${stateDir}/.hermes";
         };
       };
     };
@@ -50,10 +121,11 @@ in
     services = {
       hermes-agent = {
         package = hermesPackage;
-        createUser = false;
-        user = "sgiath";
+        createUser = true;
+        user = "hermes";
         group = "hermes";
-        stateDir = "/home/sgiath/hermes";
+        inherit stateDir;
+        workingDirectory = stateDir;
         addToSystemPackages = true;
 
         extraPackages = with pkgs; [
@@ -64,10 +136,10 @@ in
           jq
           pkgs.${namespace}.xurl
           pkgs.${namespace}.bird
-          pkgs.${namespace}.buzz-cli
+          birdVesta
         ];
 
-        environmentFiles = [ "/data/hermes_env" ];
+        environmentFiles = [ config.sops.secrets.hermes-env.path ];
         environment = {
           HERMES_DASHBOARD_TUI = "1";
 
@@ -81,7 +153,6 @@ in
           WEBHOOK_ENABLED = "true";
           OBSIDIAN_VAULT_PATH = "~/notes";
           SEARXNG_URL = "https://search.sgiath.dev";
-          BUZZ_CLI_PATH = lib.getExe pkgs.${namespace}.buzz-cli;
         };
 
         settings = {
@@ -118,7 +189,7 @@ in
           toolsets = [ "all" ];
           terminal = {
             backend = "local";
-            cwd = "/home/sgiath/hermes";
+            cwd = stateDir;
             timeout = 180;
           };
 
@@ -144,26 +215,11 @@ in
             user_profile_enabled = true;
           };
           plugins = {
-            enabled = [ "buzz-platform" ];
             hermes-memory-store = {
               auto_extract = true;
-              db_path = "/home/sgiath/hermes/.hermes/memory_store.db";
+              db_path = "${stateDir}/.hermes/memory_store.db";
               default_trust = 0.5;
               hrr_dim = 1024;
-            };
-          };
-
-          gateway.platforms.buzz = {
-            enabled = true;
-            extra = {
-              relay_url = "https://ai.sgiath.dev";
-              channels = [ ];
-              home_channel = "";
-              poll_interval = 4;
-              cli_path = lib.getExe pkgs.${namespace}.buzz-cli;
-              allowed_users = [ ];
-              require_mention = false;
-              allow_all_users = true;
             };
           };
 
@@ -173,11 +229,6 @@ in
               host = "127.0.0.1";
               port = 8642;
             };
-          };
-
-          display.platforms.buzz = {
-            interim_assistant_messages = false;
-            tool_progress = "off";
           };
 
           agent = {

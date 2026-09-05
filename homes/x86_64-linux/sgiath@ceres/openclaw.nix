@@ -2,11 +2,10 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-
   openclawPath = lib.concatStringsSep ":" [
     "${config.home.profileDirectory}/bin"
     "/run/current-system/sw/bin"
@@ -33,14 +32,18 @@ in
         Environment = [
           "HOME=${config.home.homeDirectory}"
           "PATH=${openclawPath}"
-          "OPENCLAW_GATEWAY_TOKEN=${secrets.openclaw-token}"
           "OPENCLAW_SYSTEMD_UNIT=openclaw-node.service"
           "OPENCLAW_LOG_PREFIX=ceres"
           "OPENCLAW_SERVICE_MARKER=openclaw"
           "OPENCLAW_SERVICE_KIND=node"
           "OPENCLAW_SERVICE_VERSION=${lib.getVersion openclaw}"
         ];
-        ExecStart = "${lib.getExe openclaw} node run --host niamh.sgiath.dev --port 443 --tls --display-name ceres";
+        ExecStart = pkgs.writeShellScript "openclaw-node" ''
+          set -euo pipefail
+          OPENCLAW_GATEWAY_TOKEN="$(${pkgs.coreutils}/bin/cat ${lib.escapeShellArg osConfig.sops.secrets.openclaw-token.path})"
+          export OPENCLAW_GATEWAY_TOKEN
+          exec ${lib.getExe openclaw} node run --host niamh.sgiath.dev --port 443 --tls --display-name ceres
+        '';
       };
       Install = {
         WantedBy = [ "default.target" ];

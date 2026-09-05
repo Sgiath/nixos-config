@@ -3,15 +3,55 @@
   lib,
   pkgs,
   inputs,
+  utils,
   ...
 }:
-let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
 {
   options.services.matrix.enable = lib.mkEnableOption "matrix server";
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.matrix.enable) {
+    sops.secrets = {
+      matrix_registration_token.restartUnits = [ "continuwuity.service" ];
+      turn-shared-secret.restartUnits = [
+        "continuwuity.service"
+        "coturn.service"
+        "livekit.service"
+      ];
+    };
+    systemd.services = {
+      continuwuity.serviceConfig.LoadCredential = [
+        "registration-token:${config.sops.secrets.matrix_registration_token.path}"
+        "turn-secret:${config.sops.secrets.turn-shared-secret.path}"
+      ];
+      coturn.serviceConfig.LoadCredential = [
+        "turn-secret:${config.sops.secrets.turn-shared-secret.path}"
+      ];
+      livekit = {
+        serviceConfig = {
+          LoadCredential = [ "turn-secret:${config.sops.secrets.turn-shared-secret.path}" ];
+          RuntimeDirectory = "livekit";
+          RuntimeDirectoryMode = "0700";
+          ExecStart = lib.mkForce (
+            utils.escapeSystemdExecArgs [
+              (lib.getExe config.services.livekit.package)
+              "--config=/run/livekit/config.json"
+              "--key-file=/run/credentials/livekit.service/livekit-secrets"
+            ]
+          );
+        };
+        preStart = ''
+          umask 077
+          ${pkgs.jq}/bin/jq --rawfile secret "$CREDENTIALS_DIRECTORY/turn-secret" \
+            '.rtc.turn_servers |= map(.secret = $secret)' \
+            ${
+              (pkgs.formats.json { }).generate "livekit-public.json" (
+                lib.filterAttrsRecursive (_: value: value != null) config.services.livekit.settings
+              )
+            } > /run/livekit/config.json
+        '';
+      };
+    };
+
     environment.systemPackages = with pkgs; [
       livekit
     ];
@@ -34,7 +74,7 @@ in
 
           # registration
           allow_registration = true;
-          registration_token = secrets.matrix_registration_token;
+          registration_token_file = "/run/credentials/continuwuity.service/registration-token";
 
           # continuwuity
           new_user_displayname_suffix = "";
@@ -46,7 +86,7 @@ in
           lockdown_public_room_directory = true;
 
           # turn
-          turn_secret = secrets.turn-shared-secret;
+          turn_secret_file = "/run/credentials/continuwuity.service/turn-secret";
           turn_uris = [
             "turn:turn.sgiath.dev:3478?transport=udp"
             "turn:turn.sgiath.dev:3478?transport=tcp"
@@ -80,7 +120,7 @@ in
         enable = true;
         lt-cred-mech = true;
         use-auth-secret = true;
-        static-auth-secret = secrets.turn-shared-secret;
+        static-auth-secret-file = "/run/credentials/coturn.service/turn-secret";
         realm = "turn.sgiath.dev";
         relay-ips = [
           "193.165.30.198"
@@ -120,19 +160,16 @@ in
                 host = "turn.sgiath.dev";
                 port = 3478;
                 protocol = "tcp";
-                secret = secrets.turn-shared-secret;
               }
               {
                 host = "turn.sgiath.dev";
                 port = 3478;
                 protocol = "udp";
-                secret = secrets.turn-shared-secret;
               }
               {
                 host = "turn.sgiath.dev";
                 port = 5349;
                 protocol = "tls";
-                secret = secrets.turn-shared-secret;
               }
             ];
           };

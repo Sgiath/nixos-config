@@ -6,7 +6,7 @@
 
 ## OVERVIEW
 
-Personal NixOS/Home Manager configuration built with Snowfall Lib namespace `sgiath`. Hosts: `ceres` daily AMD desktop, `pallas` notebook, `vesta` home server, `hygiea` legacy/decommissioned host.
+Personal NixOS/Home Manager configuration built with Snowfall Lib namespace `sgiath`. Hosts: `ceres` daily AMD desktop, `pallas` notebook, `vesta` home server.
 
 ## STRUCTURE
 
@@ -53,7 +53,7 @@ shells/default/default.nix        # dev/update toolchain
 - Snowfall discovers `systems`, `homes`, `modules`, `packages`, `overlays`, `shells`; do not add manual output lists unless replacing Snowfall behavior.
 - Modules use `options.<scope>.enable = lib.mkEnableOption ...` plus `config = lib.mkIf config.<scope>.enable ...`.
 - Main NixOS/Home Manager state versions are `23.11`; do not bump casually.
-- Secrets are loaded from encrypted `secrets.json` via `builtins.fromJSON`; server runtime secret files usually live under `/data/secrets`.
+- Secrets are SOPS-encrypted in `secrets/` and decrypted at activation using host SSH keys. Use `sops.secrets` with native runtime credential files; never evaluate plaintext credentials into Nix/store files.
 - New files must be `git add`ed before Nix flake evaluation can see them.
 - Format Nix with `nixfmt`; use `nix develop` for `nixd`, `nil`, `shfmt`, `prettier`, and update helpers.
 - Do not evaluate Home Manager outputs directly; Stylix Home Manager wiring is provided through the NixOS Stylix module. Validate homes as part of the full NixOS system evaluation/build.
@@ -64,8 +64,7 @@ shells/default/default.nix        # dev/update toolchain
 - Do not use `nix-shell` shebangs in new update scripts; add missing tools to `shells/default/default.nix`.
 - Do not compute hashes before detecting that an updater's version actually changed.
 - Do not copy `packages/relay-tester/update.sh`'s `nix-shell` lockfile step into new scripts; treat it as legacy.
-- Do not widen `secrets.json` usage or introduce new plaintext secret paths.
-- Do not treat `hygiea` as an active primary host; it is retained legacy config.
+- Do not reintroduce git-crypt, plaintext secret files, or secret values in Nix options/derivations. Ceres's private build-signing key must never be distributed to Vesta.
 - Destructive git ops are forbidden unless explicit: no reset, clean, restore, force-push.
 
 ## COMMANDS
@@ -78,12 +77,12 @@ nix build '.#<package>'
 nix build '.#install-isoConfigurations.live'
 nixos-rebuild switch --sudo --flake .
 nixos-rebuild switch --sudo --flake '.#ceres'
-NIX_SSHOPTS="-o IdentityAgent=$SSH_AUTH_SOCK" nixos-rebuild switch --sudo --flake '.#vesta' --target-host 'vesta.local'
+update --vesta
 ```
 
 ## NOTES
 
-- No in-repo CI, `checks`, `nixosTests`, pre-commit config, Makefile, or justfile found; validation is manual builds/rebuilds.
+- No in-repo CI or NixOS VM test suite; security checks live under `tests/` and `modules/nixos/server/hermes-migrate-test.py`. Validate homes through full NixOS builds.
 - Custom user commands `update`, `update-limited`, `clear-cache` are defined in `modules/home/sgiath/default.nix`; `update*` commits and pushes before rebuilding.
 - `clear-cache` runs Nix GC, Docker prune, and journal vacuum; treat as destructive maintenance.
 - `dnd5etools` has a separate image hash updater; package `update.sh` alone is incomplete if image assets changed.

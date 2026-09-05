@@ -4,23 +4,33 @@
   pkgs,
   ...
 }:
-let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.transmission.enable) {
+    sops.secrets.transmission.restartUnits = [ "transmission.service" ];
+    systemd.services.transmission = {
+      serviceConfig.LoadCredential = [ "password:${config.sops.secrets.transmission.path}" ];
+      serviceConfig.ExecStartPre = lib.mkBefore [
+        "${pkgs.writeShellScript "transmission-credentials" ''
+          umask 077
+          ${pkgs.jq}/bin/jq -Rs '{"rpc-password": .}' \
+            < "$CREDENTIALS_DIRECTORY/password" \
+            > /run/transmission/credentials.json
+        ''}"
+      ];
+    };
+
     services = {
       transmission = {
         openPeerPorts = true;
         performanceNetParameters = true;
         package = pkgs.transmission_4;
         webHome = pkgs.flood-for-transmission;
+        credentialsFile = "/run/transmission/credentials.json";
 
         settings = {
           download-dir = "/nas/downloads";
           rpc-authentication-required = true;
           rpc-username = "sgiath";
-          rpc-password = secrets.transmission;
         };
       };
 
