@@ -38,6 +38,9 @@
 
     [[pre-remove]]
     preserve-omo-plans = "if [ -d .omo/plans ]; then mkdir -p {{ primary_worktree_path }}/.omo/plans && cp -a .omo/plans/. {{ primary_worktree_path }}/.omo/plans/; fi"
+
+    [step.copy-ignored]
+    exclude = [".direnv/", ".devenv/"]
   '';
 
   programs = {

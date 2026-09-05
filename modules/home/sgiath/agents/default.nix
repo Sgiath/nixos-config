@@ -42,6 +42,11 @@
       pkgs.${namespace}.bird
       pkgs.nodejs
       pkgs.bun
+      pkgs.sysstat
+      pkgs.postgresql
+      pkgs.valkey
+      pkgs.poppler-utils
+      pkgs.hyperfine
 
       # agents
       pkgs.llm-agents.grok
