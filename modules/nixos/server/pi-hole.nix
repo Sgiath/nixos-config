@@ -1,11 +1,12 @@
 { config, lib, ... }:
-let
-  secrets = builtins.fromJSON (builtins.readFile ./../../../secrets.json);
-in
 {
   options.services.pi-hole.enable = lib.mkEnableOption "pi-hole";
 
   config = lib.mkIf (config.sgiath.server.enable && config.services.pi-hole.enable) {
+    sops.secrets.pihole-password.restartUnits = [
+      "${config.virtualisation.oci-containers.backend}-pihole.service"
+    ];
+
     networking.networkmanager.dns = lib.mkForce "none";
 
     services.nginx = {
@@ -41,6 +42,7 @@ in
       ];
       volumes = [
         "/var/lib/pihole:/etc/pihole"
+        "${config.sops.secrets.pihole-password.path}:/run/secrets/pihole-password:ro"
       ];
       extraOptions = [
         "--network=host"
@@ -48,7 +50,7 @@ in
       environment = {
         TZ = "UTC";
         FTLCONF_webserver_port = "8053";
-        FTLCONF_webserver_api_password = secrets.pihole-password;
+        WEBPASSWORD_FILE = "pihole-password";
       };
     };
   };

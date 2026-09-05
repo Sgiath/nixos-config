@@ -1,7 +1,24 @@
 keys:
-  - &sgiath 8750C3952E0CAD8740484E7CF0541A25A8123AF3
+  - &sgiath B1663624D093688ED5C3296B70F9C7DE34CB3BC8
+  - &ceres age1mrl86ltzgeeu32ps58fdrvchk5m9a42wve92ejjdx7ztngjygeyqps9nqh
+  - &vesta age1cl34njduy9a05t03ldq5uc7q03f6aqhw7ns9xw34uakk5cdqsg4qr54ezu
 creation_rules:
+  - path_regex: secrets/ceres-signing\.yaml$
+    key_groups:
+      - pgp:
+          - *sgiath
+        age:
+          - *ceres
+  - path_regex: secrets/vesta\.yaml$
+    key_groups:
+      - pgp:
+          - *sgiath
+        age:
+          - *vesta
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - pgp:
           - *sgiath
+        age:
+          - *ceres
+          - *vesta

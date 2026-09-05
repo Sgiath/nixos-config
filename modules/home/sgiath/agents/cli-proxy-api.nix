@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  apiKeyWrapper,
   ...
 }:
 let
@@ -22,7 +23,7 @@ in
       };
 
       Service = {
-        ExecStart = "${lib.getExe pkgs.llm-agents.cli-proxy-api} -config ${configPath}";
+        ExecStart = "${lib.getExe apiKeyWrapper} ${lib.getExe pkgs.llm-agents.cli-proxy-api} -config ${configPath}";
         WorkingDirectory = stateDirectory;
         StateDirectory = "cli-proxy-api";
         StateDirectoryMode = "0700";

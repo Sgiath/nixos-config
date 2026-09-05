@@ -19,7 +19,6 @@ Per-host NixOS entry points. Host directory name should match `networking.hostNa
 - `ceres`: active AMD desktop/gaming workstation; primary default target.
 - `pallas`: notebook; host-specific networking/display quirks belong here.
 - `vesta`: home server; imports `disko.nix`, enables `sgiath.server`, toggles services.
-- `hygiea`: legacy/decommissioned offsite/VM host; preserve unless user asks.
 - Keep `default.nix` declarative and role-level; hardware UUIDs and disk topology stay out.
 - Desktops usually enable `sgiath.enable`; server hosts add `sgiath.server.enable`.
 
@@ -28,12 +27,10 @@ Per-host NixOS entry points. Host directory name should match `networking.hostNa
 - Do not move generated hardware config into shared modules.
 - Do not copy service definitions into host files; add/tune modules under `modules/nixos/server` or `modules/nixos/sgiath`.
 - Do not treat `disko.nix` as optional cleanup; it is part of reproducible host state where present.
-- Do not remove `hygiea` just because it is decommissioned.
 
 ## VALIDATION
 
 ```bash
 nixos-rebuild switch --sudo --flake '.#ceres'
-NIX_SSHOPTS="-o IdentityAgent=$SSH_AUTH_SOCK" nixos-rebuild switch --sudo --flake '.#vesta' --target-host 'vesta.local'
-nixos-rebuild switch --sudo --flake '.#hygiea' --target-host 'sgiath@hygiea.sgiath.dev'
+update --vesta
 ```

@@ -1,8 +1,5 @@
 pkgs: {
   bird = pkgs.callPackage ./bird { };
-  buzz = pkgs.callPackage ./buzz { };
-  buzz-cli = pkgs.callPackage ./buzz-cli { };
-  buzz-relay = pkgs.callPackage ./buzz-relay { };
   clawpatch = pkgs.callPackage ./clawpatch { };
   codex-desktop = pkgs.callPackage ./codex-desktop { };
   delta = pkgs.callPackage ./delta { };

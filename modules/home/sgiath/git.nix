@@ -6,12 +6,6 @@
 }:
 {
   config = lib.mkIf config.programs.git.enable {
-    home = {
-      packages = with pkgs; [
-        git-crypt
-      ];
-    };
-
     xdg.configFile = {
       "git/commit-template".text = ''
         type:

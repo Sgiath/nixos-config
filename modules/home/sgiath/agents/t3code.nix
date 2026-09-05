@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  apiKeyWrapper,
   ...
 }:
 let
@@ -60,7 +61,7 @@ in
         Service = {
           # `start --no-browser` rather than `serve`: serve prints a pairing
           # token on every launch, which would land in the journal.
-          ExecStart = "${lib.getExe cfg.package} ${
+          ExecStart = "${lib.getExe apiKeyWrapper} ${lib.getExe cfg.package} ${
             lib.escapeShellArgs (
               [
                 "start"

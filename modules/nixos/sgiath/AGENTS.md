@@ -20,7 +20,7 @@ Shared workstation/system baseline behind `sgiath.enable`, plus opt-in hardware 
 - Root gate is `options.sgiath.enable`; many baseline modules are imported always but activated under that gate.
 - Feature modules add their own options under `sgiath.*` or existing NixOS option namespaces.
 - Keep workstation concerns here: shell/user defaults, GPU, audio, input devices, desktop session, local dev/runtime services.
-- `secrets.json` is read relative to this tree in `default.nix`; avoid adding more eval-time secret reads unless necessary.
+- `secrets.nix` declares SOPS runtime files and Ceres build-signing trust. Never load plaintext secret values during Nix evaluation; user session loading belongs in the Home Manager secrets module.
 - Host-specific branching exists but should stay narrow and explicit.
 
 ## ANTI-PATTERNS
