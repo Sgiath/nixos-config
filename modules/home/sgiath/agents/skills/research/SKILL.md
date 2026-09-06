@@ -1,25 +1,25 @@
 ---
 name: research
-description: Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.
+description: "Use when asked to research a question and save a source-cited repository note."
 ---
 
-Launch parallel research subagents to build a grounded answer to the current question or decision.
+Split independent research angles between subagents when useful; keep a narrow lookup in one context.
 
-Use fresh context, not forked context, unless I explicitly ask for forked context. Researchers and scouts should inspect sources directly instead of relying on the main conversation history.
+Use fresh context, not forked context, unless the user explicitly asks otherwise. Researchers and scouts should inspect sources directly instead of relying on the main conversation history.
 
-Use a combination of `librarian` and `scout` subagents:
+Use these specialist agent types when available; otherwise give the same briefs to task-capable agents:
 - Use `librarian` for web, docs, standards, ecosystem, recent changes, benchmarks, and primary-source evidence.
 - Use `scout` for local codebase context, existing implementation patterns, repo constraints, and files that would be affected.
 
 1. Investigate the question against **primary sources** — official docs, source code, specs, first-party APIs and academic papers — not a secondary write-up of them. Follow every claim back to the source that owns it.
-2. *Practical tradeoffs* - at least one subagent should also compare options, risks, edge cases, maintenance cost, and what would be easiest to validate.
+2. *Practical tradeoffs* - compare options, risks, edge cases, maintenance cost, and what would be easiest to validate.
 
 Adapt the angles when the question calls for it:
 - Library/API questions: include official docs and recent examples.
 - Architecture decisions: include local module boundaries, dependency direction, and migration cost.
 - Debugging questions: include likely failure modes, local call paths, and exact error evidence.
 - UI/product questions: include user flow, accessibility, design precedent, and implementation constraints.
-- Time-sensitive topics: include a recent-developments angle and prefer 2026/2025 sources.
+- Time-sensitive topics: include a recent-developments angle and prefer current sources, checking their publication date and applicable version.
 
 ## Result
 

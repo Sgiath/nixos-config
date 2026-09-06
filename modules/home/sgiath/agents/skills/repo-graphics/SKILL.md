@@ -1,6 +1,6 @@
 ---
 name: repo-graphics
-description: Create README header banners and content graphics as generated SVGs in Sgiath's visual style. Use when asked to add a header, banner, logo card, or visual/graphic to a repo README, project page, or profile — or to make a README "more alive".
+description: "Use when asked for generated SVG README banners or project graphics in Sgiath’s style."
 ---
 
 # Repo Graphics
@@ -31,16 +31,13 @@ line-work, in one consistent visual style across all repos.
    domain-relevant. One sentence each: what real thing it draws.
 3. **Draft all candidates.** Generate quick SVG drafts in the house style
    (skip polish: no animation, rough labels). Screenshot each with the
-   browser tool and present them to the user for a pick — use the `ask` tool
-   with one option per candidate, screenshots referenced in descriptions.
+   browser tool and present them to the user for a pick — offer one option per candidate with its screenshot.
    Also ask whether the winner becomes a header banner or standalone content
    graphics.
 
-   > **PHASE GATE — MANDATORY STOP.** End the turn after presenting the
-   > candidates. Steps 4–6 are PROHIBITED until the user has replied with
-   > both a selected candidate and a surface (header vs standalone
-   > graphics). No final artifact, no README edits, no cleanup before that
-   > reply.
+   Wait for the user's chosen concept and surface before building the final
+   artifact or editing the README. A choice already supplied by the user
+   satisfies this gate; do not ask them to repeat it.
 
 4. **Build the final artifact** — only after the gate — from the chosen
    concept, as either:
@@ -50,7 +47,7 @@ line-work, in one consistent visual style across all repos.
    Polish: exact geometry, label placement, subtle animation, collision checks.
 5. **Wire into the README** (see Embedding) and delete rejected drafts.
 6. **Verify**: light+dark browser screenshots, repo formatter on the script,
-   prettier on the README. Remind the user raw URLs resolve only after push.
+   the existing README formatting convention. Remind the user raw URLs resolve only after push.
 
 ## Visual Style
 

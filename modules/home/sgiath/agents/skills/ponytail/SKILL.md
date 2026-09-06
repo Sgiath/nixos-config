@@ -1,13 +1,6 @@
 ---
 name: ponytail
-description: >
-  Plan review focused exclusively on over-engineering. Finds what to remove:
-  reinvented standard library, unneeded dependencies, speculative abstractions,
-  dead flexibility, and unnecessary steps. One line per finding: plan location,
-  what to cut, what replaces it. Use when the user says "review this plan",
-  "simplify this plan", "is this over-engineered", "what can we remove from
-  this plan", or invokes /ponytail-review. This reviews plans before
-  implementation, not code diffs.
+description: "Use when asked to simplify a plan, check over-engineering, or run /ponytail-review."
 ---
 
 Review implementation plans for unnecessary complexity before work begins. One
@@ -29,18 +22,18 @@ Tags:
 
 ## Examples
 
-❌ "This plan might be more complex than necessary. Could you consider
+"This plan might be more complex than necessary. Could you consider
      simplifying it?"
 
-✅ `Step 3: stdlib: Add an EmailValidator class. Use the existing confirmation-mail flow; no validator.`
+`Step 3: delete: Add an EmailValidator class despite the existing confirmation-mail flow. No validator.`
 
-✅ `Dependencies: native: Add a date library for one format call. Use Intl.DateTimeFormat, 0 deps.`
+`Dependencies: native: Add a date library for one format call. Use Intl.DateTimeFormat, 0 deps.`
 
-✅ `Architecture: yagni: Introduce an AbstractRepository with one implementation. Keep the repository concrete.`
+`Architecture: yagni: Introduce an AbstractRepository with one implementation. Keep the repository concrete.`
 
-✅ `Step 5: delete: Add a retry wrapper around an idempotent local call. Nothing replaces it.`
+`Step 5: delete: Add a retry wrapper around an idempotent local call. Nothing replaces it.`
 
-✅ `Steps 2-4: shrink: Three layers only pass data through. One function handles the flow.`
+`Steps 2-4: shrink: Three layers only pass data through. One function handles the flow.`
 
 ## Scoring
 

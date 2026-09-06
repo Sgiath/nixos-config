@@ -12,7 +12,7 @@ The prose that ships alongside the type sketch. One page. Sentence-case headings
 
 ## Shape
 
-*The recommended architecture. Data structures first; then how data flows through the signatures. Name the load-bearing decisions: which invariants are encoded in types, where validation lives, what the system deliberately does not do. Cite the principle behind each decision (e.g., `per boundary-discipline`); don't restate it.*
+*The recommended architecture. Data structures first; then how data flows through the signatures. Name the load-bearing decisions: which invariants are encoded in types, where validation lives, what the system deliberately does not do. Explain the relevant constraint behind each decision.*
 
 ## Synthesis decision
 
@@ -32,4 +32,4 @@ The prose that ships alongside the type sketch. One page. Sentence-case headings
 
 ## Next implementation step
 
-*The first thing to build against the sketch. One sentence. What you'd start writing immediately after synthesis (or after Phase D sign-off, if a checkpoint was opted into).*
+*The first thing to build against the sketch. One sentence. What you'd start writing immediately after synthesis (or after checkpoint sign-off, if a checkpoint was opted into).*

@@ -9,9 +9,10 @@ Mock at **system boundaries** only:
 
 Don't mock:
 
-- Your own classes/modules
-- Internal collaborators
-- Anything you control
+- The module under test
+- Internal collaborators that do not represent external I/O
+
+An owned client module that wraps a remote service is still an I/O boundary.
 
 ## Designing for Mockability
 
