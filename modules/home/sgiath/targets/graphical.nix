@@ -19,6 +19,8 @@ in
       appimage-run
     ];
 
+    wayland.windowManager.niri.enable = true;
+
     wayland.windowManager.hyprland.settings = {
       on = [
         {

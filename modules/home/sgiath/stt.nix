@@ -49,6 +49,21 @@ in
       ];
     };
 
+    # Niri has no release binding, so use press-to-toggle instead of hold-to-talk.
+    wayland.windowManager.niri.settings.binds = lib.mkIf config.wayland.windowManager.niri.enable {
+      "Mod+B" = {
+        _props = {
+          repeat = false;
+          hotkey-overlay-title = "Toggle dictation";
+        };
+        spawn = [
+          (lib.getExe voxtype)
+          "record"
+          "toggle"
+        ];
+      };
+    };
+
     systemd.user.services.voxtype = {
       Service.Environment = [ "VOXTYPE_VULKAN_DEVICE=amd" ];
     };

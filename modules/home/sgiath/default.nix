@@ -44,6 +44,7 @@ in
     ./git.nix
     ./gnupg.nix
     ./hyprland.nix
+    ./niri.nix
     ./noctalia.nix
     ./secrets.nix
     ./ssh.nix

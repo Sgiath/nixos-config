@@ -27,7 +27,7 @@
         enable = true;
         settings = {
           default_session = {
-            command = "${lib.getExe pkgs.tuigreet} --time --asterisks --remember --cmd start-hyprland --issue";
+            command = "${lib.getExe pkgs.tuigreet} --time --asterisks --remember --remember-session --sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions --xsessions '' --cmd start-hyprland --issue";
             user = "greeter";
           };
         };
@@ -67,6 +67,10 @@
 
     programs = {
       hyprland.enable = true;
+      niri = {
+        enable = true;
+        useNautilus = false;
+      };
     };
   };
 }
