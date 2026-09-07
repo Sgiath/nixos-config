@@ -6,12 +6,9 @@
 }:
 let
   userKeys = {
-    OPENAI_API_KEY = "openai";
-    OPENROUTER_API_KEY = "openrouter";
     GITHUB_PERSONAL_ACCESS_TOKEN = "github_token";
     GITHUB_TOKEN = "github_token";
     GH_TOKEN = "github_token";
-    LINEAR_API_KEY = "linear_api_key";
     CLIPROXY_API_KEY = "cliproxy_api_key";
   };
   keyFiles = pkgs.writeText "user-api-key-paths.json" (

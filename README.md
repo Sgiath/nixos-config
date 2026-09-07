@@ -97,24 +97,3 @@ Removing plaintext from the current configuration does not remove it from
 old store paths, generations, backups, or previously copied sources. Rotate
 the affected credentials after activation; retain recovery generations until
 the migrated services have been verified.
-
-## Security verification
-
-```bash
-nix develop
-python3 -m unittest discover -s tests
-python3 modules/nixos/server/hermes-migrate-test.py
-python3 tests/check_signed_transfer.py /run/secrets/nix-signing-key public-keys/ceres-cache.pub
-ceres=$(nix build '.#nixosConfigurations.ceres.config.system.build.toplevel' --no-link --print-out-paths)
-vesta=$(nix build '.#nixosConfigurations.vesta.config.system.build.toplevel' --no-link --print-out-paths)
-python3 tests/check_service_credentials.py "$vesta"
-python3 tests/check_hermes_setup.py "$vesta"
-python3 tests/check_store_secrets.py "$ceres" "$vesta"
-```
-
-The transfer check uses a disposable Vesta store, verifies signatures before
-and after SSH transfer, and does not activate either host.
-
-The service and activation checks use synthetic secrets in disposable
-Bubblewrap namespaces. The store check decrypts credentials only in memory and
-reports matching paths without printing secret values.
