@@ -66,7 +66,7 @@ Read [the theme contract](theme.md) before building. Asset paths below are relat
    - report-specific styles reuse the theme's custom-property tokens for color, typography, spacing, and surfaces; base elements the theme already covers are not restyled;
    - current date visible in report metadata;
    - source links that open in a new tab while internal anchors stay in the same tab;
-   - no external assets other than the shared theme stylesheet link, the PostHog analytics snippet, and — only when the report contains an interactive graph — the two hosted graph scripts (`litegraph.js`, `report.js`); no other external fonts, scripts, images, or runtime dependencies;
+   - no external assets other than the shared theme stylesheet link, and — only when the report contains an interactive graph — the two hosted graph scripts (`litegraph.js`, `report.js`); no other external fonts, scripts, images, or runtime dependencies;
    - no unsupported claims, placeholder text, TODOs, or fabricated citations;
    - print styles when the content is useful as a document.
 
@@ -79,7 +79,6 @@ Read [the theme contract](theme.md) before building. Asset paths below are relat
    Run every check against `${REPORT_PATH}`, never a repository path. Always run static checks:
    - the file exists and is non-empty;
    - exactly one `<title>` and one `<h1>` exist;
-   - the PostHog snippet from `references/posthog.html` is present in `<head>`;
    - the current date appears in the filename and report metadata;
    - no `TODO`, `FIXME`, placeholder copy, accidental secrets, or external asset references other than the shared theme stylesheet link, the PostHog snippet, and (when a graph is present) the two hosted graph scripts;
    - every factual source link and local evidence reference is present;

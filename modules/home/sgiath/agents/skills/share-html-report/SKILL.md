@@ -17,8 +17,8 @@ Create exactly one themed HTML file in a `mktemp` workspace outside the reposito
 
 - [Theme and graph contract](references/theme.md): shared assets, semantic layout, utility classes, graph eligibility/schema, analytics. Read before building.
 - [Build and publish workflow](references/publishing.md): safety gate, temporary paths, static checks, bounded optional screenshot, SSH/SCP, asset checks, collision handling, checksum/HTTP verification, and cleanup. Read before execution.
-- [Rendered sample](references/sample.html), [stylesheet](references/report.css), [analytics snippet](references/posthog.html).
+- [Rendered sample](references/sample.html), [stylesheet](references/report.css).
 
-Use semantic desktop-only HTML; do not add mobile compatibility. Prefer tables/lists/steps to graphs. Load graph scripts only when non-linear relationships and useful drag/pan/zoom justify them. Include the PostHog snippet verbatim and use only the allowed shared assets.
+Use semantic desktop-only HTML; do not add mobile compatibility. Prefer tables/lists/steps to graphs. Load graph scripts only when non-linear relationships and useful drag/pan/zoom justify them.
 
 Return the public URL, checksum-match and local-cleanup confirmations, and whether the optional single-screenshot check ran. Do not claim success before deployment verification.

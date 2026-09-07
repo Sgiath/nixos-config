@@ -104,8 +104,3 @@ Spec format (`report.js` translates it to LiteGraph):
 Graphs are display-only: no node creation, no searchbox, no context menu, and no graph execution. If the scripts fail to load, the figure shows only its caption and the `<noscript>` note.
 
 If the theme itself changes, update `references/report.css`, re-upload it to the same remote path, and verify with a cache-busting query. The hosted filename stays `report.css`.
-
-## Analytics snippet
-
-Every report includes the PostHog snippet so page views are tracked. Copy `references/posthog.html` from this skill verbatim into the report's `<head>`, after the stylesheet link. Do not reformat, minify further, or edit the project key or hosts.
-
