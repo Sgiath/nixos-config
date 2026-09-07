@@ -126,6 +126,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    herdr = {
+      url = "github:herdrdev/herdr/v0.9.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     opencode = {
       url = "github:anomalyco/opencode/v1.18.29";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -204,6 +209,7 @@
         comfyui.overlays.default
         oh-my-pi.overlays.default
         opencode.overlays.default
+        herdr.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [

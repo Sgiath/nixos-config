@@ -9,6 +9,7 @@
             "192.168.1.2" = [
               "vesta.sgiath.dev"
               "niamh.sgiath.dev"
+              "search.sgiath.dev"
               "matrix.sgiath.dev"
               "matrix-rtc.sgiath.dev"
               "turn.sgiath.dev"

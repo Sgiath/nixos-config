@@ -22,7 +22,7 @@ in
 {
   programs.herdr = {
     enable = true;
-    package = pkgs.llm-agents.herdr;
+    package = pkgs.herdr;
     settings = {
       onboarding = false;
 

@@ -46,11 +46,16 @@
       ];
       extraOptions = [
         "--network=host"
-      ];
+      ]
+      ++ lib.optional config.services.searx.enable "--add-host=search.sgiath.dev:192.168.1.2";
       environment = {
         TZ = "UTC";
         FTLCONF_webserver_port = "8053";
         WEBPASSWORD_FILE = "pihole-password";
+      }
+      // lib.optionalAttrs config.services.searx.enable {
+        # Keep public AAAA and HTTPS records from routing LAN clients through Cloudflare.
+        FTLCONF_misc_dnsmasq_lines = "local=/search.sgiath.dev/";
       };
     };
   };

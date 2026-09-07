@@ -86,7 +86,7 @@ in
           git add --all
           if [[ "$no_commit" == false ]]; then
             if ! commit_message="$(${lib.getExe pkgs.llm-agents.pi} \
-              --model openai-codex/gpt-5.6-luna:minimal \
+              --model opencode-go/glm-5.3-flash:low \
               --print \
               --no-session \
               --no-tools \
