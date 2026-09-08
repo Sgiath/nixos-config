@@ -9,7 +9,7 @@
     services = {
       gvfs.enable = true;
       udisks2.enable = true;
-      dbus.packages = [ pkgs.gcr ];
+      dbus.packages = [ pkgs.gcr_4 ];
     };
   };
 }
