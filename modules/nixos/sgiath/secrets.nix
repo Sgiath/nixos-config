@@ -41,7 +41,8 @@ in
           };
           hermes-env = lib.mkIf config.services.hermes-agent.enable {
             sopsFile = ../../../secrets/vesta.yaml;
-            owner = "hermes";
+            owner = "sgiath";
+            group = "hermes";
             key = "hermes-env";
             mode = "0400";
             restartUnits = [
@@ -52,7 +53,8 @@ in
           hermes-bird-env = lib.mkIf config.services.hermes-agent.enable {
             sopsFile = ../../../secrets/vesta.yaml;
             key = "bird-env";
-            owner = "hermes";
+            owner = "sgiath";
+            group = "hermes";
             mode = "0400";
             restartUnits = [ "hermes-agent.service" ];
           };

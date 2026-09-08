@@ -82,7 +82,7 @@ update --vesta
 
 ## NOTES
 
-- No in-repo CI or NixOS VM test suite; security checks live under `tests/` and `modules/nixos/server/hermes-migrate-test.py`. Validate homes through full NixOS builds.
+- No in-repo CI or NixOS VM test suite. Validate homes through full NixOS builds.
 - Custom user commands `update`, `update-limited`, `clear-cache` are defined in `modules/home/sgiath/default.nix`; `update*` commits and pushes before rebuilding.
 - `clear-cache` runs Nix GC, Docker prune, and journal vacuum; treat as destructive maintenance.
 - `dnd5etools` has a separate image hash updater; package `update.sh` alone is incomplete if image assets changed.

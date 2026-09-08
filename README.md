@@ -73,20 +73,12 @@ nixos-rebuild switch --sudo --flake '.#ceres'
 update --vesta
 ```
 
-Both `update --vesta` and `update-limited --vesta` build on Ceres, sign the exact
+Both `update --vesta` build on Ceres, sign the exact
 selected system closure, and pass it to `nixos-rebuild --store-path` for SSH
 transfer and activation. Neither command changes the existing `result` link.
 Vesta trusts Ceres's public key; it never receives the private key. Signature
 checks remain enabled, including for downloaded packages. Existing flake
 caches remain explicitly allowed for ordinary, non-trusted Nix users.
-
-The first Vesta activation copies active Hermes state from
-`/home/sgiath/hermes` to `/var/lib/hermes-agent`, verifies the copy, and changes
-ownership to the dedicated `hermes` account. It retains the source and leaves
-older `/var/lib/hermes` data untouched. Later activations reuse the migrated
-state. The dashboard is accessible through its existing HTTPS proxy rather
-than directly through port 9119. Buzz services are removed; their stored data
-is not deleted.
 
 The paid Factorio archive must already be imported into the Nix store for the
 first Ceres build; the package error provides the exact filename/hash/import

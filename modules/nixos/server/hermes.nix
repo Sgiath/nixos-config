@@ -16,7 +16,7 @@ let
       "web"
     ];
   };
-  stateDir = "/var/lib/hermes-agent";
+  stateDir = "/home/sgiath/hermes";
   birdVesta = pkgs.writeShellApplication {
     name = "bird-vesta";
     runtimeInputs = [ pkgs.nodejs_22 ];
@@ -27,80 +27,22 @@ let
     ''
     + builtins.readFile ./hermes-bird-vesta.sh;
   };
-  migrateState = pkgs.writeShellApplication {
-    name = "hermes-migrate-state";
-    runtimeInputs = with pkgs; [
-      (python3.withPackages (ps: [ ps.pyyaml ]))
-      rsync
-      systemd
-    ];
-    text = ''
-      exec python3 ${./hermes-migrate.py}
-    '';
-  };
-  confinement = {
-    NoNewPrivileges = true;
-    ProtectSystem = "strict";
-    ProtectHome = true;
-    PrivateTmp = true;
-    ReadWritePaths = [ stateDir ];
-    InaccessiblePaths = [
-      "-/run/docker.sock"
-      "-/run/podman"
-      "-/data"
-    ];
-    UMask = "0007";
-  };
 in
 {
   config = lib.mkIf (config.sgiath.server.enable && config.services.hermes-agent.enable) {
     users.groups.hermes.members = [ "sgiath" ];
-    # Upstream activation creates the home after migration, without skeleton
-    # files that would make an otherwise empty destination ambiguous.
-    users.users.hermes.createHome = lib.mkForce false;
-    users.users.hermes.extraGroups = lib.mkForce [ ];
-
-    # Only the initial, no-follow state copy runs as root. Upstream setup
-    # operates on agent-writable files and must not follow symlinks as root.
-    system.activationScripts.hermes-agent-setup.text = lib.mkMerge [
-      (lib.mkBefore ''
-        (
-        set -e
-        rm -f /run/hermes-agent-setup.ready
-        ${lib.getExe migrateState}
-        ${pkgs.util-linux}/bin/setpriv --reuid=hermes --regid=hermes \
-          --clear-groups --no-new-privs \
-          ${pkgs.coreutils}/bin/env -i PATH="$PATH" HOME=${stateDir} USER=hermes LOGNAME=hermes \
-          ${pkgs.bash}/bin/bash -e <<'HERMES_UNPRIVILEGED_SETUP'
-        install -d -m 2770 ${stateDir}/.local/bin
-        ln -sfn ${lib.getExe pkgs.${namespace}.bird} ${stateDir}/.local/bin/bird
-        ln -sfn ${lib.getExe birdVesta} ${stateDir}/.local/bin/bird-vesta
-      '')
-      (lib.mkAfter ''
-        HERMES_UNPRIVILEGED_SETUP
-        touch /run/hermes-agent-setup.ready
-        )
-      '')
-    ];
 
     systemd.services = {
-      hermes-agent = {
-        after = [ "continuwuity.service" ];
-        unitConfig.ConditionPathExists = "/run/hermes-agent-setup.ready";
-        serviceConfig = confinement // {
-          ProtectHome = lib.mkForce true;
-        };
-      };
+      hermes-agent.after = [ "continuwuity.service" ];
       hermes-dashboard = {
         description = "Hermes Agent web dashboard";
         wantedBy = [ "multi-user.target" ];
         after = [ "hermes-agent.service" ];
         wants = [ "hermes-agent.service" ];
-        unitConfig.ConditionPathExists = "/run/hermes-agent-setup.ready";
 
         path = config.services.hermes-agent.extraPackages;
-        serviceConfig = confinement // {
-          User = "hermes";
+        serviceConfig = {
+          User = "sgiath";
           Group = "hermes";
           WorkingDirectory = stateDir;
           EnvironmentFile = [ "${stateDir}/.hermes/.env" ];
@@ -110,7 +52,6 @@ in
         };
 
         environment = {
-          HOME = stateDir;
           HERMES_MANAGED = "false";
           HERMES_DASHBOARD_TUI = "1";
           HERMES_HOME = "${stateDir}/.hermes";
@@ -121,11 +62,10 @@ in
     services = {
       hermes-agent = {
         package = hermesPackage;
-        createUser = true;
-        user = "hermes";
+        createUser = false;
+        user = "sgiath";
         group = "hermes";
         inherit stateDir;
-        workingDirectory = stateDir;
         addToSystemPackages = true;
 
         extraPackages = with pkgs; [
