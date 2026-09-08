@@ -2,34 +2,9 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }:
-let
-  deployVesta = pkgs.writeShellScript "deploy-vesta" ''
-    set -euo pipefail
-
-    signing_key=/run/secrets/nix-signing-key
-    if ! sudo test -r "$signing_key"; then
-      echo "Vesta deployment requires the signing key at $signing_key. Activate the Ceres signing-key configuration first." >&2
-      exit 1
-    fi
-
-    nix-store --add-fixed sha256 "$HOME/nix-root/FoundryVTT-Linux-14.367.zip"
-
-    # Keep this closure rooted until activation without replacing the user's result.
-    build_dir=$(mktemp -d)
-    trap 'rm -rf -- "$build_dir"' EXIT
-    nix build "$@" --no-update-lock-file --out-link "$build_dir/result" \
-      '.#nixosConfigurations.vesta.config.system.build.toplevel'
-    toplevel=$(readlink -e "$build_dir/result")
-
-    # Cached outputs may predate daemon signing; sign only this deployment closure.
-    sudo nix store sign --recursive --key-file "$signing_key" "$toplevel"
-    NIX_SSHOPTS="''${NIX_SSHOPTS:+$NIX_SSHOPTS }-o IdentityAgent=$SSH_AUTH_SOCK" \
-      nixos-rebuild switch --sudo --store-path "$toplevel" \
-      --target-host 'sgiath@vesta.local'
-  '';
-in
 {
   imports = [
     ./audio.nix
@@ -44,7 +19,6 @@ in
     ./git.nix
     ./gnupg.nix
     ./hyprland.nix
-    ./niri.nix
     ./noctalia.nix
     ./secrets.nix
     ./ssh.nix
@@ -52,7 +26,6 @@ in
     ./stt.nix
     ./stylix.nix
     ./tmux.nix
-    ./waybar.nix
     ./web_browsers.nix
     ./worktrunk.nix
     ./zsh.nix
@@ -65,134 +38,12 @@ in
       stateVersion = "23.11";
 
       packages = with pkgs; [
-        (writeShellScriptBin "update" ''
-          pushd ~/nixos
-
-          no_commit=false
-          update_args=()
-          for arg in "$@"; do
-            if [[ "$arg" == "--no-commit" ]]; then
-              no_commit=true
-            else
-              update_args+=("$arg")
-            fi
-          done
-          set -- "''${update_args[@]}"
-          case "''${1:-}" in
-            ""|--ceres|--vesta|--iso) ;;
-            *) echo "Unknown update target: $1" >&2; exit 2 ;;
-          esac
-
-          git add --all
-          if [[ "$no_commit" == false ]]; then
-            if ! commit_message="$(${lib.getExe pkgs.llm-agents.pi} \
-              --model opencode-go/glm-5.3-flash:low \
-              --print \
-              --no-session \
-              --no-tools \
-              --no-extensions \
-              --no-context-files \
-              --no-prompt-templates \
-              --no-skills \
-              --skill "$HOME/.agents/skills/conventional-commit" \
-              "Use the loaded conventional-commit skill to write exactly one commit message for the staged diff supplied on stdin. The first line must match '<type>(<optional-scope>): <imperative subject>'. Output only the commit message. Do not describe the change, mention implementation status, or use Markdown fences." \
-              < <(git diff --cached))"; then
-              echo "Failed to generate a commit message with pi" >&2
-              exit 1
-            fi
-
-            if [[ ! "$commit_message" =~ ^(feat|fix|docs|style|refactor|perf|build|test|ci|chore)(\([a-z0-9._/-]+\))?!?:[[:space:]][^[:space:]] ]]; then
-              echo "pi generated an invalid Conventional Commit message:" >&2
-              echo "$commit_message" >&2
-              exit 1
-            fi
-
-            git commit --signoff -m "$commit_message"
-            git push
-          fi
-
-          case "$1" in
-            --ceres)
-              nixos-rebuild switch --sudo --flake '.#ceres'
-              ;;
-
-            --vesta)
-              shift
-              ${deployVesta} "$@" || exit $?
-              ;;
-
-            --iso)
-              nix build '.#install-isoConfigurations.live'
-
-              echo
-              echo "doas dd if=result/iso/*.iso of=/dev/sdX status=progress"
-              ;;
-
-            *)
-              nixos-rebuild switch --sudo --flake .
-              ;;
-          esac
-
-          popd
-        '')
-
-        (writeShellScriptBin "update-limited" ''
-          pushd ~/nixos
-          case "''${1:-}" in
-            ""|--ceres|--vesta|--iso) ;;
-            *) echo "Unknown update target: $1" >&2; exit 2 ;;
-          esac
-
-          case "$1" in
-            --ceres)
-              nixos-rebuild switch --sudo --max-jobs 2 --cores 12 --flake '.#ceres'
-              ;;
-
-            --vesta)
-              shift
-              ${deployVesta} --max-jobs 2 --cores 12 "$@" || exit $?
-              ;;
-
-            --iso)
-              nix build '.#install-isoConfigurations.live'
-
-              echo
-              echo "doas dd if=result/iso/*.iso of=/dev/sdX status=progress"
-              ;;
-
-            *)
-              nixos-rebuild switch --sudo --max-jobs 2 --cores 12 --flake .
-              ;;
-          esac
-
-          popd
-        '')
-
-        (writeShellScriptBin "fix-images" ''
-          find . -type f \( \
-            -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \
-            -o -iname "*.tif" -o -iname "*.tiff" -o -iname "*.webp" -o -iname "*.heic" \
-            -o -iname "*.heif" \) -print0 | \
-          ${lib.getExe parallel-full} -0 --eta \
-            ${lib.getExe exiftool} -quiet -api PNGEarlyXMP=1 -JUMBF:all= -overwrite_original {}
-        '')
-
-        (writeShellScriptBin "clear-cache" ''
-          doas nix-collect-garbage -d
-          nix-collect-garbage -d
-
-          doas nix-store --gc
-          doas nix-store --optimise
-
-          docker system prune -a -f
-          docker volume prune -f
-
-          doas journalctl --vacuum-time=14d
-        '')
+        pkgs.${namespace}.update
+        pkgs.${namespace}.fix-images
+        pkgs.${namespace}.clear-cache
 
         # general programs I want to have always available
         imagemagick
-        # parallel-full
         ffmpeg
         zip
         unzip

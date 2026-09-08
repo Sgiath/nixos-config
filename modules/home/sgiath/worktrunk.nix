@@ -15,7 +15,7 @@
     stage = "all"
 
     [commit.generation]
-    command = "pi --model cliproxy/gpt-5.6-luna --tools read,grep,find,ls"
+    command = "pi --model opencode-go/glm-5.3-flash:high --tools read,grep,find,ls"
 
     [merge]
     squash = true      # Squash commits into one (--no-squash to preserve history)

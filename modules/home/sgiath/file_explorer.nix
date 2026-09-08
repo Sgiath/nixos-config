@@ -17,6 +17,7 @@ in
       superfile
       exiftool
     ];
+
     wayland.windowManager.hyprland.settings.bind = [
       {
         _args = [

@@ -5,6 +5,7 @@
       ".ssh/personal_pgp.pub".text = ''
         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGJYz3V8IxqdAJw9LLj0RMsdCu4QpgPmItoDoe73w/3 openpgp:0xB94CDF85
       '';
+
       ".ssh/remote_pgp.pub".text = ''
         ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILxh2qujFEDOb0S69C97cmIDT4rma0tmvT3M5cHF2sg1 openpgp:0x6428E2A2
       '';

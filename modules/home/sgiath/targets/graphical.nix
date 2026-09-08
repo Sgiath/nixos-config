@@ -19,21 +19,21 @@ in
       appimage-run
     ];
 
-    wayland.windowManager.niri.enable = true;
+    # Start on login as part of the Hyprland graphical session.
+    systemd.user.services.kitty = {
+      Unit = {
+        Description = "Kitty terminal";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = terminalCommand;
+        Slice = "app.slice";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
 
     wayland.windowManager.hyprland.settings = {
-      on = [
-        {
-          _args = [
-            "hyprland.start"
-            (lib.generators.mkLuaInline ''
-              function()
-                hl.exec_cmd(${builtins.toJSON terminalCommand})
-              end
-            '')
-          ];
-        }
-      ];
       bind = [
         {
           _args = [
@@ -70,7 +70,6 @@ in
       # hyprland
       hyprland.enable = true;
       noctalia.enable = true;
-      waybar.enable = false;
 
       # terminals
       alacritty.enable = true;

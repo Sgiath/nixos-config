@@ -13,72 +13,65 @@
   config = lib.mkIf (config.sgiath.comm.enable) {
     home.packages = with pkgs; [
       slack
-      # webcord
       telegram-desktop
       signal-desktop
-      # simplex-chat-desktop
+      simplex-chat-desktop
       gajim
-      weechat
       cinny-desktop
       fluffychat
-
-      # nostr CLI
-      pkgs.${namespace}.nak
     ];
 
-    programs = {
-      element-desktop = {
-        enable = true;
-        settings = {
-          default_server_config = {
-            "m.homeserver" = {
-              base_url = "https://matrix.sgiath.dev";
-              server_name = "sgiath.dev";
-            };
-          };
-
-          features = {
-            feature_latex_maths = true;
-            feature_pinning = true;
-            feature_dm_verification = true;
-            feature_location_share_live = true;
-            feature_video_rooms = true;
-            feature_element_call_video_rooms = true;
-            feature_group_calls = true;
-            feature_new_room_list = true;
-          };
-
-          disable_custom_urls = false;
-          disable_login_language_selector = false;
-          force_verification = true;
-
-          default_theme = "dark";
-          brand = "matrix";
+    # Start on login as part of the graphical session.
+    systemd.user.services = {
+      slack = {
+        Unit = {
+          Description = "Slack";
+          PartOf = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
         };
+        Service = {
+          ExecStart = lib.getExe pkgs.slack;
+          Slice = "app.slice";
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
+      };
+
+      signal-desktop = {
+        Unit = {
+          Description = "Signal";
+          PartOf = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
+        };
+        Service = {
+          ExecStart = lib.getExe pkgs.signal-desktop;
+          Slice = "app.slice";
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
+      };
+
+      cinny-desktop = {
+        Unit = {
+          Description = "Cinny";
+          PartOf = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
+        };
+        Service = {
+          ExecStart = lib.getExe pkgs.cinny-desktop;
+          Slice = "app.slice";
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
       };
     };
 
-    wayland.windowManager.hyprland.settings = {
-      on = [
-        {
-          _args = [
-            "hyprland.start"
-            (lib.generators.mkLuaInline ''
-              function()
-                hl.exec_cmd(${builtins.toJSON (lib.getExe pkgs.slack)})
-                hl.exec_cmd(${builtins.toJSON (lib.getExe pkgs.signal-desktop)})
-                hl.exec_cmd(${builtins.toJSON (lib.getExe pkgs.cinny-desktop)})
-              end
-            '')
-          ];
-        }
-      ];
-      window_rule =
+    wayland.windowManager.hyprland = {
+      # workspace 10 is dedicated to communication apps, kept as one tab group
+      settings.window_rule =
         map
           (class: {
             match.class = class;
             workspace = "10 silent";
             no_initial_focus = true;
+            group = "set";
           })
           [
             "slack"
@@ -90,6 +83,24 @@
             "Element"
             "cinny"
           ];
+
+      # Hyprland only auto-groups into the focused window's group, so windows
+      # opened silently on workspace 10 each become their own single-window
+      # group. Merge every tiled window that lands there into the existing one.
+      extraConfig = ''
+        hl.on("window.open", function(window)
+          local ws = window.workspace
+          if not ws or ws.id ~= 10 or window.floating then
+            return
+          end
+          for _, group in ipairs(ws:get_groups()) do
+            if group ~= window.group then
+              group:add(window)
+              return
+            end
+          end
+        end)
+      '';
     };
   };
 }

@@ -44,19 +44,21 @@
       X-GNOME-Autostart-enabled=true
     '';
 
+    # Start on login as part of the graphical session.
+    systemd.user.services.protonmail-desktop = {
+      Unit = {
+        Description = "Proton Mail";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = lib.getExe pkgs.protonmail-desktop;
+        Slice = "app.slice";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
+
     wayland.windowManager.hyprland.settings = {
-      on = [
-        {
-          _args = [
-            "hyprland.start"
-            (lib.generators.mkLuaInline ''
-              function()
-                hl.exec_cmd(${builtins.toJSON (lib.getExe pkgs.protonmail-desktop)})
-              end
-            '')
-          ];
-        }
-      ];
       window_rule = [
         {
           match.class = "claws-mail";

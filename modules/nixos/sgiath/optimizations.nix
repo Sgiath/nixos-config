@@ -59,12 +59,6 @@
           ManagedOOMMemoryPressure = "kill";
           ManagedOOMSwap = "kill";
         };
-
-        background-build.sliceConfig = {
-          IOAccounting = true;
-          CPUWeight = 25;
-          IOWriteBandwidthMax = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_4TB_S7DPNF0XA13591K 200M";
-        };
       };
       settings.Manager = {
         DefaultTimeoutStopSec = "5s";

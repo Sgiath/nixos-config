@@ -30,15 +30,15 @@
         "--fingerprinting-canvas-image-data-noise"
         "--fingerprinting-canvas-measuretext-noise"
         "--fingerprinting-client-rects-noise"
-
-        "--ssl-key-log-file=/home/sgiath/.ssl_keylog"
       ];
     };
 
+    # open PDF in Chromium
     home.activation.setChromiumAsPdfHandler = config.lib.dag.entryAfter [ "writeBoundary" ] ''
       run ${lib.getExe' pkgs.xdg-utils "xdg-mime"} default chromium-browser.desktop application/pdf
     '';
 
+    # workspace 2 is dedicated to Chromium
     wayland.windowManager.hyprland.settings.window_rule = [
       {
         match.class = "chromium-browser";
