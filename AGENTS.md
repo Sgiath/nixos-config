@@ -53,7 +53,7 @@ shells/default/default.nix        # dev/update toolchain
 
 | Symbol/Field | Location | Role |
 | --- | --- | --- |
-| `inputs` | `flake.nix` | 30+ flake inputs; includes local absolute `bird-src`. |
+| `inputs` | `flake.nix` | External flake inputs; Bird uses `vendor/bird` instead of the unavailable upstream/local absolute `bird-src` input. |
 | `lib.mkFlake` | `flake.nix` | Snowfall Lib output generation; no manual `nixosConfigurations`. |
 | `channels-config` | `flake.nix` | `allowUnfree`, ROCm enabled, CUDA disabled. |
 | `systems.modules.nixos` | `flake.nix` | External NixOS modules exposed to all hosts. |
@@ -115,6 +115,14 @@ nixos-rebuild switch --sudo --flake .
 nixos-rebuild switch --sudo --flake '.#ceres'
 update --vesta
 ```
+
+## INSTALLER
+
+- Live image: `systems/x86_64-install-iso/live/default.nix`; commands: `packages/burn-iso/default.nix` and `packages/live-install/default.nix`.
+- Run `nix run .#burn-iso -- /dev/sdX` from `~/nixos`. It builds the live ISO from `~/nixos`, bakes the configuration, overwrites the whole USB device, and exports the running user's GPG secret keys/ownertrust directly onto a `SGIATH-KEYS` FAT partition. Keys must never enter Nix or the store; FAT is not encryption. `--iso PATH` reuses an image; `--no-keys` omits the key partition/export.
+- Boot auto-logs in as `sgiath`; run `live-install <host>` for `ceres`, `pallas`, or `vesta`. It imports the USB keys, copies the baked repository to `~/nixos`, and wipes the host's configured disks through disko after confirmation. `--keep-disks` skips disko and requires target filesystems already mounted under `/mnt`.
+- Inspect the host disk/filesystem configuration before installation. A whole-disk disko wipe on Pallas destroys Windows dual boot; preserve it by adapting the configuration and using existing Linux/boot mounts with `live-install --keep-disks pallas`.
+- For a new host SSH recipient, update `.sops.yaml` and applicable creation rules, run `sops updatekeys` on each applicable secrets file, then rerun `sudo nixos-install --flake "$HOME/nixos#<host>" --no-root-passwd` before reboot. Copy the updated checkout to `/mnt/home/sgiath/nixos` and preserve `sgiath:users` ownership. Merely copying ciphertext does not update the installed system; never rerun destructive disko for this step.
 
 ## NOTES
 

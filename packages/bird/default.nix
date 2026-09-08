@@ -1,7 +1,6 @@
 {
   lib,
   stdenv,
-  inputs,
   nodejs,
   pnpm_10,
   fetchPnpmDeps,
@@ -13,7 +12,8 @@ stdenv.mkDerivation (finalAttrs: {
   pname = "bird";
   version = "0.8.0";
 
-  src = inputs.bird-src;
+  # Vendored: upstream github:steipete/bird is no longer available.
+  src = ../../vendor/bird;
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;

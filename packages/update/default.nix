@@ -90,7 +90,7 @@ writeShellScriptBin "update" ''
       nix build '.#install-isoConfigurations.live'
 
       echo
-      echo "doas dd if=result/iso/*.iso of=/dev/sdX status=progress"
+      echo "burn-iso --iso result/iso/*.iso /dev/sdX"
       ;;
 
     *)

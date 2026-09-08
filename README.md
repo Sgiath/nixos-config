@@ -2,19 +2,62 @@
 
 ## Install
 
+From the checkout at `~/nixos`, write an installer USB (replace `/dev/sdX`
+with the whole USB device, not a partition; all its contents are overwritten):
+
 ```bash
-# install system config
-nixos-rebuild switch --sudo --flake https://github.com/sgiath/nixos-config#ceres
+cd ~/nixos
+nix run .#burn-iso -- /dev/sdX
+```
 
-reboot
+This builds `install-isoConfigurations.live` with a baked snapshot of this
+configuration, writes the ISO, and appends a `SGIATH-KEYS` FAT partition. GPG
+secret keys and ownertrust are exported directly from your running user
+keyring onto that partition, never through Nix or the store. Protect the USB
+as private-key material; the FAT filesystem is not encrypted. Use
+`--iso /path/to/image.iso` to reuse an existing image or `--no-keys` to write
+only the ISO. Bird is vendored in `vendor/bird`, removing the unavailable
+upstream and machine-local `bird-src` input dependency.
 
-# install dotfiles
-git clone https://github.com/sgiath/nixos-config ~/nixos
-cd nixos/
-nixos-rebuild switch --sudo --flake '.#ceres'
+Boot the USB; the console automatically logs in as `sgiath`. Select `ceres`,
+`pallas`, or `vesta`:
 
+```bash
+live-install ceres
+```
+
+The installer imports keys from `SGIATH-KEYS`, copies the baked configuration
+to `~/nixos`, and installs the selected host. **By default, confirmation wipes
+every disk in that host's disko configuration.** Inspect the host layout and
+`lsblk` output first. In particular, a whole-disk disko install on **Pallas
+destroys its Windows dual boot**. To preserve Windows or another existing
+layout, inspect and adapt the host filesystem configuration, mount the target
+Linux filesystems (including the boot filesystem) under `/mnt`, then use:
+
+```bash
+live-install --keep-disks pallas
+```
+
+`--keep-disks` skips disko; it does not prepare or validate the existing layout.
+
+**Before rebooting**, if the installed SSH host key has a new SOPS recipient,
+add the printed recipient to `.sops.yaml` and the applicable creation rules.
+Re-encrypt each applicable secrets file with `sops updatekeys`, then rerun
+`nixos-install` so the installed system contains the updated ciphertext:
+
+```bash
+cd ~/nixos
+# After editing .sops.yaml; repeat for each applicable secrets file:
+sops updatekeys -y secrets/secrets.yaml
+# Replace ceres with the selected host:
+sudo nixos-install --flake "$HOME/nixos#ceres" --no-root-passwd
+sudo cp -a ~/nixos/. /mnt/home/sgiath/nixos/
+sudo nixos-enter --root /mnt -c 'chown -R sgiath:users /home/sgiath/nixos'
 reboot
 ```
+
+Copying the edited checkout alone does not update the installed system. Do not
+rerun the default destructive `live-install` to apply the recipient change.
 
 ## Usage
 

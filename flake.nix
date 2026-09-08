@@ -101,11 +101,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    bird-src = {
-      url = "path:/home/sgiath/develop/sgiath/bird";
-      flake = false;
-    };
-
     voxtype.url = "github:peteonrails/voxtype/v1.0.1";
     comfyui.url = "github:utensils/comfyui-nix/v0.34.0";
 

@@ -2,7 +2,8 @@
   config,
   lib,
   osConfig,
-  apiKeyWrapper,
+  # Absent on systems without the NixOS sgiath baseline (live ISO).
+  apiKeyWrapper ? null,
   ...
 }:
 {

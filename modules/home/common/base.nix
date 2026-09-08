@@ -14,6 +14,7 @@
         pkgs.${namespace}.update
         pkgs.${namespace}.fix-images
         pkgs.${namespace}.clear-cache
+        pkgs.${namespace}.burn-iso
 
         # general programs I want to have always available
         imagemagick
