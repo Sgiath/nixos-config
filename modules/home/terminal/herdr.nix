@@ -1,26 +1,46 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-  # Yoru with restrained intermediate shades for Herdr's layered chrome.
+  # Parse the base16 scheme shared with Stylix; Nix has no YAML reader, and the
+  # file only contains `baseXX: "rrggbb"` entries.
+  base16 = lib.pipe (builtins.readFile ../../../themes/yoru.yaml) [
+    (lib.splitString "\n")
+    (lib.concatMap (
+      line:
+      let
+        m = builtins.match ''base(0[0-9A-F]): "([0-9a-fA-F]{6})".*'' line;
+      in
+      lib.optional (m != null) (lib.nameValuePair "base${lib.elemAt m 0}" "#${lib.elemAt m 1}")
+    ))
+    lib.listToAttrs
+  ];
+
   palette = {
-    background = "#0c0e0f";
-    panel = "#121415";
-    surface = "#1f2122";
+    background = base16.base00;
+    panel = base16.base01;
+    surface = base16.base03;
+    overlay = base16.base02;
+    text = base16.base05;
+    red = base16.base08;
+    peach = base16.base09;
+    yellow = base16.base0A;
+    green = base16.base0B;
+    teal = base16.base0C;
+    blue = base16.base0D;
+    mauve = base16.base0E;
+
+    # Intermediate shades Yoru does not define, tuned for Herdr's layered chrome.
     selection = "#302438";
-    overlay = "#565859";
     overlayBright = "#747677";
     subtext = "#a8aaab";
-    text = "#edeff0";
-    red = "#f26e74";
-    peach = "#ecd28b";
-    yellow = "#e79881";
-    green = "#82c29c";
-    teal = "#6791c9";
-    blue = "#709ad2";
-    mauve = "#c58cec";
   };
 in
 {
-  programs.herdr = {
+  programs.herdr = lib.mkIf config.sgiath.roles.terminal.enable {
     enable = true;
     package = pkgs.herdr;
     settings = {

@@ -7,7 +7,6 @@
     ./codex.nix
     ./cursor.nix
     ./dsh.nix
-    ./herdr.nix
     ./omp.nix
     ./opencode.nix
     ./pi.nix

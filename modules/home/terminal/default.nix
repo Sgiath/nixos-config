@@ -4,6 +4,7 @@
     ./role.nix
     ./git.nix
     ./gpg.nix
+    ./herdr.nix
     ./ssh.nix
     ./starship.nix
     ./tmux.nix
