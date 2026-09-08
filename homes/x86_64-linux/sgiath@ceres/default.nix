@@ -18,18 +18,11 @@
     };
   };
 
-  sgiath = {
-    enable = true;
-    games.enable = true;
-
-    targets = {
-      terminal = true;
-      graphical = true;
-    };
+  sgiath.work = {
+    crazyegg.enable = true;
+    remote.enable = true;
   };
 
-  crazyegg.enable = true;
-  remote.enable = true;
   services = {
     cli-proxy-api.enable = true;
     system-failure-watcher.enable = true;

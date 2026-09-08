@@ -17,7 +17,7 @@
 #   };
 # in
 {
-  config = lib.mkIf (config.sgiath.server.enable) {
+  config = lib.mkIf (config.sgiath.roles.server.enable) {
     # for starting new packs on the server and testing
     environment.systemPackages = with pkgs; [ zulu25 ];
 

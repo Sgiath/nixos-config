@@ -1,11 +1,10 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 {
-  config = lib.mkIf config.sgiath.server.enable {
+  config = lib.mkIf config.sgiath.roles.server.enable {
     users.users.sgiath.extraGroups = [ "nginx" ];
 
     security.acme = {

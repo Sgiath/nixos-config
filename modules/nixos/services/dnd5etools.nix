@@ -1,0 +1,35 @@
+{
+  namespace,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.services.dnd5etools = {
+    enable = lib.mkEnableOption "5e tools service";
+  };
+
+  config = lib.mkIf (config.sgiath.roles.server.enable && config.services.dnd5etools.enable) {
+    services.nginx.virtualHosts."5e.sgiath.dev" = {
+      # SSL
+      onlySSL = true;
+      kTLS = true;
+
+      # ACME
+      enableACME = true;
+      acmeRoot = null;
+
+      # static files
+      root = "${pkgs.${namespace}.dnd5etools}";
+
+      locations = {
+        "/" = {
+          extraConfig = ''
+            add_header Access-Control-Allow-Origin 'https://foundry.sgiath.dev';
+          '';
+        };
+      };
+    };
+  };
+}

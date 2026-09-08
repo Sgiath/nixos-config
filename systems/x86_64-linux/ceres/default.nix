@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, ... }:
 {
   imports = [ ./hardware.nix ];
 
@@ -6,55 +6,45 @@
 
   sgiath = {
     enable = true;
-    gpu = "amd";
-    audio.enable = true;
-    bluetooth.enable = true;
-    docker.enable = true;
-    xamond.enable = true;
-    printing.enable = true;
-    razer.enable = false;
-    wayland.enable = true;
+
+    hardware = {
+      gpu = "amd";
+      kernel = "xanmod";
+    };
+
+    roles = {
+      desktop.enable = true;
+      gaming.enable = true;
+    };
   };
+
+  virtualisation.docker.enable = true;
 
   services = {
     ollama.enable = false;
     comfyui.enable = false;
+
+    yggdrasil.settings.Peers = [
+      "quic://192.168.1.2:56088"
+      "quic://192.168.1.3:56088"
+    ];
   };
 
-  environment.systemPackages = with pkgs; [
-    protonplus
-    winetricks
-  ];
-
-  programs = {
-    gamescope.enable = true;
-    gamemode.enable = true;
-
-    wine = {
-      enable = true;
-      binfmt = true;
-      ntsync = true;
-      package = pkgs.wineWow64Packages.waylandFull;
+  # Build-signing key for closures pushed to the servers; the public half is
+  # secrets/ceres-cache.pub.
+  sops.secrets = {
+    nix-signing-key = {
+      sopsFile = ../../../secrets/ceres-signing.yaml;
+      key = "nix-signing-key";
+      mode = "0400";
+      restartUnits = [ "nix-daemon.service" ];
     };
 
-    steam = {
-      enable = true;
-      package = pkgs.steam.override {
-        extraPkgs =
-          pkgs: with pkgs; [
-            gamemode
-            libpulseaudio
-            libpng
-            libgpg-error
-            keyutils
-          ];
-      };
-      remotePlay.openFirewall = true;
-      protontricks.enable = true;
-      gamescopeSession.enable = true;
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
-      ];
+    openclaw-token = {
+      owner = "sgiath";
+      mode = "0400";
     };
   };
+
+  nix.settings.secret-key-files = [ config.sops.secrets.nix-signing-key.path ];
 }

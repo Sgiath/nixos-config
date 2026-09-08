@@ -1,0 +1,25 @@
+{
+  imports = [
+    ./audiobookshelf.nix
+    ./comfyui.nix
+    ./dnd5etools.nix
+    ./docker.nix
+    ./factorio.nix
+    ./foundryvtt.nix
+    ./hermes-agent.nix
+    ./home-assistant.nix
+    ./jellyfin.nix
+    ./litellm.nix
+    ./matrix.nix
+    ./mollysocket.nix
+    ./monitoring.nix
+    ./nostr-rs-relay.nix
+    ./ntfy-sh.nix
+    ./ollama.nix
+    ./open-webui.nix
+    ./pi-hole.nix
+    ./searx.nix
+    ./transmission.nix
+    ./xmpp.nix
+  ];
+}

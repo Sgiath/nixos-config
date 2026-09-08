@@ -20,7 +20,7 @@ reboot
 
 ```bash
 # update release pinned flake inputs and packages
-./update-inputs
+./scripts/update-inputs.sh
 
 # update branch inputs
 nix flake update
@@ -47,7 +47,7 @@ nix develop -c sops secrets/vesta.yaml
 Hermes and its Bird credentials and is encrypted only for Vesta and the
 administrator. `ceres-signing.yaml` contains the build-signing private key and
 is encrypted only for Ceres and the administrator. Only the public signing key
-is stored unencrypted, in `public-keys/ceres-cache.pub`.
+is stored unencrypted, in `secrets/ceres-cache.pub`.
 
 The configured host recipients are Ceres and Vesta. Before deploying another
 host or replacing a host's SSH key, add its `ssh-to-age` public recipient to

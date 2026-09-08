@@ -1,26 +1,21 @@
-{ lib, ... }:
 {
   imports = [ ./hardware.nix ];
 
-  networking = {
-    hostName = "pallas";
-    networkmanager.enable = lib.mkForce true;
-  };
-
-  environment.etc."resolv.conf".text = lib.mkForce ''
-    nameserver 1.1.1.1
-    nameserver 8.8.8.8
-  '';
+  networking.hostName = "pallas";
 
   sgiath = {
     enable = true;
-    gpu = "nvidia";
-    audio.enable = true;
-    bluetooth.enable = true;
-    docker.enable = true;
-    xamond.enable = false;
-    printing.enable = true;
-    razer.enable = true;
-    wayland.enable = true;
+
+    hardware = {
+      gpu = "nvidia";
+      razer.enable = true;
+    };
+
+    roles = {
+      desktop.enable = true;
+      laptop.enable = true;
+    };
   };
+
+  virtualisation.docker.enable = true;
 }

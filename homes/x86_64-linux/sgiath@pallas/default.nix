@@ -1,14 +1,4 @@
 {
-  sgiath = {
-    enable = true;
-    games.enable = false;
-
-    targets = {
-      terminal = true;
-      graphical = true;
-    };
-  };
-
   services.t3code.enable = true;
 
   stylix.fonts.sizes = {

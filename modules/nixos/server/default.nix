@@ -1,32 +1,16 @@
-{ lib, ... }:
+{ config, lib, ... }:
 {
   imports = [
-    ./5e.nix
-    ./audiobookshelf.nix
-    ./eve.nix
-    ./factorio.nix
-    ./foundry.nix
-    ./hermes.nix
-    ./jellyfin.nix
-    ./litellm.nix
-    ./matrix.nix
     ./minecraft.nix
-    ./monitoring.nix
-    ./nas.nix
     ./nginx.nix
-    ./nostr.nix
-    ./ntfy.nix
-    # ./openclaw.nix
-    ./opencode.nix
-    ./pi-hole.nix
-    ./search.nix
-    ./sgiath.nix
-    ./sinai.nix
-    ./torrent.nix
-    ./xmpp.nix
   ];
 
-  options.sgiath.server = {
-    enable = lib.mkEnableOption "sgiath server";
+  options.sgiath.roles.server.enable = lib.mkEnableOption "home server role";
+
+  config = lib.mkIf config.sgiath.roles.server.enable {
+    # Servers accept Ceres-built closures without trusting arbitrary SSH imports.
+    nix.settings.trusted-public-keys = [
+      (lib.strings.trim (builtins.readFile ../../../secrets/ceres-cache.pub))
+    ];
   };
 }

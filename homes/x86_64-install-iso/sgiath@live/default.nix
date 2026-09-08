@@ -1,7 +1,7 @@
 {
   sgiath = {
     enable = true;
-    targets.terminal = true;
+    roles.terminal.enable = true;
   };
 
   home.file.nixos = {
