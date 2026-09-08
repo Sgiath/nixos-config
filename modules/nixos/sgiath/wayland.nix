@@ -67,10 +67,6 @@
 
     programs = {
       hyprland.enable = true;
-      niri = {
-        enable = true;
-        useNautilus = false;
-      };
     };
   };
 }
