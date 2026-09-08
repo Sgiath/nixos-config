@@ -231,6 +231,7 @@
         noctalia.homeModules.default
         sops-nix.homeManagerModules.sops
         nix-index-database.homeModules.nix-index
+        stylix.homeModules.stylix
         voxtype.homeManagerModules.default
         oh-my-pi.homeManagerModules.default
         worktrunk.homeModules.default

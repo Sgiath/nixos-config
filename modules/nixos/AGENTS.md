@@ -12,7 +12,7 @@ Role-based NixOS modules. Snowfall imports every `<dir>/default.nix` into every 
 | Shared secrets | `common/secrets.nix` | SOPS defaults, user API keys, `apiKeyWrapper`, nix access-tokens template. |
 | Network quirks | `common/networking.nix`, `common/yggdrasil.nix`, `laptop/default.nix` | Static branch is `mkIf (!networkmanager.enable)`; laptop forces NetworkManager + public DNS. |
 | GPU choice | `hardware/gpu.nix`, `hardware/gpu-amd.nix`, `hardware/gpu-nvidia.nix` | Nullable `sgiath.hardware.gpu`. |
-| Desktop session | `desktop/wayland.nix`, `desktop/audio.nix`, `common/stylix.nix` | Greetd/Hyprland, pipewire, theme from `themes/yoru.yaml`. |
+| Desktop session | `desktop/wayland.nix`, `desktop/audio.nix`, `desktop/stylix.nix` | Greetd/Hyprland, pipewire, theme from `themes/yoru.yaml`. |
 | Gaming stack | `gaming/role.nix` | Steam/wine/gamescope/gamemode + `factorio-token` secret. |
 | Server root | `server/default.nix`, `server/nginx.nix` | Ceres cache-key trust; ACME Cloudflare, QUIC, shared nginx tuning. |
 | Large integrated service | `services/matrix.nix`, `services/hermes-agent.nix` | Secrets, TURN/LiveKit, vhosts, ordering. |

@@ -8,7 +8,6 @@
     ./optimizations.nix
     ./secrets.nix
     ./security.nix
-    ./stylix.nix
     ./udev.nix
     ./usb.nix
     ./users.nix

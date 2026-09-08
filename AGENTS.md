@@ -60,7 +60,7 @@ shells/default/default.nix        # dev/update toolchain
 | `homes.modules` | `flake.nix` | External Home Manager modules exposed to all homes. |
 | `sgiath.enable` | `modules/nixos/common/default.nix` | Main shared system gate; pushes HM `sgiath.enable` + `roles.terminal`. |
 | `sgiath.hardware.*` | `modules/nixos/hardware/default.nix` | `gpu` (`null`/`amd`/`nvidia`), `kernel` (`zen`/`xanmod`), `boot` (`uefi`/`legacy`), `razer.enable`. |
-| `sgiath.roles.desktop.enable` | `modules/nixos/desktop/default.nix` | Wayland, audio, bluetooth, printing; pushes HM `roles.desktop`. |
+| `sgiath.roles.desktop.enable` | `modules/nixos/desktop/default.nix` | Wayland, audio, bluetooth, printing, Stylix; pushes HM `roles.desktop`. |
 | `sgiath.roles.laptop.enable` | `modules/nixos/laptop/default.nix` | NetworkManager + public DNS `resolv.conf`. |
 | `sgiath.roles.server.enable` | `modules/nixos/server/default.nix` | Main server-module gate; nginx, minecraft, trusts `secrets/ceres-cache.pub`. |
 | `sgiath.roles.gaming.enable` | `modules/nixos/gaming/default.nix` (body in `role.nix`) | Steam/wine/gamescope/gamemode, factorio token; pushes HM `roles.gaming`. |
@@ -90,7 +90,7 @@ shells/default/default.nix        # dev/update toolchain
 - Secrets are SOPS-encrypted in `secrets/` and decrypted at activation using host SSH keys. Use `sops.secrets` with native runtime credential files; never evaluate plaintext credentials into Nix/store files.
 - New files must be `git add`ed before Nix flake evaluation can see them.
 - Format Nix with `nixfmt`; use `nix develop` for `nixd`, `nil`, `shfmt`, `prettier`, and update helpers.
-- Do not evaluate Home Manager outputs directly; Stylix Home Manager wiring is provided through the NixOS Stylix module. Validate homes as part of the full NixOS system evaluation/build.
+- Do not evaluate Home Manager outputs directly; validate homes as part of the full NixOS system evaluation/build. The Stylix HM module is imported unconditionally from `flake.nix` (`homeManagerIntegration.autoImport = false`), so `stylix.targets.*` exist on headless hosts while Stylix itself is only enabled by the desktop role.
 
 ## ANTI-PATTERNS
 

@@ -6,6 +6,7 @@
     ./clipboard.nix
     ./hyprland.nix
     ./noctalia.nix
+    ./stylix.nix
     ./voxtype.nix
     ./yazi.nix
   ];

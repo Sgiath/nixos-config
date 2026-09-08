@@ -8,16 +8,16 @@ Home Manager modules for user `sgiath`, split by role. Snowfall imports every `<
 
 | Task | Location | Gate |
 | --- | --- | --- |
-| Baseline packages, direnv, pass, stylix, API-key secrets | `common/` | `sgiath.enable` |
+| Baseline packages, direnv, pass, API-key secrets | `common/` | `sgiath.enable` |
 | CLI stack: git, gpg, ssh, zsh, starship, tmux, worktrunk, agents | `terminal/` | `sgiath.roles.terminal.enable` |
-| Hyprland, noctalia, terminals, clipboard, voxtype, chromium | `desktop/` | `sgiath.roles.desktop.enable` |
+| Hyprland, noctalia, stylix, terminals, clipboard, voxtype, chromium | `desktop/` | `sgiath.roles.desktop.enable` |
 | Hyprland shards and monitor/workspace rules | `desktop/hyprland/` | Has its own `AGENTS.md`. |
 | Desktop app groups | `programs/` | `sgiath.programs.{audio,bitcoin,browsers,chat,editors,email}.enable` |
 | Games (lutris, prismlauncher, factorio) | `gaming/` | `sgiath.roles.gaming.enable` |
 | Agent tooling | `agents/` | `sgiath.agents.enable`; has its own `AGENTS.md`. |
 | CrazyEgg / Remote work setups | `work/` | `sgiath.work.{crazyegg,remote}.enable` |
 
-Themes referenced by `common/stylix.nix` live in `themes/` at the repo root.
+Themes referenced by `desktop/stylix.nix` live in `themes/` at the repo root.
 
 ## CONVENTIONS
 

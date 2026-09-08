@@ -4,6 +4,7 @@
     ./audio.nix
     ./bluetooth.nix
     ./printing.nix
+    ./stylix.nix
     ./wayland.nix
   ];
 
