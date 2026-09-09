@@ -16,7 +16,10 @@ in
       settings = {
         auto-optimise-store = true;
         require-sigs = true;
-        trusted-users = [ "root" ];
+        trusted-users = [
+          "root"
+          "sgiath"
+        ];
         experimental-features = [
           "nix-command"
           "flakes"

@@ -97,7 +97,7 @@
     };
 
     worktrunk = {
-      url = "github:max-sixty/worktrunk/v0.76.0";
+      url = "github:max-sixty/worktrunk/v0.77.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -117,7 +117,7 @@
     };
 
     oh-my-pi = {
-      url = "github:can1357/oh-my-pi/v18.1.14";
+      url = "github:can1357/oh-my-pi/v18.1.15";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -127,12 +127,12 @@
     };
 
     opencode = {
-      url = "github:anomalyco/opencode/v1.18.29";
+      url = "github:anomalyco/opencode/v1.18.30";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     crit = {
-      url = "github:tomasz-tomczyk/crit/v0.20.0";
+      url = "github:tomasz-tomczyk/crit/v0.20.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
