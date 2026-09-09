@@ -28,7 +28,6 @@
 
   services = {
     cli-proxy-api.enable = true;
-    litellm.enable = true;
     system-failure-watcher.enable = true;
     t3code.enable = true;
   };

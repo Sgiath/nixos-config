@@ -9,7 +9,6 @@
     ./hermes-agent.nix
     ./home-assistant.nix
     ./jellyfin.nix
-    ./litellm.nix
     ./matrix.nix
     ./mollysocket.nix
     ./monitoring.nix
