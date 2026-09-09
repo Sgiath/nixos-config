@@ -12,55 +12,55 @@ let
   imgHashes = [
     {
       name = "z01";
-      hash = "sha256-h/kQ83L4FK97wRuTy4xc4/sPtSvIBvw8ogchhhKQANg=";
+      hash = "sha256-/OLHJKtCOmC7upRJX9IZLyMYh5UPGMQrJoDZnHBJw0M=";
     }
     {
       name = "z02";
-      hash = "sha256-hSLfNtgLRZHLmVA4j6pZoktX5oX6I7GF0bzrAAWDznk=";
+      hash = "sha256-hwc4sbqUkDqSArTCX0uDzRxdau7h63EJf7GUuJGjj9s=";
     }
     {
       name = "z03";
-      hash = "sha256-fybtP80gGvCn+16sc+n3z9BIZxEBgJZbtJtHdlDwq/g=";
+      hash = "sha256-sxAWTHvcJFCkR7azyVoiNCSCFt1UwXQYZV5EzdlzDSM=";
     }
     {
       name = "z04";
-      hash = "sha256-SZIoQiNWIY+/CZ9NsMpvjl8cna1xNmdDQQyKwF0jnqM=";
+      hash = "sha256-VcZEqeJanvqUe+yFzMne4J/eZIKUKjNVnh7POt/3Lj8=";
     }
     {
       name = "z05";
-      hash = "sha256-3u7HWCTC6ivaAF9TVf9gB0Zk54GdbESXC581zg7ZGXI=";
+      hash = "sha256-W4RvMmEB6r/M0BjRDIlCUeoRfCTJaG9TsMQrR/wtZSA=";
     }
     {
       name = "z06";
-      hash = "sha256-nBFmtbvrCnGe1HoOmSOWw3b2hsXzmH3hC5R8cHFjotw=";
+      hash = "sha256-Vf1e7j/HnUc1LoMvgUr8Pf4bQjhmtE2TQNcfhdXNNko=";
     }
     {
       name = "z07";
-      hash = "sha256-2U2QaZDX1W9C+Dwh05OB2Eei5p+CrbUQWkSUK5E2Hgg=";
+      hash = "sha256-H0ErP5W63anSvRcWKNzYZxlhr2C4g7lDD8SJU4+eC90=";
     }
     {
       name = "z08";
-      hash = "sha256-tUv47QX6A6mNCIkhsVeUvOCtE2qA01U19MTci+iT8DI=";
+      hash = "sha256-fMCSfgysbWjOLC4hUQjfoa4hm6RS9AVO3DOOAEV0PX4=";
     }
     {
       name = "z09";
-      hash = "sha256-G9H6BphG+sTp8l2uzVeUt6aPADSk7OE1hUimSHCNe4I=";
+      hash = "sha256-sXCnHiCy9kFyy0QhGS4o5ephpwdatIsNnAHsX0SiFkg=";
     }
     {
       name = "z10";
-      hash = "sha256-nh1iV4U2AVEvve3lF/1gUVjQzY5j1ngl4hbVr7z3iQ4=";
+      hash = "sha256-rJ7SqkSxrZkAC8DfAmLXdg+ubhjCpgvc36jcs0eYph0=";
     }
     {
       name = "z11";
-      hash = "sha256-Ebalams81wOy2KKNUNKELYYOTYH4wLCzFXxQiTYGsGk=";
+      hash = "sha256-rgGomkBxx4GaW68Zflp2iISCrkXfex0QR4hyPyZDx4Q=";
     }
     {
       name = "z12";
-      hash = "sha256-PmgrtiPpqyU5pxNqVFdCkHvUpbwhHHx/3LA6Uo8LjyM=";
+      hash = "sha256-dagj1NHB0ikGiTbX10ojSvA+BZxpzIZjLq5D04zECCQ=";
     }
     {
       name = "zip";
-      hash = "sha256-fsUTV9/yd81/p6xKs67kMXwcjWEPE2cmfKK+pv8mEtg=";
+      hash = "sha256-8NPNaE7iBxqExdCUhjf5ebxe4Bjm/KlQ8o6b1tDuUSs=";
     }
   ];
 
@@ -69,7 +69,7 @@ let
     let
       img = fetchurl {
         pname = "5etools-img-${v.name}";
-        version = "2.30.0";
+        version = "2.35.1";
         inherit (v) hash;
         url = "https://github.com/5etools-mirror-2/5etools-img/releases/download/v${version}/img-v${version}.${v.name}";
       };
