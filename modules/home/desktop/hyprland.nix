@@ -106,10 +106,9 @@
         ];
       };
     };
-    stylix.targets = {
-      hyprland.enable = false;
-      fuzzel.enable = false;
-    };
+    # stylix.targets = {
+    #   hyprland.enable = false;
+    # };
 
     gtk = pkgs.lib.mkForce {
       enable = true;

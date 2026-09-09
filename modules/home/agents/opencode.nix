@@ -173,7 +173,7 @@ in
         ];
       };
     };
-    stylix.targets.opencode.enable = false;
+    # stylix.targets.opencode.enable = false;
 
     programs.zsh.shellAliases = {
       oc = lib.getExe pkgs.opencode;

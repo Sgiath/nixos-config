@@ -1,23 +1,14 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 let
-  # Parse the base16 scheme shared with Stylix; Nix has no YAML reader, and the
-  # file only contains `baseXX: "rrggbb"` entries.
-  base16 = lib.pipe (builtins.readFile ../../../themes/yoru.yaml) [
-    (lib.splitString "\n")
-    (lib.concatMap (
-      line:
-      let
-        m = builtins.match ''base(0[0-9A-F]): "([0-9a-fA-F]{6})".*'' line;
-      in
-      lib.optional (m != null) (lib.nameValuePair "base${lib.elemAt m 0}" "#${lib.elemAt m 1}")
-    ))
-    lib.listToAttrs
-  ];
+  # Use Stylix's scheme parser without requiring Stylix on headless hosts.
+  base16Lib = inputs.stylix.inputs.base16.lib { inherit lib pkgs; };
+  base16 = (base16Lib.mkSchemeAttrs ../../../themes/sgiath.yaml).withHashtag;
 
   palette = {
     background = base16.base00;
@@ -36,7 +27,7 @@ let
     # Intermediate shades Yoru does not define, tuned for Herdr's layered chrome.
     selection = "#302438";
     overlayBright = "#747677";
-    subtext = "#a8aaab";
+    subtext = base16.base04;
   };
 in
 {
@@ -54,7 +45,7 @@ in
           accent = palette.green;
           panel_bg = palette.background;
           sidebar_bg = palette.panel;
-          active_row_bg = palette.surface;
+          active_row_bg = palette.overlay;
           selection_bg = palette.selection;
 
           surface0 = palette.panel;
@@ -124,7 +115,8 @@ in
               [
                 {
                   token = "branch";
-                  dim = true;
+                  fg = palette.yellow;
+                  dim = false;
                 }
                 "git_status"
               ]

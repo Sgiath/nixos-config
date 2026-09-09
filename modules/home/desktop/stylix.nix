@@ -23,7 +23,7 @@ in
         enableReleaseChecks = false;
 
         polarity = "dark";
-        base16Scheme = ../../../themes/yoru.yaml;
+        base16Scheme = ../../../themes/sgiath.yaml;
 
         cursor = {
           package = pkgs.nordzy-cursor-theme;

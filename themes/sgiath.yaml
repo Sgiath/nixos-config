@@ -1,0 +1,22 @@
+system: "base16"
+name: "space black"
+author: "sgiath (https://sgiath.dev)"
+variant: "dark"
+
+palette:
+  base00: "000000" # black-metal      ----
+  base01: "121212" # black-metal      ---
+  base02: "585858" # da-one-black     --
+  base03: "888888" # da-one-black     - (comments)
+  base04: "c8c8c8" # da-one-black     +
+  base05: "ffffff" # da-one-black     ++
+  base06: "ffffff" # da-one-black     +++
+  base07: "ffffff" # da-one-black     ++++
+  base08: "fa7883" # da-one-black     red
+  base09: "ffc387" # da-one-black     orange
+  base0A: "ff9470" # da-one-black     yellow
+  base0B: "98c379" # da-one-black     green
+  base0C: "8af5ff" # da-one-black     aqua/cyan
+  base0D: "6bb8ff" # da-one-black     blue
+  base0E: "e799ff" # da-one-black     purple
+  base0F: "b3684f" # da-one-black     brown

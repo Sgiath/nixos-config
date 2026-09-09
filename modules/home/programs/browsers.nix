@@ -18,6 +18,7 @@
       firefox = {
         enable = true;
         configPath = "${config.xdg.configHome}/mozilla/firefox";
+        profiles.default.path = "l5hqlmby.default";
       };
 
       # https://librewolf.net/docs/settings/
@@ -40,8 +41,7 @@
     };
 
     stylix.targets = {
-      firefox.enable = false;
-      librewolf.enable = false;
+      firefox.profileNames = [ "default" ];
     };
 
     wayland.windowManager.hyprland.settings.window_rule = [
