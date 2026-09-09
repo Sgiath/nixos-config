@@ -23,8 +23,12 @@
     remote.enable = true;
   };
 
+  # Login default stays Noctalia; `desktop-shell sgiath` switches at runtime.
+  sgiath.desktop.quickshell.live = true;
+
   services = {
     cli-proxy-api.enable = true;
+    litellm.enable = true;
     system-failure-watcher.enable = true;
     t3code.enable = true;
   };

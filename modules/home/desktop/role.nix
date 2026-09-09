@@ -80,6 +80,7 @@ in
 
     programs = {
       noctalia.enable = true;
+      quickshell.enable = true;
 
       # terminals
       alacritty.enable = true;

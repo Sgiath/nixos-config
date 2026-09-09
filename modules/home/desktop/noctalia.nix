@@ -4,11 +4,6 @@
   lib,
   ...
 }:
-let
-  noctalia = lib.getExe config.programs.noctalia.package;
-  sessionMenuCommand = "${noctalia} msg panel-toggle session";
-  launcherCommand = "${noctalia} msg panel-toggle launcher";
-in
 {
   config = lib.mkIf config.programs.noctalia.enable {
     programs.noctalia = {
@@ -119,21 +114,6 @@ in
     systemd.user.services.noctalia.Service.Environment = "TERMINAL=${lib.getExe pkgs.kitty}";
 
     wayland.windowManager.hyprland.settings = {
-      bind = [
-        {
-          _args = [
-            "SUPER + SHIFT + Q"
-            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON sessionMenuCommand})")
-          ];
-        }
-        {
-          _args = [
-            "SUPER + slash"
-            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(${builtins.toJSON launcherCommand})")
-          ];
-        }
-      ];
-
       layer_rule = [
         {
           name = "noctalia";

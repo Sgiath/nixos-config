@@ -175,7 +175,7 @@
           namespace = "sgiath";
           meta = {
             name = "sgiath";
-            title = "Sgiath's dotfiles";
+            title = "sgiath's dotfiles";
           };
         };
       };
