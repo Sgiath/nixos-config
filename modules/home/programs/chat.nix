@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  namespace,
   ...
 }:
 {
@@ -17,11 +16,26 @@
       fluffychat
     ];
 
-    # Start on login as part of the graphical session.
+    # Launch once per graphical session, never during Home Manager activation.
+    systemd.user.timers = lib.genAttrs [ "slack" "signal-desktop" "cinny-desktop" ] (name: {
+      Unit = {
+        Description = "Launch ${name} at login";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+        RefuseManualStart = true;
+      };
+      Timer = {
+        OnActiveSec = "1s";
+        AccuracySec = "1s";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    });
+
     systemd.user.services = {
       slack = {
         Unit = {
           Description = "Slack";
+          X-SwitchMethod = "keep-old";
           PartOf = [ "graphical-session.target" ];
           After = [ "graphical-session.target" ];
         };
@@ -29,12 +43,12 @@
           ExecStart = lib.getExe pkgs.slack;
           Slice = "app.slice";
         };
-        Install.WantedBy = [ "graphical-session.target" ];
       };
 
       signal-desktop = {
         Unit = {
           Description = "Signal";
+          X-SwitchMethod = "keep-old";
           PartOf = [ "graphical-session.target" ];
           After = [ "graphical-session.target" ];
         };
@@ -42,12 +56,12 @@
           ExecStart = lib.getExe pkgs.signal-desktop;
           Slice = "app.slice";
         };
-        Install.WantedBy = [ "graphical-session.target" ];
       };
 
       cinny-desktop = {
         Unit = {
           Description = "Cinny";
+          X-SwitchMethod = "keep-old";
           PartOf = [ "graphical-session.target" ];
           After = [ "graphical-session.target" ];
         };
@@ -55,7 +69,6 @@
           ExecStart = lib.getExe pkgs.cinny-desktop;
           Slice = "app.slice";
         };
-        Install.WantedBy = [ "graphical-session.target" ];
       };
     };
 

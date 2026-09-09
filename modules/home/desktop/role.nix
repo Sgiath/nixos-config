@@ -17,10 +17,25 @@ in
       appimage-run
     ];
 
-    # Start on login as part of the Hyprland graphical session.
+    # Launch once per graphical session, never during Home Manager activation.
+    systemd.user.timers.kitty = {
+      Unit = {
+        Description = "Launch Kitty at login";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+        RefuseManualStart = true;
+      };
+      Timer = {
+        OnActiveSec = "1s";
+        AccuracySec = "1s";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
+
     systemd.user.services.kitty = {
       Unit = {
         Description = "Kitty terminal";
+        X-SwitchMethod = "keep-old";
         PartOf = [ "graphical-session.target" ];
         After = [ "graphical-session.target" ];
       };
@@ -28,7 +43,6 @@ in
         ExecStart = terminalCommand;
         Slice = "app.slice";
       };
-      Install.WantedBy = [ "graphical-session.target" ];
     };
 
     wayland.windowManager.hyprland.settings = {

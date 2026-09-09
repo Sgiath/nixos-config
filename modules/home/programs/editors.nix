@@ -34,7 +34,7 @@
         pkgs.nil
       ];
     };
-    stylix.targets.zed.enable = false;
+    # stylix.targets.zed.enable = true;
     programs.zsh.shellAliases.zed = "${lib.getExe pkgs.zed-editor}";
   };
 }

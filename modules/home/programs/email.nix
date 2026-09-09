@@ -40,10 +40,25 @@
       X-GNOME-Autostart-enabled=true
     '';
 
-    # Start on login as part of the graphical session.
+    # Launch once per graphical session, never during Home Manager activation.
+    systemd.user.timers.protonmail-desktop = {
+      Unit = {
+        Description = "Launch Proton Mail at login";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+        RefuseManualStart = true;
+      };
+      Timer = {
+        OnActiveSec = "1s";
+        AccuracySec = "1s";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
+
     systemd.user.services.protonmail-desktop = {
       Unit = {
         Description = "Proton Mail";
+        X-SwitchMethod = "keep-old";
         PartOf = [ "graphical-session.target" ];
         After = [ "graphical-session.target" ];
       };
@@ -51,7 +66,6 @@
         ExecStart = lib.getExe pkgs.protonmail-desktop;
         Slice = "app.slice";
       };
-      Install.WantedBy = [ "graphical-session.target" ];
     };
 
     wayland.windowManager.hyprland.settings = {
