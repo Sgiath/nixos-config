@@ -26,8 +26,8 @@ in
         base16Scheme = ../../../themes/sgiath.yaml;
 
         cursor = {
-          package = pkgs.nordzy-cursor-theme;
-          name = "Nordzy-cursors";
+          package = pkgs.volantes-cursors;
+          name = "volantes_light_cursors";
           size = 24;
         };
 

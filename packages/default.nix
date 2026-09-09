@@ -9,7 +9,6 @@ pkgs: {
   grok-bot = pkgs.callPackage ./grok-bot { };
   live-install = pkgs.callPackage ./live-install { };
   nak = pkgs.callPackage ./nak { };
-  nordic-gtk-theme = pkgs.callPackage ./nordic-gtk-theme { };
   omnisearch = pkgs.callPackage ./omnisearch { };
   relay-tester = pkgs.callPackage ./relay-tester { };
   update = pkgs.callPackage ./update { };

@@ -106,34 +106,11 @@
         ];
       };
     };
-    # stylix.targets = {
-    #   hyprland.enable = false;
-    # };
 
-    gtk = pkgs.lib.mkForce {
-      enable = true;
-      gtk4.theme = null;
-      theme = {
-        package = pkgs.sgiath.nordic-gtk-theme;
-        name = "Nordic";
-      };
-      cursorTheme = {
-        package = pkgs.nordzy-cursor-theme;
-        name = "Nordzy-cursors";
-        size = 24;
-      };
+    gtk = {
       iconTheme = {
-        package = pkgs.nordzy-icon-theme;
-        name = "Nordzy";
-      };
-    };
-
-    programs.wofi = {
-      enable = false;
-      settings = {
-        mode = "drun";
-        prompt = "";
-        insensitive = true;
+        package = pkgs.tela-icon-theme;
+        name = "Tela-dark";
       };
     };
 
