@@ -25,7 +25,7 @@
     verify = true      # Run project hooks (--no-verify to skip)
 
     [post-switch]
-    herdr = 'if [ "$HERDR_ENV" = 1 ]; then herdr tab create --workspace "$HERDR_WORKSPACE_ID" --cwd {{ worktree_path }} --label {{ branch }} --focus; fi'
+    herdr = 'if [ "$HERDR_ENV" = 1 ]; then herdr worktree open --workspace "$HERDR_WORKSPACE_ID" --path {{ worktree_path }} --label {{ branch }} --focus; fi'
 
     [[pre-start]]
     copy = "wt step copy-ignored"
@@ -50,7 +50,7 @@
     };
 
     zsh.initContent = lib.mkAfter ''
-      # In Herdr, wt switch opens and focuses the destination in a new tab.
+      # In Herdr, wt switch opens and focuses the destination worktree workspace.
       functions[_worktrunk_wt]=$functions[wt]
       wt() {
         if [[ "''${HERDR_ENV:-}" == 1 && "$1" == switch ]]; then
